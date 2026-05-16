@@ -1,274 +1,264 @@
 # Roadmap — Plano de Execução
 
-```
-LINHA DO TEMPO: 10 SEMANAS → MVP NA BANCA
-───────────────────────────────────────────
-```
+```mermaid
+gantt
+    title Cronograma Macro — 10 Semanas
+    dateFormat  YYYY-MM-DD
+    axisFormat  Semana %W
 
-## ════════════════ VISÃO GERAL ════════════════
-
-```
-    Sprint 0     Sprint 1     Sprint 2     Sprint 3     Sprint 4
-   Semana 1     Semana 2     Semana 3     Semana 4     Semana 5
- ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
- │ Fundação  │ │ Auth +   │ │ Dashboard │ │  Rotina  │ │  Rotina  │
- │          │ │  Nav     │ │           │ │          │ │ (cont.)  │
- └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘
-      │            │            │            │            │
-      ▼            ▼            ▼            ▼            ▼
-  Firebase     Login/      Cards       Disciplinas   Cálculo
-  pronto       Cadastro    módulos     +             notas/
-  + App roda   funcional   + resumo    formulário    faltas
-
-    Sprint 5     Sprint 6     Sprint 7     Sprint 8
-   Semana 6     Semana 7     Semana 8     Semanas 9-10
- ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────────┐
- │ Certifica │ │ Pesquisa  │ │  Radar   │ │  Qualidade   │
- │  dos     │ │   TCC    │ │  Eventos │ │  + Banca     │
- └────┬─────┘ └────┬─────┘ └────┬─────┘ └──────┬───────┘
-      │            │            │              │
-      ▼            ▼            ▼              ▼
-  Upload      OpenAlex     Mapa +        Testes +
-  +           +            Lista         Slides +
-  Progresso   ArticleCard  eventos       Ensaio
+    section Sprints
+    Sprint 0 — Fundação              :s0, 2024-01-01, 5d
+    Sprint 1 — Auth + Navegação      :s1, after s0, 5d
+    Sprint 2 — Dashboard             :s2, after s1, 4d
+    Sprint 3 — Rotina                :s3, after s2, 8d
+    Sprint 4 — Certificados          :s4, after s3, 8d
+    Sprint 5 — Pesquisa TCC          :s5, after s4, 7d
+    Sprint 6 — Radar Eventos         :s6, after s5, 7d
+    Sprint 7 — Qualidade + Banca     :s7, after s6, 6d
 ```
 
 ---
 
-## ══════════════ DIAS 1-5 — SPRINT 0: FUNDAÇÃO ══════════════
+## Sprints Detalhadas
 
-```
-OBJETIVO: Ambiente pronto, `flutter run` funciona, Firebase conectado
+### Sprint 0 — Fundação (Dias 1-5)
 
- Responsável       Dia 1           Dia 2          Dia 3          Dia 4          Dia 5
-───────────────────────────────────────────────────────────────────────────────────────────────
- Pessoa A (Líder)  │               │              │              │              │
-                    Instalar       Criar repo     Criar          Implementar   Revisar PR
-                    Flutter SDK    GitHub +       pastas +       AuthService    + mergear
-                    + configurar   flutter create main.dart +    +
-                    PATH           + Firebase     routes.dart    AuthProvider
-                                   + pubspec
+```mermaid
+flowchart LR
+    subgraph Todos[Dias 1-2]
+        SDK[Flutter SDK + Android Studio] --> Doctor[flutter doctor OK]
+        Git[GitHub repo] --> Create[flutter create]
+    end
 
- Pessoa B (Front)   Instalar       flutter run    Criar tema    LoginScreen   Ajudar
-                    Android        no emulador    (cores,        +             correções
-                    Studio + SDK                   fontes)       RegisterScreen
+    subgraph Time[Dias 3-4]
+        PessoaA["Pessoa A<br>pastas + routes + main"] --> PessoaB["Pessoa B<br>tema + componentes"]
+        PessoaC["Pessoa C<br>Firebase + Firestore"] --> PessoaD["Pessoa D<br>board + docs"]
+    end
 
- Pessoa C (Dados)   Instalar       flutterfire    ─              Firestore     Regras
-                    Flutter        configure                      Service       Firestore
-                                                                               + testes
+    subgraph Fim[Dia 5]
+        AuthService[AuthService + AuthProvider] --> FirestoreS[FirestoreService]
+        Regras[Regras segurança] --> PR1["PR #1 mergeado"]
+    end
 
- Pessoa D (QA/Doc)  Instalar tudo  Testar         Organizar      Testar        Checklist
-                                  flutter run     docs + board   login/cad     + PR
+    Todos --> Time --> Fim
 ```
 
+**Checkpoint:** `flutter run` sem erro ✅ | Firebase conectado ✅ | PR #1 mergeado ✅
+
+---
+
+### Sprint 1 — Auth + Navegação (Dias 6-10)
+
+```mermaid
+flowchart LR
+    subgraph Dias6_7[Dias 6-7]
+        Login[LoginScreen] --> Register[RegisterScreen]
+        AuthP[AuthProvider erros PT] --> UserFS[User no Firestore]
+    end
+
+    subgraph Dias8_9[Dias 8-9]
+        Guarda[Guarda de rota] --> Sessao[Sessão persistente]
+        BottomNav[BottomNavigationBar] --> Dash[Dashboard esqueleto]
+        Profile[ProfileScreen] --> Sair[Botão sair]
+    end
+
+    subgraph Dia10[Dia 10]
+        Testes[Testes fluxo] --> Correcao[Correções]
+        Review[Review grupo] --> PR2["PR #2 mergeado"]
+    end
+
+    Dias6_7 --> Dias8_9 --> Dia10
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA: flutter run ✅ | Firebase conectado ✅ | PR #1 mergeado ✅   │
-│  Board criado ✅ | Regras de branch configuradas ✅                         │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+**Checkpoint:** Login/Cadastro ✅ | Sessão persistente ✅ | Navegação ✅ | PR #2 ✅
+
+---
+
+### Sprint 2 — Dashboard (Dias 11-14)
+
+```mermaid
+flowchart LR
+    subgraph Dias11_12[Dias 11-12]
+        Grid[GridView cards] --> ModuleCard[ModuleCard widget]
+        DashP[DashboardProvider] --> NavegacaoCards[Navegação dos cards]
+    end
+
+    subgraph Dias13_14[Dias 13-14]
+        Resumo[Resumo horas] --> Contagem[Contagem disciplinas]
+        Progresso[Progresso visual] --> PR3["PR #3"]
+    end
+
+    Dias11_12 --> Dias13_14
+```
+
+**Checkpoint:** Dashboard com cards ✅ | Resumo horas ✅ | Contagem ✅ | PR #3 ✅
+
+---
+
+### Sprint 3 — Rotina (Dias 15-22)
+
+```mermaid
+flowchart LR
+    subgraph Dias15_17[Dias 15-17]
+        ModelDisc[Discipline model] --> ListaDisc[Lista disciplinas]
+        FormDisc[Formulário validação] --> Salvamento[Salvar Firestore]
+    end
+
+    subgraph Dias18_20[Dias 18-20]
+        Notas[Lançar notas] --> Media[Cálculo média]
+        Previsao[Previsão nota final] --> Faltas[Controle faltas]
+        Alertas[Alertas visuais] --> Calculos[Cálculos funcionando]
+    end
+
+    subgraph Dias21_22[Dias 21-22]
+        TestesRotina[Testes fluxo] --> CorrecaoRotina[Correções]
+        ReviewRotina[Review] --> PR4["PR #4"]
+    end
+
+    Dias15_17 --> Dias18_20 --> Dias21_22
+```
+
+**Checkpoint:** CRUD disciplinas ✅ | Cálculo média ✅ | Previsão final ✅ | Faltas ✅ | PR #4 ✅
+
+---
+
+### Sprint 4 — Certificados (Dias 23-30)
+
+```mermaid
+flowchart LR
+    subgraph Dias23_25[Dias 23-25]
+        CertModel[Certificate model] --> StorageS[StorageService]
+        CertProvider[CertificateProvider] --> Upload[Upload FilePicker]
+    end
+
+    subgraph Dias26_28[Dias 26-28]
+        FirestoreCert[Salvar Firestore] --> ListaCert[Lista certificados]
+        ProgressRing[ProgressRing widget] --> TotalHoras[Total no Dashboard]
+    end
+
+    subgraph Dias29_30[Dias 29-30]
+        TestesCert[Testes upload/delete] --> CorrecaoCert[Correções]
+        PR5["PR #5"]
+    end
+
+    Dias23_25 --> Dias26_28 --> Dias29_30
+```
+
+**Checkpoint:** Upload PDF/imagem ✅ | Lista certificados ✅ | Progresso visual ✅ | PR #5 ✅
+
+---
+
+### Sprint 5 — Pesquisa TCC (Dias 31-37)
+
+```mermaid
+flowchart LR
+    subgraph Dias31_33[Dias 31-33]
+        OAS[OpenAlexService] --> Abstract[Decodificar abstract]
+        ResearchP[ResearchProvider] --> Busca[Campo de busca]
+    end
+
+    subgraph Dias34_36[Dias 34-36]
+        ArticleCard[ArticleCard widget] --> ListaOA[Lista resultados]
+        Paginacao[Paginação] --> FiltroAno[Filtro ano]
+    end
+
+    subgraph Dia37[Dia 37]
+        TestesOA[Testes busca real] --> PR6["PR #6"]
+    end
+
+    Dias31_33 --> Dias34_36 --> Dia37
+```
+
+**Checkpoint:** Busca OpenAlex ✅ | Cards com dados ✅ | Loading/erro/vazio ✅ | PR #6 ✅
+
+---
+
+### Sprint 6 — Radar Eventos (Dias 38-44)
+
+```mermaid
+flowchart LR
+    subgraph Dias38_40[Dias 38-40]
+        EventModel[Event model] --> EventProvider[EventProvider]
+        DadosMock[Dados mock Firestore] --> ListaEvent[Lista eventos]
+    end
+
+    subgraph Dias41_43[Dias 41-43]
+        Mapa[flutter_map + markers] --> Popup[Popup info]
+        FiltroData[Filtro por data] --> LinkEvent[Link inscrição]
+    end
+
+    subgraph Dia44[Dia 44]
+        TestesEvent[Testes mapa/lista] --> PR7["PR #7"]
+    end
+
+    Dias38_40 --> Dias41_43 --> Dia44
+```
+
+**Checkpoint:** Lista eventos ✅ | Mapa com markers ✅ | Popup ✅ | Filtro data ✅ | PR #7 ✅
+
+---
+
+### Sprint 7 — Qualidade + Banca (Dias 45-50)
+
+```mermaid
+flowchart LR
+    subgraph Dias45_47[Dias 45-47]
+        TestesFim[Testes fluxo completo] --> Bugs[Bugs críticos]
+        UX[UX + loading + erro] --> RegrasFS[Regras Firestore]
+    end
+
+    subgraph Dias48_49[Dias 48-49]
+        Demo[Dados de demo] --> Contas[3 contas teste]
+        Video[Vídeo backup] --> Slides[Slides]
+    end
+
+    subgraph Dia50[Dia 50]
+        Ensaio1[Ensaio 1] --> Ensaio2[Ensaio 2]
+        Ensaio2 --> Ensaio3[Ensaio 3]
+        Ensaio3 --> Banca["🎯 Banca!"]
+    end
+
+    Dias45_47 --> Dias48_49 --> Dia50
+```
+
+**Checkpoint Final:**
+
+- Auth ✅ | Dashboard ✅ | Rotina ✅ | Certificados ✅ | Pesquisa ✅ | Radar ✅
+- 3 ensaios realizados ✅ | Vídeo backup ✅ | Slides prontos ✅
+
+---
+
+## Plano de Contingência
+
+```mermaid
+flowchart TD
+    subgraph Prioridade1[NÃO PULAR]
+        P1a["1º Auth + Dashboard"] --> P1b["2º Rotina"]
+        P1b --> P1c["3º Certificados v1"]
+    end
+
+    subgraph Prioridade2[REDUZIR ESCOPO]
+        P2a["4º Pesquisa TCC (sem paginação)"] --> P2b["5º Radar (só lista)"]
+    end
+
+    subgraph Prioridade3[CORTAR]
+        P3a["OCR automático"] --> P3b["Scraper Python"]
+        P3b --> P3c["Notificações push"]
+    end
+
+    Prioridade1 --> Prioridade2 --> Prioridade3
 ```
 
 ---
 
-## ══════════════ DIAS 6-10 — SPRINT 1: AUTH + NAV ══════════════
+## Distribuição por Pessoa (Equipe de 4)
 
-```
-  DIA 6         DIA 7          DIA 8          DIA 9          DIA 10
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-│ Finalizar│ │ Guarda   │ │ Logout   │ │ Testes   │ │ Review   │
-│ Login +  │ │ de rota  │ │ completo │ │ fluxo    │ │ +        │
-│ Register │ │ Bottom   │ │ Persis-  │ │ completo │ │ PR #2    │
-│ Telas    │ │ NavBar   │ │ tência   │ │ +        │ │ + merge  │
-└──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA: Login/Cadastro ✅ | Sessão persistente ✅ |                   │
-│  Navegação entre telas ✅ | Mensagens de erro PT ✅                         │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ══════════════ DIAS 11-14 — SPRINT 2: DASHBOARD ══════════════
-
-```
-  DIA 11        DIA 12         DIA 13          DIA 14
-┌──────────┐ ┌──────────┐ ┌────────────┐ ┌────────────┐
-│ GridView │ │ Dashboard│ │ Resumo     │ │ Testes     │
-│ Module   │ │ Provider │ │ horas +    │ │ +          │
-│ Card     │ │ +        │ │ contagem   │ │ PR #3      │
-│ widget   │ │ placehold│ │ disciplinas│ │ + merge    │
-└──────────┘ └──────────┘ └────────────┘ └────────────┘
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA: Dashboard com cards dos módulos ✅ |                           │
-│  Resumo de horas complementares ✅ | Contagem de disciplinas ✅             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ════════════════ DIAS 15-22 — SPRINT 3: ROTINA ════════════════
-
-```
-  DIAS 15-16     DIAS 17-18      DIAS 19-20      DIAS 21-22
-┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐
-│ Model +    │ │ Lançar     │ │ Cálculo    │ │ Testes +   │
-│ Provider + │ │ notas +    │ │ média +    │ │ Correções  │
-│ Tela lista │ │ formulário │ │ previsão   │ │ + PR #4    │
-│ disciplinas│ │ faltas     │ │ final      │ │ + merge    │
-└────────────┘ └────────────┘ └────────────┘ └────────────┘
-
-    │              │              │              │
-    ▼              ▼              ▼              ▼
-  Disciplina    Notas         "Precisa de     Fluxo completo
-  salva no      lançadas       X na final     testado com
-  Firestore     com peso       para passar"   dados reais
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA: CRUD disciplinas ✅ | Cálculo média ✅ |                      │
-│  Previsão nota final ✅ | Controle faltas ✅ | Alertas visuais ✅           │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ═══════════════ DIAS 23-30 — SPRINT 4: CERTIFICADOS ═══════════════
-
-```
-  DIAS 23-24      DIAS 25-26       DIAS 27-28       DIAS 29-30
-┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐
-│ Model +    │ │ Upload     │ │ Progress   │ │ Testes +   │
-│ Provider + │ │ Storage +  │ │ Ring +     │ │ Correções  │
-│ Tela lista │ │ Firestore  │ │ Total no   │ │ + PR #5    │
-│ certificad │ │ Validação  │ │ Dashboard  │ │ + merge    │
-└────────────┘ └────────────┘ └────────────┘ └────────────┘
-
-    │              │              │              │
-    ▼              ▼              ▼              ▼
-  Lista         PDF salvo      Gráfico       Upload +
-  de           no Storage     mostrando     exclusão
-  certificados + Firestore    progresso     funcionando
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA: Upload PDF/imagem ✅ | Lista de certificados ✅ |             │
-│  Dashboard com progresso visual ✅ | Exclusão funcional ✅                 │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ═══════════════ DIAS 31-37 — SPRINT 5: PESQUISA TCC ═══════════════
-
-```
-  DIAS 31-32      DIAS 33-34       DIAS 35-37
-┌────────────┐ ┌────────────┐ ┌──────────────┐
-│ OpenAlex   │ │ ArticleCard│ │ Paginação    │
-│ Service +  │ │ + ListView │ │ + Filtro ano │
-│ Provider   │ │ + Estado   │ │ + Testes     │
-│ Decodificar│ │ vazio/erro │ │ + PR #6      │
-│ abstract   │ │            │ │ + merge      │
-└────────────┘ └────────────┘ └──────────────┘
-
-    │              │              │
-    ▼              ▼              ▼
-  API           Resultados      Busca com
-  respondendo   exibidos        termos reais
-  com dados     em cards        funcionando
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA: Busca OpenAlex ✅ | Cards com título/autor/resumo/ano/link ✅│
-│  Loading + erro + vazio ✅ | Paginação funcionando ✅                      │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ═══════════════ DIAS 38-44 — SPRINT 6: RADAR EVENTOS ═══════════════
-
-```
-  DIAS 38-39      DIAS 40-41       DIAS 42-44
-┌────────────┐ ┌────────────┐ ┌──────────────┐
-│ Event      │ │ Mapa com   │ │ Popup info   │
-│ model +    │ │ flutter_map│ │ + Filtro     │
-│ Provider + │ │ + markers  │ │ + Link       │
-│ Lista +    │ │ + zoom     │ │ + Testes     │
-│ dados mock │ │            │ │ + PR #7      │
-└────────────┘ └────────────┘ └──────────────┘
-
-    │              │              │
-    ▼              ▼              ▼
-  Eventos        Mapa com       Clicar no
-  no             pins nas       pin mostra
-  Firestore      coordenadas    info do evento
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA: Lista de eventos ✅ | Mapa com markers ✅ |                    │
-│  Popup com info ✅ | Filtro por data ✅ | Link de inscrição ✅              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ════════════════ DIAS 45-50 — SPRINT 7: QUALIDADE + BANCA ════════════════
-
-```
-  DIAS 45-46        DIAS 47-48         DIAS 49-50
-┌────────────────┐ ┌────────────────┐ ┌──────────────────┐
-│ Testes fluxo   │ │ Dados demo     │ │ Ensaio 1, 2, 3   │
-│ completo       │ │ Contas teste   │ │ Slides prontos   │
-│ Corrigir bugs  │ │ Vídeo backup   │ │ Backup em nuvem  │
-│ críticos       │ │ Slides         │ │ Tudo verificado  │
-└────────────────┘ └────────────────┘ └──────────────────┘
-
-    │                  │                  │
-    ▼                  ▼                  ▼
-  App sem           Dados reais         Time pronto
-  crashes           para mostrar        para banca
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 ENTREGA FINAL:                                                        │
-│                                                                             │
-│  📱 App: Auth ✅ Dashboard ✅ Rotina ✅ Certificados ✅                     │
-│          Pesquisa ✅ Radar ✅                                               │
-│                                                                             │
-│  📋 Documentação: Prints ✅ Vídeo backup ✅ Slides ✅                       │
-│                                                                             │
-│  🎤 Time: 3 ensaios realizados ✅ Falas definidas ✅                       │
-│          Perguntas da banca preparadas ✅                                   │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ⚠️ PLANO DE CONTINGÊNCIA (SE FALTAR TEMPO)
-
-```
-Prioridade absoluta (não pular):
-  1º Auth + Dashboard     ← base de tudo
-  2º Rotina               ← módulo mais útil
-  3º Certificados v1      ← diferencial do projeto
-
-Pode reduzir escopo:
-  4º Pesquisa TCC         ← versão sem paginação
-  5º Radar v1             ← só lista, sem mapa
-
-Corta por último:
-  6º OCR automático       ← versão manual já funciona
-  7º Scraper Python       ← dados mockados resolvem
+```mermaid
+flowchart LR
+    subgraph Pessoas
+        A["Pessoa A<br>Líder Técnico"] --> Auth[Auth + Provider + Firebase]
+        B["Pessoa B<br>Dev Front"] --> Telas[Telas + Dashboard + Rotina]
+        C["Pessoa C<br>Dev Dados"] --> Dados[Modelos + Services + Storage]
+        D["Pessoa D<br>QA/Doc"] --> Testes[Testes + Docs + Slides]
+    end
 ```

@@ -1,200 +1,200 @@
 # Roadmap — Plano de Estudos
 
-```
-TRILHA DE APRENDIZADO: DO ZERO AO FLUTTER FUNCIONAL
-─────────────────────────────────────────────────────
-```
+```mermaid
+gantt
+    title Trilha de Aprendizado — 4 Semanas
+    dateFormat  YYYY-MM-DD
+    axisFormat  %d/%m
 
-## ═══════════ SEMANA 1 — DART + FLUTTER BASE ═══════════
+    section Semana 1
+    Dart I — Variáveis, funções, null safety      :s1a, 2024-01-01, 1d
+    Dart II — Classes, listas, mapas              :s1b, after s1a, 1d
+    Flutter I — Primeiro app, widgets             :s1c, after s1b, 1d
+    Flutter II — Navegação, forms                 :s1d, after s1c, 1d
+    Listas + Layout + Grid                        :s1e, after s1d, 1d
+    Reforço / Revisão                             :s1f, after s1e, 1d
 
-```
-Nível atual: ❌ nunca programou / sabe lógica básica
-Meta:        ✔ criar app Flutter com 3 telas navegáveis
-```
+    section Semana 2
+    Provider — ChangeNotifier, Consumer           :s2a, after s1f, 1d
+    Firebase Auth — login, cadastro               :s2b, after s2a, 1d
+    Firestore CRUD — models, streams              :s2c, after s2b, 1d
+    Firebase Storage — upload, image picker       :s2d, after s2c, 1d
+    HTTP + OpenAlex API                           :s2e, after s2d, 1d
+    Reforço / Revisão                             :s2f, after s2e, 1d
 
-```
-    SEG          TER          QUA          QUI          SEX          SÁB
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-│  Dart I   │ │  Dart II  │ │ Flutter I │ │ Flutter  │ │  Listas  │ │ Reforço  │
-│ variáveis │ │  classes  │ │ primeiro │ │  II      │ │   +      │ │ +        │
-│ funções   │ │  listas   │ │  app     │ │ navegação│ │ Layout   │ │ Revisão  │
-│ null-safe │ │  mapas    │ │ widgets  │ │ forms    │ │ Grids    │ │          │
-└────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘
-     │            │            │            │            │            │
-     ▼            ▼            ▼            ▼            ▼            ▼
-  10 ex     Classes      App roda    3 telas     Lista de      Tudo
-  resolv    Aluno com    no          + forms     20 cards      funcionando
-  em Dart   media       emulador    validados   customizados  sem duvidas
-```
+    section Semana 3
+    Mini Projeto 1 — ToDo completo                :s3a, after s2f, 2d
+    Mini Projeto 2 — CRUD + Upload                :s3b, after s3a, 2d
+    Revisão + Correções + PR                      :s3c, after s3b, 1d
+    Entrega dos projetos                          :s3d, after s3c, 1d
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 MARCO: App com 3 telas navegáveis + formulário com validação rodando   │
-│            no emulador Android.                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ═══════════ SEMANA 2 — FIREBASE + PROVIDER ═══════════
-
-```
-Nível atual: ✔ faz telas estáticas em Flutter
-Meta:        ✔ app com login real + dados salvos na nuvem
-```
-
-```
-    SEG          TER          QUA          QUI          SEX          SÁB
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-│ Provider  │ │ Firebase │ │ Firestore│ │ Firebase │ │  HTTP +  │ │ Reforço  │
-│          │ │   Auth   │ │   CRUD   │ │ Storage  │ │ OpenAlex │ │ +        │
-│ Change   │ │ login/   │ │ models   │ │ upload   │ │   API    │ │ Revisão  │
-│ Notifier │ │ cadastro │ │ streams  │ │ image    │ │  JSON    │ │          │
-│ Consumer │ │          │ │          │ │ picker   │ │          │ │          │
-└────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘
-     │            │            │            │            │            │
-     ▼            ▼            ▼            ▼            ▼            ▼
-   ToDo de   App com     Lista em    Upload     Busca      Domínio
-   exemplo   login       tempo       de foto    artigos    de tudo
-   rodando   funcional   real        exibindo   OpenAlex   estudado
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 MARCO: 2 apps rodando (1) ToDo com Provider (2) Login + CRUD          │
-│            Firestore. Cada membro entrega individualmente.                 │
-└─────────────────────────────────────────────────────────────────────────────┘
+    section Semana 4
+    Navegação avançada — BottomNav, IndexedStack  :s4a, after s3d, 1d
+    Maps — flutter_map, markers                   :s4b, after s4a, 1d
+    OCR — ML Kit text recognition                 :s4c, after s4b, 1d
+    Animações — AnimatedContainer, Hero           :s4d, after s4c, 1d
+    Revisão geral — juntar tudo                   :s4e, after s4d, 1d
 ```
 
 ---
 
-## ═══════════ SEMANA 3 — MINI PROJETOS OBRIGATÓRIOS ═══════════
+## Semana 1 — Dart + Flutter Base
 
-```
-Nível atual: ✔ sabe conectar Flutter + Firebase
-Meta:        ✔ entregar 2 mini projetos completos (em dupla)
+```mermaid
+flowchart LR
+    subgraph Seg[Dia 1 — Dart I]
+        Variaveis[Variáveis] --> Funcoes[Funções]
+        Funcoes --> NullSafety[Null safety]
+        NullSafety --> Ex10["10 exercícios"]
+    end
+
+    subgraph Ter[Dia 2 — Dart II]
+        Classes[Classes] --> Listas[Listas]
+        Listas --> Mapas[Mapas]
+        Mapas --> ExAluno[Classe Aluno com média]
+    end
+
+    subgraph Qua[Dia 3 — Flutter I]
+        Criar[flutter create] --> Widgets[Widgets básicos]
+        Widgets --> AppRodando[App rodando no emulador]
+    end
+
+    subgraph Qui[Dia 4 — Flutter II]
+        Navegacao[Navegação push/pop] --> Forms[Formulários]
+        Forms --> Validacao[Validação]
+        Validacao --> App3Telas[App com 3 telas]
+    end
+
+    subgraph Sex[Dia 5 — Listas]
+        ListView[ListView.builder] --> CardCustom[Card customizado]
+        CardCustom --> Grid[GridView]
+        Grid --> Lista20[20 cards na tela]
+    end
+
+    Seg --> Ter --> Qua --> Qui --> Sex
 ```
 
-```
-    SEG          TER          QUA          QUI          SEX          SÁB
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-│  Mini    │ │  Mini    │ │  Mini    │ │  Mini    │ │ Revisão  │ │ Entrega  │
-│ Projeto  │ │ Projeto  │ │ Projeto  │ │ Projeto  │ │   +      │ │   dos    │
-│  1 dia 1 │ │  1 dia 2 │ │  2 dia 1 │ │  2 dia 2 │ │ Correções│ │ projetos │
-└────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘
-     │            │            │            │            │            │
-     ▼            ▼            ▼            ▼            ▼            ▼
-   ToDo      ToDo       CRUD       CRUD +     PR     Ambos
-   completo  com        produtos   upload     aberto   mergeados
-   + login   Firestore  completo   de foto    + review na develop
-```
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 MARCO: 2 mini projetos completos no GitHub. Cada membro sabe fazer    │
-│            CRUD completo + Auth + upload de arquivo. PR aprovado.          │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-**Mini Projeto 1 — ToDo List**
-- Login Firebase Auth
-- CRUD no Firestore
-- Marcar concluída
-- Filtrar: todas/pendentes/concluídas
-- Provider + loading + erro + vazio
-
-**Mini Projeto 2 — CRUD + Upload**
-- Cadastro de produto com foto
-- Upload para Firebase Storage
-- Lista com StreamBuilder
-- Editar/Excluir com confirmação
+**Marco da Semana 1:** App com 3 telas navegáveis + formulário com validação rodando no emulador.
 
 ---
 
-## ═══════════ SEMANA 4 — AVANÇADO + INTEGRAÇÕES ═══════════
+## Semana 2 — Firebase + Provider
 
-```
-Nível atual: ✔ mini projetos completos
-Meta:        ✔ domínio de tópicos avançados para o GraduaHUB
+```mermaid
+flowchart LR
+    subgraph Seg[Dia 6 — Provider]
+        Change[ChangeNotifier] --> Consumer[Consumer]
+        Consumer --> ToDo[ToDo de exemplo]
+    end
+
+    subgraph Ter[Dia 7 — Firebase Auth]
+        Config[Config Firebase] --> Login[Login]
+        Login --> Cadastro[Cadastro]
+        Cadastro --> AuthApp[App com login real]
+    end
+
+    subgraph Qua[Dia 8 — Firestore]
+        Model[Model + toMap] --> CRUD[CRUD completo]
+        CRUD --> Stream[Stream em tempo real]
+    end
+
+    subgraph Qui[Dia 9 — Storage]
+        Picker[Image Picker] --> Upload[Upload Storage]
+        Upload --> Exibir[Exibir na tela]
+    end
+
+    subgraph Sex[Dia 10 — API]
+        HTTP[http.get] --> JSON[jsonDecode]
+        JSON --> ListaAPI[Lista de resultados]
+    end
+
+    Seg --> Ter --> Qua --> Qui --> Sex
 ```
 
-```
-    SEG           TER            QUA            QUI            SEX
-┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐
-│ Navegação  │ │  Maps      │ │   OCR      │ │ Animações  │ │  Revisão   │
-│ avançada   │ │            │ │            │ │            │ │   Geral    │
-│ BottomNav  │ │ flutter_map│ │ ML Kit     │ │ Animated   │ │            │
-│ Indexed    │ │ markers    │ │ text       │ │ Container  │ │ Juntar     │
-│ Stack      │ │ geolocator │ │ recognition│ │ Hero       │ │ tudo       │
-└────┬───────┘ └────┬───────┘ └────┬───────┘ └────┬───────┘ └────┬───────┘
-     │              │              │              │              │
-     ▼              ▼              ▼              ▼              ▼
-   4 abas       Mapa com      OCR lendo      Transições     Pronto
-   com        pins reais     texto de       suaves         para
-   telas                     imagem         entre telas    o projeto
-   independentes
+**Marco da Semana 2:** 2 apps rodando — (1) ToDo com Provider (2) Login + CRUD Firestore. Cada membro entrega individualmente.
+
+---
+
+## Semana 3 — Mini Projetos Obrigatórios
+
+### Mini Projeto 1 — ToDo List (2 dias)
+
+```mermaid
+flowchart LR
+    LoginMP[Login Firebase] --> CRUDMP[CRUD Firestore]
+    CRUDMP --> Concluir[Concluir tarefa]
+    Concluir --> Filtrar[Filtrar pendentes]
+    Filtrar --> ProviderMP[Provider + Loading + Erro]
 ```
 
+### Mini Projeto 2 — CRUD + Upload (2 dias)
+
+```mermaid
+flowchart LR
+    FormProd[Formulário produto] --> Foto[Upload foto]
+    Foto --> ListaProd[StreamBuilder lista]
+    ListaProd --> Editar[Editar / Excluir]
+    Editar --> Confirmar[Confirmação exclusão]
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│  🏁 MARCO FINAL DOS ESTUDOS: Time apto a desenvolver o GraduaHUB.         │
-│  Cada membro consegue:                                                     │
-│    • Criar tela Flutter com formulário                                     │
-│    • Navegar entre telas                                                   │
-│    • Salvar/ler dados no Firestore                                         │
-│    • Implementar login com Firebase Auth                                   │
-│    • Subir feature via branch + PR                                         │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+**Marco da Semana 3:** 2 mini projetos completos no GitHub. Cada membro sabe fazer CRUD completo + Auth + upload.
+
+---
+
+## Semana 4 — Avançado + Integrações
+
+```mermaid
+flowchart LR
+    subgraph Seg[Dia 1 — Navegação]
+        Bottom[BottomNavigationBar] --> Stack[IndexedStack]
+    end
+
+    subgraph Ter[Dia 2 — Maps]
+        FMap[flutter_map] --> Markers[Markers]
+    end
+
+    subgraph Qua[Dia 3 — OCR]
+        MLKit[ML Kit] --> TextRecognition[Text recognition]
+    end
+
+    subgraph Qui[Dia 4 — Animações]
+        Anim[AnimatedContainer] --> Hero[Hero]
+    end
+
+    subgraph Sex[Dia 5 — Revisão]
+        Revisao[Revisão geral] --> Junta[Juntar tudo]
+    end
+
+    Seg --> Ter --> Qua --> Qui --> Sex
 ```
 
 ---
 
-## ═══════════ SEMANAS 5-8 — ESTUDO PARALELO ÀS SPRINTS ═══════════
+## Progresso da Trilha
 
-```
-Nível atual: ✔ base completa para desenvolver
-Estratégia: estudar APENAS o necessário para a próxima tarefa
-```
+```mermaid
+gantt
+    title Progresso Geral
+    dateFormat  YYYY-MM-DD
+    axisFormat  Semana %W
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                                                                             │
-│  SPRINT 1 (Auth + Nav)     → Provider, Firebase Auth, Navigator             │
-│  SPRINT 2 (Dashboard)      → GridView, Cards, StreamBuilder                │
-│  SPRINT 3 (Rotina)         → Forms, cálculos, validação                    │
-│  SPRINT 4 (Certificados)   → ImagePicker, Storage, File                    │
-│  SPRINT 5 (Pesquisa)       → HTTP, JSON, ListView                          │
-│  SPRINT 6 (Radar)          → flutter_map, geolocator, markers              │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+    section Capacitação
+    Semana 1 — Dart + Flutter base     :done, p1, 2024-01-01, 7d
+    Semana 2 — Firebase + Provider     :done, p2, after p1, 7d
+    Semana 3 — Mini projetos           :done, p3, after p2, 7d
+    Semana 4 — Tópicos avançados       :done, p4, after p3, 7d
 ```
 
 ---
 
-## 📊 SUMÁRIO DE PROGRESSO
+## Meta Final dos Estudos
 
-```
-SEMANA 1 ─████████░░░░░░░░░░ 40%  Dart + Flutter base
-SEMANA 2 ─████████████░░░░░░ 60%  Firebase + Provider
-SEMANA 3 ─█████████████████░ 90%  Mini projetos
-SEMANA 4 ─██████████████████ 100% Tópicos avançados
+Cada membro deve conseguir, **sozinho**:
 
-         ├───────────┬───────────┬───────────┬───────────┤
-        Semana 1    Semana 2    Semana 3    Semana 4
+- Criar uma tela Flutter com formulário
+- Navegar entre telas
+- Salvar e ler dados no Firestore
+- Implementar login com Firebase Auth
+- Subir uma feature via branch + PR
 
-  ✔ = pronto para desenvolver o GraduaHUB
-```
-
----
-
-## ⚠️ REGRA DE OURO
-
-```
-Se mais de 30% do time não conseguir fazer um exercício:
-    → REPETIR o dia seguinte com mais prática
-    → NÃO AVANÇAR sem base sólida
-
-Cada membro PRECISA conseguir fazer tudo sozinho:
-    ❌ "Fulano fez a parte dele, eu só copiei"
-    ✔ "Eu fiz minha tela do zero e entendi cada linha"
-```
+> Se mais de 30% do time não conseguir, **repetir a semana** antes de avançar.
