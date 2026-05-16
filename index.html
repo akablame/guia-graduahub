@@ -6,8 +6,9 @@
 <meta name="theme-color" content="#08080a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="GraduaHUB — Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP na banca.">
 <title>GraduaHUB — Guia Completo</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
@@ -17,16 +18,20 @@
   --bg3:#151518;
   --bg4:#1c1c21;
   --bg5:#25252b;
+  --bg6:#2e2e36;
   --tx:#e8e8ed;
   --tx2:#9f9fab;
   --tx3:#6b6b78;
   --tx4:#4a4a54;
   --grn:#22c55e;
   --grn-bg:rgba(34,197,94,.08);
+  --grn-glow:rgba(34,197,94,.15);
   --blu:#3b82f6;
   --blu-bg:rgba(59,130,246,.08);
+  --blu-glow:rgba(59,130,246,.15);
   --pur:#a855f7;
   --pur-bg:rgba(168,85,247,.08);
+  --pur-glow:rgba(168,85,247,.15);
   --yel:#eab308;
   --yel-bg:rgba(234,179,8,.08);
   --red:#ef4444;
@@ -35,12 +40,107 @@
   --teal-bg:rgba(20,184,166,.08);
   --brd:#1c1c21;
   --brd2:#26262c;
+  --brd3:#33333d;
   --r:12px;
+  --r-sm:8px;
+  --r-lg:16px;
   --f:'Inter',system-ui,sans-serif;
   --m:'JetBrains Mono',monospace;
   --safe-b:env(safe-area-inset-bottom,0px);
   --safe-t:env(safe-area-inset-top,0px);
+  --glass-bg:rgba(21,21,24,.75);
+  --glass-brd:rgba(255,255,255,.06);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+  --transition-fast:.2s ease;
+  --transition-med:.35s cubic-bezier(.22,1,.36,1);
+  --transition-slow:.6s cubic-bezier(.22,1,.36,1);
 }
+
+::selection{background:rgba(168,85,247,.35);color:#fff}
+::-moz-selection{background:rgba(168,85,247,.35);color:#fff}
+
+:focus-visible{outline:2px solid var(--pur);outline-offset:2px;border-radius:4px}
+
+html{scroll-behavior:smooth;font-size:16px;scrollbar-width:thin;scrollbar-color:var(--bg5) transparent}
+body{font-family:var(--f);background:var(--bg);color:var(--tx);line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;padding-top:52px;min-height:100vh}
+body.no-scroll{overflow:hidden;position:fixed;width:100%}
+
+@media(min-width:1024px){
+  body{padding-top:0;display:flex;overflow:hidden}
+}
+
+/* ═══ CUSTOM SCROLLBAR ═══ */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--bg6)}
+
+/* ═══ CURSOR FOLLOWER ═══ */
+.cursor-follower{
+  position:fixed;pointer-events:none;z-index:99999;width:20px;height:20px;
+  border-radius:50%;background:radial-gradient(circle,var(--pur) 0%,transparent 70%);
+  opacity:0;transform:translate(-50%,-50%) scale(0);
+  transition:opacity .6s ease,transform .3s ease;
+  will-change:transform,left,top;
+}
+.cursor-follower.show{opacity:.35;transform:translate(-50%,-50%) scale(1)}
+@media(hover:none)and(pointer:coarse){.cursor-follower{display:none}}
+
+/* ═══ THEME TOGGLE ═══ */
+.theme-toggle{
+  position:fixed;bottom:80px;right:16px;z-index:100;
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--brd2);
+  background:var(--bg3);color:var(--tx2);cursor:pointer;display:flex;
+  align-items:center;justify-content:center;
+  transition:all var(--transition-med);box-shadow:0 4px 16px rgba(0,0,0,.4);
+  opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;
+}
+.theme-toggle.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.theme-toggle:hover{background:var(--bg4);border-color:var(--brd3);color:var(--tx);transform:scale(1.1)}
+.theme-toggle:active{transform:scale(.92)}
+.theme-toggle svg{width:18px;height:18px;display:block}
+
+/* ═══ LIGHT THEME ═══ */
+[data-theme="light"]{
+  --bg:#f5f5f7;
+  --bg2:#eeeeef;
+  --bg3:#e8e8ed;
+  --bg4:#dddde3;
+  --bg5:#c8c8d0;
+  --bg6:#b8b8c2;
+  --tx:#1a1a24;
+  --tx2:#4a4a54;
+  --tx3:#6b6b78;
+  --tx4:#8a8a94;
+  --brd:#d0d0d8;
+  --brd2:#c0c0ca;
+  --brd3:#aaaab4;
+  --glass-bg:rgba(245,245,247,.8);
+  --glass-brd:rgba(0,0,0,.06);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.1);
+  --grn-bg:rgba(34,197,94,.12);
+  --blu-bg:rgba(59,130,246,.12);
+  --pur-bg:rgba(168,85,247,.12);
+  --yel-bg:rgba(234,179,8,.12);
+  --red-bg:rgba(239,68,68,.12);
+  --teal-bg:rgba(20,184,166,.12);
+}
+[data-theme="light"] .card{background:rgba(255,255,255,.7);border-color:var(--brd)}
+[data-theme="light"] .card:hover{border-color:var(--brd2)}
+[data-theme="light"] .card-b code{background:var(--bg3)}
+[data-theme="light"] .card-b pre{background:var(--bg2)}
+[data-theme="light"] .sc,.st-card,.pc,.co{background:rgba(255,255,255,.7)}
+[data-theme="light"] .drawer{background:rgba(238,238,239,.97)}
+[data-theme="light"] .topbar{background:rgba(238,238,239,.85)}
+[data-theme="light"] .road-dot.dim{background:var(--bg4);border-color:var(--bg4)}
+[data-theme="light"] .sd{background:var(--bg2)}
+[data-theme="light"] .tc{background:var(--bg2)}
+[data-theme="light"] .cl-progress{background:rgba(255,255,255,.5)}
+[data-theme="light"] .ce{background:rgba(255,255,255,.5)}
+[data-theme="light"] .co::after{background:linear-gradient(135deg,transparent 60%,rgba(0,0,0,.02))}
+[data-theme="light"] .cl-i:hover{background:var(--bg3)}
+[data-theme="light"] .milestone-highlight{border-color:var(--brd2)}
+[data-theme="light"] .shimmer-line{background:linear-gradient(90deg,var(--bg3) 25%,var(--bg4) 50%,var(--bg3) 75%)}
 
 html{scroll-behavior:smooth;font-size:16px}
 body{
@@ -61,8 +161,81 @@ body.no-scroll{overflow:hidden;position:fixed;width:100%}
 @keyframes borderGlow{0%,100%{border-color:var(--brd2)}50%{border-color:rgba(168,85,247,.3)}}
 @keyframes gradientText{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes float-delayed{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes orbit1{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+@keyframes breathe{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes rotate-glow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes shine-slide{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+@keyframes morph{0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}}
+
+/* ═══ REDUCED MOTION ═══ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ═══ SHIMMER LINES (skeleton) ═══ */
+.shimmer-line{
+  height:12px;border-radius:6px;background:linear-gradient(90deg,var(--bg4) 25%,var(--bg5) 50%,var(--bg4) 75%);
+  background-size:200% 100%;animation:shimmer 1.5s ease infinite;margin-bottom:8px;
+}
+.shimmer-line:last-child{width:60%}
+.shimmer-line.wide{width:100%}
+.shimmer-line.med{width:75%}
+.shimmer-line.narrow{width:45%}
+
+/* ═══ SECTION GLASS DIVIDER ═══ */
+.section-divider{
+  height:1px;margin:0 -16px 32px;position:relative;
+  background:linear-gradient(90deg,transparent,var(--brd2),transparent);
+}
+.section-divider::after{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:40px;height:12px;border-radius:50%;background:var(--pur-glow);filter:blur(8px);
+  animation:breathe 3s ease-in-out infinite;
+}
+@media(min-width:640px){.section-divider{margin-left:-24px;margin-right:-24px}}
+
+/* ═══ STATUS BADGE PULSE ═══ */
+.badge-pulse{display:inline-flex;align-items:center;gap:5px}
+.badge-dot{width:6px;height:6px;border-radius:50%;display:inline-block;animation:pulse 2s ease-in-out infinite}
+.badge-dot.grn{background:var(--grn);box-shadow:0 0 6px var(--grn-glow)}
+.badge-dot.pur{background:var(--pur);box-shadow:0 0 6px var(--pur-glow)}
+.badge-dot.blu{background:var(--blu);box-shadow:0 0 6px var(--blu-glow)}
+.badge-dot.yel{background:var(--yel);box-shadow:0 0 6px rgba(234,179,8,.3)}
+
+/* ═══ GLASS CARD VARIANT ═══ */
+.glass-card{
+  background:var(--glass-bg);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);border:1px solid var(--glass-brd);
+  box-shadow:var(--glass-shadow);
+}
+
+/* ═══ CARD SHINE ═══ */
+.card-shine{position:relative;overflow:hidden}
+.card-shine::before{
+  content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.04) 45%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 55%,transparent 60%);
+  transform:translateX(-100%);transition:transform .6s ease;pointer-events:none;z-index:2;
+}
+.card-shine:hover::before{transform:translateX(100%)}
+[data-theme="light"] .card-shine::before{background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.3) 45%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.3) 55%,transparent 60%)}
+
+/* ═══ PARALLAX DECORATIVE ORB ═══ */
+.orb{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  filter:blur(60px);opacity:.12;will-change:transform;
+}
+.orb-1{width:400px;height:400px;background:var(--pur);top:-100px;right:-100px;animation:float-delayed 8s ease-in-out infinite}
+.orb-2{width:300px;height:300px;background:var(--blu);bottom:-50px;left:-80px;animation:float-delayed 10s ease-in-out infinite reverse}
+.orb-3{width:250px;height:250px;background:var(--teal);top:50%;left:60%;animation:float-delayed 12s ease-in-out infinite 2s}
+
+/* ═══ ACCESSIBILITY SKIP LINK ═══ */
+.skip-link{
+  position:fixed;top:-100%;left:16px;z-index:100000;padding:8px 16px;
+  background:var(--pur);color:#fff;border-radius:8px;font-size:13px;font-weight:600;
+  transition:top .3s ease;
+}
+.skip-link:focus{top:16px}
 
 /* ═══ PARTICLES BG ═══ */
 #particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
@@ -627,6 +800,14 @@ details[open]{animation:fadeUp .3s ease}
 </head>
 <body>
 
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<a href="#main-content" class="skip-link" tabindex="1">Pular para conteúdo</a>
+
 <canvas id="particles-canvas"></canvas>
 
 <div class="achievement" id="achievementToast">
@@ -638,9 +819,15 @@ details[open]{animation:fadeUp .3s ease}
 <div id="progressBar"></div>
 <canvas id="confettiCanvas"></canvas>
 
-<button class="btt" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">
+<button class="btt" id="backToTop" aria-label="Voltar ao topo">
   <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
   <span class="btt-ring"><svg viewBox="0 0 44 44"><circle class="btt-ring-bg" cx="22" cy="22" r="19"/><circle class="btt-ring-fg" id="bttRingFg" cx="22" cy="22" r="19"/></svg></span>
+</button>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">
+  <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
 </button>
 
 <div class="road-popup" id="roadPopup">
@@ -650,7 +837,6 @@ details[open]{animation:fadeUp .3s ease}
   <div class="road-popup-desc" id="roadPopupDesc"></div>
 </div>
 
-<!-- SWIPE HINT -->
 <div class="swipe-hint" id="swipeHint"></div>
 
 <!-- TOPBAR -->
@@ -692,7 +878,7 @@ details[open]{animation:fadeUp .3s ease}
 </aside>
 
 <!-- MAIN -->
-<main class="main">
+<main class="main" id="main-content">
 <div class="ct">
 
 <!-- ═══ HERO ═══ -->
@@ -1291,39 +1477,64 @@ Bloqueios: [o que impede]</pre>
 ;(function(){
 'use strict';
 
-// ─── PARTICLES ───
+// ─── ENHANCED PARTICLES WITH MOUSE INTERACTION ───
 (function(){
   const c = document.getElementById('particles-canvas');
   if (!c) return;
   const ctx = c.getContext('2d');
   let w, h, particles = [];
-  const COUNT = 50;
+  let mouse = {x: -9999, y: -9999};
+  const COUNT = 70;
+  const CONNECT_DIST = 140;
+  const MOUSE_RADIUS = 150;
+
   function resize(){ w = c.width = innerWidth; h = c.height = innerHeight; }
   addEventListener('resize', resize); resize();
+  addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
   for (let i = 0; i < COUNT; i++) particles.push({
     x: Math.random() * w, y: Math.random() * h,
-    vx: (Math.random() - .5) * .2, vy: (Math.random() - .5) * .2,
-    r: Math.random() * 2.5 + .5, a: Math.random() * .4 + .1
+    vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+    r: Math.random() * 2.5 + .5, a: Math.random() * .4 + .15,
+    baseVx: 0, baseVy: 0
   });
+
   function draw(){
     ctx.clearRect(0, 0, w, h);
+
     for (const p of particles) {
+      const dx = mouse.x - p.x;
+      const dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < MOUSE_RADIUS) {
+        const force = (1 - dist / MOUSE_RADIUS) * .5;
+        p.vx -= dx / dist * force;
+        p.vy -= dy / dist * force;
+      }
+      p.vx += (Math.random() - .5) * .02;
+      p.vy += (Math.random() - .5) * .02;
+      p.vx *= .98; p.vy *= .98;
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(168, 85, 247, ${p.a})`; ctx.fill();
+      ctx.fillStyle = `rgba(168, 85, 247, ${p.a})`;
+      ctx.fill();
     }
+
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130) {
+        if (dist < CONNECT_DIST) {
+          const alpha = .1 * (1 - dist / CONNECT_DIST);
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(168, 85, 247, ${.08 * (1 - dist / 130)})`;
+          ctx.strokeStyle = `rgba(168, 85, 247, ${alpha})`;
           ctx.stroke();
         }
       }
@@ -1331,6 +1542,88 @@ Bloqueios: [o que impede]</pre>
     requestAnimationFrame(draw);
   }
   draw();
+})();
+
+// ─── CURSOR FOLLOWER ───
+(function(){
+  const cf = document.getElementById('cursorFollower');
+  if (!cf) return;
+  let x = -100, y = -100, tx = -100, ty = -100;
+  let raf = null;
+  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (prefersReduced) return;
+
+  function onMove(e){
+    tx = e.clientX; ty = e.clientY;
+    if (!raf) { raf = requestAnimationFrame(tick); }
+  }
+
+  function tick(){
+    raf = null;
+    x += (tx - x) * .15;
+    y += (ty - y) * .15;
+    cf.style.left = x + 'px';
+    cf.style.top = y + 'px';
+    if (Math.abs(x - tx) > .5 || Math.abs(y - ty) > .5) {
+      raf = requestAnimationFrame(tick);
+    }
+  }
+
+  addEventListener('mousemove', onMove, {passive:true});
+  addEventListener('mouseenter', () => cf.classList.add('show'));
+  addEventListener('mouseleave', () => { cf.classList.remove('show'); x = -100; y = -100; tx = -100; ty = -100; });
+})();
+
+// ─── PARALLAX ORBS ───
+(function(){
+  const orbs = document.querySelectorAll('.orb');
+  if (!orbs.length) return;
+  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (prefersReduced) return;
+  let raf = null;
+  addEventListener('scroll', () => {
+    if (!raf) raf = requestAnimationFrame(() => {
+      raf = null;
+      const s = window.scrollY;
+      orbs[0].style.transform = `translate(${s * .02}px, ${s * -.015}px)`;
+      if (orbs[1]) orbs[1].style.transform = `translate(${s * -.015}px, ${s * .02}px)`;
+      if (orbs[2]) orbs[2].style.transform = `translate(${s * .01}px, ${s * -.01}px)`;
+    });
+  }, {passive:true});
+})();
+
+// ─── THEME TOGGLE ───
+(function(){
+  const btn = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+  if (!btn) return;
+
+  const saved = localStorage.getItem('gh_theme');
+  if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+
+  updateIcon();
+
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isLight = html.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      html.removeAttribute('data-theme');
+      localStorage.setItem('gh_theme', 'dark');
+    } else {
+      html.setAttribute('data-theme', 'light');
+      localStorage.setItem('gh_theme', 'light');
+    }
+    updateIcon();
+    btn.style.transform = 'scale(.85)';
+    setTimeout(() => { btn.style.transform = ''; }, 200);
+  });
+
+  function updateIcon(){
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    icon.innerHTML = isLight
+      ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'
+      : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  }
 })();
 
 // ─── READING PROGRESS BAR ───
@@ -1359,6 +1652,10 @@ Bloqueios: [o que impede]</pre>
     btt.classList.toggle('show', (h.scrollTop || document.body.scrollTop) > 300);
   };
   addEventListener('scroll', update, {passive:true}); update();
+
+  btt.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior:'smooth'});
+  });
 })();
 
 // ─── TOGGLE DRAWER ───
@@ -1393,16 +1690,18 @@ document.querySelectorAll('.dnav-item').forEach(item => {
 });
 
 // ─── INTERSECTION OBSERVER (nav active) ───
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
-      const link = document.querySelector(`.dnav-item[data-target="${entry.target.id}"]`);
-      if (link) link.classList.add('active');
-    }
-  });
-}, { threshold: .2, rootMargin: '0px 0px -40% 0px' });
-document.querySelectorAll('.section').forEach(s => obs.observe(s));
+(function(){
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
+        const link = document.querySelector(`.dnav-item[data-target="${entry.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: .2, rootMargin: '0px 0px -40% 0px' });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+})();
 
 // ─── SCROLL REVEAL + SCRAMBLE ───
 (function(){
@@ -1508,19 +1807,23 @@ document.querySelectorAll('.section').forEach(s => obs.observe(s));
   counters.forEach(c => obs2.observe(c));
 })();
 
-// ─── 3D TILT ON CARDS ───
+// ─── ENHANCED 3D TILT ON CARDS ───
 (function(){
-  if (innerWidth < 768) return; // skip on small mobile for perf
+  if (innerWidth < 768) return;
   const tiltItems = document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co');
+  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (prefersReduced) return;
+
   tiltItems.forEach(el => {
+    el.classList.add('card-shine');
     el.addEventListener('mousemove', e => {
       const r = el.getBoundingClientRect();
       const x = e.clientX - r.left;
       const y = e.clientY - r.top;
-      const mx = (x / r.width - .5) * 12;
-      const my = (y / r.height - .5) * -12;
-      el.style.transform = `perspective(800px) rotateX(${my}deg) rotateY(${mx}deg) translateZ(6px)`;
-      el.style.boxShadow = `${-mx * 2}px ${-my * 2}px 24px rgba(0,0,0,.3)`;
+      const mx = (x / r.width - .5) * 16;
+      const my = (y / r.height - .5) * -16;
+      el.style.transform = `perspective(1000px) rotateX(${my}deg) rotateY(${mx}deg) translateZ(10px) scale(1.02)`;
+      el.style.boxShadow = `${-mx * 2}px ${-my * 2}px 30px rgba(0,0,0,.35), ${-mx * 4}px ${-my * 4}px 0 var(--brd)`;
     });
     el.addEventListener('mouseleave', () => {
       el.style.transform = '';
@@ -1703,7 +2006,7 @@ window.closeRoadPopup = function(){
 // ─── RIPPLE EFFECT ───
 (function(){
   document.addEventListener('click', function(e){
-    const target = e.target.closest('.menu-btn, .dnav-item, .cl-i, .flow-s, details summary, .btt, .road-dot');
+    const target = e.target.closest('.menu-btn, .dnav-item, .cl-i, .flow-s, details summary, .btt, .road-dot, .theme-toggle');
     if (!target) return;
     const rect = target.getBoundingClientRect();
     const r = document.createElement('span');
@@ -1720,15 +2023,16 @@ window.closeRoadPopup = function(){
 })();
 
 // ─── SWIPE HINT ───
-const hint = document.getElementById('swipeHint');
-if (hint) {
+(function(){
+  const hint = document.getElementById('swipeHint');
+  if (!hint) return;
   let shown = localStorage.getItem('swipe_hint_shown');
   if (!shown) {
     setTimeout(() => { hint.classList.add('show'); }, 2000);
     setTimeout(() => { hint.classList.remove('show'); }, 6000);
     localStorage.setItem('swipe_hint_shown', '1');
   }
-}
+})();
 
 // ─── DETAILS SMOOTH OPEN ───
 document.querySelectorAll('details').forEach(d => {
@@ -1740,14 +2044,46 @@ document.querySelectorAll('details').forEach(d => {
 });
 
 // ─── DRAWER SWIPE TO CLOSE ───
-let touchStartX = 0;
-document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
-document.addEventListener('touchend', e => {
-  const d = document.querySelector('.drawer');
-  if (!d.classList.contains('open')) return;
-  const dx = e.changedTouches[0].screenX - touchStartX;
-  if (dx < -60) toggleDrawer();
-});
+(function(){
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const d = document.querySelector('.drawer');
+    if (!d?.classList.contains('open')) return;
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    if (dx < -60) toggleDrawer();
+  });
+})();
+
+// ─── THEME TOGGLE SHOW ON SCROLL ───
+(function(){
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  const update = () => {
+    btn.classList.toggle('show', window.scrollY > 500);
+  };
+  addEventListener('scroll', update, {passive:true}); update();
+})();
+
+// ─── KEYBOARD SHORTCUTS ───
+(function(){
+  addEventListener('keydown', e => {
+    if (e.key === 't' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      document.getElementById('themeToggle')?.click();
+    }
+    if (e.key === 'Escape') {
+      const popup = document.getElementById('roadPopup');
+      if (popup?.classList.contains('show')) closeRoadPopup();
+      const drawer = document.querySelector('.drawer');
+      if (drawer?.classList.contains('open')) toggleDrawer();
+    }
+    if (e.key === 'm' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      toggleDrawer();
+    }
+  });
+})();
 
 })();
 </script>
