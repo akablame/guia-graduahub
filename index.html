@@ -578,7 +578,53 @@ details[open]{animation:fadeUp .3s ease}
   .road-dot:active{transform:scale(1.3)}
   .ce:active{transform:none}
 }
-</style>
+
+/* ═══ GRID BG ═══ */
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.grid-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(168,85,247,.06) 1px,transparent 1px);background-size:32px 32px;animation:gridDrift 12s linear infinite}
+@keyframes gridDrift{0%{transform:translate(0,0)}100%{transform:translate(32px,32px)}}
+
+/* ═══ PROGRESS BAR ═══ */
+#progressBar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--pur),var(--blu),var(--teal));z-index:999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(168,85,247,.4)}
+
+/* ═══ BACK TO TOP ═══ */
+.btt{position:fixed;bottom:24px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:var(--bg3);color:var(--tx2);cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:all .4s cubic-bezier(.22,1,.36,1);border:1px solid var(--brd2);box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.btt.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.btt:active{transform:scale(.92)}
+.btt svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btt-ring{position:absolute;inset:2px;pointer-events:none}
+.btt-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.btt-ring-bg{fill:none;stroke:var(--bg4);stroke-width:2}
+.btt-ring-fg{fill:none;stroke:var(--pur);stroke-width:2;stroke-linecap:round;transition:stroke-dashoffset .3s}
+
+/* ═══ CONFETTI CANVAS ═══ */
+#confettiCanvas{position:fixed;inset:0;z-index:9999;pointer-events:none}
+
+/* ═══ 3D TILT ═══ */
+.tilt-wrap{perspective:1000px;transform-style:preserve-3d}
+.tilt-inner{transition:transform .1s ease;transform-style:preserve-3d;will-change:transform}
+.tilt-inner .card,.tilt-inner .sc,.tilt-inner .st-card,.tilt-inner .pc,.tilt-inner .tc{transition:transform .1s ease,box-shadow .1s ease}
+
+/* ═══ ROADMAP POPUP ═══ */
+.road-popup{position:fixed;bottom:20px;left:16px;right:16px;max-width:400px;margin:0 auto;background:rgba(14,14,17,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--brd2);border-radius:14px;padding:18px;z-index:300;transform:translateY(120px);opacity:0;transition:all .5s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 40px rgba(0,0,0,.6);pointer-events:none}
+.road-popup.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.road-popup-close{position:absolute;top:10px;right:12px;width:28px;height:28px;border:none;background:var(--bg4);color:var(--tx3);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px}
+.road-popup-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.road-popup-sub{font-size:11px;color:var(--pur);font-family:var(--m);margin-bottom:8px}
+.road-popup-desc{font-size:13px;color:var(--tx2);line-height:1.6}
+
+/* ═══ SCRAMBLE TEXT ═══ */
+.scramble{display:inline-block}
+.scramble-done{color:var(--tx)}
+
+/* ═══ PARALLAX WRAP ═══ */
+.parallax{will-change:transform}
+
+/* ═══ DRAWER DRAG HANDLE ═══ */
+.drawer-handle{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:20px;height:40px;background:var(--bg3);border:1px solid var(--brd);border-left:none;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .3s;z-index:201}
+.drawer.open .drawer-handle{opacity:1}
+.drawer-handle::after{content:'';width:3px;height:14px;background:var(--tx4);border-radius:2px;display:block}
+}
 </head>
 <body>
 
@@ -587,6 +633,22 @@ details[open]{animation:fadeUp .3s ease}
 <div class="achievement" id="achievementToast">
   <div class="achievement-icon">🏆</div>
   <div class="achievement-text"><strong>Conquista!</strong>Continue assim!</div>
+</div>
+
+<div class="grid-bg"></div>
+<div id="progressBar"></div>
+<canvas id="confettiCanvas"></canvas>
+
+<button class="btt" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">
+  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+  <span class="btt-ring"><svg viewBox="0 0 44 44"><circle class="btt-ring-bg" cx="22" cy="22" r="19"/><circle class="btt-ring-fg" id="bttRingFg" cx="22" cy="22" r="19"/></svg></span>
+</button>
+
+<div class="road-popup" id="roadPopup">
+  <button class="road-popup-close" onclick="closeRoadPopup()">✕</button>
+  <div class="road-popup-title" id="roadPopupTitle"></div>
+  <div class="road-popup-sub" id="roadPopupSub"></div>
+  <div class="road-popup-desc" id="roadPopupDesc"></div>
 </div>
 
 <!-- SWIPE HINT -->
@@ -1236,13 +1298,13 @@ Bloqueios: [o que impede]</pre>
   if (!c) return;
   const ctx = c.getContext('2d');
   let w, h, particles = [];
-  const COUNT = 40;
+  const COUNT = 50;
   function resize(){ w = c.width = innerWidth; h = c.height = innerHeight; }
   addEventListener('resize', resize); resize();
   for (let i = 0; i < COUNT; i++) particles.push({
     x: Math.random() * w, y: Math.random() * h,
-    vx: (Math.random() - .5) * .15, vy: (Math.random() - .5) * .15,
-    r: Math.random() * 2 + .5, a: Math.random() * .4 + .1
+    vx: (Math.random() - .5) * .2, vy: (Math.random() - .5) * .2,
+    r: Math.random() * 2.5 + .5, a: Math.random() * .4 + .1
   });
   function draw(){
     ctx.clearRect(0, 0, w, h);
@@ -1253,17 +1315,16 @@ Bloqueios: [o que impede]</pre>
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(168, 85, 247, ${p.a})`; ctx.fill();
     }
-    // lines between nearby particles
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
+        if (dist < 130) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(168, 85, 247, ${.08 * (1 - dist / 120)})`;
+          ctx.strokeStyle = `rgba(168, 85, 247, ${.08 * (1 - dist / 130)})`;
           ctx.stroke();
         }
       }
@@ -1271,6 +1332,34 @@ Bloqueios: [o que impede]</pre>
     requestAnimationFrame(draw);
   }
   draw();
+})();
+
+// ─── READING PROGRESS BAR ───
+(function(){
+  const bar = document.getElementById('progressBar');
+  if (!bar) return;
+  const update = () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  };
+  addEventListener('scroll', update, {passive:true});
+})();
+
+// ─── BACK TO TOP ───
+(function(){
+  const btt = document.getElementById('backToTop');
+  const ring = document.getElementById('bttRingFg');
+  if (!btt) return;
+  const circ = 2 * Math.PI * 19;
+  ring.style.strokeDasharray = circ;
+  const update = () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight);
+    ring.style.strokeDashoffset = circ - circ * Math.min(pct, 1);
+    btt.classList.toggle('show', (h.scrollTop || document.body.scrollTop) > 300);
+  };
+  addEventListener('scroll', update, {passive:true}); update();
 })();
 
 // ─── TOGGLE DRAWER ───
@@ -1316,26 +1405,53 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: .2, rootMargin: '0px 0px -40% 0px' });
 document.querySelectorAll('.section').forEach(s => obs.observe(s));
 
-// ─── SCROLL REVEAL ───
+// ─── SCROLL REVEAL + SCRAMBLE ───
 (function(){
   const rev = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        rev.unobserve(entry.target);
+        const el = entry.target;
+        el.classList.add('revealed');
+        el.style.opacity = '';
+        el.style.transform = '';
+        rev.unobserve(el);
+        // scramble effect on .sec-title
+        if (el.classList.contains('section')) {
+          const title = el.querySelector('.sec-title');
+          if (title && !title.dataset.scrambled) {
+            title.dataset.scrambled = '1';
+            scrambleText(title);
+          }
+        }
       }
     });
   }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.section, .card, .st, .sg, .pg, .cg, .tg, .cl').forEach(el => {
-    if (el.classList.contains('section')) { /* already observed by obs */ }
-    if (el.closest('.section') || el.classList.contains('section')) {
-      rev.observe(el);
-    }
-  });
-  // also observe cards individually
-  document.querySelectorAll('.card, .sc, .pc, .ce, .tc, .ms, .co').forEach(el => {
+
+  document.querySelectorAll('.card, .sc, .pc, .ce, .tc, .ms, .co, .st, .sg, .pg, .cg, .tg, .cl, .cl-progress').forEach(el => {
     rev.observe(el);
   });
+
+  function scrambleText(el){
+    const orig = el.textContent || '';
+    const chars = '!@#$%&?+*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let frame = 0;
+    const total = 20;
+    const iv = setInterval(() => {
+      frame++;
+      let txt = '';
+      for (let i = 0; i < orig.length; i++) {
+        if (orig[i] === ' ') { txt += ' '; continue; }
+        const progress = frame / total;
+        if (progress > i / orig.length) {
+          txt += orig[i];
+        } else {
+          txt += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      el.textContent = txt;
+      if (frame >= total) { clearInterval(iv); el.textContent = orig; }
+    }, 40);
+  }
 })();
 
 // ─── TYPEWRITER ───
@@ -1393,6 +1509,82 @@ document.querySelectorAll('.section').forEach(s => obs.observe(s));
   counters.forEach(c => obs2.observe(c));
 })();
 
+// ─── 3D TILT ON CARDS ───
+(function(){
+  if (innerWidth < 768) return; // skip on small mobile for perf
+  const tiltItems = document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co');
+  tiltItems.forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const mx = (x / r.width - .5) * 12;
+      const my = (y / r.height - .5) * -12;
+      el.style.transform = `perspective(800px) rotateX(${my}deg) rotateY(${mx}deg) translateZ(6px)`;
+      el.style.boxShadow = `${-mx * 2}px ${-my * 2}px 24px rgba(0,0,0,.3)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.boxShadow = '';
+    });
+  });
+})();
+
+// ─── ROADMAP CLICK POPUP ───
+(function(){
+  const dots = document.querySelectorAll('.road-dot');
+  const popup = document.getElementById('roadPopup');
+  const pTitle = document.getElementById('roadPopupTitle');
+  const pSub = document.getElementById('roadPopupSub');
+  const pDesc = document.getElementById('roadPopupDesc');
+  if (!popup) return;
+  const roadData = {
+    'Dias 1-5': { title:'Fundação', sub:'Setup do ambiente', desc:'Instalar Flutter SDK, Android Studio, configurar Firebase, criar projeto, estrutura de pastas, AuthService. Primeiro PR mergeado.' },
+    'Dias 6-10': { title:'Auth + Navegação', sub:'Sistema de login', desc:'Tela de login, cadastro, guarda de rota com auth state listener, BottomNavigationBar, Dashboard. Sessão persistente.' },
+    'Dias 11-14': { title:'Dashboard', sub:'Visão geral', desc:'GridView com ModuleCards, resumo de horas complementares, indicador de progresso visual.' },
+    'Dias 15-22': { title:'Módulo Rotina', sub:'CRUD de disciplinas', desc:'Adicionar disciplinas, lançar notas, calcular média automática, previsão de nota final, faltas restantes, alertas visuais.' },
+    'Dias 23-30': { title:'Certificados', sub:'Upload + validação', desc:'Upload de PDF/imagem para Firebase Storage, lista com StreamBuilder, validação manual, gráfico de progresso de horas.' },
+    'Dias 31-37': { title:'Pesquisa TCC', sub:'OpenAlex API', desc:'Buscar artigos na API OpenAlex, ArticleCard com título/ano/resumo, paginação, filtro por ano.' },
+    'Dias 38-44': { title:'Radar de Eventos', sub:'Lista + Mapa', desc:'Lista de eventos acadêmicos, flutter_map com markers OpenStreetMap, popup de detalhes, filtro por data.' },
+    'Dias 45-50': { title:'Banca Final 🎯', sub:'Preparação para apresentação', desc:'Testes finais, correção de bugs, dados demo populados, roteiro de apresentação, 3 ensaios completos. Sucesso!' },
+    'Sem 1': { title:'Semana 1 — Fundação', sub:'Dias 1-5', desc:'Flutter SDK, Android Studio, GitHub, Firebase, estrutura, tema, rotas, AuthService.' },
+    'Sem 2': { title:'Semana 2 — Auth', sub:'Dias 6-10', desc:'Login, sessão, BottomNav, Dashboard, PR #2.' },
+    'Sem 3': { title:'Semana 3 — Dashboard', sub:'Dias 11-14', desc:'GridView, ModuleCard, resumo, progresso, PR #3.' },
+    'Sem 4-5': { title:'Semanas 4-5 — Rotina', sub:'Dias 15-22', desc:'CRUD disciplinas, média, previsão, faltas, PR #4.' },
+    'Sem 6': { title:'Semana 6 — Certificados', sub:'Dias 23-30', desc:'Upload Storage, validação, progresso, PR #5.' },
+    'Sem 7': { title:'Semana 7 — Pesquisa TCC', sub:'Dias 31-37', desc:'OpenAlex API, ArticleCard, paginação, PR #6.' },
+    'Sem 8': { title:'Semana 8 — Radar', sub:'Dias 38-44', desc:'Lista eventos, flutter_map, markers, PR #7.' },
+    'Sem 9-10': { title:'Semanas 9-10 — Banca', sub:'Dias 45-50', desc:'Testes, correções, demo, slides, 3 ensaios, banca!' },
+    'Spr.0': { title:'Sprint 0 — Fundação', sub:'Dias 1-5', desc:'Setup completo. Flutter + Firebase rodando. PR #1.' },
+    'Spr.1': { title:'Sprint 1 — Auth+Nav', sub:'Dias 6-10', desc:'Login, guarda rota, BottomNav. PR #2.' },
+    'Spr.2': { title:'Sprint 2 — Dashboard', sub:'Dias 11-14', desc:'GridView cards, resumo. PR #3.' },
+    'Spr.3': { title:'Sprint 3 — Rotina', sub:'Dias 15-22', desc:'CRUD + cálculos. PR #4.' },
+    'Spr.4': { title:'Sprint 4 — Certificados', sub:'Dias 23-30', desc:'Upload + progresso. PR #5.' },
+    'Spr.5': { title:'Sprint 5 — Pesquisa', sub:'Dias 31-37', desc:'API + filtros. PR #6.' },
+    'Spr.6': { title:'Sprint 6 — Radar', sub:'Dias 38-44', desc:'Mapa + lista. PR #7.' },
+    'Spr.7': { title:'Sprint 7 — Banca 🎯', sub:'Dias 45-50', desc:'Preparação final e apresentação!' }
+  };
+  dots.forEach(dot => {
+    dot.addEventListener('click', function(){
+      const parent = this.closest('.road-s');
+      if (!parent) return;
+      const label = parent.querySelector('.road-l')?.textContent?.trim();
+      const sub = parent.querySelector('.road-s2')?.textContent?.trim();
+      const data = roadData[label] || roadData[sub];
+      if (data) {
+        pTitle.textContent = data.title;
+        pSub.textContent = data.sub;
+        pDesc.textContent = data.desc;
+        popup.classList.add('show');
+      }
+    });
+  });
+})();
+
+window.closeRoadPopup = function(){
+  document.getElementById('roadPopup')?.classList.remove('show');
+};
+
 // ─── ACHIEVEMENT TOAST ───
 (function(){
   const toast = document.getElementById('achievementToast');
@@ -1416,6 +1608,54 @@ document.querySelectorAll('.section').forEach(s => obs.observe(s));
   }
 })();
 
+// ─── CONFETTI ───
+(function(){
+  const c = document.getElementById('confettiCanvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let particles = [], animId = null;
+  function resize(){ c.width = innerWidth; c.height = innerHeight; }
+  addEventListener('resize', resize); resize();
+  window.fireConfetti = function(count){
+    count = count || 100;
+    const colors = ['#a855f7','#3b82f6','#22c55e','#eab308','#ef4444','#14b8a6'];
+    for (let i = 0; i < count; i++) {
+      const size = Math.random() * 8 + 4;
+      particles.push({
+        x: innerWidth / 2 + (Math.random() - .5) * innerWidth * .6,
+        y: -10,
+        w: size, h: size * .6,
+        vx: (Math.random() - .5) * 6,
+        vy: Math.random() * 3 + 2,
+        rot: Math.random() * 360,
+        vr: (Math.random() - .5) * 8,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 1
+      });
+    }
+    if (!animId) drawConfetti();
+  };
+  function drawConfetti(){
+    if (!particles.length) { animId = null; ctx.clearRect(0,0,c.width,c.height); return; }
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy; p.vy += .05;
+      p.rot += p.vr;
+      p.life -= .003;
+      if (p.life <= 0 || p.y > c.height + 20) { particles.splice(i,1); continue; }
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+    }
+    animId = requestAnimationFrame(drawConfetti);
+  }
+})();
+
 // ─── CHECKLIST ───
 (function(){
   const items = document.querySelectorAll('.cl-i');
@@ -1434,15 +1674,14 @@ document.querySelectorAll('.section').forEach(s => obs.observe(s));
       const nowChecked = this.classList.contains('do');
       localStorage.setItem(key, nowChecked ? '1' : '0');
       updateChecklistProgress();
-      // achievement
       if (nowChecked) {
         const total = items.length;
         const done = document.querySelectorAll('.cl-i.do').length;
         const pct = Math.round(done / total * 100);
         if (pct === 25) showAchievement('🎯', '25% da Checklist!', 'Continue assim, vai dar certo!');
-        if (pct === 50) showAchievement('⭐', 'Metade da Checklist!', 'Você está no caminho certo!');
+        if (pct === 50) { showAchievement('⭐', 'Metade da Checklist!', 'Você está no caminho certo!'); fireConfetti(40); }
         if (pct === 75) showAchievement('🔥', '75% da Checklist!', 'Quase lá, não pare agora!');
-        if (done === total) showAchievement('🏆', 'Checklist COMPLETA!', 'Parabéns! Tudo pronto para a banca!');
+        if (done === total) { showAchievement('🏆', 'Checklist COMPLETA!', 'Parabéns! Tudo pronto para a banca!'); fireConfetti(150); }
       }
     });
   });
@@ -1465,7 +1704,7 @@ document.querySelectorAll('.section').forEach(s => obs.observe(s));
 // ─── RIPPLE EFFECT ───
 (function(){
   document.addEventListener('click', function(e){
-    const target = e.target.closest('.menu-btn, .dnav-item, .cl-i, .flow-s, details summary');
+    const target = e.target.closest('.menu-btn, .dnav-item, .cl-i, .flow-s, details summary, .btt, .road-dot');
     if (!target) return;
     const rect = target.getBoundingClientRect();
     const r = document.createElement('span');
