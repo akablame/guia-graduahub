@@ -110,7 +110,7 @@
 
 html{scroll-behavior:smooth;font-size:16px;scrollbar-width:thin;scrollbar-color:var(--bg5) transparent}
 body{font-family:var(--f);background:var(--bg);color:var(--tx);line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;padding-top:52px;min-height:100vh}
-body.no-scroll{overflow:hidden;position:fixed;width:100%}
+body.no-scroll{overflow:hidden;position:fixed;width:100%;overscroll-behavior:none}
 
 @media(min-width:1024px){
   body{padding-top:0;display:flex;overflow:hidden}
@@ -195,7 +195,7 @@ body{
   line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
   padding-top:52px;min-height:100vh;
 }
-body.no-scroll{overflow:hidden;position:fixed;width:100%}
+body.no-scroll{overflow:hidden;position:fixed;width:100%;overscroll-behavior:none}
 
 /* ═══ ANIMATIONS ═══ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -1016,6 +1016,114 @@ footer[role="contentinfo"]{margin-top:32px;padding:24px 0;border-top:1px solid v
 .drawer-handle{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:20px;height:40px;background:var(--bg3);border:1px solid var(--brd);border-left:none;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .3s;z-index:201}
 .drawer.open .drawer-handle{opacity:1}
 .drawer-handle::after{content:'';width:3px;height:14px;background:var(--tx4);border-radius:2px;display:block}
+
+/* ════════════════════════════════════════
+   MOBILE ENHANCEMENTS (≤639px)
+   ════════════════════════════════════════ */
+@media(max-width:639px){
+  /* ── Background elements: scale down or hide ── */
+  .orb{opacity:.06}
+  .orb-1{width:200px;height:200px;top:-60px;right:-60px}
+  .orb-2{width:160px;height:160px;bottom:-40px;left:-60px}
+  .orb-3{width:120px;height:120px;top:40%;left:70%}
+  .geo-ring{opacity:.04}
+  .geo-ring-1{width:260px;height:260px;top:-60px;right:-40px}
+  .geo-ring-2{width:200px;height:200px;bottom:8%;left:-60px}
+  .geo-ring-3{width:120px;height:120px;top:35%;right:2%}
+  .geo-ring-4{display:none}
+  .geo-dot-grid{opacity:.08;background-size:36px 36px}
+  .noise-overlay{opacity:.15}
+  #particles-canvas{opacity:.3}
+
+  /* ── Typography & spacing ── */
+  .hero-title{font-size:22px}
+  .hero-desc{font-size:13px}
+  .sec-title{font-size:17px}
+  .card{padding:14px}
+  .card-t{font-size:14px}
+  .card-b{font-size:13px}
+  .card-b li{font-size:13px}
+  .section{margin-bottom:32px}
+  .sc{padding:13px}
+  .sc-n{font-size:13px}
+  .sc-b{font-size:12px}
+  .split-card{padding:13px}
+  .split-card-title{font-size:12px}
+  .split-card-body{font-size:12px}
+
+  /* ── Better touch targets ── */
+  .tag-filter-btn{padding:7px 14px;font-size:10px;min-height:36px}
+  .road-dot{width:20px;height:20px}
+  .road-l{font-size:11px}
+  .road-s2{font-size:10px}
+
+  /* ── Timeline steps scroll ── */
+  .tl-step{min-width:100px;padding:0 3px}
+  .tl-step-label{font-size:10px}
+  .tl-step-sub{font-size:8px}
+  .tl-cat{font-size:6px;padding:1px 6px}
+  .tl-step-badge{width:28px;height:28px;font-size:10px}
+  .tl-connector{top:45px;left:calc(50% + 24px);right:calc(50% - 24px + 12px)}
+
+  /* ── Timeline detail card: reposition on mobile ── */
+  .tl-detail{position:fixed;top:auto;bottom:70px;left:16px;right:16px;transform:none!important;width:auto;max-width:360px;margin:0 auto;z-index:50;border-radius:12px;padding:14px}
+  .tl-detail::before{display:none}
+  .tl-step:hover .tl-detail,.tl-step:active .tl-detail,.tl-step.tl-tap .tl-detail{transform:none!important;opacity:1;pointer-events:auto}
+
+  /* ── Touch active feedback ── */
+  .touch-active{-webkit-tap-highlight-color:rgba(168,85,247,.25)}
+  .touch-active:active{transform:scale(.97)!important}
+  .dnav-item.touch-active:active{transform:none!important;background:var(--bg4)!important}
+  .menu-btn:active,.btt:active,.theme-toggle:active,.road-popup-close:active,.road-dot:active{transform:scale(.92)!important}
+  .tl-detail-title{font-size:13px}
+  .tl-detail-desc{font-size:11px}
+
+  /* ── Section title bar ── */
+  .sec-title-bar{margin-top:4px;height:2px}
+
+  /* ── Hero typewriter ── */
+  #typewriter{font-size:12px;min-height:24px}
+
+  /* ── Progress highlight ── */
+  .progress-highlight{margin:6px 0}
+
+  /* ── Flow steps horizontal scroll ── */
+  .flow{padding:2px 0;gap:3px}
+  .flow-s{padding:6px 10px;font-size:10px;white-space:nowrap;flex-shrink:0}
+
+  /* ── Roadmap popup ── */
+  .road-popup{left:12px;right:12px;padding:14px;bottom:16px}
+
+  /* ── Back to top button ── */
+  .btt{bottom:18px;right:12px;width:40px;height:40px}
+
+  /* ── Theme toggle ── */
+  .theme-toggle{bottom:70px;right:12px;width:40px;height:40px}
+  .theme-toggle svg{width:16px;height:16px}
+
+  /* ── Drawer improvements ── */
+  .drawer{width:290px;max-width:85vw}
+  .drawer:not(.open)+.drawer-handle{display:none}
+  .dnav-item{padding:12px 16px;min-height:48px;font-size:14px}
+  .dnav-item .nb{min-width:20px;font-size:10px}
+  .dnav-foot-link{padding:4px 10px;font-size:11px}
+
+  /* ── Sprint grid ── */
+  .sg{gap:8px}
+
+  /* ── Study week grid ── */
+  .sw{gap:5px}
+
+  /* ── Tables ── */
+  .tbl-wrap{font-size:12px;margin:10px 0}
+  .tbl-wrap td,.tbl-wrap th{padding:6px 8px}
+
+  /* ── Confetti ── */
+  #confettiCanvas{display:none}
+
+  /* ── Section divider ── */
+  .section-divider{margin:0 -16px 24px}
+}
 </style>
 </head>
 <body>
@@ -2203,9 +2311,10 @@ const observeInContainer = (selector, callback, options = {}) => {
   const ctx = c.getContext('2d');
   let w, h, particles = [];
   let mouse = {x: -9999, y: -9999};
-  const COUNT = 70;
-  const CONNECT_DIST = 140;
-  const MOUSE_RADIUS = 150;
+  const isMobile = innerWidth < 640 || matchMedia('(hover:none)').matches;
+  const COUNT = isMobile ? 25 : 70;
+  const CONNECT_DIST = isMobile ? 80 : 140;
+  const MOUSE_RADIUS = isMobile ? 0 : 150;
 
   function resize(){ w = c.width = innerWidth; h = c.height = innerHeight; }
   addEventListener('resize', resize); resize();
@@ -2848,15 +2957,47 @@ document.querySelectorAll('details').forEach(d => {
   });
 });
 
-// ─── DRAWER SWIPE TO CLOSE ───
+// ─── DRAWER SWIPE GESTURE ───
 (function(){
-  let touchStartX = 0;
-  document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+  let sX = 0, dragging = false;
+  const drawer = document.querySelector('.drawer');
+  if (!drawer) return;
+  document.addEventListener('touchstart', e => {
+    sX = e.changedTouches[0].screenX;
+    dragging = drawer.classList.contains('open');
+  }, {passive:true});
+  document.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const dx = e.changedTouches[0].screenX - sX;
+    if (dx < 0) {
+      drawer.style.transform = `translateX(${Math.max(-280, dx)}px)`;
+      drawer.style.transition = 'none';
+    }
+  }, {passive:true});
   document.addEventListener('touchend', e => {
-    const d = document.querySelector('.drawer');
-    if (!d?.classList.contains('open')) return;
-    const dx = e.changedTouches[0].screenX - touchStartX;
+    if (!dragging) return;
+    dragging = false;
+    drawer.style.transition = '';
+    const dx = e.changedTouches[0].screenX - sX;
+    drawer.style.transform = '';
     if (dx < -60) toggleDrawer();
+  }, {passive:true});
+})();
+
+// ─── TIMELINE TAP ON MOBILE ───
+(function(){
+  if (!matchMedia('(hover:none)').matches) return;
+  document.querySelectorAll('.tl-step').forEach(step => {
+    step.addEventListener('click', function(e) {
+      const wasTap = this.classList.contains('tl-tap');
+      document.querySelectorAll('.tl-step.tl-tap').forEach(s => s.classList.remove('tl-tap'));
+      if (!wasTap) this.classList.add('tl-tap');
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.tl-step')) {
+      document.querySelectorAll('.tl-step.tl-tap').forEach(s => s.classList.remove('tl-tap'));
+    }
   });
 })();
 
@@ -3013,6 +3154,15 @@ document.querySelectorAll('details').forEach(d => {
     btn.addEventListener('click', function(){
       this.classList.toggle('active');
     });
+  });
+})();
+
+// ─── TOUCH ACTIVE FEEDBACK ───
+(function(){
+  if (!matchMedia('(hover:none)').matches) return;
+  const sel = '.card,.sc,.sd,.pc,.ce,.tc,.ms,.co,.st,.sg,.pg,.cg,.tg,.cl,.split-card,.tl-step,.menu-btn,.btt,.theme-toggle,.tag-filter-btn,.flow-s';
+  document.querySelectorAll(sel).forEach(el => {
+    el.classList.add('touch-active');
   });
 })();
 
