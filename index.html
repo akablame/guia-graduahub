@@ -212,6 +212,24 @@ body.no-scroll{overflow:hidden;position:fixed;width:100%}
 }
 
 /* ═══ CARD SHINE ═══ */
+/* ═══ CARD GROW ON HOVER (scale instead of tilt) ═══ */
+.card-grow{transition:transform var(--transition-med),box-shadow var(--transition-med),border-color var(--transition-med),z-index 0s;will-change:transform;z-index:1}
+.card-grow:hover{transform:scale(1.04);z-index:3;box-shadow:0 8px 40px rgba(0,0,0,.35);border-color:var(--brd3)}
+.card-grow:active{transform:scale(.98)}
+[data-theme="light"] .card-grow:hover{box-shadow:0 8px 40px rgba(0,0,0,.12)}
+
+/* ═══ STAGGER ENTER ANIMATION ═══ */
+.stagger-enter{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.stagger-enter.revealed{opacity:1;transform:translateY(0)}
+.stagger-enter:nth-child(1){transition-delay:0s}
+.stagger-enter:nth-child(2){transition-delay:.06s}
+.stagger-enter:nth-child(3){transition-delay:.12s}
+.stagger-enter:nth-child(4){transition-delay:.18s}
+.stagger-enter:nth-child(5){transition-delay:.24s}
+.stagger-enter:nth-child(6){transition-delay:.3s}
+.stagger-enter:nth-child(7){transition-delay:.36s}
+.stagger-enter:nth-child(8){transition-delay:.42s}
+
 .card-shine{position:relative;overflow:hidden}
 .card-shine::before{
   content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.04) 45%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 55%,transparent 60%);
@@ -1477,6 +1495,39 @@ Bloqueios: [o que impede]</pre>
 ;(function(){
 'use strict';
 
+/* ═══ SCROLL CONTAINER HELPERS (desktop: .main, mobile: window) ═══ */
+const isDesktopLayout = () => {
+  const main = document.querySelector('.main');
+  return main && getComputedStyle(document.body).overflow === 'hidden';
+};
+const $main = () => document.querySelector('.main');
+const getScrollY = () => {
+  if (isDesktopLayout()) return $main().scrollTop;
+  return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+};
+const getScrollHeight = () => {
+  if (isDesktopLayout()) return $main().scrollHeight;
+  return document.documentElement.scrollHeight;
+};
+const getClientHeight = () => {
+  if (isDesktopLayout()) return $main().clientHeight;
+  return document.documentElement.clientHeight;
+};
+const addScrollListener = (fn) => {
+  window.addEventListener('scroll', fn, {passive:true});
+  if (isDesktopLayout()) $main().addEventListener('scroll', fn, {passive:true});
+};
+const smoothScrollTo = (top) => {
+  if (isDesktopLayout()) $main().scrollTo({top, behavior:'smooth'});
+  else window.scrollTo({top, behavior:'smooth'});
+};
+const observeInContainer = (selector, callback, options = {}) => {
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver(callback, {...options, root});
+  document.querySelectorAll(selector).forEach(el => obs.observe(el));
+  return obs;
+};
+
 // ─── ENHANCED PARTICLES WITH MOUSE INTERACTION ───
 (function(){
   const c = document.getElementById('particles-canvas');
@@ -1581,15 +1632,15 @@ Bloqueios: [o que impede]</pre>
   const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
   if (prefersReduced) return;
   let raf = null;
-  addEventListener('scroll', () => {
+  addScrollListener(() => {
     if (!raf) raf = requestAnimationFrame(() => {
       raf = null;
-      const s = window.scrollY;
+      const s = getScrollY();
       orbs[0].style.transform = `translate(${s * .02}px, ${s * -.015}px)`;
       if (orbs[1]) orbs[1].style.transform = `translate(${s * -.015}px, ${s * .02}px)`;
       if (orbs[2]) orbs[2].style.transform = `translate(${s * .01}px, ${s * -.01}px)`;
     });
-  }, {passive:true});
+  });
 })();
 
 // ─── THEME TOGGLE ───
@@ -1631,11 +1682,13 @@ Bloqueios: [o que impede]</pre>
   const bar = document.getElementById('progressBar');
   if (!bar) return;
   const update = () => {
-    const h = document.documentElement;
-    const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    const s = getScrollY();
+    const total = getScrollHeight() - getClientHeight();
+    const pct = total > 0 ? (s / total) * 100 : 0;
     bar.style.width = Math.min(pct, 100) + '%';
   };
-  addEventListener('scroll', update, {passive:true});
+  addScrollListener(update);
+  setTimeout(update, 100);
 })();
 
 // ─── BACK TO TOP ───
@@ -1646,16 +1699,15 @@ Bloqueios: [o que impede]</pre>
   const circ = 2 * Math.PI * 19;
   ring.style.strokeDasharray = circ;
   const update = () => {
-    const h = document.documentElement;
-    const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight);
+    const s = getScrollY();
+    const total = getScrollHeight() - getClientHeight();
+    const pct = total > 0 ? s / total : 0;
     ring.style.strokeDashoffset = circ - circ * Math.min(pct, 1);
-    btt.classList.toggle('show', (h.scrollTop || document.body.scrollTop) > 300);
+    btt.classList.toggle('show', s > 300);
   };
-  addEventListener('scroll', update, {passive:true}); update();
+  addScrollListener(update); update();
 
-  btt.addEventListener('click', () => {
-    window.scrollTo({top: 0, behavior:'smooth'});
-  });
+  btt.addEventListener('click', () => smoothScrollTo(0));
 })();
 
 // ─── TOGGLE DRAWER ───
@@ -1678,10 +1730,12 @@ document.querySelectorAll('.dnav-item').forEach(item => {
     if (el) {
       toggleDrawer();
       const topbar = document.querySelector('.topbar');
-      const topbarH = topbar ? topbar.offsetHeight + 8 : 60;
-      const elTop = el.getBoundingClientRect().top + window.scrollY;
+      const topbarH = topbar && !isDesktopLayout() ? topbar.offsetHeight + 8 : 0;
+      const container = isDesktopLayout() ? $main() : window;
+      const rect = el.getBoundingClientRect();
+      const elTop = rect.top + (isDesktopLayout() ? container.scrollTop : window.scrollY);
       requestAnimationFrame(() => {
-        window.scrollTo({top: elTop - topbarH, behavior:'smooth'});
+        smoothScrollTo(elTop - topbarH);
       });
     } else {
       toggleDrawer();
@@ -1690,22 +1744,20 @@ document.querySelectorAll('.dnav-item').forEach(item => {
 });
 
 // ─── INTERSECTION OBSERVER (nav active) ───
-(function(){
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
-        const link = document.querySelector(`.dnav-item[data-target="${entry.target.id}"]`);
-        if (link) link.classList.add('active');
-      }
-    });
-  }, { threshold: .2, rootMargin: '0px 0px -40% 0px' });
-  document.querySelectorAll('.section').forEach(s => obs.observe(s));
-})();
+observeInContainer('.section', entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
+      const link = document.querySelector(`.dnav-item[data-target="${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: .2, rootMargin: '0px 0px -40% 0px' });
 
-// ─── SCROLL REVEAL + SCRAMBLE ───
+// ─── SCROLL REVEAL + SCRAMBLE + STAGGER ───
 (function(){
-  const rev = new IntersectionObserver(entries => {
+  const revealItems = '.card, .sc, .pc, .ce, .tc, .ms, .co, .st, .sg, .pg, .cg, .tg, .cl, .cl-progress, .road, .flow';
+  const rev = observeInContainer(revealItems, entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
@@ -1713,7 +1765,14 @@ document.querySelectorAll('.dnav-item').forEach(item => {
         el.style.opacity = '';
         el.style.transform = '';
         rev.unobserve(el);
-        // scramble effect on .sec-title
+
+        const staggerEls = el.querySelectorAll(':scope > .stagger-enter');
+        if (staggerEls.length) {
+          staggerEls.forEach((child, i) => {
+            setTimeout(() => child.classList.add('revealed'), i * 80);
+          });
+        }
+
         if (el.classList.contains('section')) {
           const title = el.querySelector('.sec-title');
           if (title && !title.dataset.scrambled) {
@@ -1725,8 +1784,14 @@ document.querySelectorAll('.dnav-item').forEach(item => {
     });
   }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.card, .sc, .pc, .ce, .tc, .ms, .co, .st, .sg, .pg, .cg, .tg, .cl, .cl-progress').forEach(el => {
-    rev.observe(el);
+  // Apply stagger-enter to children of grids and direct cards in sections
+  document.querySelectorAll('.sg > *, .pg > *, .cg > *, .tg > *, .sw > *, .cl > *, .section > .card, .section > .co').forEach(el => {
+    el.classList.add('stagger-enter');
+  });
+
+  // Apply card-grow + card-shine to interactive cards
+  document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co').forEach(el => {
+    el.classList.add('card-grow', 'card-shine');
   });
 
   function scrambleText(el){
@@ -1783,10 +1848,12 @@ document.querySelectorAll('.dnav-item').forEach(item => {
 (function(){
   const counters = document.querySelectorAll('.st-n');
   if (!counters.length) return;
-  const obs2 = new IntersectionObserver(entries => {
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
+        observer.unobserve(el);
         const txt = el.textContent.trim();
         const num = parseInt(txt);
         if (!isNaN(num) && num > 0) {
@@ -1800,35 +1867,78 @@ document.querySelectorAll('.dnav-item').forEach(item => {
             el.textContent = current + (isPct ? '%' : '');
           }, 30);
         }
-        obs2.unobserve(el);
       }
     });
-  }, { threshold: .5 });
-  counters.forEach(c => obs2.observe(c));
+  }, { threshold: .5, root });
+  counters.forEach(c => obs.observe(c));
 })();
 
-// ─── ENHANCED 3D TILT ON CARDS ───
-(function(){
-  if (innerWidth < 768) return;
-  const tiltItems = document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co');
-  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if (prefersReduced) return;
+// (3D tilt replaced by CSS scale-up hover — see .card-grow in stylesheet)
 
-  tiltItems.forEach(el => {
-    el.classList.add('card-shine');
-    el.addEventListener('mousemove', e => {
-      const r = el.getBoundingClientRect();
-      const x = e.clientX - r.left;
-      const y = e.clientY - r.top;
-      const mx = (x / r.width - .5) * 16;
-      const my = (y / r.height - .5) * -16;
-      el.style.transform = `perspective(1000px) rotateX(${my}deg) rotateY(${mx}deg) translateZ(10px) scale(1.02)`;
-      el.style.boxShadow = `${-mx * 2}px ${-my * 2}px 30px rgba(0,0,0,.35), ${-mx * 4}px ${-my * 4}px 0 var(--brd)`;
+// ─── PROGRESS BARS FILL ON SCROLL ───
+(function(){
+  const bars = document.querySelectorAll('.pb-f');
+  if (!bars.length) return;
+  bars.forEach(bar => {
+    const w = bar.style.width || '0%';
+    bar.dataset.targetWidth = w;
+    bar.style.width = '0%';
+    bar.style.transition = 'width 1.5s cubic-bezier(.22,1,.36,1)';
+  });
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        observer.unobserve(bar);
+        bar.style.width = bar.dataset.targetWidth || '0%';
+      }
     });
-    el.addEventListener('mouseleave', () => {
-      el.style.transform = '';
-      el.style.boxShadow = '';
+  }, { threshold: .2, root });
+  bars.forEach(b => obs.observe(b));
+})();
+
+// ─── ROADMAP SEQUENTIAL GLOW ON SCROLL ───
+(function(){
+  const tracks = document.querySelectorAll('.road-track');
+  if (!tracks.length) return;
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const track = entry.target;
+        observer.unobserve(track);
+        const dots = track.querySelectorAll('.road-dot:not(.dim)');
+        dots.forEach((dot, i) => {
+          setTimeout(() => {
+            dot.style.transform = 'scale(1.4)';
+            dot.style.boxShadow = '0 0 20px currentColor';
+            setTimeout(() => {
+              dot.style.transform = '';
+              dot.style.boxShadow = '';
+            }, 600);
+          }, i * 200);
+        });
+      }
     });
+  }, { threshold: .3, root });
+  tracks.forEach(t => obs.observe(t));
+})();
+
+// ─── AUTO-SAVE READING POSITION ───
+(function(){
+  const key = 'gh_read_pos';
+  const saved = sessionStorage.getItem(key);
+  if (saved) {
+    const pos = parseInt(saved);
+    setTimeout(() => smoothScrollTo(pos), 200);
+  }
+  let saveTimer = null;
+  addScrollListener(() => {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      sessionStorage.setItem(key, getScrollY().toString());
+    }, 500);
   });
 })();
 
@@ -2060,9 +2170,9 @@ document.querySelectorAll('details').forEach(d => {
   const btn = document.getElementById('themeToggle');
   if (!btn) return;
   const update = () => {
-    btn.classList.toggle('show', window.scrollY > 500);
+    btn.classList.toggle('show', getScrollY() > 500);
   };
-  addEventListener('scroll', update, {passive:true}); update();
+  addScrollListener(update); update();
 })();
 
 // ─── KEYBOARD SHORTCUTS ───
