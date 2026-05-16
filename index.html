@@ -774,6 +774,133 @@ details[open]{animation:fadeUp .3s ease}
 .grid-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(168,85,247,.06) 1px,transparent 1px);background-size:32px 32px;animation:gridDrift 12s linear infinite}
 @keyframes gridDrift{0%{transform:translate(0,0)}100%{transform:translate(32px,32px)}}
 
+/* ═══ PER-SECTION ACCENT VARIABLES ═══ */
+.section[data-accent="purple"]{--sec-accent:var(--pur);--sec-glow:rgba(168,85,247,.15);--sec-bg:var(--pur-bg)}
+.section[data-accent="blue"]{--sec-accent:var(--blu);--sec-glow:rgba(59,130,246,.15);--sec-bg:var(--blu-bg)}
+.section[data-accent="green"]{--sec-accent:var(--grn);--sec-glow:rgba(34,197,94,.15);--sec-bg:var(--grn-bg)}
+.section[data-accent="yellow"]{--sec-accent:var(--yel);--sec-glow:rgba(234,179,8,.15);--sec-bg:var(--yel-bg)}
+.section[data-accent="red"]{--sec-accent:var(--red);--sec-glow:rgba(239,68,68,.15);--sec-bg:var(--red-bg)}
+.section[data-accent="teal"]{--sec-accent:var(--teal);--sec-glow:rgba(20,184,166,.15);--sec-bg:var(--teal-bg)}
+
+/* ═══ ENHANCED TIMELINE SYSTEM ═══ */
+.tl-wrap{margin:20px 0;position:relative}
+.tl-track{display:flex;gap:0;position:relative;padding:36px 0 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-snap-type:x mandatory}
+.tl-track::-webkit-scrollbar{display:none}
+.tl-step{flex:1;min-width:120px;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 4px;scroll-snap-align:start}
+.tl-step-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:var(--m);position:relative;z-index:2;flex-shrink:0;border:2px solid;transition:all var(--transition-med);cursor:pointer;background:var(--bg)}
+.tl-step-badge::after{content:'';position:absolute;inset:-4px;border-radius:50%;opacity:0;transition:opacity .4s}
+.tl-step:hover .tl-step-badge::after{opacity:1}
+.tl-step-badge.grn{border-color:var(--grn);color:var(--grn);box-shadow:0 0 8px rgba(34,197,94,.2)}
+.tl-step-badge.blu{border-color:var(--blu);color:var(--blu);box-shadow:0 0 8px rgba(59,130,246,.2)}
+.tl-step-badge.pur{border-color:var(--pur);color:var(--pur);box-shadow:0 0 8px rgba(168,85,247,.2)}
+.tl-step-badge.yel{border-color:var(--yel);color:var(--yel);box-shadow:0 0 8px rgba(234,179,8,.2)}
+.tl-step-badge.teal{border-color:var(--teal);color:var(--teal);box-shadow:0 0 8px rgba(20,184,166,.2)}
+.tl-step-badge.red{border-color:var(--red);color:var(--red);box-shadow:0 0 8px rgba(239,68,68,.2)}
+.tl-step-badge.dim{border-color:var(--bg5);color:var(--tx4);background:var(--bg4);box-shadow:none}
+.tl-step:hover .tl-step-badge{transform:scale(1.2);box-shadow:0 0 20px currentColor}
+.tl-step-badge .tl-step-num{position:relative;z-index:1}
+
+/* Connector line */
+.tl-connector{position:absolute;top:50px;left:calc(50% + 32px);right:calc(50% - 32px + 16px);height:2px;z-index:1;transform:translateY(-50%)}
+.tl-connector svg{width:100%;height:6px;display:block}
+.tl-connector-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:2000;stroke-dashoffset:2000;transition:stroke-dashoffset 1.5s cubic-bezier(.22,1,.36,1)}
+.tl-connector-line.drawn{stroke-dashoffset:0}
+
+/* Step content */
+.tl-step-label{font-size:11px;font-weight:600;margin-top:8px;color:var(--tx2);font-family:var(--m);line-height:1.2}
+.tl-step-sub{font-size:9px;color:var(--tx3);margin-top:2px;line-height:1.2}
+
+/* Category label */
+.tl-cat{display:inline-flex;align-items:center;gap:4px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:2px 8px;border-radius:10px;margin-bottom:6px;border:1px solid transparent}
+.tl-cat.setup{background:rgba(107,107,120,.15);color:var(--tx3);border-color:rgba(107,107,120,.2)}
+.tl-cat.dev{background:var(--blu-bg);color:var(--blu);border-color:rgba(59,130,246,.2)}
+.tl-cat.test{background:var(--grn-bg);color:var(--grn);border-color:rgba(34,197,94,.2)}
+.tl-cat.deploy{background:var(--pur-bg);color:var(--pur);border-color:rgba(168,85,247,.2)}
+.tl-cat.prep{background:var(--yel-bg);color:var(--yel);border-color:rgba(234,179,8,.2)}
+
+/* Detail card */
+.tl-detail{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(8px);width:200px;background:var(--bg3);border:1px solid var(--brd2);border-radius:10px;padding:12px;opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1);z-index:10;box-shadow:0 8px 32px rgba(0,0,0,.5);text-align:left}
+.tl-step:hover .tl-detail{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.tl-detail::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:var(--bg3);border-left:1px solid var(--brd2);border-top:1px solid var(--brd2)}
+.tl-detail-title{font-size:12px;font-weight:600;margin-bottom:3px;color:var(--tx)}
+.tl-detail-desc{font-size:10px;color:var(--tx2);line-height:1.5}
+.tl-detail-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.tl-detail-tags span{font-size:7px;font-weight:600;padding:2px 6px;border-radius:4px;background:var(--bg4);color:var(--tx3);font-family:var(--m);letter-spacing:.3px}
+
+/* Shimmer skeleton for timelines */
+.tl-shimmer{display:flex;gap:8px;padding:20px 0;overflow:hidden}
+.tl-shimmer-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.tl-shimmer-circle{width:32px;height:32px;border-radius:50%;background:linear-gradient(90deg,var(--bg4) 25%,var(--bg5) 50%,var(--bg4) 75%);background-size:200% 100%;animation:shimmer 1.5s ease infinite}
+.tl-shimmer-line{width:50px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--bg4) 25%,var(--bg5) 50%,var(--bg4) 75%);background-size:200% 100%;animation:shimmer 1.5s ease infinite}
+.tl-shimmer-line:last-child{width:35px}
+
+/* Section-specific entrance animations */
+@keyframes secSlideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes secSlideLeft{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes secSlideRight{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes secScaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes secReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes secRotateIn{from{opacity:0;transform:rotate(-3deg) scale(.9)}to{opacity:1;transform:rotate(0) scale(1)}}
+@keyframes secFlipUp{from{opacity:0;transform:perspective(600px) rotateX(10deg) translateY(20px)}to{opacity:1;transform:perspective(600px) rotateX(0) translateY(0)}}
+@keyframes secBlurIn{from{opacity:0;filter:blur(8px);transform:translateY(20px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
+
+.sec-enter{opacity:0}
+.sec-enter.revealed{animation:secSlideUp .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="slide-left"].revealed{animation:secSlideLeft .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="slide-right"].revealed{animation:secSlideRight .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="scale-in"].revealed{animation:secScaleIn .6s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="rotate-in"].revealed{animation:secRotateIn .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="flip-up"].revealed{animation:secFlipUp .8s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="blur-in"].revealed{animation:secBlurIn .8s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="reveal"].revealed{animation:secReveal .9s cubic-bezier(.22,1,.36,1) forwards}
+
+/* ═══ ENHANCED MICRO-INTERACTIONS ═══ */
+.hover-glow{transition:all var(--transition-med)}
+.hover-glow:hover{box-shadow:0 0 24px var(--sec-glow,var(--pur-glow));border-color:var(--sec-accent,var(--pur));transform:translateY(-2px)}
+.hover-lift{transition:transform var(--transition-med),box-shadow var(--transition-med)}
+.hover-lift:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.hover-bright{transition:filter var(--transition-fast),opacity var(--transition-fast)}
+.hover-bright:hover{filter:brightness(1.3)}
+.hover-underline{position:relative;display:inline-block}
+.hover-underline::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--sec-accent,var(--pur));border-radius:1px;transition:width .4s cubic-bezier(.22,1,.36,1)}
+.hover-underline:hover::after{width:100%}
+
+/* Step pulse on load */
+@keyframes stepPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 currentColor}50%{transform:scale(1.15);box-shadow:0 0 0 8px transparent}}
+.tl-step.pulse .tl-step-badge:not(.dim){animation:stepPulse .6s ease 1}
+
+/* Interactive tag filter style */
+.tag-filter{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.tag-filter-btn{font-size:9px;font-weight:600;padding:5px 12px;border-radius:14px;border:1px solid var(--brd2);background:var(--bg3);color:var(--tx3);cursor:pointer;transition:all var(--transition-fast);font-family:var(--m);letter-spacing:.3px}
+.tag-filter-btn:hover{background:var(--bg4);color:var(--tx);border-color:var(--brd3)}
+.tag-filter-btn.active{background:var(--pur-bg);color:var(--pur);border-color:rgba(168,85,247,.25)}
+
+/* Split layout for guide sections */
+.split-layout{display:grid;grid-template-columns:1fr;gap:16px;margin:14px 0}
+@media(min-width:640px){.split-layout{grid-template-columns:1fr 1fr}}
+.split-card{background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);padding:16px;transition:all var(--transition-med)}
+.split-card:hover{border-color:var(--brd2);box-shadow:0 4px 20px rgba(0,0,0,.3);transform:translateY(-2px)}
+.split-card-title{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;color:var(--tx)}
+.split-card-body{font-size:13px;color:var(--tx2);line-height:1.6}
+
+/* Progress highlight bar */
+.progress-highlight{height:3px;border-radius:2px;margin:8px 0;background:linear-gradient(90deg,var(--sec-accent,var(--pur)),transparent);animation:progressPulse 2s ease-in-out infinite}
+@keyframes progressPulse{0%,100%{opacity:.6}50%{opacity:1}}
+
+/* Tooltip style for step badges */
+.tl-step-badge[data-tooltip]{position:relative}
+.tl-step-badge[data-tooltip]:hover::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg5);color:var(--tx);font-size:9px;font-weight:500;padding:4px 10px;border-radius:6px;white-space:nowrap;z-index:20;font-family:var(--f);box-shadow:0 4px 12px rgba(0,0,0,.4);pointer-events:none;animation:fadeIn .2s ease}
+.tl-step-badge[data-tooltip]:hover::before{content:'';position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--bg5);z-index:20;pointer-events:none;animation:fadeIn .2s ease}
+
+/* Stat counter highlight */
+.st-card.stat-pop{transition:all var(--transition-med)}
+.st-card.stat-pop:hover .st-n{transform:scale(1.1);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.st-card.stat-pop .st-n{display:inline-block;transition:transform .3s ease}
+
+/* Flow step animation */
+.flow-s.flow-pop{transition:all var(--transition-med)}
+.flow-s.flow-pop:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+
 /* ═══ PROGRESS BAR ═══ */
 #progressBar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--pur),var(--blu),var(--teal));z-index:999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(168,85,247,.4)}
 
@@ -914,7 +1041,7 @@ details[open]{animation:fadeUp .3s ease}
 </div>
 
 <!-- ═══ VISÃO ═══ -->
-<div class="section" id="visao">
+<div class="section sec-enter" id="visao" data-accent="purple" data-style="flip-up">
   <div class="sec-tag">Visão Geral</div>
   <h2 class="sec-title">O <span class="hl">GraduaHUB</span></h2>
 
@@ -975,7 +1102,7 @@ details[open]{animation:fadeUp .3s ease}
 </div>
 
 <!-- ═══ GUIDELINE ═══ -->
-<div class="section" id="guideline">
+<div class="section sec-enter" id="guideline" data-accent="purple" data-style="slide-right">
   <div class="sec-tag">Guia 01</div>
   <h2 class="sec-title">Guideline <span class="hl">Técnico</span></h2>
 
@@ -1126,7 +1253,7 @@ match /events/{eventId} {
 </div>
 
 <!-- ═══ ESTUDOS ═══ -->
-<div class="section" id="estudos">
+<div class="section sec-enter" id="estudos" data-accent="blue" data-style="blur-in">
   <div class="sec-tag">Guia 02</div>
   <h2 class="sec-title">Plano de <span class="hl">Estudos</span></h2>
 
@@ -1236,7 +1363,7 @@ String <span class="fn">saudar</span>(String? nome) => <span class="str">'Olá, 
 </div>
 
 <!-- ═══ EXECUÇÃO ═══ -->
-<div class="section" id="execucao">
+<div class="section sec-enter" id="execucao" data-accent="green" data-style="scale-in">
   <div class="sec-tag">Guia 03</div>
   <h2 class="sec-title">Plano de <span class="hl">Execução</span></h2>
 
@@ -1335,7 +1462,7 @@ Bloqueios: [o que impede]</pre>
 
 <!-- ═══ TESTES ═══ -->
 <div class="section-divider"></div>
-<div class="section" id="testes">
+<div class="section sec-enter" id="testes" data-accent="green" data-style="reveal">
   <div class="sec-tag">Guia 04</div>
   <h2 class="sec-title">Guia de <span class="hl">Testes</span></h2>
 
@@ -1399,7 +1526,7 @@ Bloqueios: [o que impede]</pre>
 
 <!-- ═══ GIT & GITHUB ═══ -->
 <div class="section-divider"></div>
-<div class="section" id="git">
+<div class="section sec-enter" id="git" data-accent="purple" data-style="slide-left">
   <div class="sec-tag">Guia 05</div>
   <h2 class="sec-title">Guia de <span class="hl">Git & GitHub</span></h2>
 
@@ -1479,7 +1606,7 @@ git push origin feature/nome-da-tarefa</pre>
 
 <!-- ═══ TROUBLESHOOTING ═══ -->
 <div class="section-divider"></div>
-<div class="section" id="troubleshooting">
+<div class="section sec-enter" id="troubleshooting" data-accent="red" data-style="flip-up">
   <div class="sec-tag">Guia 06</div>
   <h2 class="sec-title">Guia de <span class="hl">Troubleshooting</span></h2>
 
@@ -1523,7 +1650,7 @@ service cloud.firestore {
 
 <!-- ═══ DEPLOY ═══ -->
 <div class="section-divider"></div>
-<div class="section" id="deploy">
+<div class="section sec-enter" id="deploy" data-accent="teal" data-style="rotate-in">
   <div class="sec-tag">Guia 07</div>
   <h2 class="sec-title">Guia de <span class="hl">Deploy</span></h2>
 
@@ -1572,7 +1699,7 @@ firebase deploy --only hosting</pre>
 </div>
 
 <!-- ═══ ROADMAP GUIDELINE ═══ -->
-<div class="section" id="road-guideline">
+<div class="section sec-enter" id="road-guideline" data-accent="purple" data-style="slide-right">
   <div class="sec-tag">Roadmap R1</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Guideline</span></h2>
 
@@ -1602,7 +1729,7 @@ firebase deploy --only hosting</pre>
 </div>
 
 <!-- ═══ ROADMAP ESTUDOS ═══ -->
-<div class="section" id="road-estudos">
+<div class="section sec-enter" id="road-estudos" data-accent="blue" data-style="blur-in">
   <div class="sec-tag">Roadmap R2</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Estudos</span></h2>
 
@@ -1632,7 +1759,7 @@ firebase deploy --only hosting</pre>
 </div>
 
 <!-- ═══ ROADMAP EXECUÇÃO ═══ -->
-<div class="section" id="road-execucao">
+<div class="section sec-enter" id="road-execucao" data-accent="green" data-style="scale-in">
   <div class="sec-tag">Roadmap R3</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Execução</span></h2>
 
@@ -1671,43 +1798,206 @@ firebase deploy --only hosting</pre>
 
 <!-- ═══ ROADMAP TESTES ═══ -->
 <div class="section-divider"></div>
-<div class="section" id="road-testes">
+<div class="section sec-enter" id="road-testes" data-accent="green" data-style="reveal">
   <div class="sec-tag">Roadmap R4</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Testes</span></h2>
 
-  <div class="road">
-    <div class="road-track">
-      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Setup</div><div class="road-s2">flutter_test</div></div>
-      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Models</div><div class="road-s2">Discipline, etc.</div></div>
-      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Services</div><div class="road-s2">Auth, Firestore</div></div>
-      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Providers</div><div class="road-s2">Mock + test</div></div>
-      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Widgets</div><div class="road-s2">Telas críticas</div></div>
-      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">CI</div><div class="road-s2">GitHub Actions</div></div>
-      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Cobertura</div><div class="road-s2">70%+</div></div>
+  <div class="st">
+    <div class="st-card stat-pop"><div class="st-l">Fases</div><div class="st-n grn">7</div><div class="st-d">Setup → Cobertura</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Foco</div><div class="st-n blu">Models</div><div class="st-d">Primeiro a testar</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Meta</div><div class="st-n pur">70%+</div><div class="st-d">Cobertura geral</div></div>
+    <div class="st-card stat-pop"><div class="st-l">CI</div><div class="st-n yel">Auto</div><div class="st-d">GitHub Actions</div></div>
+  </div>
+
+  <div class="tl-wrap">
+    <div class="tl-shimmer" id="testesShimmer">
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+    </div>
+    <div class="tl-track" id="testesTrack" style="display:none">
+      <div class="tl-connector" id="testesConnector"><svg viewBox="0 0 100 6" preserveAspectRatio="none"><path class="tl-connector-line" d="M1,3 L99,3" stroke="var(--grn)"/></svg></div>
+      <div class="tl-step">
+        <div class="tl-cat setup">Setup</div>
+        <div class="tl-step-badge dim" data-tooltip="Ferramentas prontas"><span class="tl-step-num">1</span></div>
+        <div class="tl-step-label">flutter_test</div>
+        <div class="tl-step-sub">SDK nativo</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Setup de Testes</div>
+          <div class="tl-detail-desc">Flutter já vem com flutter_test. Rode flutter test para verificar. Adicione mocktail ou mockito para mocks.</div>
+          <div class="tl-detail-tags"><span>mocktail</span><span>flutter_test</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Core</div>
+        <div class="tl-step-badge blu" data-tooltip="Modelos de dados"><span class="tl-step-num">2</span></div>
+        <div class="tl-step-label">Models</div>
+        <div class="tl-step-sub">Discipline, Cert</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Modelos</div>
+          <div class="tl-detail-desc">Testar cálculo de média, faltas, toMap/fromMap. Cobertura alvo: 100% dos models.</div>
+          <div class="tl-detail-tags"><span>unit</span><span>100%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Core</div>
+        <div class="tl-step-badge grn" data-tooltip="Serviços Firebase"><span class="tl-step-num">3</span></div>
+        <div class="tl-step-label">Services</div>
+        <div class="tl-step-sub">Auth, Firestore</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Serviços</div>
+          <div class="tl-detail-desc">Mockar Firebase com mocktail. Testar signUp, signIn, upload, CRUD. Cobertura: 80%.</div>
+          <div class="tl-detail-tags"><span>mock</span><span>80%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Lógica</div>
+        <div class="tl-step-badge yel" data-tooltip="Providers com mock"><span class="tl-step-num">4</span></div>
+        <div class="tl-step-label">Providers</div>
+        <div class="tl-step-sub">Mock + test</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Providers</div>
+          <div class="tl-detail-desc">Injetar serviços mockados. Testar loading/erro/sucesso. Cobertura: 70%.</div>
+          <div class="tl-detail-tags"><span>ChangeNotifier</span><span>70%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat test">UI</div>
+        <div class="tl-step-badge pur" data-tooltip="Telas e componentes"><span class="tl-step-num">5</span></div>
+        <div class="tl-step-label">Widgets</div>
+        <div class="tl-step-sub">Telas críticas</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Widget</div>
+          <div class="tl-detail-desc">Testar LoginScreen, Dashboard, formulários. Verificar loading, erro, empty state. Cobertura: 60%.</div>
+          <div class="tl-detail-tags"><span>widget</span><span>60%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat deploy">CI</div>
+        <div class="tl-step-badge teal" data-tooltip="Automação"><span class="tl-step-num">6</span></div>
+        <div class="tl-step-label">GitHub Actions</div>
+        <div class="tl-step-sub">Automático</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">CI com GitHub Actions</div>
+          <div class="tl-detail-desc">Configurar .github/workflows/test.yml. Roda flutter test a cada push. Bloqueia PR se falhar.</div>
+          <div class="tl-detail-tags"><span>CI/CD</span><span>automation</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat prep">Meta</div>
+        <div class="tl-step-badge red" data-tooltip="Objetivo final"><span class="tl-step-num">7</span></div>
+        <div class="tl-step-label">Cobertura</div>
+        <div class="tl-step-sub">70%+</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Cobertura 70%+</div>
+          <div class="tl-detail-desc">Gerar relatório com flutter test --coverage. Visualizar com genhtml. Meta mínima: 70% geral.</div>
+          <div class="tl-detail-tags"><span>coverage</span><span>genhtml</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══ ROADMAP DEPLOY ═══ -->
 <div class="section-divider"></div>
-<div class="section" id="road-deploy">
+<div class="section sec-enter" id="road-deploy" data-accent="teal" data-style="rotate-in">
   <div class="sec-tag">Roadmap R5</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Deploy</span></h2>
 
-  <div class="road">
-    <div class="road-track">
-      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Keystore</div><div class="road-s2">Gerar chave</div></div>
-      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Config</div><div class="road-s2">key.properties</div></div>
-      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">APK</div><div class="road-s2">flutter build</div></div>
-      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Web</div><div class="road-s2">Firebase Hosting</div></div>
-      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Testar</div><div class="road-s2">Celular limpo</div></div>
-      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Backup</div><div class="road-s2">Pendrive + vídeo</div></div>
+  <div class="st">
+    <div class="st-card stat-pop"><div class="st-l">Etapas</div><div class="st-n teal">6</div><div class="st-d">Keystore → Backup</div></div>
+    <div class="st-card stat-pop"><div class="st-l">APK</div><div class="st-n grn">1</div><div class="st-d">app-release.apk</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Web</div><div class="st-n blu">Firebase</div><div class="st-d">Hosting</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Backup</div><div class="st-n yel">3</div><div class="st-d">Pendrive + nuvem + vídeo</div></div>
+  </div>
+
+  <div class="tl-wrap">
+    <div class="tl-shimmer" id="deployShimmer">
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+    </div>
+    <div class="tl-track" id="deployTrack" style="display:none">
+      <div class="tl-connector" id="deployConnector"><svg viewBox="0 0 100 6" preserveAspectRatio="none"><path class="tl-connector-line" d="M1,3 L99,3" stroke="var(--teal)"/></svg></div>
+      <div class="tl-step">
+        <div class="tl-cat setup">Setup</div>
+        <div class="tl-step-badge dim" data-tooltip="Chave de assinatura"><span class="tl-step-num">1</span></div>
+        <div class="tl-step-label">Keystore</div>
+        <div class="tl-step-sub">Gerar chave</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Gerar Keystore</div>
+          <div class="tl-detail-desc">keytool -genkey -v -keystore upload-keystore.jks. Anote a senha! Só precisa fazer uma vez.</div>
+          <div class="tl-detail-tags"><span>keytool</span><span>JKS</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat setup">Setup</div>
+        <div class="tl-step-badge blu" data-tooltip="Assinatura configurada"><span class="tl-step-num">2</span></div>
+        <div class="tl-step-label">Config</div>
+        <div class="tl-step-sub">key.properties</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Configurar key.properties</div>
+          <div class="tl-detail-desc">Criar android/key.properties com storePassword, keyPassword, keyAlias, storeFile.</div>
+          <div class="tl-detail-tags"><span>config</span><span>signing</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Build</div>
+        <div class="tl-step-badge grn" data-tooltip="Build release"><span class="tl-step-num">3</span></div>
+        <div class="tl-step-label">APK</div>
+        <div class="tl-step-sub">flutter build</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Build do APK</div>
+          <div class="tl-detail-desc">flutter build apk --release. APK em build/app/outputs/flutter-apk/app-release.apk.</div>
+          <div class="tl-detail-tags"><span>release</span><span>APK</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat deploy">Web</div>
+        <div class="tl-step-badge yel" data-tooltip="Deploy web"><span class="tl-step-num">4</span></div>
+        <div class="tl-step-label">Firebase Hosting</div>
+        <div class="tl-step-sub">Web</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Deploy Web</div>
+          <div class="tl-detail-desc">flutter build web && firebase deploy --only hosting. URL: https://graduahub-dev.web.app</div>
+          <div class="tl-detail-tags"><span>hosting</span><span>web</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat test">QA</div>
+        <div class="tl-step-badge pur" data-tooltip="Teste em dispositivo"><span class="tl-step-num">5</span></div>
+        <div class="tl-step-label">Testar</div>
+        <div class="tl-step-sub">Celular limpo</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testar APK</div>
+          <div class="tl-detail-desc">Instalar APK em um celular que nunca viu o projeto. Testar fluxo completo.</div>
+          <div class="tl-detail-tags"><span>QA</span><span>device</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat prep">Backup</div>
+        <div class="tl-step-badge red" data-tooltip="Plano B"><span class="tl-step-num">6</span></div>
+        <div class="tl-step-label">Backup</div>
+        <div class="tl-step-sub">Pendrive + vídeo</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Backup</div>
+          <div class="tl-detail-desc">Salvar APK, slides PDF e vídeo do app em pendrive e na nuvem. Plano B para banca.</div>
+          <div class="tl-detail-tags"><span>backup</span><span>plan-b</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══ CHECKLIST ═══ -->
-<div class="section" id="checklist">
+<div class="section sec-enter" id="checklist" data-accent="purple" data-style="slide-up">
   <div class="sec-tag">Checklist Final</div>
   <h2 class="sec-title">Checklist da <span class="hl">Banca</span></h2>
 
@@ -2480,6 +2770,123 @@ document.querySelectorAll('details').forEach(d => {
     btn.classList.toggle('show', getScrollY() > 500);
   };
   addScrollListener(update); update();
+})();
+
+// ─── ENHANCED SECTION ENTRANCE OBSERVER ───
+(function(){
+  const sections = document.querySelectorAll('.sec-enter');
+  if (!sections.length) return;
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .1, rootMargin: '0px 0px -40px 0px', root });
+  sections.forEach(s => obs.observe(s));
+})();
+
+// ─── TIMELINE ANIMATIONS (road-testes, road-deploy) ───
+(function(){
+  const timelines = [
+    { trackId: 'testesTrack', connectorId: 'testesConnector', shimmerId: 'testesShimmer' },
+    { trackId: 'deployTrack', connectorId: 'deployConnector', shimmerId: 'deployShimmer' }
+  ];
+
+  timelines.forEach(tl => {
+    const track = document.getElementById(tl.trackId);
+    const connector = document.getElementById(tl.connectorId);
+    const shimmer = document.getElementById(tl.shimmerId);
+    if (!track || !shimmer) return;
+
+    const root = isDesktopLayout() ? $main() : null;
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+
+          // Hide shimmer, show track
+          shimmer.style.display = 'none';
+          track.style.display = 'flex';
+
+          // Animate steps in sequence
+          const steps = track.querySelectorAll('.tl-step');
+          steps.forEach((step, i) => {
+            setTimeout(() => {
+              step.style.opacity = '0';
+              step.style.transform = 'translateY(20px)';
+              step.style.transition = 'opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)';
+              requestAnimationFrame(() => {
+                step.style.opacity = '1';
+                step.style.transform = 'translateY(0)';
+              });
+              // Pulse badge
+              const badge = step.querySelector('.tl-step-badge:not(.dim)');
+              if (badge) {
+                setTimeout(() => {
+                  badge.style.transform = 'scale(1.3)';
+                  badge.style.boxShadow = '0 0 24px currentColor';
+                  setTimeout(() => {
+                    badge.style.transform = '';
+                    badge.style.boxShadow = '';
+                  }, 500);
+                }, 300);
+              }
+            }, i * 150);
+          });
+
+          // Draw connector line
+          if (connector) {
+            const line = connector.querySelector('.tl-connector-line');
+            if (line) {
+              setTimeout(() => {
+                line.classList.add('drawn');
+              }, 200);
+            }
+          }
+        }
+      });
+    }, { threshold: .15, rootMargin: '0px 0px -60px 0px', root });
+
+    // Observe the shimmer element (which acts as the trigger point)
+    obs.observe(shimmer);
+  });
+})();
+
+// ─── ENHANCED COUNTER POP ON SCROLL ───
+(function(){
+  document.querySelectorAll('.stat-pop .st-n').forEach(el => {
+    const root = isDesktopLayout() ? $main() : null;
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+          entry.target.style.transition = 'transform .5s cubic-bezier(.22,1,.36,1)';
+          entry.target.style.transform = 'scale(1.2)';
+          setTimeout(() => { entry.target.style.transform = ''; }, 500);
+        }
+      });
+    }, { threshold: .5, root });
+    obs.observe(el);
+  });
+})();
+
+// ─── HOVER GLOW ON GUIDE CARDS ───
+(function(){
+  document.querySelectorAll('.card, .sc, .st-card').forEach(el => {
+    el.classList.add('hover-glow');
+  });
+})();
+
+// ─── TAG FILTER TOGGLE ───
+(function(){
+  document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      this.classList.toggle('active');
+    });
+  });
 })();
 
 // ─── KEYBOARD SHORTCUTS ───
