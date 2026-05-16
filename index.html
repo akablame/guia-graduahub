@@ -882,10 +882,18 @@ details[open]{animation:fadeUp .3s ease}
     <div class="dnav-item" data-target="guideline"><span class="nb">01</span> Guideline Técnico</div>
     <div class="dnav-item" data-target="estudos"><span class="nb">02</span> Plano de Estudos</div>
     <div class="dnav-item" data-target="execucao"><span class="nb">03</span> Plano de Execução</div>
+    <div class="dnav-item" data-target="testes"><span class="nb">04</span> Testes</div>
+    <div class="dnav-item" data-target="git"><span class="nb">05</span> Git & GitHub</div>
+    <div class="dnav-item" data-target="apresentacao"><span class="nb">06</span> Apresentação</div>
+    <div class="dnav-item" data-target="troubleshooting"><span class="nb">07</span> Troubleshooting</div>
+    <div class="dnav-item" data-target="deploy"><span class="nb">08</span> Deploy</div>
     <div class="dnav-grp">Roadmaps</div>
-    <div class="dnav-item" data-target="road-guideline"><span class="nb">R1</span> Roadmap Guideline</div>
-    <div class="dnav-item" data-target="road-estudos"><span class="nb">R2</span> Roadmap Estudos</div>
-    <div class="dnav-item" data-target="road-execucao"><span class="nb">R3</span> Roadmap Execução</div>
+    <div class="dnav-item" data-target="road-guideline"><span class="nb">R1</span> Guideline</div>
+    <div class="dnav-item" data-target="road-estudos"><span class="nb">R2</span> Estudos</div>
+    <div class="dnav-item" data-target="road-execucao"><span class="nb">R3</span> Execução</div>
+    <div class="dnav-item" data-target="road-testes"><span class="nb">R4</span> Testes</div>
+    <div class="dnav-item" data-target="road-apresentacao"><span class="nb">R5</span> Apresentação</div>
+    <div class="dnav-item" data-target="road-deploy"><span class="nb">R6</span> Deploy</div>
     <div class="dnav-grp">Final</div>
     <div class="dnav-item" data-target="checklist"><span class="nb">✓</span> Checklist da Banca</div>
   </nav>
@@ -903,7 +911,7 @@ details[open]{animation:fadeUp .3s ease}
 <div class="hero">
   <div class="hero-tag">GraduaHUB</div>
   <h1 class="hero-title">Guia <span>Completo</span> do Projeto</h1>
-  <p class="hero-desc">Do zero ao MVP na banca — guideline técnico, plano de estudos, plano de execução e roadmaps visuais para a equipe do SENAI.</p>
+  <p class="hero-desc">Do zero ao MVP na banca — guideline técnico, planos de estudo/execução, testes, git, deploy, troubleshooting e roadmaps visuais para a equipe do SENAI.</p>
   <div id="typewriter"><span class="cursor"></span></div>
 </div>
 
@@ -1483,6 +1491,346 @@ Bloqueios: [o que impede]</pre>
   </div>
 </div>
 
+<!-- ═══ TESTES ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="testes">
+  <div class="sec-tag">Guia 04</div>
+  <h2 class="sec-title">Guia de <span class="hl">Testes</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Unit Tests</div><div class="st-n grn">ms</div><div class="st-d">Modelos e serviços</div></div>
+    <div class="st-card"><div class="st-l">Widget Tests</div><div class="st-n blu">seg</div><div class="st-d">Telas e componentes</div></div>
+    <div class="st-card"><div class="st-l">Cobertura</div><div class="st-n pur">70%+</div><div class="st-d">Meta do projeto</div></div>
+    <div class="st-card"><div class="st-l">CI</div><div class="st-n yel">GitHub Actions</div><div class="st-d">Automático no push</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🧪 Tipos de Teste</div>
+    <div class="flow">
+      <span class="flow-s grn">Unit</span><span class="flow-a">→</span>
+      <span class="flow-s blu">Widget</span><span class="flow-a">→</span>
+      <span class="flow-s pur">Integração</span>
+    </div>
+    <div class="card-b">
+      <table>
+        <thead><tr><th>Tipo</th><th>O que testa</th><th>Comando</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Unit</strong></td><td>Modelos, serviços, providers</td><td><code>flutter test test/models/</code></td></tr>
+          <tr><td><strong>Widget</strong></td><td>Telas, formulários, componentes</td><td><code>flutter test test/features/</code></td></tr>
+          <tr><td><strong>Integração</strong></td><td>Fluxo completo (login → dashboard)</td><td><code>flutter test integration_test/</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📋 Modelo — Teste de Discipline</div>
+    <div class="card-b">
+<pre><span class="kw">void</span> main() {
+  group(<span class="str">'Discipline Model'</span>, () {
+    test(<span class="str">'weightedAverage retorna 0 sem notas'</span>, () {
+      <span class="kw">final</span> d = Discipline(id: <span class="str">'1'</span>, name: <span class="str">'Mat'</span>, professor: <span class="str">'João'</span>);
+      expect(d.weightedAverage, 0);
+    });
+
+    test(<span class="str">'calcula média ponderada correta'</span>, () {
+      <span class="kw">final</span> d = Discipline(id: <span class="str">'1'</span>, name: <span class="str">'Mat'</span>, professor: <span class="str">'João'</span>,
+        grades: [Grade(weight: 2, score: 8.0), Grade(weight: 3, score: 6.0)]);
+      expect(d.weightedAverage, 6.8);  <span class="cm">// (16+18)/5</span>
+    });
+  });
+}</pre>
+      <div class="co blu"><div class="co-b"><strong>Comandos:</strong> <code>flutter test</code> · <code>flutter test --coverage</code> · <code>genhtml coverage/lcov.info -o coverage/html/</code></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📋 Checklist por Módulo</div>
+    <div class="sg" style="grid-template-columns:1fr">
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Auth</div></div><div class="sc-b">signUp · signIn · signOut · Loading/Erro LoginScreen · Validação RegisterScreen</div></div>
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Rotina</div></div><div class="sc-b">Média ponderada · Faltas restantes · toMap/fromMap · neededForFinal</div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Dashboard</div></div><div class="sc-b">ModuleCards · Nome usuário · Resumo horas · Empty state</div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa</div></div><div class="sc-b">OpenAlex parse · Campo busca · Lista resultados · Empty state</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GIT & GITHUB ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="git">
+  <div class="sec-tag">Guia 05</div>
+  <h2 class="sec-title">Guia de <span class="hl">Git & GitHub</span></h2>
+
+  <div class="card">
+    <div class="card-t">🌳 Estrutura de Branches</div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s red">main</span><span class="flow-a">←</span>
+        <span class="flow-s yel">develop</span><span class="flow-a">←</span>
+        <span class="flow-s grn">feature/*</span>
+      </div>
+      <table>
+        <thead><tr><th>Branch</th><th>Finalidade</th></tr></thead>
+        <tbody>
+          <tr><td><code>main</code></td><td>Código final — só entra depois de testado</td></tr>
+          <tr><td><code>develop</code></td><td>Integração — onde as features são juntadas</td></tr>
+          <tr><td><code>feature/nome</code></td><td>Sua branch de trabalho (uma por funcionalidade)</td></tr>
+        </tbody>
+      </table>
+      <div class="co red"><div class="co-b">🚫 <strong>Nunca</strong> commitar direto em <code>main</code> ou <code>develop</code>. Sempre criar <code>feature/nomedatarefa</code>.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔄 Fluxo Diário</div>
+    <div class="card-b">
+<pre><span class="cm"># Início do dia</span>
+git checkout develop
+git pull origin develop
+git checkout -b feature/nome-da-tarefa
+
+<span class="cm"># Durante</span>
+git add .
+git commit -m <span class="str">"feat: adiciona tela de login"</span>
+git push origin feature/nome-da-tarefa
+
+<span class="cm"># Antes do PR</span>
+git checkout develop && git pull
+git checkout feature/nome-da-tarefa && git merge develop
+git push origin feature/nome-da-tarefa</pre>
+      <div class="co grn"><div class="co-b"><strong>Commits:</strong> <code>feat:</code> nova funcionalidade · <code>fix:</code> correção · <code>refactor:</code> reorganização · <code>test:</code> testes · <code>docs:</code> documentação</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📝 Template de PR</div>
+    <div class="card-b">
+<pre><span class="cm">## O que foi feito</span>
+[descrição das mudanças]
+
+<span class="cm">## Prints / Vídeo</span>
+[evidência do funcionamento]
+
+<span class="cm">## Checklist</span>
+- [ ] Roda no emulador
+- [ ] Sem erro de compilação
+- [ ] Testado manualmente
+- [ ] Código segue padrões
+
+<span class="cm">## Revisores</span>
+@colega1 @colega2</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🆘 Comandos de Emergência</div>
+    <div class="sg" style="grid-template-columns:1fr">
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Status</div></div><div class="sc-b"><code>git status</code> — mostra o que mudou</div></div>
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Diff</div></div><div class="sc-b"><code>git diff</code> — mostra as alterações linha a linha</div></div>
+      <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Desfazer local</div></div><div class="sc-b"><code>git checkout -- arquivo</code> — descarta mudanças</div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Log</div></div><div class="sc-b"><code>git log --oneline --graph</code> — histórico visual</div></div>
+      <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Reset soft</div></div><div class="sc-b"><code>git reset --soft HEAD~1</code> — desfaz commit mantendo código</div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Blame</div></div><div class="sc-b"><code>git blame arquivo</code> — quem fez o quê em cada linha</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APRESENTAÇÃO ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="apresentacao">
+  <div class="sec-tag">Guia 06</div>
+  <h2 class="sec-title">Guia de <span class="hl">Apresentação</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Duração</div><div class="st-n grn">7 min</div><div class="st-d">Ideal: 5-8 min</div></div>
+    <div class="st-card"><div class="st-l">Pessoas</div><div class="st-n blu">4</div><div class="st-d">Cada uma fala 1 parte</div></div>
+    <div class="st-card"><div class="st-l">Ensaios</div><div class="st-n pur">3</div><div class="st-d">Mínimo antes do dia</div></div>
+    <div class="st-card"><div class="st-l">Backup</div><div class="st-n yel">Vídeo</div><div class="st-d">Se o app falhar</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🎤 Roteiro (7 min)</div>
+    <div class="flow">
+      <span class="flow-s blu">Abertura 1min</span><span class="flow-a">→</span>
+      <span class="flow-s grn">Solução 1min</span><span class="flow-a">→</span>
+      <span class="flow-s yel">Demo 3min</span><span class="flow-a">→</span>
+      <span class="flow-s pur">Arquitetura 1min</span><span class="flow-a">→</span>
+      <span class="flow-s teal">Desafios 30s</span><span class="flow-a">→</span>
+      <span class="flow-s red">Encerramento 30s</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">👥 Divisão de Falas</div>
+    <div class="pg">
+      <div class="pc"><div class="pa a">A</div><div class="pi"><div class="pn">Abertura + Desafios</div><div class="pr">Líder Técnico</div><div class="pt">Arquitetura, Firebase, decisões técnicas, regras Firestore</div></div></div>
+      <div class="pc"><div class="pa b">B</div><div class="pi"><div class="pn">Solução + Módulos</div><div class="pr">Dev Front</div><div class="pt">UI/UX, Widgets, Provider, Navegação, loading/erro</div></div></div>
+      <div class="pc"><div class="pa c">C</div><div class="pi"><div class="pn">Demo + Funcionalidades</div><div class="pr">Dev Dados</div><div class="pt">Rotina, certificados, cálculos de média, upload</div></div></div>
+      <div class="pc"><div class="pa d">D</div><div class="pi"><div class="pn">Arquitetura + Stack</div><div class="pr">QA/API</div><div class="pt">OpenAlex, mapa, testes, Git, workflow</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">⚠️ Plano B</div>
+    <div class="cg">
+      <div class="ce p1"><div class="ce-title">🔴 App crashou</div><div class="ce-item">"Deixa eu reiniciar" — enquanto isso, explica o módulo</div></div>
+      <div class="ce p1"><div class="ce-title">🔴 Internet caiu</div><div class="ce-item">Usar vídeo de backup do app rodando</div></div>
+      <div class="ce p2"><div class="ce-title">🟡 Projetor falhou</div><div class="ce-item">Mostrar no notebook + descrever o app</div></div>
+      <div class="ce p2"><div class="ce-title">🟡 Pergunta difícil</div><div class="ce-item">"O que posso dizer é..." + colega complementa</div></div>
+    </div>
+    <div class="co yel"><div class="co-b"><strong>Kit emergência:</strong> Pendrive com APK + slides + vídeo · Cabo HDMI · Carregador · Água</div></div>
+  </div>
+</div>
+
+<!-- ═══ TROUBLESHOOTING ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="troubleshooting">
+  <div class="sec-tag">Guia 07</div>
+  <h2 class="sec-title">Guia de <span class="hl">Troubleshooting</span></h2>
+
+  <div class="card">
+    <div class="card-t">❌ Erros Comuns e Soluções</div>
+    <div class="card-b">
+      <table>
+        <thead><tr><th>Erro</th><th>Causa</th><th>Solução</th></tr></thead>
+        <tbody>
+          <tr><td><code>No Firebase App '[DEFAULT]'</code></td><td>Firebase não inicializado</td><td>Verificar <code>Firebase.initializeApp()</code> no main.dart</td></tr>
+          <tr><td><code>permission-denied</code></td><td>Regras Firestore bloqueando</td><td>Verificar se usuário só acessa próprios dados</td></tr>
+          <tr><td><code>No connected devices</code></td><td>Nenhum dispositivo conectado</td><td><code>flutter devices</code> · Abrir emulador · USB debugging</td></tr>
+          <tr><td><code>Gradle build failed</code></td><td>Cache corrompido</td><td><code>flutter clean && flutter pub get</code></td></tr>
+          <tr><td><code>setState() after dispose()</code></td><td>Atualizando widget removido</td><td>Verificar <code>if (mounted)</code> antes de setState</td></tr>
+          <tr><td><code>ProviderNotFoundException</code></td><td>Provider não registrado</td><td>Adicionar no <code>MultiProvider</code> em app.dart</td></tr>
+          <tr><td><code>failed to push</code></td><td>Branch remota à frente</td><td><code>git pull origin develop</code></td></tr>
+          <tr><td><code>Undefined name 'X'</code></td><td>Variável não encontrada</td><td>Verificar import e nome da variável</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔧 Setup Firestore Rules</div>
+    <div class="card-b">
+<pre>rules_version = <span class="str">'2'</span>;
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: <span class="kw">if</span> request.auth.uid == userId;
+    }
+    match /certificates/{certId} {
+      allow read, update, delete: <span class="kw">if</span> resource.data.userId == request.auth.uid;
+      allow create: <span class="kw">if</span> request.resource.data.userId == request.auth.uid;
+    }
+  }
+}</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DEPLOY ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="deploy">
+  <div class="sec-tag">Guia 08</div>
+  <h2 class="sec-title">Guia de <span class="hl">Deploy</span></h2>
+
+  <div class="card">
+    <div class="card-t">📦 APK de Apresentação (Release)</div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s blu">keytool</span><span class="flow-a">→</span>
+        <span class="flow-s blu">key.properties</span><span class="flow-a">→</span>
+        <span class="flow-s grn">flutter build</span><span class="flow-a">→</span>
+        <span class="flow-s pur">app-release.apk</span>
+      </div>
+<pre><span class="cm"># Gerar keystore (uma vez)</span>
+keytool -genkey -v -keystore C:\Users\SeuNome\upload-keystore.jks ^
+  -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+
+<span class="cm"># Build release</span>
+flutter build apk --release
+
+<span class="cm"># APK em: build/app/outputs/flutter-apk/app-release.apk</span></pre>
+      <div class="co grn"><div class="co-b"><strong>Dica:</strong> <code>flutter build apk --release --split-per-abi</code> gera APKs menores por arquitetura</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🌐 Web (Firebase Hosting)</div>
+    <div class="card-b">
+<pre>flutter build web
+firebase init hosting     <span class="cm"># public: build/web, SPA: yes</span>
+firebase deploy --only hosting</pre>
+      <div class="co pur"><div class="co-b">URL: <code>https://graduahub-dev.web.app</code></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">✅ Checklist Pré-Deploy</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">flutter analyze sem erros</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">flutter test passando</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Testado em dispositivo físico</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">APK gerado e testado</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">APK salvo em pendrive + nuvem</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Vídeo de backup do fluxo completo</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP TESTES ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="road-testes">
+  <div class="sec-tag">Roadmap R4</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Testes</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Setup</div><div class="road-s2">flutter_test</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Models</div><div class="road-s2">Discipline, etc.</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Services</div><div class="road-s2">Auth, Firestore</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Providers</div><div class="road-s2">Mock + test</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Widgets</div><div class="road-s2">Telas críticas</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">CI</div><div class="road-s2">GitHub Actions</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Cobertura</div><div class="road-s2">70%+</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP APRESENTAÇÃO ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="road-apresentacao">
+  <div class="sec-tag">Roadmap R5</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Apresentação</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">D-7</div><div class="road-s2">Slides</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">D-5</div><div class="road-s2">Roteiro</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">D-3</div><div class="road-s2">1º Ensaio</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">D-1</div><div class="road-s2">2º Ensaio</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dia</div><div class="road-s2">3º Ensaio</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">🎯</div><div class="road-s2">Banca!</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP DEPLOY ═══ -->
+<div class="section-divider"></div>
+<div class="section" id="road-deploy">
+  <div class="sec-tag">Roadmap R6</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Deploy</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Keystore</div><div class="road-s2">Gerar chave</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Config</div><div class="road-s2">key.properties</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">APK</div><div class="road-s2">flutter build</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Web</div><div class="road-s2">Firebase Hosting</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Testar</div><div class="road-s2">Celular limpo</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Backup</div><div class="road-s2">Pendrive + vídeo</div></div>
+    </div>
+  </div>
+</div>
+
 <div class="footer">
   GraduaHUB — Projeto Integrador SENAI<br>
   <strong>Curso Técnico em Desenvolvimento de Sistemas</strong>
@@ -1711,13 +2059,13 @@ const observeInContainer = (selector, callback, options = {}) => {
 })();
 
 // ─── TOGGLE DRAWER ───
-function toggleDrawer() {
+window.toggleDrawer = function() {
   const d = document.querySelector('.drawer');
   const b = document.querySelector('.backdrop');
   const isOpen = d.classList.toggle('open');
   b.classList.toggle('open', isOpen);
   document.body.classList.toggle('no-scroll', isOpen);
-}
+};
 
 // ─── NAV ITEMS ───
 document.querySelectorAll('.dnav-item').forEach(item => {
@@ -1979,7 +2327,24 @@ observeInContainer('.section', entries => {
     'Spr.4': { title:'Sprint 4 — Certificados', sub:'Dias 23-30', desc:'Upload + progresso. PR #5.' },
     'Spr.5': { title:'Sprint 5 — Pesquisa', sub:'Dias 31-37', desc:'API + filtros. PR #6.' },
     'Spr.6': { title:'Sprint 6 — Radar', sub:'Dias 38-44', desc:'Mapa + lista. PR #7.' },
-    'Spr.7': { title:'Sprint 7 — Banca 🎯', sub:'Dias 45-50', desc:'Preparação final e apresentação!' }
+    'Spr.7': { title:'Sprint 7 — Banca 🎯', sub:'Dias 45-50', desc:'Preparação final e apresentação!' },
+    'Setup': { title:'Setup de Testes', sub:'flutter_test nativo', desc:'Flutter já vem com flutter_test. Rode flutter test para verificar. Adicione mocktail ou mockito para mocks.' },
+    'Models': { title:'Testes de Modelos', sub:'Discipline, Certificate', desc:'Testar cálculo de média, faltas, toMap/fromMap. Cobertura alvo: 100% dos models.' },
+    'Services': { title:'Testes de Serviços', sub:'Auth, Firestore, Storage', desc:'Mockar Firebase com mocktail. Testar signUp, signIn, upload, CRUD. Cobertura: 80%.' },
+    'Providers': { title:'Testes de Providers', sub:'Mock + ChangeNotifier', desc:'Injetar serviços mockados. Testar loading/erro/sucesso. Cobertura: 70%.' },
+    'Widgets': { title:'Testes de Widget', sub:'Telas críticas', desc:'Testar LoginScreen, Dashboard, formulários. Verificar loading, erro, empty state. Cobertura: 60%.' },
+    'CI': { title:'CI com GitHub Actions', sub:'Automático no push', desc:'Configurar .github/workflows/test.yml. Roda flutter test a cada push. Bloqueia PR se falhar.' },
+    'Cobertura': { title:'Cobertura 70%+', sub:'Meta do projeto', desc:'Gerar relatório com flutter test --coverage. Visualizar com genhtml. Meta mínima: 70% geral.' },
+    'D-7': { title:'7 Dias Antes', sub:'Slides', desc:'Finalizar slides da apresentação. Estrutura: problema, solução, demo, arquitetura, desafios.' },
+    'D-5': { title:'5 Dias Antes', sub:'Roteiro', desc:'Distribuir falas entre os 4 membros. Cada um prepara sua parte. Roteiro de 7 min.' },
+    'D-3': { title:'3 Dias Antes', sub:'1º Ensaio', desc:'Primeiro ensaio completo cronometrado. Corrigir falhas, ajustar tempo.' },
+    'D-1': { title:'1 Dia Antes', sub:'2º Ensaio', desc:'Segundo ensaio. Gravar vídeo de backup. Exportar slides em PDF. Salvar APK em pendrive.' },
+    'Keystore': { title:'Gerar Keystore', sub:'Chave de assinatura', desc:'keytool -genkey -v -keystore upload-keystore.jks. Anote a senha! Só precisa fazer uma vez.' },
+    'Config': { title:'Configurar key.properties', sub:'Assinatura do APK', desc:'Criar android/key.properties com storePassword, keyPassword, keyAlias, storeFile.' },
+    'APK': { title:'Build do APK', sub:'flutter build --release', desc:'flutter build apk --release. APK em build/app/outputs/flutter-apk/app-release.apk.' },
+    'Web': { title:'Deploy Web', sub:'Firebase Hosting', desc:'flutter build web && firebase deploy --only hosting. URL: https://graduahub-dev.web.app' },
+    'Testar': { title:'Testar APK', sub:'Dispositivo físico', desc:'Instalar APK em um celular que nunca viu o projeto. Testar fluxo completo.' },
+    'Backup': { title:'Backup', sub:'Pendrive + nuvem + vídeo', desc:'Salvar APK, slides PDF e vídeo do app em pendrive e na nuvem. Plano B para banca.' }
   };
   dots.forEach(dot => {
     dot.addEventListener('click', function(){
