@@ -884,16 +884,14 @@ details[open]{animation:fadeUp .3s ease}
     <div class="dnav-item" data-target="execucao"><span class="nb">03</span> Plano de Execução</div>
     <div class="dnav-item" data-target="testes"><span class="nb">04</span> Testes</div>
     <div class="dnav-item" data-target="git"><span class="nb">05</span> Git & GitHub</div>
-    <div class="dnav-item" data-target="apresentacao"><span class="nb">06</span> Apresentação</div>
-    <div class="dnav-item" data-target="troubleshooting"><span class="nb">07</span> Troubleshooting</div>
-    <div class="dnav-item" data-target="deploy"><span class="nb">08</span> Deploy</div>
+    <div class="dnav-item" data-target="troubleshooting"><span class="nb">06</span> Troubleshooting</div>
+    <div class="dnav-item" data-target="deploy"><span class="nb">07</span> Deploy</div>
     <div class="dnav-grp">Roadmaps</div>
     <div class="dnav-item" data-target="road-guideline"><span class="nb">R1</span> Guideline</div>
     <div class="dnav-item" data-target="road-estudos"><span class="nb">R2</span> Estudos</div>
     <div class="dnav-item" data-target="road-execucao"><span class="nb">R3</span> Execução</div>
     <div class="dnav-item" data-target="road-testes"><span class="nb">R4</span> Testes</div>
-    <div class="dnav-item" data-target="road-apresentacao"><span class="nb">R5</span> Apresentação</div>
-    <div class="dnav-item" data-target="road-deploy"><span class="nb">R6</span> Deploy</div>
+    <div class="dnav-item" data-target="road-deploy"><span class="nb">R5</span> Deploy</div>
     <div class="dnav-grp">Final</div>
     <div class="dnav-item" data-target="checklist"><span class="nb">✓</span> Checklist da Banca</div>
   </nav>
@@ -1331,165 +1329,9 @@ Bloqueios: [o que impede]</pre>
   </div>
 </div>
 
-<!-- ═══ ROADMAP GUIDELINE ═══ -->
-<div class="section" id="road-guideline">
-  <div class="sec-tag">Roadmap R1</div>
-  <h2 class="sec-title">Roadmap — <span class="hl">Guideline</span></h2>
 
-  <div class="road">
-    <div class="road-track">
-      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Dias 1-5</div><div class="road-s2">Fundação</div></div>
-      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Dias 6-10</div><div class="road-s2">Auth</div></div>
-      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Dias 11-14</div><div class="road-s2">Dash</div></div>
-      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Dias 15-22</div><div class="road-s2">Rotina</div></div>
-      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 23-30</div><div class="road-s2">Cert</div></div>
-      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Dias 31-37</div><div class="road-s2">Pesq</div></div>
-      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Dias 38-44</div><div class="road-s2">Radar</div></div>
-      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 45-50</div><div class="road-s2">Banca</div></div>
-    </div>
-  </div>
 
-  <div class="card"><div class="card-t">🛠 Fase 1 — Fundação <span class="b blu">Dias 1-5</span></div><div class="card-b"><div class="flow"><span class="flow-s act">SDK</span><span class="flow-a">→</span><span class="flow-s act">Studio</span><span class="flow-a">→</span><span class="flow-s act">Firebase</span><span class="flow-a">→</span><span class="flow-s act">Pastas</span><span class="flow-a">→</span><span class="flow-s act">AuthService</span><span class="flow-a">→</span><span class="flow-s act">PR #1</span></div><div class="co grn"><div class="co-b">flutter run ✅ · Firebase ✅ · PR #1 ✅</div></div></div></div>
-  <div class="card"><div class="card-t">🔐 Fase 2 — Auth <span class="b blu">Dias 6-10</span></div><div class="card-b"><div class="flow"><span class="flow-s blu">Login</span><span class="flow-a">→</span><span class="flow-s blu">Cadastro</span><span class="flow-a">→</span><span class="flow-s blu">Guarda</span><span class="flow-a">→</span><span class="flow-s blu">Nav</span><span class="flow-a">→</span><span class="flow-s blu">Sessão</span><span class="flow-a">→</span><span class="flow-s blu">PR #2</span></div><div class="co grn"><div class="co-b">Login/Cadastro ✅ · Sessão ✅ · Erros PT ✅</div></div></div></div>
-  <div class="card"><div class="card-t">🧩 Fase 3 — Módulos <span class="b yel">Dias 11-44</span></div><div class="sg">
-    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Dashboard</div><div class="sc-d">PR #3</div></div><div class="sc-b">GridView, ModuleCard, resumo horas</div></div>
-    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Rotina</div><div class="sc-d">PR #4</div></div><div class="sc-b">CRUD, média, previsão, faltas</div></div>
-    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Certificados</div><div class="sc-d">PR #5</div></div><div class="sc-b">Upload, Storage, progresso</div></div>
-    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa</div><div class="sc-d">PR #6</div></div><div class="sc-b">OpenAlex, ArticleCard</div></div>
-    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Radar</div><div class="sc-d">PR #7</div></div><div class="sc-b">Lista, mapa, markers</div></div>
-  </div></div>
-  <div class="card"><div class="card-t">✨ Fase 4 — Banca <span class="b pur">Dias 45-50</span></div><div class="card-b"><div class="flow"><span class="flow-s red">Testes</span><span class="flow-a">→</span><span class="flow-s red">Correções</span><span class="flow-a">→</span><span class="flow-s red">Demo</span><span class="flow-a">→</span><span class="flow-s red">Slides</span><span class="flow-a">→</span><span class="flow-s red">Ensaio</span><span class="flow-a">→</span><span class="flow-s red">🎯</span></div></div></div>
-</div>
 
-<!-- ═══ ROADMAP ESTUDOS ═══ -->
-<div class="section" id="road-estudos">
-  <div class="sec-tag">Roadmap R2</div>
-  <h2 class="sec-title">Roadmap — <span class="hl">Estudos</span></h2>
-
-  <div class="st">
-    <div class="st-card"><div class="st-l">Semanas</div><div class="st-n grn">4</div><div class="st-d">Capacitação</div></div>
-    <div class="st-card"><div class="st-l">Carga</div><div class="st-n blu">2-3h</div><div class="st-d">por dia</div></div>
-    <div class="st-card"><div class="st-l">Projetos</div><div class="st-n pur">2</div><div class="st-d">Obrigatórios</div></div>
-    <div class="st-card"><div class="st-l">Meta</div><div class="st-n yel">100%</div><div class="st-d">Time apto</div></div>
-  </div>
-
-  <div class="card"><div class="card-t">📘 Semana 1 — Dart + Flutter</div><div class="card-b"><div class="flow"><span class="flow-s">Dart I</span><span class="flow-a">→</span><span class="flow-s">Dart II</span><span class="flow-a">→</span><span class="flow-s">Flutter I</span><span class="flow-a">→</span><span class="flow-s">Flutter II</span><span class="flow-a">→</span><span class="flow-s">Listas</span><span class="flow-a">→</span><span class="flow-s grn">App 3 telas</span></div><div class="co grn"><div class="co-b">🏁 App 3 telas + form válido no emulador</div></div></div></div>
-  <div class="card"><div class="card-t">🔥 Semana 2 — Firebase + Provider</div><div class="card-b"><div class="flow"><span class="flow-s">Provider</span><span class="flow-a">→</span><span class="flow-s">Auth</span><span class="flow-a">→</span><span class="flow-s">Firestore</span><span class="flow-a">→</span><span class="flow-s">Storage</span><span class="flow-a">→</span><span class="flow-s">HTTP</span><span class="flow-a">→</span><span class="flow-s grn">2 apps</span></div><div class="co grn"><div class="co-b">🏁 ToDo + Login CRUD. Individual.</div></div></div></div>
-  <div class="card"><div class="card-t">🚀 Semana 3 — Mini Projetos</div><div class="sg" style="grid-template-columns:1fr">
-    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">ToDo</div><div class="sc-d">2 dias</div></div><div class="sc-b">Login · CRUD · Concluir · Filtrar · Provider</div></div>
-    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">CRUD + Upload</div><div class="sc-d">2 dias</div></div><div class="sc-b">Forms · Storage · Stream · Editar</div></div>
-  </div></div>
-  <div class="card"><div class="card-t">⚡ Semana 4 — Avançado</div><div class="card-b"><div class="flow"><span class="flow-s">Nav</span><span class="flow-a">→</span><span class="flow-s">Maps</span><span class="flow-a">→</span><span class="flow-s">OCR</span><span class="flow-a">→</span><span class="flow-s">Anim</span><span class="flow-a">→</span><span class="flow-s grn">Rev</span></div></div></div>
-
-  <div class="card"><div class="card-t">📊 Progresso</div>
-    <div class="pb-l">
-      <div class="pb-r"><div class="pb-lb">Sem 1</div><div class="pb-tr"><div class="pb-f" style="width:40%;background:var(--blu)"></div></div><div class="pb-p">40%</div></div>
-      <div class="pb-r"><div class="pb-lb">Sem 2</div><div class="pb-tr"><div class="pb-f" style="width:60%;background:var(--grn)"></div></div><div class="pb-p">60%</div></div>
-      <div class="pb-r"><div class="pb-lb">Sem 3</div><div class="pb-tr"><div class="pb-f" style="width:90%;background:var(--pur)"></div></div><div class="pb-p">90%</div></div>
-      <div class="pb-r"><div class="pb-lb">Sem 4</div><div class="pb-tr"><div class="pb-f" style="width:100%;background:var(--pur)"></div></div><div class="pb-p">100%</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ ROADMAP EXECUÇÃO ═══ -->
-<div class="section" id="road-execucao">
-  <div class="sec-tag">Roadmap R3</div>
-  <h2 class="sec-title">Roadmap — <span class="hl">Execução</span></h2>
-
-  <div class="road">
-    <div class="road-track">
-      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Spr.0</div><div class="road-s2">Fund</div></div>
-      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Spr.1</div><div class="road-s2">Auth</div></div>
-      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Spr.2</div><div class="road-s2">Dash</div></div>
-      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Spr.3</div><div class="road-s2">Rotina</div></div>
-      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.4</div><div class="road-s2">Cert</div></div>
-      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Spr.5</div><div class="road-s2">Pesq</div></div>
-      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Spr.6</div><div class="road-s2">Radar</div></div>
-      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.7</div><div class="road-s2">🎯</div></div>
-    </div>
-  </div>
-
-  <div class="sg">
-    <div class="sc"><div class="sc-bar" style="background:var(--tx3)"></div><div class="sc-h"><div class="sc-n">Sprint 0 — Fundação</div><div class="sc-d">Dias 1-5</div></div><div class="sc-b">Flutter, Studio, GitHub, Firebase, pastas, tema, AuthService</div><div class="sc-t"><span class="t t-grn">PR #1</span></div></div>
-    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Sprint 1 — Auth+Nav</div><div class="sc-d">Dias 6-10</div></div><div class="sc-b">Login, cadastro, guarda, BottomNav, Dashboard</div><div class="sc-t"><span class="t t-blu">PR #2</span></div></div>
-    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Sprint 2 — Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView, ModuleCard, resumo, progresso</div><div class="sc-t"><span class="t t-grn">PR #3</span></div></div>
-    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Sprint 3 — Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD, notas, média, previsão, faltas</div><div class="sc-t"><span class="t t-yel">PR #4</span></div></div>
-    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Sprint 4 — Cert.</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload Storage, validação, ring, Dashboard</div><div class="sc-t"><span class="t t-pur">PR #5</span></div></div>
-    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Sprint 5 — Pesquisa</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex, ArticleCard, paginação</div><div class="sc-t"><span class="t t-teal">PR #6</span></div></div>
-    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Sprint 6 — Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista, flutter_map, markers, popup</div><div class="sc-t"><span class="t t-red">PR #7</span></div></div>
-    <div class="sc"><div class="sc-bar rbow"></div><div class="sc-h"><div class="sc-n">Sprint 7 — Banca</div><div class="sc-d">Dias 45-50</div></div><div class="sc-b">Testes, demo, vídeo, slides, 3 ensaios</div><div class="sc-t"><span class="t t-grn">🎯</span></div></div>
-  </div>
-
-  <div class="card"><div class="card-t">⚠️ Contingência</div>
-    <div class="cg">
-      <div class="ce p1"><div class="ce-title">🔴 Não Pular</div><div class="ce-item">Auth + Dashboard</div><div class="ce-item">Rotina</div><div class="ce-item">Certificados</div></div>
-      <div class="ce p2"><div class="ce-title">🟡 Reduzir</div><div class="ce-item">Pesquisa (sem paginação)</div><div class="ce-item">Radar (só lista)</div></div>
-      <div class="ce p3"><div class="ce-title">⚪ Cortar</div><div class="ce-item">OCR · Scraper · Notificações</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ CHECKLIST ═══ -->
-<div class="section" id="checklist">
-  <div class="sec-tag">Checklist Final</div>
-  <h2 class="sec-title">Checklist da <span class="hl">Banca</span></h2>
-
-  <div class="cl-progress">
-    <div class="cl-ring">
-      <svg viewBox="0 0 52 52">
-        <circle class="cl-ring-bg" cx="26" cy="26" r="22"/>
-        <circle class="cl-ring-fg" id="clRingFg" cx="26" cy="26" r="22"/>
-      </svg>
-      <div class="cl-ring-txt" id="clRingTxt">0%</div>
-    </div>
-    <div class="cl-ring-lbl">
-      <strong>Progresso da Checklist</strong>
-      Toque nos itens abaixo para marcar. Tudo salvo no celular.
-    </div>
-  </div>
-
-  <div class="card"><div class="card-t">📱 Funcionalidades</div>
-    <div class="cl">
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cadastro: criar conta com email + senha + nome</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Login: entrar com email + senha</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Logout: sair e voltar para tela de login</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Persistência: fechar e abrir app continua logado</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Dashboard: cards dos módulos com resumo</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: disciplina, nota, média calculada</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: faltas restantes com alertas</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: upload de PDF/imagem</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: progresso de horas no dashboard</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Pesquisa: buscar artigos no OpenAlex</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: lista de eventos do Firestore</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: mapa com pins dos eventos</div></div>
-    </div>
-  </div>
-
-  <div class="card"><div class="card-t">🎨 Qualidade</div>
-    <div class="cl">
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Sem crash ao navegar entre telas</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Loading visível em operações lentas</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Mensagem de erro amigável</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Estado vazio quando não há dados</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Design consistente (cores, fontes)</div></div>
-    </div>
-  </div>
-
-  <div class="card"><div class="card-t">🎤 Apresentação</div>
-    <div class="cl">
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Contas de teste com dados reais</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Roteiro de demo de 5-8 minutos</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Vídeo de backup do fluxo completo</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cada membro explica uma parte técnica</div></div>
-      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">3 ensaios realizados antes do dia</div></div>
-    </div>
-  </div>
-
-  <div class="co grn">
-    <div class="co-t">🎯 Regra de Ouro</div>
-    <div class="co-b">Funcionalidade simples funcionando &gt; complexa quebrada. Entreguem o básico <strong>PERFEITO</strong>.</div>
-  </div>
-</div>
 
 <!-- ═══ TESTES ═══ -->
 <div class="section-divider"></div>
@@ -1635,57 +1477,10 @@ git push origin feature/nome-da-tarefa</pre>
   </div>
 </div>
 
-<!-- ═══ APRESENTAÇÃO ═══ -->
-<div class="section-divider"></div>
-<div class="section" id="apresentacao">
-  <div class="sec-tag">Guia 06</div>
-  <h2 class="sec-title">Guia de <span class="hl">Apresentação</span></h2>
-
-  <div class="st">
-    <div class="st-card"><div class="st-l">Duração</div><div class="st-n grn">7 min</div><div class="st-d">Ideal: 5-8 min</div></div>
-    <div class="st-card"><div class="st-l">Pessoas</div><div class="st-n blu">4</div><div class="st-d">Cada uma fala 1 parte</div></div>
-    <div class="st-card"><div class="st-l">Ensaios</div><div class="st-n pur">3</div><div class="st-d">Mínimo antes do dia</div></div>
-    <div class="st-card"><div class="st-l">Backup</div><div class="st-n yel">Vídeo</div><div class="st-d">Se o app falhar</div></div>
-  </div>
-
-  <div class="card">
-    <div class="card-t">🎤 Roteiro (7 min)</div>
-    <div class="flow">
-      <span class="flow-s blu">Abertura 1min</span><span class="flow-a">→</span>
-      <span class="flow-s grn">Solução 1min</span><span class="flow-a">→</span>
-      <span class="flow-s yel">Demo 3min</span><span class="flow-a">→</span>
-      <span class="flow-s pur">Arquitetura 1min</span><span class="flow-a">→</span>
-      <span class="flow-s teal">Desafios 30s</span><span class="flow-a">→</span>
-      <span class="flow-s red">Encerramento 30s</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-t">👥 Divisão de Falas</div>
-    <div class="pg">
-      <div class="pc"><div class="pa a">A</div><div class="pi"><div class="pn">Abertura + Desafios</div><div class="pr">Líder Técnico</div><div class="pt">Arquitetura, Firebase, decisões técnicas, regras Firestore</div></div></div>
-      <div class="pc"><div class="pa b">B</div><div class="pi"><div class="pn">Solução + Módulos</div><div class="pr">Dev Front</div><div class="pt">UI/UX, Widgets, Provider, Navegação, loading/erro</div></div></div>
-      <div class="pc"><div class="pa c">C</div><div class="pi"><div class="pn">Demo + Funcionalidades</div><div class="pr">Dev Dados</div><div class="pt">Rotina, certificados, cálculos de média, upload</div></div></div>
-      <div class="pc"><div class="pa d">D</div><div class="pi"><div class="pn">Arquitetura + Stack</div><div class="pr">QA/API</div><div class="pt">OpenAlex, mapa, testes, Git, workflow</div></div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-t">⚠️ Plano B</div>
-    <div class="cg">
-      <div class="ce p1"><div class="ce-title">🔴 App crashou</div><div class="ce-item">"Deixa eu reiniciar" — enquanto isso, explica o módulo</div></div>
-      <div class="ce p1"><div class="ce-title">🔴 Internet caiu</div><div class="ce-item">Usar vídeo de backup do app rodando</div></div>
-      <div class="ce p2"><div class="ce-title">🟡 Projetor falhou</div><div class="ce-item">Mostrar no notebook + descrever o app</div></div>
-      <div class="ce p2"><div class="ce-title">🟡 Pergunta difícil</div><div class="ce-item">"O que posso dizer é..." + colega complementa</div></div>
-    </div>
-    <div class="co yel"><div class="co-b"><strong>Kit emergência:</strong> Pendrive com APK + slides + vídeo · Cabo HDMI · Carregador · Água</div></div>
-  </div>
-</div>
-
 <!-- ═══ TROUBLESHOOTING ═══ -->
 <div class="section-divider"></div>
 <div class="section" id="troubleshooting">
-  <div class="sec-tag">Guia 07</div>
+  <div class="sec-tag">Guia 06</div>
   <h2 class="sec-title">Guia de <span class="hl">Troubleshooting</span></h2>
 
   <div class="card">
@@ -1729,7 +1524,7 @@ service cloud.firestore {
 <!-- ═══ DEPLOY ═══ -->
 <div class="section-divider"></div>
 <div class="section" id="deploy">
-  <div class="sec-tag">Guia 08</div>
+  <div class="sec-tag">Guia 07</div>
   <h2 class="sec-title">Guia de <span class="hl">Deploy</span></h2>
 
   <div class="card">
@@ -1776,6 +1571,104 @@ firebase deploy --only hosting</pre>
   </div>
 </div>
 
+<!-- ═══ ROADMAP GUIDELINE ═══ -->
+<div class="section" id="road-guideline">
+  <div class="sec-tag">Roadmap R1</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Guideline</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Dias 1-5</div><div class="road-s2">Fundação</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Dias 6-10</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Dias 11-14</div><div class="road-s2">Dash</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Dias 15-22</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 23-30</div><div class="road-s2">Cert</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Dias 31-37</div><div class="road-s2">Pesq</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Dias 38-44</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 45-50</div><div class="road-s2">Banca</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🛠 Fase 1 — Fundação <span class="b blu">Dias 1-5</span></div><div class="card-b"><div class="flow"><span class="flow-s act">SDK</span><span class="flow-a">→</span><span class="flow-s act">Studio</span><span class="flow-a">→</span><span class="flow-s act">Firebase</span><span class="flow-a">→</span><span class="flow-s act">Pastas</span><span class="flow-a">→</span><span class="flow-s act">AuthService</span><span class="flow-a">→</span><span class="flow-s act">PR #1</span></div><div class="co grn"><div class="co-b">flutter run ✅ · Firebase ✅ · PR #1 ✅</div></div></div></div>
+  <div class="card"><div class="card-t">🔐 Fase 2 — Auth <span class="b blu">Dias 6-10</span></div><div class="card-b"><div class="flow"><span class="flow-s blu">Login</span><span class="flow-a">→</span><span class="flow-s blu">Cadastro</span><span class="flow-a">→</span><span class="flow-s blu">Guarda</span><span class="flow-a">→</span><span class="flow-s blu">Nav</span><span class="flow-a">→</span><span class="flow-s blu">Sessão</span><span class="flow-a">→</span><span class="flow-s blu">PR #2</span></div><div class="co grn"><div class="co-b">Login/Cadastro ✅ · Sessão ✅ · Erros PT ✅</div></div></div></div>
+  <div class="card"><div class="card-t">🧩 Fase 3 — Módulos <span class="b yel">Dias 11-44</span></div><div class="sg">
+    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Dashboard</div><div class="sc-d">PR #3</div></div><div class="sc-b">GridView, ModuleCard, resumo horas</div></div>
+    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Rotina</div><div class="sc-d">PR #4</div></div><div class="sc-b">CRUD, média, previsão, faltas</div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Certificados</div><div class="sc-d">PR #5</div></div><div class="sc-b">Upload, Storage, progresso</div></div>
+    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa</div><div class="sc-d">PR #6</div></div><div class="sc-b">OpenAlex, ArticleCard</div></div>
+    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Radar</div><div class="sc-d">PR #7</div></div><div class="sc-b">Lista, mapa, markers</div></div>
+  </div></div>
+  <div class="card"><div class="card-t">✨ Fase 4 — Banca <span class="b pur">Dias 45-50</span></div><div class="card-b"><div class="flow"><span class="flow-s red">Testes</span><span class="flow-a">→</span><span class="flow-s red">Correções</span><span class="flow-a">→</span><span class="flow-s red">Demo</span><span class="flow-a">→</span><span class="flow-s red">Slides</span><span class="flow-a">→</span><span class="flow-s red">Ensaio</span><span class="flow-a">→</span><span class="flow-s red">🎯</span></div></div></div>
+</div>
+
+<!-- ═══ ROADMAP ESTUDOS ═══ -->
+<div class="section" id="road-estudos">
+  <div class="sec-tag">Roadmap R2</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Estudos</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Semanas</div><div class="st-n grn">4</div><div class="st-d">Capacitação</div></div>
+    <div class="st-card"><div class="st-l">Carga</div><div class="st-n blu">2-3h</div><div class="st-d">por dia</div></div>
+    <div class="st-card"><div class="st-l">Projetos</div><div class="st-n pur">2</div><div class="st-d">Obrigatórios</div></div>
+    <div class="st-card"><div class="st-l">Meta</div><div class="st-n yel">100%</div><div class="st-d">Time apto</div></div>
+  </div>
+
+  <div class="card"><div class="card-t">📘 Semana 1 — Dart + Flutter</div><div class="card-b"><div class="flow"><span class="flow-s">Dart I</span><span class="flow-a">→</span><span class="flow-s">Dart II</span><span class="flow-a">→</span><span class="flow-s">Flutter I</span><span class="flow-a">→</span><span class="flow-s">Flutter II</span><span class="flow-a">→</span><span class="flow-s">Listas</span><span class="flow-a">→</span><span class="flow-s grn">App 3 telas</span></div><div class="co grn"><div class="co-b">🏁 App 3 telas + form válido no emulador</div></div></div></div>
+  <div class="card"><div class="card-t">🔥 Semana 2 — Firebase + Provider</div><div class="card-b"><div class="flow"><span class="flow-s">Provider</span><span class="flow-a">→</span><span class="flow-s">Auth</span><span class="flow-a">→</span><span class="flow-s">Firestore</span><span class="flow-a">→</span><span class="flow-s">Storage</span><span class="flow-a">→</span><span class="flow-s">HTTP</span><span class="flow-a">→</span><span class="flow-s grn">2 apps</span></div><div class="co grn"><div class="co-b">🏁 ToDo + Login CRUD. Individual.</div></div></div></div>
+  <div class="card"><div class="card-t">🚀 Semana 3 — Mini Projetos</div><div class="sg" style="grid-template-columns:1fr">
+    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">ToDo</div><div class="sc-d">2 dias</div></div><div class="sc-b">Login · CRUD · Concluir · Filtrar · Provider</div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">CRUD + Upload</div><div class="sc-d">2 dias</div></div><div class="sc-b">Forms · Storage · Stream · Editar</div></div>
+  </div></div>
+  <div class="card"><div class="card-t">⚡ Semana 4 — Avançado</div><div class="card-b"><div class="flow"><span class="flow-s">Nav</span><span class="flow-a">→</span><span class="flow-s">Maps</span><span class="flow-a">→</span><span class="flow-s">OCR</span><span class="flow-a">→</span><span class="flow-s">Anim</span><span class="flow-a">→</span><span class="flow-s grn">Rev</span></div></div></div>
+
+  <div class="card"><div class="card-t">📊 Progresso</div>
+    <div class="pb-l">
+      <div class="pb-r"><div class="pb-lb">Sem 1</div><div class="pb-tr"><div class="pb-f" style="width:40%;background:var(--blu)"></div></div><div class="pb-p">40%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 2</div><div class="pb-tr"><div class="pb-f" style="width:60%;background:var(--grn)"></div></div><div class="pb-p">60%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 3</div><div class="pb-tr"><div class="pb-f" style="width:90%;background:var(--pur)"></div></div><div class="pb-p">90%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 4</div><div class="pb-tr"><div class="pb-f" style="width:100%;background:var(--pur)"></div></div><div class="pb-p">100%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP EXECUÇÃO ═══ -->
+<div class="section" id="road-execucao">
+  <div class="sec-tag">Roadmap R3</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Execução</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Spr.0</div><div class="road-s2">Fund</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Spr.1</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Spr.2</div><div class="road-s2">Dash</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Spr.3</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.4</div><div class="road-s2">Cert</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Spr.5</div><div class="road-s2">Pesq</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Spr.6</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.7</div><div class="road-s2">🎯</div></div>
+    </div>
+  </div>
+
+  <div class="sg">
+    <div class="sc"><div class="sc-bar" style="background:var(--tx3)"></div><div class="sc-h"><div class="sc-n">Sprint 0 — Fundação</div><div class="sc-d">Dias 1-5</div></div><div class="sc-b">Flutter, Studio, GitHub, Firebase, pastas, tema, AuthService</div><div class="sc-t"><span class="t t-grn">PR #1</span></div></div>
+    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Sprint 1 — Auth+Nav</div><div class="sc-d">Dias 6-10</div></div><div class="sc-b">Login, cadastro, guarda, BottomNav, Dashboard</div><div class="sc-t"><span class="t t-blu">PR #2</span></div></div>
+    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Sprint 2 — Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView, ModuleCard, resumo, progresso</div><div class="sc-t"><span class="t t-grn">PR #3</span></div></div>
+    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Sprint 3 — Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD, notas, média, previsão, faltas</div><div class="sc-t"><span class="t t-yel">PR #4</span></div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Sprint 4 — Cert.</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload Storage, validação, ring, Dashboard</div><div class="sc-t"><span class="t t-pur">PR #5</span></div></div>
+    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Sprint 5 — Pesquisa</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex, ArticleCard, paginação</div><div class="sc-t"><span class="t t-teal">PR #6</span></div></div>
+    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Sprint 6 — Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista, flutter_map, markers, popup</div><div class="sc-t"><span class="t t-red">PR #7</span></div></div>
+    <div class="sc"><div class="sc-bar rbow"></div><div class="sc-h"><div class="sc-n">Sprint 7 — Banca</div><div class="sc-d">Dias 45-50</div></div><div class="sc-b">Testes, demo, vídeo, slides, 3 ensaios</div><div class="sc-t"><span class="t t-grn">🎯</span></div></div>
+  </div>
+
+  <div class="card"><div class="card-t">⚠️ Contingência</div>
+    <div class="cg">
+      <div class="ce p1"><div class="ce-title">🔴 Não Pular</div><div class="ce-item">Auth + Dashboard</div><div class="ce-item">Rotina</div><div class="ce-item">Certificados</div></div>
+      <div class="ce p2"><div class="ce-title">🟡 Reduzir</div><div class="ce-item">Pesquisa (sem paginação)</div><div class="ce-item">Radar (só lista)</div></div>
+      <div class="ce p3"><div class="ce-title">⚪ Cortar</div><div class="ce-item">OCR · Scraper · Notificações</div></div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ ROADMAP TESTES ═══ -->
 <div class="section-divider"></div>
 <div class="section" id="road-testes">
@@ -1795,28 +1688,10 @@ firebase deploy --only hosting</pre>
   </div>
 </div>
 
-<!-- ═══ ROADMAP APRESENTAÇÃO ═══ -->
-<div class="section-divider"></div>
-<div class="section" id="road-apresentacao">
-  <div class="sec-tag">Roadmap R5</div>
-  <h2 class="sec-title">Roadmap — <span class="hl">Apresentação</span></h2>
-
-  <div class="road">
-    <div class="road-track">
-      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">D-7</div><div class="road-s2">Slides</div></div>
-      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">D-5</div><div class="road-s2">Roteiro</div></div>
-      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">D-3</div><div class="road-s2">1º Ensaio</div></div>
-      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">D-1</div><div class="road-s2">2º Ensaio</div></div>
-      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dia</div><div class="road-s2">3º Ensaio</div></div>
-      <div class="road-s"><div class="road-dot red"></div><div class="road-l">🎯</div><div class="road-s2">Banca!</div></div>
-    </div>
-  </div>
-</div>
-
 <!-- ═══ ROADMAP DEPLOY ═══ -->
 <div class="section-divider"></div>
 <div class="section" id="road-deploy">
-  <div class="sec-tag">Roadmap R6</div>
+  <div class="sec-tag">Roadmap R5</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Deploy</span></h2>
 
   <div class="road">
@@ -1828,6 +1703,68 @@ firebase deploy --only hosting</pre>
       <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Testar</div><div class="road-s2">Celular limpo</div></div>
       <div class="road-s"><div class="road-dot red"></div><div class="road-l">Backup</div><div class="road-s2">Pendrive + vídeo</div></div>
     </div>
+  </div>
+</div>
+
+<!-- ═══ CHECKLIST ═══ -->
+<div class="section" id="checklist">
+  <div class="sec-tag">Checklist Final</div>
+  <h2 class="sec-title">Checklist da <span class="hl">Banca</span></h2>
+
+  <div class="cl-progress">
+    <div class="cl-ring">
+      <svg viewBox="0 0 52 52">
+        <circle class="cl-ring-bg" cx="26" cy="26" r="22"/>
+        <circle class="cl-ring-fg" id="clRingFg" cx="26" cy="26" r="22"/>
+      </svg>
+      <div class="cl-ring-txt" id="clRingTxt">0%</div>
+    </div>
+    <div class="cl-ring-lbl">
+      <strong>Progresso da Checklist</strong>
+      Toque nos itens abaixo para marcar. Tudo salvo no celular.
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">📱 Funcionalidades</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cadastro: criar conta com email + senha + nome</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Login: entrar com email + senha</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Logout: sair e voltar para tela de login</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Persistência: fechar e abrir app continua logado</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Dashboard: cards dos módulos com resumo</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: disciplina, nota, média calculada</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: faltas restantes com alertas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: upload de PDF/imagem</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: progresso de horas no dashboard</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Pesquisa: buscar artigos no OpenAlex</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: lista de eventos do Firestore</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: mapa com pins dos eventos</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🎨 Qualidade</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Sem crash ao navegar entre telas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Loading visível em operações lentas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Mensagem de erro amigável</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Estado vazio quando não há dados</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Design consistente (cores, fontes)</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🎤 Apresentação</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Contas de teste com dados reais</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Roteiro de demo de 5-8 minutos</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Vídeo de backup do fluxo completo</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cada membro explica uma parte técnica</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">3 ensaios realizados antes do dia</div></div>
+    </div>
+  </div>
+
+  <div class="co grn">
+    <div class="co-t">🎯 Regra de Ouro</div>
+    <div class="co-b">Funcionalidade simples funcionando &gt; complexa quebrada. Entreguem o básico <strong>PERFEITO</strong>.</div>
   </div>
 </div>
 
