@@ -424,7 +424,7 @@ body.no-scroll{overflow:hidden;position:fixed;width:100%}
 /* ═══ CARDS ═══ */
 .card{
   background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);
-  padding:18px;margin-bottom:14px;border-color:var(--brd);
+  padding:18px;margin-bottom:14px;
   transition:transform .25s ease,border-color .3s,box-shadow .3s;
 }
 .card:hover{border-color:var(--brd2);box-shadow:0 2px 20px rgba(0,0,0,.3)}
@@ -457,9 +457,10 @@ body.no-scroll{overflow:hidden;position:fixed;width:100%}
 .card-b pre .tp{color:var(--yel)}
 .card-b pre .op{color:var(--red)}
 
-.card-b table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.card-b th{background:var(--bg4);padding:9px 12px;text-align:left;font-weight:600;color:var(--tx2);border-bottom:1px solid var(--brd);font-size:10px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
-.card-b td{padding:9px 12px;border-bottom:1px solid var(--brd);color:var(--tx2);white-space:nowrap}
+.card-b .tbl-wrap{width:100%;overflow-x:auto;margin:10px 0}
+.card-b .tbl-wrap table{width:100%;border-collapse:collapse;font-size:13px}
+.card-b th{background:var(--bg4);padding:9px 12px;text-align:left;font-weight:600;color:var(--tx2);border-bottom:1px solid var(--brd);font-size:10px;letter-spacing:.5px;text-transform:uppercase}
+.card-b td{padding:9px 12px;border-bottom:1px solid var(--brd);color:var(--tx2)}
 .card-b tbody tr:active{background:var(--bg4)}
 
 details{margin-top:8px}
@@ -506,6 +507,7 @@ details[open]{animation:fadeUp .3s ease}
 /* ═══ TIMELINE ROAD ═══ */
 .road{margin:16px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;border-radius:var(--r)}
 .road-track{display:flex;gap:2px;position:relative;padding:28px 0 14px;min-width:580px;margin:0 4px}
+@media(max-width:640px){.road-track{min-width:100%;gap:1px;padding:24px 0 10px}}
 .road-track::before{content:'';position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,var(--bg5),var(--pur),var(--blu),var(--bg5));opacity:.6}
 .road-s{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
 .road-dot{
@@ -555,7 +557,8 @@ details[open]{animation:fadeUp .3s ease}
 .t-teal{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(20,184,166,.2)}
 
 /* ═══ STUDY WEEK GRID ═══ */
-.sw{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:12px 0}
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}
+@media(min-width:480px){.sw{grid-template-columns:1fr 1fr 1fr}}
 .sd{
   background:var(--bg);border:1px solid var(--brd2);border-radius:8px;
   padding:10px 8px;text-align:center;transition:.2s ease
@@ -941,11 +944,6 @@ details[open]{animation:fadeUp .3s ease}
 /* ═══ CONFETTI CANVAS ═══ */
 #confettiCanvas{position:fixed;inset:0;z-index:9999;pointer-events:none}
 
-/* ═══ 3D TILT (enhanced) ═══ */
-.tilt-wrap{perspective:1200px;transform-style:preserve-3d}
-.tilt-inner{transition:transform .15s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d;will-change:transform}
-.tilt-inner .card,.tilt-inner .sc,.tilt-inner .st-card,.tilt-inner .pc,.tilt-inner .tc,.tilt-inner .tl-step-badge,.tilt-inner .split-card{transition:transform .15s ease,box-shadow .15s ease}
-
 /* ═══ SECTION TITLE DECORATION ═══ */
 .sec-title-wrap{position:relative;display:inline-block;margin-bottom:14px}
 .sec-title-bar{width:0;height:3px;border-radius:2px;margin-top:6px;background:linear-gradient(90deg,var(--sec-accent,var(--pur)),transparent);transition:width 1s cubic-bezier(.22,1,.36,1)}
@@ -1010,7 +1008,7 @@ details[open]{animation:fadeUp .3s ease}
 </button>
 
 <div class="road-popup" id="roadPopup">
-  <button class="road-popup-close" onclick="closeRoadPopup()">✕</button>
+  <button class="road-popup-close" onclick="closeRoadPopup()" aria-label="Fechar popup">✕</button>
   <div class="road-popup-title" id="roadPopupTitle"></div>
   <div class="road-popup-sub" id="roadPopupSub"></div>
   <div class="road-popup-desc" id="roadPopupDesc"></div>
@@ -1063,7 +1061,7 @@ details[open]{animation:fadeUp .3s ease}
 </aside>
 
 <!-- MAIN -->
-<main class="main" id="main-content">
+<main class="main" id="main-content" tabindex="-1">
 <div class="ct">
 
 <!-- ═══ HERO ═══ -->
@@ -1379,7 +1377,7 @@ String <span class="fn">saudar</span>(String? nome) => <span class="str">'Olá, 
   <div class="card">
     <div class="card-t">📚 Recursos</div>
     <div class="card-b">
-      <table>
+       <div class="tbl-wrap"><table>
         <thead><tr><th>Assunto</th><th>Link</th></tr></thead>
         <tbody>
           <tr><td>Dart Tour</td><td><code>dart.dev/language</code></td></tr>
@@ -1390,7 +1388,7 @@ String <span class="fn">saudar</span>(String? nome) => <span class="str">'Olá, 
           <tr><td>Flutter com Migs (PT)</td><td><code>youtube.com/@fluttercommigs</code></td></tr>
           <tr><td>NetNinja Flutter</td><td><code>youtube.com/playlist?list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ</code></td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="co pur"><div class="co-b"><strong>🎯</strong> Cada membro: cria tela · navega · Firestore · login · PR</div></div>
     </div>
   </div>
@@ -1515,14 +1513,14 @@ Bloqueios: [o que impede]</pre>
       <span class="flow-s pur">Integração</span>
     </div>
     <div class="card-b">
-      <table>
+      <div class="tbl-wrap"><table>
         <thead><tr><th>Tipo</th><th>O que testa</th><th>Comando</th></tr></thead>
         <tbody>
           <tr><td><strong>Unit</strong></td><td>Modelos, serviços, providers</td><td><code>flutter test test/models/</code></td></tr>
           <tr><td><strong>Widget</strong></td><td>Telas, formulários, componentes</td><td><code>flutter test test/features/</code></td></tr>
           <tr><td><strong>Integração</strong></td><td>Fluxo completo (login → dashboard)</td><td><code>flutter test integration_test/</code></td></tr>
         </tbody>
-      </table>
+      </table></div>
     </div>
   </div>
 
@@ -1572,14 +1570,14 @@ Bloqueios: [o que impede]</pre>
         <span class="flow-s yel">develop</span><span class="flow-a">←</span>
         <span class="flow-s grn">feature/*</span>
       </div>
-      <table>
+      <div class="tbl-wrap"><table>
         <thead><tr><th>Branch</th><th>Finalidade</th></tr></thead>
         <tbody>
           <tr><td><code>main</code></td><td>Código final — só entra depois de testado</td></tr>
           <tr><td><code>develop</code></td><td>Integração — onde as features são juntadas</td></tr>
           <tr><td><code>feature/nome</code></td><td>Sua branch de trabalho (uma por funcionalidade)</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="co red"><div class="co-b">🚫 <strong>Nunca</strong> commitar direto em <code>main</code> ou <code>develop</code>. Sempre criar <code>feature/nomedatarefa</code>.</div></div>
     </div>
   </div>
@@ -1647,7 +1645,7 @@ git push origin feature/nome-da-tarefa</pre>
   <div class="card">
     <div class="card-t">❌ Erros Comuns e Soluções</div>
     <div class="card-b">
-      <table>
+      <div class="tbl-wrap"><table>
         <thead><tr><th>Erro</th><th>Causa</th><th>Solução</th></tr></thead>
         <tbody>
           <tr><td><code>No Firebase App '[DEFAULT]'</code></td><td>Firebase não inicializado</td><td>Verificar <code>Firebase.initializeApp()</code> no main.dart</td></tr>
@@ -1659,7 +1657,7 @@ git push origin feature/nome-da-tarefa</pre>
           <tr><td><code>failed to push</code></td><td>Branch remota à frente</td><td><code>git pull origin develop</code></td></tr>
           <tr><td><code>Undefined name 'X'</code></td><td>Variável não encontrada</td><td>Verificar import e nome da variável</td></tr>
         </tbody>
-      </table>
+      </table></div>
     </div>
   </div>
 
@@ -2156,8 +2154,7 @@ const observeInContainer = (selector, callback, options = {}) => {
   for (let i = 0; i < COUNT; i++) particles.push({
     x: Math.random() * w, y: Math.random() * h,
     vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
-    r: Math.random() * 2.5 + .5, a: Math.random() * .4 + .15,
-    baseVx: 0, baseVy: 0
+    r: Math.random() * 2.5 + .5, a: Math.random() * .4 + .15
   });
 
   function draw(){
@@ -2167,7 +2164,7 @@ const observeInContainer = (selector, callback, options = {}) => {
       const dx = mouse.x - p.x;
       const dy = mouse.y - p.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < MOUSE_RADIUS) {
+      if (dist > 0 && dist < MOUSE_RADIUS) {
         const force = (1 - dist / MOUSE_RADIUS) * .5;
         p.vx -= dx / dist * force;
         p.vy -= dy / dist * force;
@@ -2222,8 +2219,7 @@ const observeInContainer = (selector, callback, options = {}) => {
     raf = null;
     x += (tx - x) * .15;
     y += (ty - y) * .15;
-    cf.style.left = x + 'px';
-    cf.style.top = y + 'px';
+    cf.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-50%)';
     if (Math.abs(x - tx) > .5 || Math.abs(y - ty) > .5) {
       raf = requestAnimationFrame(tick);
     }
@@ -2330,7 +2326,9 @@ window.toggleDrawer = function() {
 
 // ─── NAV ITEMS ───
 document.querySelectorAll('.dnav-item').forEach(item => {
-  item.addEventListener('click', function() {
+  item.setAttribute('tabindex', '0');
+  item.setAttribute('role', 'button');
+  function navHandler() {
     const target = this.dataset.target;
     if (!target) return;
     document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
@@ -2349,6 +2347,10 @@ document.querySelectorAll('.dnav-item').forEach(item => {
     } else {
       toggleDrawer();
     }
+  }
+  item.addEventListener('click', navHandler);
+  item.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navHandler.call(this, e); }
   });
 });
 
@@ -2403,19 +2405,9 @@ observeInContainer('.section', entries => {
     rev.observe(el);
   });
 
-  // Apply card-grow + card-shine + 3D tilt to interactive cards
+  // Apply card-grow + card-shine to interactive cards
   document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co, .split-card').forEach(el => {
     el.classList.add('card-grow', 'card-shine');
-    // Wrap in tilt container for 3D perspective effect
-    if (!el.closest('.tilt-inner') && !el.closest('.tl-detail')) {
-      const wrap = document.createElement('div');
-      wrap.className = 'tilt-wrap';
-      const inner = document.createElement('div');
-      inner.className = 'tilt-inner';
-      el.parentNode.insertBefore(wrap, el);
-      wrap.appendChild(inner);
-      inner.appendChild(el);
-    }
   });
 
   function scrambleText(el){
@@ -2766,8 +2758,8 @@ window.closeRoadPopup = function(){
     r.style.width = r.style.height = size + 'px';
     r.style.left = (e.clientX - rect.left - size / 2) + 'px';
     r.style.top = (e.clientY - rect.top - size / 2) + 'px';
-    target.style.position = 'relative';
-    target.style.overflow = 'hidden';
+    if (getComputedStyle(target).position !== 'relative') target.style.position = 'relative';
+    if (getComputedStyle(target).overflow !== 'hidden') target.style.overflow = 'hidden';
     target.appendChild(r);
     setTimeout(() => r.remove(), 600);
   });
@@ -2925,41 +2917,6 @@ document.querySelectorAll('details').forEach(d => {
   bars.forEach(b => {
     b.style.width = '0';
     obs.observe(b);
-  });
-})();
-
-// ─── ENHANCED 3D TILT ON CARDS ───
-(function(){
-  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if (prefersReduced || !matchMedia('(hover:hover)').matches) return;
-  const wrappers = document.querySelectorAll('.tilt-wrap');
-  if (!wrappers.length) return;
-  let raf = null;
-  wrappers.forEach(wrap => {
-    wrap.addEventListener('mousemove', function(e){
-      const rect = this.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      const dx = (x - cx) / cx;
-      const dy = (y - cy) / cy;
-      const inner = this.querySelector('.tilt-inner');
-      if (!inner) return;
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        raf = null;
-        const rx = dy * -6;
-        const ry = dx * 6;
-        inner.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
-      });
-    });
-    wrap.addEventListener('mouseleave', function(){
-      const inner = this.querySelector('.tilt-inner');
-      if (!inner) return;
-      if (raf) cancelAnimationFrame(raf);
-      inner.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale3d(1,1,1)';
-    });
   });
 })();
 
