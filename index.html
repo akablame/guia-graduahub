@@ -6,9 +6,55 @@
 <meta name="theme-color" content="#08080a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="description" content="GraduaHUB — Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP na banca.">
+<meta name="description" content="GraduaHUB — Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP na banca. Planos, roadmaps, testes e deploy para equipes TDS.">
+<meta name="keywords" content="SENAI, Flutter, Firebase, Projeto Integrador, TDS, GraduaHUB, mobile, dart">
+<meta name="author" content="Equipe GraduaHUB SENAI">
+<meta name="robots" content="index, follow">
+<meta name="revisit-after" content="7 days">
+
+<!-- Open Graph -->
+<meta property="og:title" content="GraduaHUB — Guia Completo do Projeto Integrador">
+<meta property="og:description" content="Do zero ao MVP na banca: guideline técnico, planos de estudo/execução, testes, git, deploy e roadmaps visuais.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akablame.github.io/guia-graduahub/">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GraduaHUB — Guia Completo">
+<meta name="twitter:description" content="Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP.">
+
+<!-- Favicon (SVG inline) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23141418'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23a855f7' font-family='system-ui' font-weight='bold'>G</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23141418'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23a855f7' font-family='system-ui' font-weight='bold'>G</text></svg>">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "GraduaHUB — Guia Completo",
+  "description": "Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP na banca.",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Student"
+  },
+  "about": {
+    "@type": "Course",
+    "name": "Projeto Integrador SENAI TDS",
+    "description": "Desenvolvimento de aplicativo acadêmico com Flutter e Firebase"
+  },
+  "inLanguage": "pt-BR",
+  "dateModified": "2026-05-16"
+}
+</script>
+
 <title>GraduaHUB — Guia Completo</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Google Fonts (preconnect + deferred) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
@@ -721,7 +767,10 @@ details[open]{animation:fadeUp .3s ease}
 .achievement-text strong{color:var(--tx);display:block;margin-bottom:2px;font-size:13px}
 
 /* ═══ FOOTER ═══ */
-.footer{margin-top:32px;padding:24px 0;border-top:1px solid var(--brd);text-align:center;font-size:12px;color:var(--tx4);line-height:1.8}
+footer[role="contentinfo"]{margin-top:32px;padding:24px 0;border-top:1px solid var(--brd);font-size:12px;color:var(--tx4);line-height:1.8}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:2px}
+.dnav-foot-link{display:inline-flex;align-items:center;padding:3px 8px;border:1px solid var(--brd);border-radius:4px;font-size:10px;text-decoration:none;color:var(--tx2);background:var(--bg3);transition:all .25s;font-family:var(--m)}
+.dnav-foot-link:hover{border-color:var(--pur);color:var(--tx);background:var(--pur-bg)}
 .footer strong{color:var(--tx3)}
 
 /* ═══ RIPPLE ═══ */
@@ -1028,13 +1077,13 @@ details[open]{animation:fadeUp .3s ease}
 <div class="backdrop" onclick="toggleDrawer()"></div>
 
 <!-- DRAWER -->
-<aside class="drawer">
+<aside class="drawer" role="complementary" aria-label="Navegação principal">
   <div class="drawer-head">
     <div class="drawer-badge">SENAI — TDS</div>
     <div class="drawer-title">GraduaHUB</div>
     <div class="drawer-sub">Guia completo do projeto</div>
   </div>
-  <nav class="drawer-nav">
+  <nav class="drawer-nav" aria-label="Seções do guia">
     <div class="dnav-grp">Visão Geral</div>
     <div class="dnav-item active" data-target="visao"><span class="nb">◆</span> Visão do Projeto</div>
     <div class="dnav-grp">Guias</div>
@@ -1055,6 +1104,16 @@ details[open]{animation:fadeUp .3s ease}
     <div class="dnav-item" data-target="checklist"><span class="nb">✓</span> Checklist da Banca</div>
   </nav>
   <div class="drawer-foot">
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+      <a href="guias/Guideline_GraduaHUB_Completo.md" class="dnav-foot-link" target="_blank" rel="noopener" aria-label="Guia completo em Markdown">📄 Guideline</a>
+      <a href="guias/Plano_de_Estudos_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Estudos</a>
+      <a href="guias/Plano_de_Execucao_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Execução</a>
+      <a href="guias/Guia_Testes_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Testes</a>
+      <a href="guias/Guia_Git_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Git</a>
+      <a href="guias/Guia_Troubleshooting_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Troubleshooting</a>
+      <a href="guias/Guia_Deploy_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Deploy</a>
+      <a href="guias/Guia_Apresentacao_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Apresentação</a>
+    </div>
     Projeto Integrador · SENAI<br>
     Curso Técnico em Desenvolvimento de Sistemas
   </div>
@@ -1073,7 +1132,7 @@ details[open]{animation:fadeUp .3s ease}
 </div>
 
 <!-- ═══ VISÃO ═══ -->
-<div class="section sec-enter" id="visao" data-accent="purple" data-style="flip-up">
+<div class="section sec-enter" id="visao" data-accent="purple" data-style="flip-up" role="region" aria-label="Visão do Projeto">
   <div class="sec-tag">Visão Geral</div>
   <h2 class="sec-title">O <span class="hl">GraduaHUB</span></h2>
 
@@ -1134,7 +1193,7 @@ details[open]{animation:fadeUp .3s ease}
 </div>
 
 <!-- ═══ GUIDELINE ═══ -->
-<div class="section sec-enter" id="guideline" data-accent="purple" data-style="slide-right">
+<div class="section sec-enter" id="guideline" data-accent="purple" data-style="slide-right" role="region" aria-label="Guideline Técnico">
   <div class="sec-tag">Guia 01</div>
   <h2 class="sec-title">Guideline <span class="hl">Técnico</span></h2>
 
@@ -1285,7 +1344,7 @@ match /events/{eventId} {
 </div>
 
 <!-- ═══ ESTUDOS ═══ -->
-<div class="section sec-enter" id="estudos" data-accent="blue" data-style="blur-in">
+<div class="section sec-enter" id="estudos" data-accent="blue" data-style="blur-in" role="region" aria-label="Plano de Estudos">
   <div class="sec-tag">Guia 02</div>
   <h2 class="sec-title">Plano de <span class="hl">Estudos</span></h2>
 
@@ -1395,7 +1454,7 @@ String <span class="fn">saudar</span>(String? nome) => <span class="str">'Olá, 
 </div>
 
 <!-- ═══ EXECUÇÃO ═══ -->
-<div class="section sec-enter" id="execucao" data-accent="green" data-style="scale-in">
+<div class="section sec-enter" id="execucao" data-accent="green" data-style="scale-in" role="region" aria-label="Plano de Execução">
   <div class="sec-tag">Guia 03</div>
   <h2 class="sec-title">Plano de <span class="hl">Execução</span></h2>
 
@@ -1494,7 +1553,7 @@ Bloqueios: [o que impede]</pre>
 
 <!-- ═══ TESTES ═══ -->
 <div class="section-divider"></div>
-<div class="section sec-enter" id="testes" data-accent="green" data-style="reveal">
+<div class="section sec-enter" id="testes" data-accent="green" data-style="reveal" role="region" aria-label="Testes">
   <div class="sec-tag">Guia 04</div>
   <h2 class="sec-title">Guia de <span class="hl">Testes</span></h2>
 
@@ -1558,7 +1617,7 @@ Bloqueios: [o que impede]</pre>
 
 <!-- ═══ GIT & GITHUB ═══ -->
 <div class="section-divider"></div>
-<div class="section sec-enter" id="git" data-accent="purple" data-style="slide-left">
+<div class="section sec-enter" id="git" data-accent="purple" data-style="slide-left" role="region" aria-label="Git e GitHub">
   <div class="sec-tag">Guia 05</div>
   <h2 class="sec-title">Guia de <span class="hl">Git & GitHub</span></h2>
 
@@ -1638,7 +1697,7 @@ git push origin feature/nome-da-tarefa</pre>
 
 <!-- ═══ TROUBLESHOOTING ═══ -->
 <div class="section-divider"></div>
-<div class="section sec-enter" id="troubleshooting" data-accent="red" data-style="flip-up">
+<div class="section sec-enter" id="troubleshooting" data-accent="red" data-style="flip-up" role="region" aria-label="Troubleshooting">
   <div class="sec-tag">Guia 06</div>
   <h2 class="sec-title">Guia de <span class="hl">Troubleshooting</span></h2>
 
@@ -1682,7 +1741,7 @@ service cloud.firestore {
 
 <!-- ═══ DEPLOY ═══ -->
 <div class="section-divider"></div>
-<div class="section sec-enter" id="deploy" data-accent="teal" data-style="rotate-in">
+<div class="section sec-enter" id="deploy" data-accent="teal" data-style="rotate-in" role="region" aria-label="Deploy">
   <div class="sec-tag">Guia 07</div>
   <h2 class="sec-title">Guia de <span class="hl">Deploy</span></h2>
 
@@ -1731,7 +1790,7 @@ firebase deploy --only hosting</pre>
 </div>
 
 <!-- ═══ ROADMAP GUIDELINE ═══ -->
-<div class="section sec-enter" id="road-guideline" data-accent="purple" data-style="slide-right">
+<div class="section sec-enter" id="road-guideline" data-accent="purple" data-style="slide-right" role="region" aria-label="Roadmap Guideline">
   <div class="sec-tag">Roadmap R1</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Guideline</span></h2>
 
@@ -1761,7 +1820,7 @@ firebase deploy --only hosting</pre>
 </div>
 
 <!-- ═══ ROADMAP ESTUDOS ═══ -->
-<div class="section sec-enter" id="road-estudos" data-accent="blue" data-style="blur-in">
+<div class="section sec-enter" id="road-estudos" data-accent="blue" data-style="blur-in" role="region" aria-label="Roadmap Estudos">
   <div class="sec-tag">Roadmap R2</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Estudos</span></h2>
 
@@ -1791,7 +1850,7 @@ firebase deploy --only hosting</pre>
 </div>
 
 <!-- ═══ ROADMAP EXECUÇÃO ═══ -->
-<div class="section sec-enter" id="road-execucao" data-accent="green" data-style="scale-in">
+<div class="section sec-enter" id="road-execucao" data-accent="green" data-style="scale-in" role="region" aria-label="Roadmap Execução">
   <div class="sec-tag">Roadmap R3</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Execução</span></h2>
 
@@ -1830,7 +1889,7 @@ firebase deploy --only hosting</pre>
 
 <!-- ═══ ROADMAP TESTES ═══ -->
 <div class="section-divider"></div>
-<div class="section sec-enter" id="road-testes" data-accent="green" data-style="reveal">
+<div class="section sec-enter" id="road-testes" data-accent="green" data-style="reveal" role="region" aria-label="Roadmap Testes">
   <div class="sec-tag">Roadmap R4</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Testes</span></h2>
 
@@ -1936,7 +1995,7 @@ firebase deploy --only hosting</pre>
 
 <!-- ═══ ROADMAP DEPLOY ═══ -->
 <div class="section-divider"></div>
-<div class="section sec-enter" id="road-deploy" data-accent="teal" data-style="rotate-in">
+<div class="section sec-enter" id="road-deploy" data-accent="teal" data-style="rotate-in" role="region" aria-label="Roadmap Deploy">
   <div class="sec-tag">Roadmap R5</div>
   <h2 class="sec-title">Roadmap — <span class="hl">Deploy</span></h2>
 
@@ -2029,7 +2088,7 @@ firebase deploy --only hosting</pre>
 </div>
 
 <!-- ═══ CHECKLIST ═══ -->
-<div class="section sec-enter" id="checklist" data-accent="purple" data-style="slide-up">
+<div class="section sec-enter" id="checklist" data-accent="purple" data-style="slide-up" role="region" aria-label="Checklist da Banca">
   <div class="sec-tag">Checklist Final</div>
   <h2 class="sec-title">Checklist da <span class="hl">Banca</span></h2>
 
@@ -2090,10 +2149,12 @@ firebase deploy --only hosting</pre>
   </div>
 </div>
 
-<div class="footer">
-  GraduaHUB — Projeto Integrador SENAI<br>
-  <strong>Curso Técnico em Desenvolvimento de Sistemas</strong>
-</div>
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <span>GraduaHUB — Projeto Integrador SENAI</span>
+    <strong>Curso Técnico em Desenvolvimento de Sistemas</strong>
+  </div>
+</footer>
 
 </div><!-- /ct -->
 </main>
@@ -2331,8 +2392,9 @@ document.querySelectorAll('.dnav-item').forEach(item => {
   function navHandler() {
     const target = this.dataset.target;
     if (!target) return;
-    document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.dnav-item').forEach(i => { i.classList.remove('active'); i.removeAttribute('aria-current'); });
     this.classList.add('active');
+    this.setAttribute('aria-current', 'page');
     const el = document.getElementById(target);
     if (el) {
       toggleDrawer();
@@ -2358,9 +2420,9 @@ document.querySelectorAll('.dnav-item').forEach(item => {
 observeInContainer('.section', entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.dnav-item').forEach(i => { i.classList.remove('active'); i.removeAttribute('aria-current'); });
       const link = document.querySelector(`.dnav-item[data-target="${entry.target.id}"]`);
-      if (link) link.classList.add('active');
+      if (link) { link.classList.add('active'); link.setAttribute('aria-current', 'page'); }
     }
   });
 }, { threshold: .2, rootMargin: '0px 0px -40% 0px' });

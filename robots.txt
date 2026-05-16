@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://akablame.github.io/guia-graduahub/sitemap.xml
