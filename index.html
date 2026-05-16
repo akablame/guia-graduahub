@@ -2433,7 +2433,23 @@ window.toggleDrawer = function() {
   const b = document.querySelector('.backdrop');
   const isOpen = d.classList.toggle('open');
   b.classList.toggle('open', isOpen);
-  document.body.classList.toggle('no-scroll', isOpen);
+  if (isOpen) {
+    if (!isDesktopLayout()) {
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = scrollY;
+      document.body.style.top = `-${scrollY}px`;
+    }
+    document.body.classList.add('no-scroll');
+  } else {
+    if (!isDesktopLayout()) {
+      const scrollY = parseInt(document.body.dataset.scrollY || '0');
+      document.body.style.top = '';
+      document.body.classList.remove('no-scroll');
+      if (scrollY > 0) window.scrollTo(0, scrollY);
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }
 };
 
 // ─── NAV ITEMS ───
