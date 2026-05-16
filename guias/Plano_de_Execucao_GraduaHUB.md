@@ -1,7 +1,7 @@
 # PLANO DE EXECUÇÃO GRADUAHUB — Sprints e Tarefas
 
 **Duração total:** 10 semanas (50 dias úteis)  
-**Equipe:** 4-6 pessoas (iniciantes em Flutter)  
+**Equipe:** 4 pessoas (iniciantes em Flutter)  
 **Meta:** MVP funcional apresentável na banca
 
 ---
