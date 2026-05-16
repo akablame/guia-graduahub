@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#08080a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>GraduaHUB — Guia Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --bg:#08080a;
+  --bg2:#0e0e11;
+  --bg3:#151518;
+  --bg4:#1c1c21;
+  --bg5:#25252b;
+  --tx:#e8e8ed;
+  --tx2:#9f9fab;
+  --tx3:#6b6b78;
+  --tx4:#4a4a54;
+  --grn:#22c55e;
+  --grn-bg:rgba(34,197,94,.08);
+  --blu:#3b82f6;
+  --blu-bg:rgba(59,130,246,.08);
+  --pur:#a855f7;
+  --pur-bg:rgba(168,85,247,.08);
+  --yel:#eab308;
+  --yel-bg:rgba(234,179,8,.08);
+  --red:#ef4444;
+  --red-bg:rgba(239,68,68,.08);
+  --teal:#14b8a6;
+  --teal-bg:rgba(20,184,166,.08);
+  --brd:#1c1c21;
+  --brd2:#26262c;
+  --r:12px;
+  --f:'Inter',system-ui,sans-serif;
+  --m:'JetBrains Mono',monospace;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-t:env(safe-area-inset-top,0px);
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--f);background:var(--bg);color:var(--tx);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:52px}
+body.no-scroll{overflow:hidden;position:fixed;width:100%}
+
+/* ═══ MOBILE TOPBAR ═══ */
+.topbar{display:flex;position:fixed;top:0;left:0;right:0;height:52px;background:var(--bg2);border-bottom:1px solid var(--brd);z-index:100;align-items:center;padding:0 12px;gap:10px;padding-top:var(--safe-t)}
+.topbar .logo{font-size:15px;font-weight:700;flex:1;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+.topbar .logo .dot{width:7px;height:7px;border-radius:50%;background:var(--grn);display:inline-block;flex-shrink:0}
+.topbar .logo .sub{font-size:9px;font-weight:400;color:var(--tx3);letter-spacing:0}
+.menu-btn{width:40px;height:40px;border:none;background:var(--bg3);color:var(--tx2);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;border:1px solid var(--brd);-webkit-user-select:none;user-select:none}
+.menu-btn:active{background:var(--bg4);transform:scale(.95)}
+.menu-btn svg{width:18px;height:18px;display:block}
+
+/* ═══ SIDEBAR DRAWER ═══ */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s ease;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.backdrop.open{opacity:1;pointer-events:auto}
+
+.drawer{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:82vw;background:var(--bg2);z-index:200;transform:translateX(-100%);transition:transform .35s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;padding-top:var(--safe-t,0px)}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:18px 16px 14px;border-bottom:1px solid var(--brd);flex-shrink:0}
+.drawer-badge{display:inline-flex;align-items:center;gap:4px;background:var(--pur-bg);border:1px solid rgba(168,85,247,.2);padding:2px 9px;border-radius:20px;font-size:8px;font-weight:700;color:var(--pur);letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px}
+.drawer-title{font-size:15px;font-weight:700;letter-spacing:-.3px}
+.drawer-sub{font-size:10px;color:var(--tx3);margin-top:2px}
+
+.drawer-nav{flex:1;overflow-y:auto;padding:4px 0 12px;-webkit-overflow-scrolling:touch}
+.drawer-nav::-webkit-scrollbar{width:3px}
+.drawer-nav::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:3px}
+.dnav-grp{padding:14px 16px 3px;font-size:8px;font-weight:600;color:var(--tx4);text-transform:uppercase;letter-spacing:1.5px;font-family:var(--m)}
+.dnav-item{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer;transition:all .1s;border-left:2px solid transparent;line-height:1.3;min-height:44px;-webkit-user-select:none;user-select:none}
+.dnav-item:active{background:var(--bg3);color:var(--tx)}
+.dnav-item.active{color:var(--pur);border-left-color:var(--pur);background:var(--pur-bg)}
+.dnav-item .nb{font-family:var(--m);font-size:9px;color:var(--tx4);min-width:18px;font-weight:500}
+.dnav-item.active .nb{color:var(--pur)}
+
+.drawer-foot{padding:12px 16px;border-top:1px solid var(--brd);font-size:10px;color:var(--tx4);line-height:1.5;flex-shrink:0}
+
+/* ═══ SWIPE HINT ═══ */
+.swipe-hint{position:fixed;left:0;top:50%;transform:translateY(-50%);width:4px;height:40px;background:var(--bg5);border-radius:0 4px 4px 0;z-index:40;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.swipe-hint.show{opacity:1}
+
+/* ═══ MAIN CONTENT ═══ */
+.main{min-height:calc(100vh - 52px);padding-bottom:calc(60px + var(--safe-b))}
+.ct{padding:20px 16px 0}
+
+/* ═══ PAGE HEADER ═══ */
+.hero{margin-bottom:28px}
+.hero-tag{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:var(--pur);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px}
+.hero-tag::before{content:'';width:18px;height:2px;background:var(--pur);border-radius:1px;flex-shrink:0}
+.hero-title{font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:8px;line-height:1.15}
+.hero-title span{background:linear-gradient(135deg,var(--pur),var(--blu));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-desc{font-size:14px;color:var(--tx2);line-height:1.7}
+
+/* ═══ SECTIONS ═══ */
+.section{scroll-margin-top:64px;margin-bottom:40px}
+.sec-tag{font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;font-family:var(--m)}
+.sec-title{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sec-title .num{font-size:10px;font-weight:500;font-family:var(--m);color:var(--tx4);background:var(--bg4);padding:2px 8px;border-radius:5px;letter-spacing:.5px}
+.sec-title .hl{color:var(--pur)}
+
+/* ═══ CARDS ═══ */
+.card{background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);padding:18px;margin-bottom:14px;transition:border-color .15s}
+.card:active{border-color:var(--brd2)}
+.card-t{font-size:15px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card-t .b{font-size:9px;font-weight:600;font-family:var(--m);padding:2px 8px;border-radius:5px;letter-spacing:.3px}
+.card-t .b.grn{background:var(--grn-bg);color:var(--grn)}
+.card-t .b.blu{background:var(--blu-bg);color:var(--blu)}
+.card-t .b.pur{background:var(--pur-bg);color:var(--pur)}
+.card-t .b.yel{background:var(--yel-bg);color:var(--yel)}
+.card-b{font-size:14px;color:var(--tx2);line-height:1.7}
+.card-b p{margin-bottom:10px;color:var(--tx2)}
+.card-b p:last-child{margin-bottom:0}
+.card-b ul{margin:6px 0 10px 20px}
+.card-b li{margin:5px 0;font-size:14px;line-height:1.6}
+.card-b li strong{color:var(--tx)}
+.card-b code{font-family:var(--m);font-size:12px;background:var(--bg4);padding:1px 6px;border-radius:4px;color:var(--pur)}
+.card-b pre{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:14px;margin:12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;font-family:var(--m);font-size:12px;line-height:1.6;color:var(--tx2)}
+.card-b pre .cm{color:var(--tx4)}
+.card-b pre .kw{color:var(--pur)}
+.card-b pre .fn{color:var(--blu)}
+.card-b pre .str{color:var(--grn)}
+.card-b pre .tp{color:var(--yel)}
+.card-b pre .op{color:var(--red)}
+
+.card-b table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.card-b th{background:var(--bg4);padding:9px 12px;text-align:left;font-weight:600;color:var(--tx2);border-bottom:1px solid var(--brd);font-size:10px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.card-b td{padding:9px 12px;border-bottom:1px solid var(--brd);color:var(--tx2);white-space:nowrap}
+.card-b tbody tr:active{background:var(--bg4)}
+
+details{margin-top:8px}
+details summary{list-style:none;display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;font-size:14px;color:var(--pur);padding:10px 0;min-height:44px;-webkit-user-select:none;user-select:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:'\25B6';font-size:10px;transition:transform .2s;display:inline-block}
+details[open] summary::before{transform:rotate(90deg)}
+
+/* ═══ CALLOUTS ═══ */
+.co{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:14px 16px;margin:12px 0;border-left:3px solid}
+.co.grn{border-left-color:var(--grn);background:var(--grn-bg)}
+.co.blu{border-left-color:var(--blu);background:var(--blu-bg)}
+.co.pur{border-left-color:var(--pur);background:var(--pur-bg)}
+.co.yel{border-left-color:var(--yel);background:var(--yel-bg)}
+.co.red{border-left-color:var(--red);background:var(--red-bg)}
+.co-t{font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.co-b{font-size:13px;color:var(--tx2);line-height:1.6}
+
+/* ═══ FLOW (responsive) ═══ */
+.flow{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;margin:12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:4px 0;scrollbar-width:none}
+.flow::-webkit-scrollbar{display:none}
+.flow-s{flex-shrink:0;background:var(--bg);border:1px solid var(--brd2);border-radius:8px;padding:7px 13px;font-size:12px;font-weight:600;color:var(--tx2);white-space:nowrap;transition:.1s}
+.flow-s:active{background:var(--bg4);transform:scale(.96)}
+.flow-s.act{background:var(--pur-bg);border-color:rgba(168,85,247,.25);color:var(--pur)}
+.flow-s.grn{background:var(--grn-bg);border-color:rgba(34,197,94,.2);color:var(--grn)}
+.flow-s.blu{background:var(--blu-bg);border-color:rgba(59,130,246,.2);color:var(--blu)}
+.flow-s.yel{background:var(--yel-bg);border-color:rgba(234,179,8,.2);color:var(--yel)}
+.flow-s.red{background:var(--red-bg);border-color:rgba(239,68,68,.2);color:var(--red)}
+.flow-a{flex-shrink:0;color:var(--tx4);font-size:14px;font-weight:300}
+
+/* ═══ TIMELINE ROAD ═══ */
+.road{margin:16px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.road-track{display:flex;gap:2px;position:relative;padding:28px 0 14px;min-width:580px}
+.road-track::before{content:'';position:absolute;left:0;right:0;top:50%;height:2px;background:var(--bg5)}
+.road-s{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
+.road-dot{width:16px;height:16px;border-radius:50%;border:2.5px solid;z-index:1;background:var(--bg);flex-shrink:0;transition:transform .2s}
+.road-dot:active{transform:scale(1.2)}
+.road-dot.grn{border-color:var(--grn);background:var(--grn)}
+.road-dot.blu{border-color:var(--blu);background:var(--blu)}
+.road-dot.pur{border-color:var(--pur);background:var(--pur)}
+.road-dot.yel{border-color:var(--yel);background:var(--yel)}
+.road-dot.red{border-color:var(--red);background:var(--red)}
+.road-dot.teal{border-color:var(--teal);background:var(--teal)}
+.road-dot.dim{border-color:var(--bg5);background:var(--bg5)}
+.road-l{font-size:10px;font-weight:600;color:var(--tx2);font-family:var(--m)}
+.road-s2{font-size:9px;color:var(--tx3);line-height:1.2}
+
+/* ═══ SPRINT GRID ═══ */
+.sg{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+.sc{background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);padding:16px;transition:all .1s;position:relative;overflow:hidden}
+.sc:active{transform:scale(.99);border-color:var(--brd2)}
+.sc-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.sc-bar.grn{background:var(--grn)}
+.sc-bar.blu{background:var(--blu)}
+.sc-bar.pur{background:var(--pur)}
+.sc-bar.yel{background:var(--yel)}
+.sc-bar.teal{background:var(--teal)}
+.sc-bar.red{background:var(--red)}
+.sc-bar.rbow{background:linear-gradient(90deg,var(--pur),var(--grn),var(--blu))}
+.sc-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.sc-n{font-size:14px;font-weight:600}
+.sc-d{font-size:9px;font-family:var(--m);color:var(--tx3);background:var(--bg4);padding:2px 8px;border-radius:5px;font-weight:500;white-space:nowrap}
+.sc-b{font-size:13px;color:var(--tx2);line-height:1.55;margin-bottom:10px}
+.sc-t{display:flex;flex-wrap:wrap;gap:4px}
+.sc-t .t{font-size:9px;font-weight:600;padding:3px 8px;border-radius:4px;font-family:var(--m);letter-spacing:.3px}
+.t-grn{background:var(--grn-bg);color:var(--grn);border:1px solid rgba(34,197,94,.2)}
+.t-blu{background:var(--blu-bg);color:var(--blu);border:1px solid rgba(59,130,246,.2)}
+.t-pur{background:var(--pur-bg);color:var(--pur);border:1px solid rgba(168,85,247,.2)}
+.t-yel{background:var(--yel-bg);color:var(--yel);border:1px solid rgba(234,179,8,.2)}
+.t-red{background:var(--red-bg);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+.t-teal{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(20,184,166,.2)}
+
+/* ═══ STUDY WEEK GRID ═══ */
+.sw{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:12px 0}
+.sd{background:var(--bg);border:1px solid var(--brd2);border-radius:8px;padding:10px 8px;text-align:center}
+.sd:active{background:var(--bg4)}
+.sd .dw{font-size:8px;font-weight:600;color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.sd .tp{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.sd .dt{font-size:10px;color:var(--tx3);line-height:1.4}
+.sd.we{opacity:.35}
+
+/* ═══ MILESTONES ═══ */
+.ms{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--brd);align-items:flex-start}
+.ms:last-child{border-bottom:none}
+.ms-n{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:var(--m);flex-shrink:0}
+.ms-n.grn{background:var(--grn-bg);color:var(--grn);border:1px solid rgba(34,197,94,.2)}
+.ms-n.blu{background:var(--blu-bg);color:var(--blu);border:1px solid rgba(59,130,246,.2)}
+.ms-n.pur{background:var(--pur-bg);color:var(--pur);border:1px solid rgba(168,85,247,.2)}
+.ms-n.yel{background:var(--yel-bg);color:var(--yel);border:1px solid rgba(234,179,8,.2)}
+.ms-b{flex:1;min-width:0}
+.ms-t{font-size:14px;font-weight:600;margin-bottom:2px}
+.ms-d{font-size:12px;color:var(--tx2);line-height:1.5}
+
+/* ═══ STATS ═══ */
+.st{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.st-card{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:14px}
+.st-l{font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;font-family:var(--m)}
+.st-n{font-size:24px;font-weight:800;font-family:var(--m);letter-spacing:-1px;line-height:1}
+.st-n.grn{color:var(--grn)}
+.st-n.blu{color:var(--blu)}
+.st-n.pur{color:var(--pur)}
+.st-n.yel{color:var(--yel)}
+.st-d{font-size:10px;color:var(--tx3);margin-top:4px;line-height:1.3}
+
+/* ═══ PROGRESS ═══ */
+.pb-l{display:grid;gap:8px;margin:14px 0}
+.pb-r{display:flex;align-items:center;gap:12px}
+.pb-lb{min-width:120px;font-size:12px;color:var(--tx2);font-weight:500;flex-shrink:0}
+.pb-tr{flex:1;height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.pb-f{height:100%;border-radius:3px;transition:width .8s ease}
+.pb-p{font-size:11px;font-family:var(--m);color:var(--tx3);min-width:28px;text-align:right;flex-shrink:0}
+
+/* ═══ PEOPLE ═══ */
+.pg{display:grid;grid-template-columns:1fr;gap:8px;margin:14px 0}
+.pc{background:var(--bg);border:1px solid var(--brd2);border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px}
+.pc:active{background:var(--bg4)}
+.pa{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;font-family:var(--m);flex-shrink:0}
+.pa.a{background:var(--blu-bg);color:var(--blu);border:1px solid rgba(59,130,246,.2)}
+.pa.b{background:var(--grn-bg);color:var(--grn);border:1px solid rgba(34,197,94,.2)}
+.pa.c{background:var(--pur-bg);color:var(--pur);border:1px solid rgba(168,85,247,.2)}
+.pa.d{background:var(--yel-bg);color:var(--yel);border:1px solid rgba(234,179,8,.2)}
+.pa.e{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(20,184,166,.2)}
+.pi{flex:1;min-width:0}
+.pn{font-size:14px;font-weight:600;margin-bottom:1px}
+.pr{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.pt{font-size:11px;color:var(--tx2);line-height:1.4}
+
+/* ═══ CONTINGENCY ═══ */
+.cg{display:grid;grid-template-columns:1fr;gap:8px;margin:14px 0}
+.ce{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:16px}
+.ce:active{border-color:var(--brd2)}
+.ce-title{font-size:13px;font-weight:600;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:6px}
+.ce-item{font-size:12px;color:var(--tx2);padding:4px 0 4px 16px;position:relative;line-height:1.5}
+.ce-item::before{content:'';position:absolute;left:0;top:50%;width:5px;height:5px;border-radius:50%;transform:translateY(-2px)}
+.ce.p1 .ce-title{color:var(--red)}
+.ce.p1 .ce-item::before{background:var(--red)}
+.ce.p2 .ce-title{color:var(--yel)}
+.ce.p2 .ce-item::before{background:var(--yel)}
+.ce.p3 .ce-title{color:var(--tx3)}
+.ce.p3 .ce-item::before{background:var(--tx3)}
+
+/* ═══ TECH GRID ═══ */
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.tc{background:var(--bg);border:1px solid var(--brd2);border-radius:8px;padding:12px}
+.tc:active{background:var(--bg4)}
+.tc-l{font-size:8px;font-weight:600;color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-family:var(--m)}
+.tc-n{font-size:14px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.tc-d{font-size:10px;color:var(--tx3);line-height:1.4}
+
+/* ═══ CHECKLIST ═══ */
+.cl{display:grid;gap:2px;margin:10px 0}
+.cl-i{display:flex;align-items:flex-start;gap:12px;padding:10px 0;font-size:14px;color:var(--tx2);cursor:pointer;transition:.1s;min-height:44px;-webkit-user-select:none;user-select:none;border-radius:6px}
+.cl-i:active{background:var(--bg4);padding-left:8px;padding-right:8px}
+.cl-c{width:22px;height:22px;border:2px solid var(--bg5);border-radius:5px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.cl-c.do{background:var(--grn);border-color:var(--grn)}
+.cl-c.do::after{content:'\2713';font-size:12px;font-weight:700;color:var(--bg)}
+.cl-l{flex:1;line-height:1.5}
+.cl-i.do .cl-l{text-decoration:line-through;color:var(--tx4)}
+
+/* ═══ FOOTER ═══ */
+.footer{margin-top:32px;padding:20px 0;border-top:1px solid var(--brd);text-align:center;font-size:12px;color:var(--tx4);line-height:1.8}
+.footer strong{color:var(--tx3)}
+
+/* ═══ TABLET+ (≥640px) ═══ */
+@media(min-width:640px){
+  .ct{padding:28px 24px 0}
+  .sg{grid-template-columns:repeat(2,1fr)}
+  .pg{grid-template-columns:repeat(2,1fr)}
+  .cg{grid-template-columns:repeat(3,1fr)}
+  .sw{grid-template-columns:repeat(6,1fr)}
+  .tg{grid-template-columns:repeat(4,1fr)}
+  .st{grid-template-columns:repeat(4,1fr)}
+  .hero-title{font-size:32px}
+  .sec-title{font-size:22px}
+  .card{padding:22px}
+  .road-track{min-width:auto}
+}
+
+/* ═══ DESKTOP (≥1024px) ═══ */
+@media(min-width:1024px){
+  body{padding-top:0;display:flex}
+  .topbar{display:none}
+  .backdrop{display:none!important}
+  .swipe-hint{display:none}
+
+  .drawer{position:sticky;top:0;left:auto;bottom:auto;width:240px;min-width:240px;height:100vh;transform:none!important;z-index:1;padding-top:0;border-right:1px solid var(--brd);transition:none}
+  .drawer.open{transform:none}
+
+  .main{flex:1;max-height:100vh;overflow-y:auto;padding-bottom:0}
+  .main::-webkit-scrollbar{width:4px}
+  .main::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:4px}
+  .ct{max-width:880px;margin:0 auto;padding:44px 40px 100px}
+  body.no-scroll{position:static;width:auto}
+
+  .dnav-item{padding:9px 16px;min-height:auto;font-size:12px}
+  .dnav-item:hover{background:var(--bg3);color:var(--tx)}
+  .dnav-item:active{transform:none}
+
+  .cl-i:active{background:transparent;padding:10px 0}
+  .cl-i:hover{color:var(--tx)}
+
+  .sc:active{transform:none}
+  .flow-s:active{transform:none;background:var(--bg)}
+  .sd:active{background:var(--bg)}
+  .pc:active{background:var(--bg)}
+  .tc:active{background:var(--bg)}
+  .card:active{border-color:var(--brd)}
+  .menu-btn:active{transform:none;background:var(--bg3)}
+  .road-dot:active{transform:none}
+  .ce:active{border-color:var(--brd)}
+}
+</style>
+</head>
+<body>
+
+<!-- SWIPE HINT -->
+<div class="swipe-hint" id="swipeHint"></div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <button class="menu-btn" onclick="toggleDrawer()" aria-label="Abrir menu">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+  </button>
+  <div class="logo"><span class="dot"></span>GraduaHUB <span class="sub">guia completo</span></div>
+</header>
+
+<!-- BACKDROP -->
+<div class="backdrop" onclick="toggleDrawer()"></div>
+
+<!-- DRAWER -->
+<aside class="drawer">
+  <div class="drawer-head">
+    <div class="drawer-badge">SENAI — TDS</div>
+    <div class="drawer-title">GraduaHUB</div>
+    <div class="drawer-sub">Guia completo do projeto</div>
+  </div>
+  <nav class="drawer-nav">
+    <div class="dnav-grp">Visão Geral</div>
+    <div class="dnav-item active" data-target="visao"><span class="nb">◆</span> Visão do Projeto</div>
+    <div class="dnav-grp">Guias</div>
+    <div class="dnav-item" data-target="guideline"><span class="nb">01</span> Guideline Técnico</div>
+    <div class="dnav-item" data-target="estudos"><span class="nb">02</span> Plano de Estudos</div>
+    <div class="dnav-item" data-target="execucao"><span class="nb">03</span> Plano de Execução</div>
+    <div class="dnav-grp">Roadmaps</div>
+    <div class="dnav-item" data-target="road-guideline"><span class="nb">R1</span> Roadmap Guideline</div>
+    <div class="dnav-item" data-target="road-estudos"><span class="nb">R2</span> Roadmap Estudos</div>
+    <div class="dnav-item" data-target="road-execucao"><span class="nb">R3</span> Roadmap Execução</div>
+    <div class="dnav-grp">Final</div>
+    <div class="dnav-item" data-target="checklist"><span class="nb">✓</span> Checklist da Banca</div>
+  </nav>
+  <div class="drawer-foot">
+    Projeto Integrador · SENAI<br>
+    Curso Técnico em Desenvolvimento de Sistemas
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+<div class="ct">
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-tag">GraduaHUB</div>
+  <h1 class="hero-title">Guia <span>Completo</span> do Projeto</h1>
+  <p class="hero-desc">Do zero ao MVP na banca — guideline técnico, plano de estudos, plano de execução e roadmaps visuais para a equipe do SENAI.</p>
+</div>
+
+<!-- ═══ VISÃO ═══ -->
+<div class="section" id="visao">
+  <div class="sec-tag">Visão Geral</div>
+  <h2 class="sec-title">O <span class="hl">GraduaHUB</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Stack</div><div class="st-n pur">Flutter</div><div class="st-d">+ Firebase + Provider</div></div>
+    <div class="st-card"><div class="st-l">Duração</div><div class="st-n grn">50 dias</div><div class="st-d">10 semanas</div></div>
+    <div class="st-card"><div class="st-l">Módulos</div><div class="st-n blu">5</div><div class="st-d">Rotina, Cert., Pesq., Radar</div></div>
+    <div class="st-card"><div class="st-l">Equipe</div><div class="st-n yel">4-6</div><div class="st-d">alunos SENAI</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📌 O que é?</div>
+    <div class="card-b">
+      <p>Hub acadêmico que centraliza a vida universitária do aluno em um só app:</p>
+      <ul>
+        <li><strong>Gestão de Rotina</strong> — disciplinas, notas, faltas, cálculo de média e previsão de nota final</li>
+        <li><strong>Certificados</strong> — upload de PDF/imagem, validação manual de horas complementares, progresso visual</li>
+        <li><strong>Pesquisa TCC</strong> — busca de artigos científicos na API aberta OpenAlex</li>
+        <li><strong>Radar de Eventos</strong> — lista e mapa com eventos acadêmicos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🛠 Stack Tecnológica</div>
+    <div class="tg">
+      <div class="tc"><div class="tc-l">Frontend</div><div class="tc-n">Flutter</div><div class="tc-d">Android, iOS, Web</div></div>
+      <div class="tc"><div class="tc-l">Auth</div><div class="tc-n">Firebase Auth</div><div class="tc-d">Email/senha</div></div>
+      <div class="tc"><div class="tc-l">Banco</div><div class="tc-n">Firestore</div><div class="tc-d">NoSQL tempo real</div></div>
+      <div class="tc"><div class="tc-l">Storage</div><div class="tc-n">Firebase Storage</div><div class="tc-d">Upload certificados</div></div>
+      <div class="tc"><div class="tc-l">Estado</div><div class="tc-n">Provider</div><div class="tc-d">ChangeNotifier</div></div>
+      <div class="tc"><div class="tc-l">Mapa</div><div class="tc-n">flutter_map</div><div class="tc-d">OpenStreetMap</div></div>
+      <div class="tc"><div class="tc-l">OCR</div><div class="tc-n">ML Kit</div><div class="tc-d">Reconhecimento texto</div></div>
+      <div class="tc"><div class="tc-l">API</div><div class="tc-n">OpenAlex</div><div class="tc-d">Catálogo científico</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📂 Estrutura de Pastas</div>
+    <div class="card-b">
+<pre>lib/
+├── main.dart
+├── app.dart
+├── core/ (theme, routes, constants, utils)
+├── data/
+│   ├── models/ (user, discipline, certificate, event)
+│   └── services/ (auth, firestore, storage, openalex)
+├── providers/ (auth, routine, certificate, event)
+└── features/
+    ├── auth/ (login, register)
+    ├── dashboard/
+    ├── routine/ (disciplines, forms, widgets)
+    ├── certificates/ (upload, list, progress)
+    ├── research/ (search, article card)
+    └── events/ (list, map, card)</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GUIDELINE ═══ -->
+<div class="section" id="guideline">
+  <div class="sec-tag">Guia 01</div>
+  <h2 class="sec-title">Guideline <span class="hl">Técnico</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Sem 1</div><div class="road-s2">Fundação</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Sem 2</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Sem 3</div><div class="road-s2">Dashboard</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Sem 4-5</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Sem 6</div><div class="road-s2">Certificados</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Sem 7</div><div class="road-s2">Pesquisa</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Sem 8</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Sem 9-10</div><div class="road-s2">Banca</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🛠 Fase 1 — Fundação <span class="b blu">Dias 1-5</span></div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s act">Flutter SDK</span><span class="flow-a">→</span>
+        <span class="flow-s act">Android Studio</span><span class="flow-a">→</span>
+        <span class="flow-s act">Firebase</span><span class="flow-a">→</span>
+        <span class="flow-s act">Estrutura</span><span class="flow-a">→</span>
+        <span class="flow-s act">AuthService</span><span class="flow-a">→</span>
+        <span class="flow-s act">PR #1</span>
+      </div>
+      <div class="co grn"><div class="co-b"><code>flutter run</code> sem erro · Firebase conectado · PR #1 mergeado</div></div>
+      <details>
+        <summary>Ver comandos de setup</summary>
+<pre><span class="cm"># Instalar Flutter</span>
+<span class="cm"># https://docs.flutter.dev/get-started/install/windows</span>
+
+flutter create --org com.graduahub --project-name graduahub .
+flutter pub get
+
+<span class="cm"># Configurar Firebase</span>
+dart pub global activate flutterfire_cli
+flutterfire configure --project=graduahub-dev
+
+<span class="cm"># Verificar</span>
+flutter doctor
+flutter run</pre>
+      </details>
+      <details>
+        <summary>Ver main.dart</summary>
+<pre><span class="kw">import</span> <span class="str">'package:flutter/material.dart'</span>;
+<span class="kw">import</span> <span class="str">'package:firebase_core/firebase_core.dart'</span>;
+<span class="kw">import</span> <span class="str">'firebase_options.dart'</span>;
+<span class="kw">import</span> <span class="str">'app.dart'</span>;
+
+<span class="kw">void</span> <span class="fn">main</span>() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  <span class="kw">await</span> Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const GraduaHubApp());
+}</pre>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔐 Fase 2 — Auth + Navegação <span class="b blu">Dias 6-10</span></div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s blu">Login</span><span class="flow-a">→</span>
+        <span class="flow-s blu">Cadastro</span><span class="flow-a">→</span>
+        <span class="flow-s blu">Guarda Rota</span><span class="flow-a">→</span>
+        <span class="flow-s blu">BottomNav</span><span class="flow-a">→</span>
+        <span class="flow-s blu">Dashboard</span><span class="flow-a">→</span>
+        <span class="flow-s blu">PR #2</span>
+      </div>
+      <div class="co grn"><div class="co-b">Criar conta → Dashboard · Fechar app → Logado · Erros PT</div></div>
+      <details>
+        <summary>Ver AuthService + AuthProvider</summary>
+<pre><span class="cm">// AuthService</span>
+<span class="kw">class</span> AuthService {
+  <span class="kw">final</span> FirebaseAuth _auth = FirebaseAuth.instance;
+  User? <span class="kw">get</span> currentUser => _auth.currentUser;
+  Stream&lt;User?&gt; <span class="kw">get</span> authStateChanges => _auth.authStateChanges();
+
+  Future&lt;UserCredential&gt; <span class="fn">signUp</span>(String email, String password)
+    => _auth.createUserWithEmailAndPassword(email: email, password: password);
+  Future&lt;UserCredential&gt; <span class="fn">signIn</span>(String email, String password)
+    => _auth.signInWithEmailAndPassword(email: email, password: password);
+  Future&lt;void&gt; <span class="fn">signOut</span>() => _auth.signOut();
+}
+
+<span class="cm">// AuthProvider (excerpt)</span>
+Future&lt;bool&gt; <span class="fn">login</span>(String email, String password) async {
+  _isLoading = <span class="kw">true</span>; _error = <span class="kw">null</span>; notifyListeners();
+  <span class="kw">try</span> {
+    <span class="kw">await</span> _auth.signIn(email, password);
+    <span class="kw">return true</span>;
+  } <span class="kw">on</span> FirebaseAuthException <span class="kw">catch</span> (e) {
+    _error = _mapError(e.code); <span class="kw">return false</span>;
+  } <span class="kw">finally</span> { _isLoading = <span class="kw">false</span>; notifyListeners(); }
+}</pre>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🧩 Fase 3 — Módulos <span class="b yel">Dias 11-44</span></div>
+    <div class="sg">
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView cards, ModuleCard, resumo horas, progresso visual</div><div class="sc-t"><span class="t t-grn">GridView</span><span class="t t-blu">Provider</span></div></div>
+      <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD disciplinas, notas, média, previsão final, faltas, alertas</div><div class="sc-t"><span class="t t-yel">Forms</span><span class="t t-red">Cálculos</span></div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Certificados</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload PDF/imagem, Storage, validação manual, gráfico progresso</div><div class="sc-t"><span class="t t-pur">Upload</span><span class="t t-teal">Storage</span></div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa TCC</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex API, ArticleCard, paginação, filtro ano</div><div class="sc-t"><span class="t t-teal">HTTP</span><span class="t t-blu">API</span></div></div>
+      <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista eventos, flutter_map markers, popup, filtro data</div><div class="sc-t"><span class="t t-red">Mapa</span><span class="t t-grn">flutter_map</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">✨ Fase 4 — Banca <span class="b pur">Dias 45-50</span></div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s red">Testes</span><span class="flow-a">→</span>
+        <span class="flow-s red">Correções</span><span class="flow-a">→</span>
+        <span class="flow-s red">Dados Demo</span><span class="flow-a">→</span>
+        <span class="flow-s red">Slides</span><span class="flow-a">→</span>
+        <span class="flow-s red">3 Ensaios</span><span class="flow-a">→</span>
+        <span class="flow-s red">Banca 🎯</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🛡 Regras Firestore</div>
+    <div class="card-b">
+<pre>match /users/{userId} {
+  allow read, write: <span class="kw">if</span> request.auth.uid == userId;
+}
+match /certificates/{certId} {
+  allow read, update, delete: <span class="kw">if</span> resource.data.userId == request.auth.uid;
+  allow create: <span class="kw">if</span> request.resource.data.userId == request.auth.uid;
+}
+match /grades/{gradeId} {
+  allow read, update, delete: <span class="kw">if</span> resource.data.userId == request.auth.uid;
+  allow create: <span class="kw">if</span> request.resource.data.userId == request.auth.uid;
+}
+match /events/{eventId} {
+  allow read: <span class="kw">if</span> request.auth != <span class="kw">null</span>;
+}</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ESTUDOS ═══ -->
+<div class="section" id="estudos">
+  <div class="sec-tag">Guia 02</div>
+  <h2 class="sec-title">Plano de <span class="hl">Estudos</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Duração</div><div class="st-n grn">4 sem</div><div class="st-d">Capacitação</div></div>
+    <div class="st-card"><div class="st-l">Carga</div><div class="st-n blu">2-3h/dia</div><div class="st-d">Mín/ideal</div></div>
+    <div class="st-card"><div class="st-l">Projetos</div><div class="st-n pur">2</div><div class="st-d">Obrigatórios</div></div>
+    <div class="st-card"><div class="st-l">Meta</div><div class="st-n yel">100%</div><div class="st-d">Time pronto</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📘 Semana 1 — Dart + Flutter Base</div>
+    <div class="card-b">
+      <div class="sw">
+        <div class="sd"><div class="dw">Seg</div><div class="tp">Dart I</div><div class="dt">Variáveis, funções</div></div>
+        <div class="sd"><div class="dw">Ter</div><div class="tp">Dart II</div><div class="dt">Classes, listas</div></div>
+        <div class="sd"><div class="dw">Qua</div><div class="tp">Flutter I</div><div class="dt">App, widgets</div></div>
+        <div class="sd"><div class="dw">Qui</div><div class="tp">Flutter II</div><div class="dt">Navegação, forms</div></div>
+        <div class="sd"><div class="dw">Sex</div><div class="tp">Listas</div><div class="dt">ListView, Grid</div></div>
+        <div class="sd we"><div class="dw">Sáb</div><div class="tp">Reforço</div><div class="dt">Revisão</div></div>
+      </div>
+      <div class="co grn"><div class="co-b"><strong>🏁</strong> App com 3 telas navegáveis + formulário validado no emulador</div></div>
+      <details>
+        <summary>Ver exercícios Dart</summary>
+<pre><span class="cm">// Média</span>
+<span class="tp">double</span> <span class="fn">media</span>(<span class="tp">double</span> a, <span class="tp">double</span> b) => (a + b) / <span class="op">2</span>;
+
+<span class="cm">// Nullable</span>
+String <span class="fn">saudar</span>(String? nome) => <span class="str">'Olá, ${nome ?? "visitante"}'</span>;
+
+<span class="cm">// Classe</span>
+<span class="kw">class</span> Aluno {
+  <span class="kw">final</span> String nome;
+  <span class="kw">final</span> List&lt;<span class="tp">double</span>&gt; notas;
+  Aluno({required <span class="kw">this</span>.nome, required <span class="kw">this</span>.notas});
+  <span class="tp">double</span> <span class="kw">get</span> media => notas.isEmpty
+    ? <span class="op">0</span> : notas.reduce((a,b)=>a+b) / notas.length;
+}</pre>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔥 Semana 2 — Firebase + Provider</div>
+    <div class="card-b">
+      <div class="sw">
+        <div class="sd"><div class="dw">Seg</div><div class="tp">Provider</div><div class="dt">ChangeNotifier</div></div>
+        <div class="sd"><div class="dw">Ter</div><div class="tp">Auth</div><div class="dt">Login Firebase</div></div>
+        <div class="sd"><div class="dw">Qua</div><div class="tp">Firestore</div><div class="dt">CRUD, streams</div></div>
+        <div class="sd"><div class="dw">Qui</div><div class="tp">Storage</div><div class="dt">Upload, Picker</div></div>
+        <div class="sd"><div class="dw">Sex</div><div class="tp">HTTP</div><div class="dt">OpenAlex API</div></div>
+        <div class="sd we"><div class="dw">Sáb</div><div class="tp">Reforço</div><div class="dt">Revisão</div></div>
+      </div>
+      <div class="co grn"><div class="co-b"><strong>🏁</strong> 2 apps: ToDo com Provider + Login CRUD Firestore. Individual.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🚀 Semana 3 — Mini Projetos</div>
+    <div class="sg" style="grid-template-columns:1fr">
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Projeto 1 — ToDo List</div><div class="sc-d">2 dias</div></div><div class="sc-b">Login Auth · CRUD Firestore · Concluir · Filtrar · Provider + Loading/Erro</div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Projeto 2 — CRUD + Upload</div><div class="sc-d">2 dias</div></div><div class="sc-b">Formulário · Upload Storage · Lista StreamBuilder · Editar/Excluir</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">⚡ Semana 4 — Avançado</div>
+    <div class="card-b">
+      <div class="sw">
+        <div class="sd"><div class="dw">Seg</div><div class="tp">Nav</div><div class="dt">BottomNav, Stack</div></div>
+        <div class="sd"><div class="dw">Ter</div><div class="tp">Maps</div><div class="dt">flutter_map</div></div>
+        <div class="sd"><div class="dw">Qua</div><div class="tp">OCR</div><div class="dt">ML Kit</div></div>
+        <div class="sd"><div class="dw">Qui</div><div class="tp">Anim.</div><div class="dt">AnimatedContainer</div></div>
+        <div class="sd"><div class="dw">Sex</div><div class="tp">Rev.</div><div class="dt">Juntar tudo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📊 Progresso</div>
+    <div class="pb-l">
+      <div class="pb-r"><div class="pb-lb">Sem 1 — Dart + Flutter</div><div class="pb-tr"><div class="pb-f" style="width:40%;background:var(--blu)"></div></div><div class="pb-p">40%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 2 — Firebase + Provider</div><div class="pb-tr"><div class="pb-f" style="width:60%;background:var(--grn)"></div></div><div class="pb-p">60%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 3 — Mini Projetos</div><div class="pb-tr"><div class="pb-f" style="width:90%;background:var(--pur)"></div></div><div class="pb-p">90%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 4 — Avançado</div><div class="pb-tr"><div class="pb-f" style="width:100%;background:var(--pur)"></div></div><div class="pb-p">100%</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📚 Recursos</div>
+    <div class="card-b">
+      <table>
+        <thead><tr><th>Assunto</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td>Dart Tour</td><td><code>dart.dev/language</code></td></tr>
+          <tr><td>DartPad</td><td><code>dartpad.dev</code></td></tr>
+          <tr><td>Flutter Get Started</td><td><code>docs.flutter.dev/get-started/install</code></td></tr>
+          <tr><td>Widget of the Week</td><td><code>youtube.com/playlist?list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG</code></td></tr>
+          <tr><td>Firebase + Flutter</td><td><code>firebase.flutter.dev/docs/overview</code></td></tr>
+          <tr><td>Flutter com Migs (PT)</td><td><code>youtube.com/@fluttercommigs</code></td></tr>
+          <tr><td>NetNinja Flutter</td><td><code>youtube.com/playlist?list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ</code></td></tr>
+        </tbody>
+      </table>
+      <div class="co pur"><div class="co-b"><strong>🎯</strong> Cada membro: cria tela · navega · Firestore · login · PR</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EXECUÇÃO ═══ -->
+<div class="section" id="execucao">
+  <div class="sec-tag">Guia 03</div>
+  <h2 class="sec-title">Plano de <span class="hl">Execução</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Sprints</div><div class="st-n blu">8</div><div class="st-d">0 a 7</div></div>
+    <div class="st-card"><div class="st-l">Dias</div><div class="st-n grn">50</div><div class="st-d">Setup → banca</div></div>
+    <div class="st-card"><div class="st-l">PRs</div><div class="st-n pur">7</div><div class="st-d">1 por sprint</div></div>
+    <div class="st-card"><div class="st-l">Equipe</div><div class="st-n yel">4-6</div><div class="st-d">pessoas</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">👥 Distribuição</div>
+    <div class="pg">
+      <div class="pc"><div class="pa a">A</div><div class="pi"><div class="pn">Pessoa A</div><div class="pr">Líder Técnico</div><div class="pt">Auth, Provider, Firebase, revisão PRs</div></div></div>
+      <div class="pc"><div class="pa b">B</div><div class="pi"><div class="pn">Pessoa B</div><div class="pr">Dev Front</div><div class="pt">Telas, Dashboard, Rotina, layout</div></div></div>
+      <div class="pc"><div class="pa c">C</div><div class="pi"><div class="pn">Pessoa C</div><div class="pr">Dev Dados</div><div class="pt">Modelos, Services, Storage, API</div></div></div>
+      <div class="pc"><div class="pa d">D</div><div class="pi"><div class="pn">Pessoa D</div><div class="pr">QA/Doc</div><div class="pt">Testes, checklist, slides, evidências</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📋 Sprints</div>
+    <div class="sg">
+      <div class="sc"><div class="sc-bar" style="background:var(--tx3)"></div><div class="sc-h"><div class="sc-n">Sprint 0 — Fundação</div><div class="sc-d">Dias 1-5</div></div><div class="sc-b">Flutter SDK, Android Studio, GitHub, Firebase, estrutura, tema, rotas, AuthService</div><div class="sc-t"><span class="t t-grn">flutter run ✅</span><span class="t t-blu">Firebase ✅</span></div></div>
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Sprint 1 — Auth + Nav</div><div class="sc-d">Dias 6-10</div></div><div class="sc-b">Login, cadastro, guarda rota, sessão, BottomNav, Dashboard</div><div class="sc-t"><span class="t t-blu">Auth ✅</span><span class="t t-pur">PR #2</span></div></div>
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Sprint 2 — Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView cards, ModuleCard, resumo horas, progresso</div><div class="sc-t"><span class="t t-grn">Cards ✅</span><span class="t t-pur">PR #3</span></div></div>
+      <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Sprint 3 — Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD disciplinas, notas, média, previsão final, faltas</div><div class="sc-t"><span class="t t-yel">8 dias</span><span class="t t-pur">PR #4</span></div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Sprint 4 — Certificados</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload PDF, Storage, validação, progress ring, Dashboard</div><div class="sc-t"><span class="t t-pur">Upload ✅</span><span class="t t-pur">PR #5</span></div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Sprint 5 — Pesquisa</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex, ArticleCard, paginação, filtro ano</div><div class="sc-t"><span class="t t-teal">API ✅</span><span class="t t-pur">PR #6</span></div></div>
+      <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Sprint 6 — Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista, flutter_map markers, popup, filtro data</div><div class="sc-t"><span class="t t-red">Mapa ✅</span><span class="t t-pur">PR #7</span></div></div>
+      <div class="sc"><div class="sc-bar rbow"></div><div class="sc-h"><div class="sc-n">Sprint 7 — Banca</div><div class="sc-d">Dias 45-50</div></div><div class="sc-b">Testes, correções, dados demo, vídeo, slides, 3 ensaios</div><div class="sc-t"><span class="t t-grn">Demo ✅</span><span class="t t-red">🎯</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🏆 Marcos</div>
+    <div class="ms"><div class="ms-n blu">1</div><div class="ms-b"><div class="ms-t">Sem 1 — Fundação</div><div class="ms-d">flutter run · Firebase · PR #1</div></div></div>
+    <div class="ms"><div class="ms-n blu">2</div><div class="ms-b"><div class="ms-t">Sem 2 — Auth</div><div class="ms-d">Login · Sessão · BottomNav · PR #2</div></div></div>
+    <div class="ms"><div class="ms-n grn">3</div><div class="ms-b"><div class="ms-t">Sem 4 — Rotina</div><div class="ms-d">CRUD · Média · Previsão · Faltas · PR #4</div></div></div>
+    <div class="ms"><div class="ms-n grn">4</div><div class="ms-b"><div class="ms-t">Sem 6 — Certificados</div><div class="ms-d">Upload · Lista · Progresso · PR #5</div></div></div>
+    <div class="ms"><div class="ms-n pur">5</div><div class="ms-b"><div class="ms-t">Sem 8 — Todos módulos</div><div class="ms-d">Pesquisa · Radar · Integrado · PR #7</div></div></div>
+    <div class="ms"><div class="ms-n yel">6</div><div class="ms-b"><div class="ms-t">Dia 50 — Banca!</div><div class="ms-d">App estável · 3 ensaios · Vídeo · Slides</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">⚠️ Contingência</div>
+    <div class="cg">
+      <div class="ce p1"><div class="ce-title">🔴 Não Pular</div><div class="ce-item">Auth + Dashboard</div><div class="ce-item">Rotina completo</div><div class="ce-item">Certificados v1</div></div>
+      <div class="ce p2"><div class="ce-title">🟡 Reduzir</div><div class="ce-item">Pesquisa (sem paginação)</div><div class="ce-item">Radar (só lista)</div></div>
+      <div class="ce p3"><div class="ce-title">⚪ Cortar</div><div class="ce-item">OCR · Scraper · Notificações</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📅 Rotina Semanal</div>
+    <div class="card-b">
+      <div class="co blu"><div class="co-b"><strong>Segunda:</strong> Planejamento + distribuir tarefas</div></div>
+      <div class="co grn"><div class="co-b"><strong>Ter-Qui:</strong> Codar + daily 15 min</div></div>
+      <div class="co yel"><div class="co-b"><strong>Sexta:</strong> Demo interna + correções + retro</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📝 Templates</div>
+    <div class="card-b">
+      <details>
+        <summary>Daily (15 min)</summary>
+<pre>Ontem: [o que fez]
+Hoje: [tarefa específica]  
+Bloqueios: [o que impede]</pre>
+      </details>
+      <details>
+        <summary>Pull Request</summary>
+<pre><span class="cm">## O que foi feito</span>
+[descrição]
+
+<span class="cm">## Evidência</span>
+[print/vídeo]
+
+<span class="cm">## Checklist</span>
+- [ ] Roda no emulador
+- [ ] Sem erro compilação
+- [ ] Testado manualmente
+- [ ] Segue padrões
+
+<span class="cm">## Revisores</span>
+@colega1 @colega2</pre>
+      </details>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP GUIDELINE ═══ -->
+<div class="section" id="road-guideline">
+  <div class="sec-tag">Roadmap R1</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Guideline</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Dias 1-5</div><div class="road-s2">Fundação</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Dias 6-10</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Dias 11-14</div><div class="road-s2">Dash</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Dias 15-22</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 23-30</div><div class="road-s2">Cert</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Dias 31-37</div><div class="road-s2">Pesq</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Dias 38-44</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 45-50</div><div class="road-s2">Banca</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🛠 Fase 1 — Fundação <span class="b blu">Dias 1-5</span></div><div class="card-b"><div class="flow"><span class="flow-s act">SDK</span><span class="flow-a">→</span><span class="flow-s act">Studio</span><span class="flow-a">→</span><span class="flow-s act">Firebase</span><span class="flow-a">→</span><span class="flow-s act">Pastas</span><span class="flow-a">→</span><span class="flow-s act">AuthService</span><span class="flow-a">→</span><span class="flow-s act">PR #1</span></div><div class="co grn"><div class="co-b">flutter run ✅ · Firebase ✅ · PR #1 ✅</div></div></div></div>
+  <div class="card"><div class="card-t">🔐 Fase 2 — Auth <span class="b blu">Dias 6-10</span></div><div class="card-b"><div class="flow"><span class="flow-s blu">Login</span><span class="flow-a">→</span><span class="flow-s blu">Cadastro</span><span class="flow-a">→</span><span class="flow-s blu">Guarda</span><span class="flow-a">→</span><span class="flow-s blu">Nav</span><span class="flow-a">→</span><span class="flow-s blu">Sessão</span><span class="flow-a">→</span><span class="flow-s blu">PR #2</span></div><div class="co grn"><div class="co-b">Login/Cadastro ✅ · Sessão ✅ · Erros PT ✅</div></div></div></div>
+  <div class="card"><div class="card-t">🧩 Fase 3 — Módulos <span class="b yel">Dias 11-44</span></div><div class="sg">
+    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Dashboard</div><div class="sc-d">PR #3</div></div><div class="sc-b">GridView, ModuleCard, resumo horas</div></div>
+    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Rotina</div><div class="sc-d">PR #4</div></div><div class="sc-b">CRUD, média, previsão, faltas</div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Certificados</div><div class="sc-d">PR #5</div></div><div class="sc-b">Upload, Storage, progresso</div></div>
+    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa</div><div class="sc-d">PR #6</div></div><div class="sc-b">OpenAlex, ArticleCard</div></div>
+    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Radar</div><div class="sc-d">PR #7</div></div><div class="sc-b">Lista, mapa, markers</div></div>
+  </div></div>
+  <div class="card"><div class="card-t">✨ Fase 4 — Banca <span class="b pur">Dias 45-50</span></div><div class="card-b"><div class="flow"><span class="flow-s red">Testes</span><span class="flow-a">→</span><span class="flow-s red">Correções</span><span class="flow-a">→</span><span class="flow-s red">Demo</span><span class="flow-a">→</span><span class="flow-s red">Slides</span><span class="flow-a">→</span><span class="flow-s red">Ensaio</span><span class="flow-a">→</span><span class="flow-s red">🎯</span></div></div></div>
+</div>
+
+<!-- ═══ ROADMAP ESTUDOS ═══ -->
+<div class="section" id="road-estudos">
+  <div class="sec-tag">Roadmap R2</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Estudos</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Semanas</div><div class="st-n grn">4</div><div class="st-d">Capacitação</div></div>
+    <div class="st-card"><div class="st-l">Carga</div><div class="st-n blu">2-3h</div><div class="st-d">por dia</div></div>
+    <div class="st-card"><div class="st-l">Projetos</div><div class="st-n pur">2</div><div class="st-d">Obrigatórios</div></div>
+    <div class="st-card"><div class="st-l">Meta</div><div class="st-n yel">100%</div><div class="st-d">Time apto</div></div>
+  </div>
+
+  <div class="card"><div class="card-t">📘 Semana 1 — Dart + Flutter</div><div class="card-b"><div class="flow"><span class="flow-s">Dart I</span><span class="flow-a">→</span><span class="flow-s">Dart II</span><span class="flow-a">→</span><span class="flow-s">Flutter I</span><span class="flow-a">→</span><span class="flow-s">Flutter II</span><span class="flow-a">→</span><span class="flow-s">Listas</span><span class="flow-a">→</span><span class="flow-s grn">App 3 telas</span></div><div class="co grn"><div class="co-b">🏁 App 3 telas + form válido no emulador</div></div></div></div>
+  <div class="card"><div class="card-t">🔥 Semana 2 — Firebase + Provider</div><div class="card-b"><div class="flow"><span class="flow-s">Provider</span><span class="flow-a">→</span><span class="flow-s">Auth</span><span class="flow-a">→</span><span class="flow-s">Firestore</span><span class="flow-a">→</span><span class="flow-s">Storage</span><span class="flow-a">→</span><span class="flow-s">HTTP</span><span class="flow-a">→</span><span class="flow-s grn">2 apps</span></div><div class="co grn"><div class="co-b">🏁 ToDo + Login CRUD. Individual.</div></div></div></div>
+  <div class="card"><div class="card-t">🚀 Semana 3 — Mini Projetos</div><div class="sg" style="grid-template-columns:1fr">
+    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">ToDo</div><div class="sc-d">2 dias</div></div><div class="sc-b">Login · CRUD · Concluir · Filtrar · Provider</div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">CRUD + Upload</div><div class="sc-d">2 dias</div></div><div class="sc-b">Forms · Storage · Stream · Editar</div></div>
+  </div></div>
+  <div class="card"><div class="card-t">⚡ Semana 4 — Avançado</div><div class="card-b"><div class="flow"><span class="flow-s">Nav</span><span class="flow-a">→</span><span class="flow-s">Maps</span><span class="flow-a">→</span><span class="flow-s">OCR</span><span class="flow-a">→</span><span class="flow-s">Anim</span><span class="flow-a">→</span><span class="flow-s grn">Rev</span></div></div></div>
+
+  <div class="card"><div class="card-t">📊 Progresso</div>
+    <div class="pb-l">
+      <div class="pb-r"><div class="pb-lb">Sem 1</div><div class="pb-tr"><div class="pb-f" style="width:40%;background:var(--blu)"></div></div><div class="pb-p">40%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 2</div><div class="pb-tr"><div class="pb-f" style="width:60%;background:var(--grn)"></div></div><div class="pb-p">60%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 3</div><div class="pb-tr"><div class="pb-f" style="width:90%;background:var(--pur)"></div></div><div class="pb-p">90%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 4</div><div class="pb-tr"><div class="pb-f" style="width:100%;background:var(--pur)"></div></div><div class="pb-p">100%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP EXECUÇÃO ═══ -->
+<div class="section" id="road-execucao">
+  <div class="sec-tag">Roadmap R3</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Execução</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Spr.0</div><div class="road-s2">Fund</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Spr.1</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Spr.2</div><div class="road-s2">Dash</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Spr.3</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.4</div><div class="road-s2">Cert</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Spr.5</div><div class="road-s2">Pesq</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Spr.6</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.7</div><div class="road-s2">🎯</div></div>
+    </div>
+  </div>
+
+  <div class="sg">
+    <div class="sc"><div class="sc-bar" style="background:var(--tx3)"></div><div class="sc-h"><div class="sc-n">Sprint 0 — Fundação</div><div class="sc-d">Dias 1-5</div></div><div class="sc-b">Flutter, Studio, GitHub, Firebase, pastas, tema, AuthService</div><div class="sc-t"><span class="t t-grn">PR #1</span></div></div>
+    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Sprint 1 — Auth+Nav</div><div class="sc-d">Dias 6-10</div></div><div class="sc-b">Login, cadastro, guarda, BottomNav, Dashboard</div><div class="sc-t"><span class="t t-blu">PR #2</span></div></div>
+    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Sprint 2 — Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView, ModuleCard, resumo, progresso</div><div class="sc-t"><span class="t t-grn">PR #3</span></div></div>
+    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Sprint 3 — Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD, notas, média, previsão, faltas</div><div class="sc-t"><span class="t t-yel">PR #4</span></div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Sprint 4 — Cert.</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload Storage, validação, ring, Dashboard</div><div class="sc-t"><span class="t t-pur">PR #5</span></div></div>
+    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Sprint 5 — Pesquisa</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex, ArticleCard, paginação</div><div class="sc-t"><span class="t t-teal">PR #6</span></div></div>
+    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Sprint 6 — Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista, flutter_map, markers, popup</div><div class="sc-t"><span class="t t-red">PR #7</span></div></div>
+    <div class="sc"><div class="sc-bar rbow"></div><div class="sc-h"><div class="sc-n">Sprint 7 — Banca</div><div class="sc-d">Dias 45-50</div></div><div class="sc-b">Testes, demo, vídeo, slides, 3 ensaios</div><div class="sc-t"><span class="t t-grn">🎯</span></div></div>
+  </div>
+
+  <div class="card"><div class="card-t">⚠️ Contingência</div>
+    <div class="cg">
+      <div class="ce p1"><div class="ce-title">🔴 Não Pular</div><div class="ce-item">Auth + Dashboard</div><div class="ce-item">Rotina</div><div class="ce-item">Certificados</div></div>
+      <div class="ce p2"><div class="ce-title">🟡 Reduzir</div><div class="ce-item">Pesquisa (sem paginação)</div><div class="ce-item">Radar (só lista)</div></div>
+      <div class="ce p3"><div class="ce-title">⚪ Cortar</div><div class="ce-item">OCR · Scraper · Notificações</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CHECKLIST ═══ -->
+<div class="section" id="checklist">
+  <div class="sec-tag">Checklist Final</div>
+  <h2 class="sec-title">Checklist da <span class="hl">Banca</span></h2>
+
+  <div class="co pur"><div class="co-b">Toque em cada item para marcar. Progresso salvo automaticamente no celular.</div></div>
+
+  <div class="card"><div class="card-t">📱 Funcionalidades</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cadastro: criar conta com email + senha + nome</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Login: entrar com email + senha</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Logout: sair e voltar para tela de login</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Persistência: fechar e abrir app continua logado</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Dashboard: cards dos módulos com resumo</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: disciplina, nota, média calculada</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: faltas restantes com alertas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: upload de PDF/imagem</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: progresso de horas no dashboard</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Pesquisa: buscar artigos no OpenAlex</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: lista de eventos do Firestore</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: mapa com pins dos eventos</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🎨 Qualidade</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Sem crash ao navegar entre telas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Loading visível em operações lentas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Mensagem de erro amigável</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Estado vazio quando não há dados</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Design consistente (cores, fontes)</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🎤 Apresentação</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Contas de teste com dados reais</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Roteiro de demo de 5-8 minutos</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Vídeo de backup do fluxo completo</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cada membro explica uma parte técnica</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">3 ensaios realizados antes do dia</div></div>
+    </div>
+  </div>
+
+  <div class="co grn">
+    <div class="co-t">🎯 Regra de Ouro</div>
+    <div class="co-b">Funcionalidade simples funcionando &gt; complexa quebrada. Entreguem o básico <strong>PERFEITO</strong>.</div>
+  </div>
+</div>
+
+<div class="footer">
+  GraduaHUB — Projeto Integrador SENAI<br>
+  <strong>Curso Técnico em Desenvolvimento de Sistemas</strong>
+</div>
+
+</div><!-- /ct -->
+</main>
+
+<script>
+// TOGGLE DRAWER
+function toggleDrawer() {
+  const d = document.querySelector('.drawer');
+  const b = document.querySelector('.backdrop');
+  const isOpen = d.classList.toggle('open');
+  b.classList.toggle('open', isOpen);
+  document.body.classList.toggle('no-scroll', isOpen);
+}
+
+// NAV ITEMS
+document.querySelectorAll('.dnav-item').forEach(item => {
+  item.addEventListener('click', function() {
+    const target = this.dataset.target;
+    if (!target) return;
+    document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(target)?.scrollIntoView({behavior:'smooth'});
+    toggleDrawer();
+  });
+});
+
+// INTERSECTION OBSERVER
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.dnav-item').forEach(i => i.classList.remove('active'));
+      const link = document.querySelector(`.dnav-item[data-target="${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: .2, rootMargin: '0px 0px -40% 0px' });
+document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+// SWIPE HINT
+const hint = document.getElementById('swipeHint');
+if (hint) {
+  let shown = localStorage.getItem('swipe_hint_shown');
+  if (!shown) {
+    setTimeout(() => { hint.classList.add('show'); }, 2000);
+    setTimeout(() => { hint.classList.remove('show'); }, 6000);
+    localStorage.setItem('swipe_hint_shown', '1');
+  }
+}
+
+// CHECKLIST
+document.querySelectorAll('.cl-i').forEach(item => {
+  const text = item.querySelector('.cl-l')?.textContent?.trim().substring(0, 50) || '';
+  const key = 'ghc_' + text.replace(/\s+/g,'_');
+  const saved = localStorage.getItem(key);
+  if (saved === '1') {
+    item.classList.add('do');
+    item.querySelector('.cl-c')?.classList.add('do');
+  }
+  item.addEventListener('click', function(e) {
+    const cb = this.querySelector('.cl-c');
+    const lbl = this.querySelector('.cl-l');
+    cb?.classList.toggle('do');
+    this.classList.toggle('do');
+    localStorage.setItem(key, this.classList.contains('do') ? '1' : '0');
+  });
+});
+
+// DETAILS SMOOTH OPEN
+document.querySelectorAll('details').forEach(d => {
+  d.addEventListener('toggle', function() {
+    if (this.open) {
+      this.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+  });
+});
+
+// CLOSE DRAWER ON BACKDROP SWIPE
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', e => {
+  const d = document.querySelector('.drawer');
+  if (!d.classList.contains('open')) return;
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  if (dx < -60) toggleDrawer(); // swipe left to close
+});
+</script>
+</body>
+</html>
