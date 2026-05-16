@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GraduaHUB — Roadmaps</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d0d0d;--bg2:#141414;--bg3:#1a1a1a;--bg4:#222;
+  --tx:#f0f0f0;--tx2:#999;--tx3:#666;
+  --grn:#42be65;--blu:#4589ff;--pur:#a56eff;--yel:#f1c21b;--red:#fa4d56;--teal:#08bdba;
+  --brd:#222;--r:8px;
+  --f:'IBM Plex Sans',sans-serif;--m:'IBM Plex Mono',monospace;
+}
+body{font-family:var(--f);background:var(--bg);color:var(--tx);line-height:1.6;font-size:14px;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.header{background:var(--bg2);border-bottom:1px solid var(--brd);padding:24px 0 0;position:sticky;top:0;z-index:100}
+.header-inner{max-width:960px;margin:0 auto;padding:0 24px}
+.header h1{font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
+.header h1 span{color:var(--pur)}
+.header p{font-size:13px;color:var(--tx2);margin-bottom:20px}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--brd)}
+.tab{padding:12px 24px;font-size:13px;font-weight:600;color:var(--tx3);cursor:pointer;border-bottom:2px solid transparent;transition:.15s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--f)}
+.tab:hover{color:var(--tx2)}
+.tab.active{color:var(--pur);border-bottom-color:var(--pur)}
+.tab .tab-num{display:inline-block;background:var(--bg4);color:var(--tx3);font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;margin-right:6px;font-family:var(--m)}
+.tab.active .tab-num{background:var(--pur);color:var(--bg)}
+
+/* MAIN */
+.main{max-width:960px;margin:0 auto;padding:32px 24px 80px}
+
+/* TAB CONTENT */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ROADMAP BLOCKS */
+.roadmap-section{margin-bottom:48px}
+.section-label{font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;font-family:var(--m)}
+.section-title{font-size:18px;font-weight:700;color:var(--tx);margin-bottom:16px;letter-spacing:-.3px}
+.section-title .highlight{color:var(--pur)}
+
+/* DIAGRAM BOX */
+.diagram{background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);padding:20px;margin-bottom:20px;overflow-x:auto;font-family:var(--m);font-size:12px;line-height:1.5;white-space:pre;color:var(--tx2)}
+.diagram .g{color:var(--grn)}
+.diagram .b{color:var(--blu)}
+.diagram .p{color:var(--pur)}
+.diagram .y{color:var(--yel)}
+.diagram .r{color:var(--red)}
+.diagram .t{color:var(--teal)}
+.diagram .w{color:var(--tx)}
+.diagram .dim{color:var(--tx3)}
+
+/* CHECKPOINT */
+.checkpoint{background:linear-gradient(135deg,rgba(165,110,255,.08),rgba(66,190,101,.05));border:1px solid rgba(165,110,255,.2);border-radius:var(--r);padding:16px 20px;margin:20px 0;font-size:13px}
+.checkpoint strong{color:var(--pur)}
+.checkpoint .check{color:var(--grn)}
+
+/* STATS BAR */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0}
+.stat-card{background:var(--bg3);border:1px solid var(--brd);border-radius:6px;padding:14px}
+.stat-label{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:600}
+.stat-value{font-size:22px;font-weight:700;font-family:var(--m)}
+.stat-value.grn{color:var(--grn)}
+.stat-value.blu{color:var(--blu)}
+.stat-value.pur{color:var(--pur)}
+.stat-value.yel{color:var(--yel)}
+.stat-desc{font-size:11px;color:var(--tx3);margin-top:4px}
+
+/* SPRINT CARDS */
+.sprint-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
+.sprint-card{background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);padding:16px;transition:.12s;position:relative;overflow:hidden}
+.sprint-card:hover{border-color:#333}
+.sprint-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.sprint-card.s0::before{background:var(--tx3)}
+.sprint-card.s1::before{background:var(--blu)}
+.sprint-card.s2::before{background:var(--grn)}
+.sprint-card.s3::before{background:var(--yel)}
+.sprint-card.s4::before{background:var(--pur)}
+.sprint-card.s5::before{background:var(--teal)}
+.sprint-card.s6::before{background:var(--red)}
+.sprint-card.s7::before{background:linear-gradient(90deg,var(--pur),var(--grn))}
+.sprint-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sprint-name{font-size:13px;font-weight:700;color:var(--tx)}
+.sprint-days{font-size:10px;font-family:var(--m);color:var(--tx3);background:var(--bg4);padding:2px 8px;border-radius:4px}
+.sprint-desc{font-size:12px;color:var(--tx2);margin-bottom:10px;line-height:1.5}
+.sprint-items{display:flex;flex-wrap:wrap;gap:4px}
+.sprint-item{font-size:10px;background:var(--bg4);color:var(--tx2);padding:2px 8px;border-radius:3px;font-family:var(--m)}
+
+/* MILESTONE LINE */
+.milestone-line{position:relative;padding:20px 0;margin:24px 0}
+.milestone-line::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:var(--bg4)}
+.milestone{position:relative;padding-left:32px;margin-bottom:16px}
+.milestone-dot{position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--m)}
+.milestone-dot.grn{background:var(--grn);color:var(--bg)}
+.milestone-dot.blu{background:var(--blu);color:var(--bg)}
+.milestone-dot.pur{background:var(--pur);color:var(--bg)}
+.milestone-dot.yel{background:var(--yel);color:var(--bg)}
+.milestone-dot.dim{background:var(--bg4);color:var(--tx3)}
+.milestone h4{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.milestone p{font-size:12px;color:var(--tx2);margin:0}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .header h1{font-size:18px}
+  .tab{padding:10px 14px;font-size:12px}
+  .main{padding:24px 14px 60px}
+  .diagram{font-size:10px;padding:14px}
+  .sprint-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>GraduaHUB <span>◆</span> Roadmaps</h1>
+    <p>Guia visual completo — do zero ao MVP na banca</p>
+    <div class="tabs">
+      <button class="tab active" data-tab="guideline">
+        <span class="tab-num">01</span> Guideline Técnico
+      </button>
+      <button class="tab" data-tab="estudos">
+        <span class="tab-num">02</span> Plano de Estudos
+      </button>
+      <button class="tab" data-tab="execucao">
+        <span class="tab-num">03</span> Plano de Execução
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 1: GUIDELINE -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-guideline">
+
+  <div class="section-label">Roadmap 01</div>
+  <h2 class="section-title">Guideline <span class="highlight">Técnico</span></h2>
+
+  <div class="diagram">
+<span class="p">                    ◆ META FINAL: MVP FUNCIONAL NA BANCA ◆</span>
+<span class="dim">                    ─────────────────────────────────────</span>
+
+<span class="w">╔══════════════════════════════════════════════════════════════════════╗</span>
+<span class="w">║</span>  <span class="g">FASE 1 — FUNDAÇÃO</span>  (Dias 1-5)                                   <span class="w">║</span>
+<span class="w">║</span>  Flutter SDK → Firebase → Estrutura → AuthService → PR #1          <span class="w">║</span>
+<span class="w">╚══════════════════════════════════════════════════════════════════════╝</span>
+
+<span class="w">╔══════════════════════════════════════════════════════════════════════╗</span>
+<span class="w">║</span>  <span class="b">FASE 2 — AUTH + NAVEGAÇÃO</span>  (Dias 6-10)                            <span class="w">║</span>
+<span class="w">║</span>  Login → Cadastro → Guarda de rota → BottomNav → PR #2             <span class="w">║</span>
+<span class="w">╚══════════════════════════════════════════════════════════════════════╝</span>
+
+<span class="w">╔══════════════════════════════════════════════════════════════════════╗</span>
+<span class="w">║</span>  <span class="y">FASE 3 — MÓDULOS</span>  (Dias 11-44)                                     <span class="w">║</span>
+<span class="w">║</span>  Dashboard → Rotina → Certificados → Pesquisa TCC → Radar Eventos  <span class="w">║</span>
+<span class="w">╚══════════════════════════════════════════════════════════════════════╝</span>
+
+<span class="w">╔══════════════════════════════════════════════════════════════════════╗</span>
+<span class="w">║</span>  <span class="p">FASE 4 — QUALIDADE + BANCA</span>  (Dias 45-50)                           <span class="w">║</span>
+<span class="w">║</span>  Testes → Correções → Dados demo → Slides → 3 ensaios              <span class="w">║</span>
+<span class="w">╚══════════════════════════════════════════════════════════════════════╝</span>
+  </div>
+
+  <!-- Fase 1 -->
+  <h3 style="color:var(--grn);margin-bottom:12px">▸ Fase 1 — Fundação</h3>
+
+  <div class="diagram">
+<span class="dim">  DIAS 1-2          DIAS 3-4            DIA 5</span>
+<span class="dim"> ┌──────────────┐ ┌──────────────┐ ┌──────────────┐</span>
+  │ Flutter SDK   │ │ Estrutura     │ │ Firebase     │
+  │ Android Studio│ │ pastas        │ │ conectado    │
+  │ flutter doctor│ │ Tema + Rotas  │ │ Auth + FS    │
+  │ Git/GitHub    │ │ main.dart     │ │ Regras seg.  │
+  │ Cria projeto  │ │ Provider      │ │ PR #1 merge  │
+<span class="dim"> └──────────────┘ └──────────────┘ └──────────────┘</span>
+  </div>
+
+  <div class="checkpoint">
+    <strong>◆ CHECKPOINT:</strong> <span class="check">✔</span> flutter run funciona sem erro<br>
+    <span class="check">✔</span> Firebase conectado (Auth, Firestore, Storage)<br>
+    <span class="check">✔</span> PR #1 aprovado e mergeado na develop
+  </div>
+
+  <!-- Fase 2 -->
+  <h3 style="color:var(--blu);margin-bottom:12px">▸ Fase 2 — Auth + Navegação</h3>
+
+  <div class="diagram">
+<span class="dim">  DIAS 6-7          DIAS 8-9            DIA 10</span>
+<span class="dim"> ┌──────────────┐ ┌──────────────┐ ┌──────────────┐</span>
+  │ LoginScreen   │ │ Guarda rota   │ │ PR #2 merge  │
+  │ RegisterScreen│ │ Sessão persis │ │ Testes fluxo │
+  │ AuthProvider  │ │ BottomNavBar  │ │ Correções    │
+  │ Erros PT-BR   │ │ Dashboard     │ │ Review grupo │
+  │ User Firestore│ │ Profile       │ │              │
+<span class="dim"> └──────────────┘ └──────────────┘ └──────────────┘</span>
+  </div>
+
+  <div class="checkpoint">
+    <strong>◆ CHECKPOINT:</strong> <span class="check">✔</span> Criar conta → dashboard → logout → login<br>
+    <span class="check">✔</span> Fechar e reabrir app continua logado<br>
+    <span class="check">✔</span> Mensagens de erro em português
+  </div>
+
+  <!-- Fase 3 - Modules -->
+  <h3 style="color:var(--yel);margin-bottom:12px">▸ Fase 3 — Módulos</h3>
+
+  <div class="sprint-grid">
+    <div class="sprint-card s2">
+      <div class="sprint-header">
+        <div class="sprint-name">Dashboard</div>
+        <div class="sprint-days">Dias 11-14</div>
+      </div>
+      <div class="sprint-desc">GridView de cards, ModuleCard widget, resumo de horas, progresso visual</div>
+      <div class="sprint-items">
+        <span class="sprint-item">GridView</span>
+        <span class="sprint-item">Provider</span>
+        <span class="sprint-item">StreamBuilder</span>
+        <span class="sprint-item">PR #3</span>
+      </div>
+    </div>
+    <div class="sprint-card s3">
+      <div class="sprint-header">
+        <div class="sprint-name">Rotina</div>
+        <div class="sprint-days">Dias 15-22</div>
+      </div>
+      <div class="sprint-desc">CRUD disciplinas, notas parciais, cálculo média, previsão final, faltas</div>
+      <div class="sprint-items">
+        <span class="sprint-item">Model</span>
+        <span class="sprint-item">Forms</span>
+        <span class="sprint-item">Validação</span>
+        <span class="sprint-item">PR #4</span>
+      </div>
+    </div>
+    <div class="sprint-card s4">
+      <div class="sprint-header">
+        <div class="sprint-name">Certificados</div>
+        <div class="sprint-days">Dias 23-30</div>
+      </div>
+      <div class="sprint-desc">Upload PDF/imagem, Storage, validação manual, progress ring no dashboard</div>
+      <div class="sprint-items">
+        <span class="sprint-item">FilePicker</span>
+        <span class="sprint-item">Storage</span>
+        <span class="sprint-item">Progress</span>
+        <span class="sprint-item">PR #5</span>
+      </div>
+    </div>
+    <div class="sprint-card s5">
+      <div class="sprint-header">
+        <div class="sprint-name">Pesquisa TCC</div>
+        <div class="sprint-days">Dias 31-37</div>
+      </div>
+      <div class="sprint-desc">OpenAlex API, decodificar abstract, ArticleCard, paginação</div>
+      <div class="sprint-items">
+        <span class="sprint-item">HTTP</span>
+        <span class="sprint-item">JSON</span>
+        <span class="sprint-item">API</span>
+        <span class="sprint-item">PR #6</span>
+      </div>
+    </div>
+    <div class="sprint-card s6">
+      <div class="sprint-header">
+        <div class="sprint-name">Radar Eventos</div>
+        <div class="sprint-days">Dias 38-44</div>
+      </div>
+      <div class="sprint-desc">Lista + mapa flutter_map, markers, popup info, filtro data</div>
+      <div class="sprint-items">
+        <span class="sprint-item">flutter_map</span>
+        <span class="sprint-item">Markers</span>
+        <span class="sprint-item">Filtro</span>
+        <span class="sprint-item">PR #7</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fase 4 -->
+  <h3 style="color:var(--pur);margin-bottom:12px">▸ Fase 4 — Qualidade + Banca</h3>
+
+  <div class="diagram">
+<span class="dim">  DIAS 45-47         DIAS 48-49          DIA 50</span>
+<span class="dim"> ┌───────────────┐ ┌───────────────┐ ┌──────────────┐</span>
+  │ Testes fluxo   │ │ Dados demo     │ │ Ensaio 1     │
+  │ Corrigir bugs  │ │ Contas teste   │ │ Ensaio 2     │
+  │ Empty/loading  │ │ Vídeo backup   │ │ Ensaio 3     │
+  │ UX final       │ │ Slides         │ │ Backup final │
+<span class="dim"> └───────────────┘ └───────────────┘ └──────────────┘</span>
+  </div>
+
+  <div class="checkpoint" style="border-color:var(--grn)">
+    <strong>◆ ENTREGA FINAL:</strong><br>
+    <span class="check">✔</span> Auth funcionando &nbsp; <span class="check">✔</span> Dashboard com dados &nbsp; <span class="check">✔</span> Rotina calculando<br>
+    <span class="check">✔</span> Certificados salvos &nbsp; <span class="check">✔</span> OpenAlex buscando &nbsp; <span class="check">✔</span> Radar exibindo<br>
+    <span class="check">✔</span> 3 ensaios realizados &nbsp; <span class="check">✔</span> Vídeo backup pronto &nbsp; <span class="check">✔</span> Slides prontos
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 2: PLANO DE ESTUDOS -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-estudos">
+
+  <div class="section-label">Roadmap 02</div>
+  <h2 class="section-title">Plano de <span class="highlight">Estudos</span></h2>
+  <p style="color:var(--tx2);margin-bottom:24px;font-size:14px">
+    Trilha de aprendizado do zero ao Flutter funcional — 4 semanas de capacitação + 4 semanas paralelas às sprints
+  </p>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-label">Duração</div>
+      <div class="stat-value grn">4 sem</div>
+      <div class="stat-desc">Capacitação intensiva</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Carga diária</div>
+      <div class="stat-value blu">2-3h</div>
+      <div class="stat-desc">Mínimo / Ideal</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Mini projetos</div>
+      <div class="stat-value pur">2</div>
+      <div class="stat-desc">Obrigatórios</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Meta final</div>
+      <div class="stat-value yel">100%</div>
+      <div class="stat-desc">Time pronto pra codar</div>
+    </div>
+  </div>
+
+  <!-- Semana 1 -->
+  <h3 style="color:var(--blu);margin-bottom:4px">Semana 1 — Dart + Flutter Base</h3>
+  <p style="color:var(--tx3);font-size:12px;margin-bottom:12px">
+    Nível atual: ❌ nunca programou &nbsp;→&nbsp; Meta: ✔ app com 3 telas navegáveis
+  </p>
+
+  <div class="diagram">
+<span class="dim">  SEG               TER               QUA               QUI               SEX               SÁB</span>
+<span class="dim"> ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐</span>
+  │ <span class="b">Dart I</span>          │ │ <span class="b">Dart II</span>         │ │ <span class="g">Flutter I</span>       │ │ <span class="g">Flutter II</span>      │ │ <span class="g">Listas</span>         │ │ Reforço        │
+  │ Variáveis       │ │ Classes         │ │ Primeiro app   │ │ Navegação      │ │ Layout         │ │ +              │
+  │ Funções         │ │ Listas          │ │ Widgets        │ │ Forms          │ │ Grids          │ │ Revisão        │
+  │ Null safety     │ │ Mapas           │ │                │ │                │ │                │ │                │
+<span class="dim"> └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘</span>
+  │                 │                  │                  │                  │                  │
+  ▼                 ▼                  ▼                  ▼                  ▼                  ▼
+  10 ex            Classes            App roda           3 telas +          Lista 20          Tudo
+  resolvidos       Aluno com          no emulador        forms validados    cards custom      funcionando
+  em Dart          média
+  </div>
+
+  <div class="checkpoint">
+    <span class="check">✔</span> App com 3 telas navegáveis + formulário com validação rodando no emulador
+  </div>
+
+  <!-- Semana 2 -->
+  <h3 style="color:var(--grn);margin-bottom:4px;margin-top:32px">Semana 2 — Firebase + Provider</h3>
+  <p style="color:var(--tx3);font-size:12px;margin-bottom:12px">
+    Nível atual: ✔ faz telas estáticas &nbsp;→&nbsp; Meta: ✔ app com login real + dados na nuvem
+  </p>
+
+  <div class="diagram">
+<span class="dim">  SEG               TER               QUA               QUI               SEX               SÁB</span>
+<span class="dim"> ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐</span>
+  │ Provider        │ │ Firebase Auth   │ │ Firestore CRUD  │ │ Firebase Storage│ │ HTTP + OpenAlex │ │ Reforço        │
+  │ ChangeNotifier  │ │ Login/Cadastro  │ │ Models toMap   │ │ Upload imagem  │ │ API             │ │ +              │
+  │ Consumer        │ │                 │ │ StreamBuilder  │ │ Image picker   │ │ JSON decode    │ │ Revisão        │
+<span class="dim"> └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘</span>
+  │                 │                  │                  │                  │                  │
+  ▼                 ▼                  ▼                  ▼                  ▼                  ▼
+  ToDo exemplo     App com login      Lista em tempo     Upload foto       Busca artigos     Domínio de
+  rodando          funcional          real               exibindo           OpenAlex          tudo
+  </div>
+
+  <div class="checkpoint">
+    <span class="check">✔</span> 2 apps rodando: (1) ToDo com Provider (2) Login + CRUD Firestore<br>
+    <span class="check">✔</span> Cada membro entrega individualmente
+  </div>
+
+  <!-- Semana 3 -->
+  <h3 style="color:var(--pur);margin-bottom:4px;margin-top:32px">Semana 3 — Mini Projetos Obrigatórios</h3>
+  <p style="color:var(--tx3);font-size:12px;margin-bottom:12px">
+    Nível atual: ✔ sabe conectar Flutter + Firebase &nbsp;→&nbsp; Meta: ✔ 2 projetos completos em dupla
+  </p>
+
+  <div class="sprint-grid" style="grid-template-columns:1fr 1fr">
+    <div class="sprint-card s4">
+      <div class="sprint-header">
+        <div class="sprint-name">Mini Projeto 1 — ToDo</div>
+        <div class="sprint-days">2 dias</div>
+      </div>
+      <div class="sprint-desc">
+        Login Firebase Auth · CRUD Firestore · Marcar concluída · Filtrar pendentes/concluídas · Provider + loading + erro + vazio
+      </div>
+    </div>
+    <div class="sprint-card s5">
+      <div class="sprint-header">
+        <div class="sprint-name">Mini Projeto 2 — CRUD + Upload</div>
+        <div class="sprint-days">2 dias</div>
+      </div>
+      <div class="sprint-desc">
+        Cadastro com foto · Upload Firebase Storage · Lista StreamBuilder · Editar/Excluir com confirmação
+      </div>
+    </div>
+  </div>
+
+  <!-- Semana 4 -->
+  <h3 style="color:var(--teal);margin-bottom:4px;margin-top:32px">Semana 4 — Avançado + Integrações</h3>
+
+  <div class="diagram">
+<span class="dim">  SEG               TER               QUA               QUI               SEX</span>
+<span class="dim"> ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐</span>
+  │ Nav avançada    │ │ Maps            │ │ OCR             │ │ Animações       │ │ Revisão Geral  │
+  │ BottomNav       │ │ flutter_map     │ │ ML Kit text     │ │ AnimatedCont.  │ │ Juntar tudo    │
+  │ IndexedStack    │ │ Markers         │ │ recognition     │ │ Hero            │ │                │
+<span class="dim"> └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘</span>
+  </div>
+
+  <div class="checkpoint" style="border-color:var(--grn)">
+    <strong>◆ META FINAL DOS ESTUDOS:</strong> Cada membro consegue:<br>
+    <span class="check">✔</span> Criar tela Flutter com formulário<br>
+    <span class="check">✔</span> Navegar entre telas<br>
+    <span class="check">✔</span> Salvar e ler dados no Firestore<br>
+    <span class="check">✔</span> Implementar login com Firebase Auth<br>
+    <span class="check">✔</span> Subir feature via branch + PR
+  </div>
+
+  <!-- Progress bar -->
+  <div style="margin-top:32px">
+    <h3 style="margin-bottom:12px">📊 Progresso da Trilha</h3>
+    <div style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);margin-bottom:4px">
+        <span>Semana 1 — Dart + Flutter base</span>
+        <span>40%</span>
+      </div>
+      <div style="height:6px;background:var(--bg4);border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:40%;background:var(--blu);border-radius:3px"></div>
+      </div>
+    </div>
+    <div style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);margin-bottom:4px">
+        <span>Semana 2 — Firebase + Provider</span>
+        <span>60%</span>
+      </div>
+      <div style="height:6px;background:var(--bg4);border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:60%;background:var(--grn);border-radius:3px"></div>
+      </div>
+    </div>
+    <div style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);margin-bottom:4px">
+        <span>Semana 3 — Mini projetos</span>
+        <span>90%</span>
+      </div>
+      <div style="height:6px;background:var(--bg4);border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:90%;background:var(--pur);border-radius:3px"></div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);margin-bottom:4px">
+        <span>Semana 4 — Tópicos avançados</span>
+        <span>100%</span>
+      </div>
+      <div style="height:6px;background:var(--bg4);border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:100%;background:var(--pur);border-radius:3px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semanas 5-8 -->
+  <div style="margin-top:32px">
+    <h3 style="margin-bottom:8px">Semanas 5-8 — Estudo Paralelo às Sprints</h3>
+    <div class="diagram">
+<span class="w">  SPRINT → Estudo necessário</span>
+  Auth + Nav     → Provider, Firebase Auth, Navigator
+  Dashboard      → GridView, Cards, StreamBuilder
+  Rotina         → Forms, cálculos, validação
+  Certificados   → ImagePicker, Storage, File
+  Pesquisa       → HTTP, JSON, ListView
+  Radar          → flutter_map, geolocator, markers
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 3: PLANO DE EXECUÇÃO -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-execucao">
+
+  <div class="section-label">Roadmap 03</div>
+  <h2 class="section-title">Plano de <span class="highlight">Execução</span></h2>
+  <p style="color:var(--tx2);margin-bottom:24px;font-size:14px">
+    10 semanas · 50 dias úteis · 8 sprints · do zero ao MVP na banca
+  </p>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-label">Duração</div>
+      <div class="stat-value grn">50 dias</div>
+      <div class="stat-desc">10 semanas corridas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Sprints</div>
+      <div class="stat-value blu">8</div>
+      <div class="stat-desc">0 a 7</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">PRs esperados</div>
+      <div class="stat-value pur">7</div>
+      <div class="stat-desc">1 por sprint</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Equipe</div>
+      <div class="stat-value yel">4-6</div>
+      <div class="stat-desc">pessoas</div>
+    </div>
+  </div>
+
+  <!-- Timeline macro -->
+  <div style="margin-bottom:32px">
+    <h3 style="margin-bottom:12px">Timeline Macro</h3>
+    <div class="diagram">
+<span class="dim">  SEM 1     SEM 2     SEM 3     SEM 4     SEM 5     SEM 6     SEM 7     SEM 8     SEM 9     SEM 10</span>
+<span class="dim"> ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐</span>
+  │ <span class="dim">Fundac</span> │ │ <span class="b">Auth</span>   │ │ <span class="g">Dash</span>   │ │ <span class="y">Rotina</span> │ │ <span class="y">Rotina</span> │ │ <span class="p">Certif</span> │ │ <span class="t">Pesq</span>   │ │ <span class="r">Radar</span>  │ │ <span class="p">Polim</span>  │ │ <span class="g">Banca</span>  │
+<span class="dim"> └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘</span>
+    </div>
+  </div>
+
+  <!-- Sprints -->
+  <h3 style="margin-bottom:16px">Sprints Detalhadas</h3>
+
+  <div class="sprint-grid">
+    <div class="sprint-card s0">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 0 — Fundação</div>
+        <div class="sprint-days">Dias 1-5</div>
+      </div>
+      <div class="sprint-desc">Flutter SDK, Android Studio, emulador, GitHub, Firebase connect, estrutura pastas, tema, rotas, AuthService, FirestoreService</div>
+      <div class="sprint-items">
+        <span class="sprint-item">flutter run ✅</span>
+        <span class="sprint-item">Firebase ✅</span>
+        <span class="sprint-item">PR #1</span>
+      </div>
+    </div>
+    <div class="sprint-card s1">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 1 — Auth + Nav</div>
+        <div class="sprint-days">Dias 6-10</div>
+      </div>
+      <div class="sprint-desc">Login/cadastro, guarda de rota, sessão persistente, BottomNavBar, Dashboard esqueleto, ProfileScreen</div>
+      <div class="sprint-items">
+        <span class="sprint-item">Login ✅</span>
+        <span class="sprint-item">Logout ✅</span>
+        <span class="sprint-item">PR #2</span>
+      </div>
+    </div>
+    <div class="sprint-card s2">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 2 — Dashboard</div>
+        <div class="sprint-days">Dias 11-14</div>
+      </div>
+      <div class="sprint-desc">GridView ModuleCard, DashboardProvider, resumo horas, contagem disciplinas, progresso visual</div>
+      <div class="sprint-items">
+        <span class="sprint-item">Cards ✅</span>
+        <span class="sprint-item">Resumo ✅</span>
+        <span class="sprint-item">PR #3</span>
+      </div>
+    </div>
+    <div class="sprint-card s3">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 3 — Rotina</div>
+        <div class="sprint-days">Dias 15-22</div>
+      </div>
+      <div class="sprint-desc">CRUD disciplinas, notas parciais, cálculo média ponderada, previsão nota final, controle faltas, alertas visuais</div>
+      <div class="sprint-items">
+        <span class="sprint-item">Média ✅</span>
+        <span class="sprint-item">Faltas ✅</span>
+        <span class="sprint-item">PR #4</span>
+      </div>
+    </div>
+    <div class="sprint-card s4">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 4 — Certificados</div>
+        <div class="sprint-days">Dias 23-30</div>
+      </div>
+      <div class="sprint-desc">Upload PDF/imagem, Firebase Storage, validação manual horas, progress ring, total no Dashboard</div>
+      <div class="sprint-items">
+        <span class="sprint-item">Upload ✅</span>
+        <span class="sprint-item">Progresso ✅</span>
+        <span class="sprint-item">PR #5</span>
+      </div>
+    </div>
+    <div class="sprint-card s5">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 5 — Pesquisa TCC</div>
+        <div class="sprint-days">Dias 31-37</div>
+      </div>
+      <div class="sprint-desc">OpenAlex API, decodificar abstract invertido, ArticleCard, paginação, filtro ano</div>
+      <div class="sprint-items">
+        <span class="sprint-item">API ✅</span>
+        <span class="sprint-item">Cards ✅</span>
+        <span class="sprint-item">PR #6</span>
+      </div>
+    </div>
+    <div class="sprint-card s6">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 6 — Radar Eventos</div>
+        <div class="sprint-days">Dias 38-44</div>
+      </div>
+      <div class="sprint-desc">Lista eventos, flutter_map com markers, popup info, filtro por data, link inscrição</div>
+      <div class="sprint-items">
+        <span class="sprint-item">Mapa ✅</span>
+        <span class="sprint-item">Lista ✅</span>
+        <span class="sprint-item">PR #7</span>
+      </div>
+    </div>
+    <div class="sprint-card s7">
+      <div class="sprint-header">
+        <div class="sprint-name">Sprint 7 — Qualidade + Banca</div>
+        <div class="sprint-days">Dias 45-50</div>
+      </div>
+      <div class="sprint-desc">Testes fluxo completo, correção bugs, dados demo, contas teste, vídeo backup, slides, 3 ensaios</div>
+      <div class="sprint-items">
+        <span class="sprint-item">Testes ✅</span>
+        <span class="sprint-item">Demo ✅</span>
+        <span class="sprint-item">Banca 🎯</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestones -->
+  <h3 style="margin-top:32px;margin-bottom:16px">Marcos (Milestones)</h3>
+
+  <div class="milestone-line">
+    <div class="milestone">
+      <div class="milestone-dot blu">1</div>
+      <h4>Fim da Semana 1 — Fundação completa</h4>
+      <p>flutter run ✅ · Firebase conectado ✅ · PR #1 mergeado ✅</p>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot blu">2</div>
+      <h4>Fim da Semana 2 — Auth funcional</h4>
+      <p>Login/cadastro/logout ✅ · Sessão persistente ✅ · BottomNav ✅</p>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot grn">3</div>
+      <h4>Fim da Semana 4 — Rotina completa</h4>
+      <p>CRUD disciplinas ✅ · Cálculo média + previsão final ✅ · Faltas ✅</p>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot grn">4</div>
+      <h4>Fim da Semana 6 — Certificados funcionando</h4>
+      <p>Upload ✅ · Lista ✅ · Progresso no Dashboard ✅</p>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot pur">5</div>
+      <h4>Fim da Semana 7 — Pesquisa TCC + Radar</h4>
+      <p>OpenAlex ✅ · Mapa eventos ✅ · Todos os módulos integrados ✅</p>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot yel">6</div>
+      <h4>Fim da Semana 8 — App estável</h4>
+      <p>Bugs críticos corrigidos ✅ · UX revisada ✅ · Dados demo prontos ✅</p>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot pur">7</div>
+      <h4>Dia 50 — Banca!</h4>
+      <p>3 ensaios realizados ✅ · Slides prontos ✅ · Vídeo backup ✅</p>
+    </div>
+  </div>
+
+  <!-- Contingência -->
+  <div style="margin-top:32px">
+    <h3 style="margin-bottom:12px">⚠️ Plano de Contingência (se faltar tempo)</h3>
+    <div class="diagram">
+<span class="y">  Prioridade 1 (NÃO PULAR):</span>
+    Auth + Dashboard  →  Rotina  →  Certificados v1
+
+<span class="dim">  Prioridade 2 (REDUZIR ESCOPO):</span>
+    Pesquisa TCC (sem paginação)  →  Radar (só lista, sem mapa)
+
+<span class="r">  Prioridade 3 (CORTAR):</span>
+    OCR automático  →  Scraper Python  →  Notificações push
+    </div>
+  </div>
+
+  <!-- Sprint 0 detail -->
+  <div style="margin-top:32px">
+    <h3 style="margin-bottom:12px">Exemplo: Dia a Dia da Sprint 0</h3>
+    <div class="diagram">
+<span class="w">  Dia 1 — Todos instalam Flutter SDK + Android Studio + emulador</span>
+<span class="w">  Dia 2 —</span> Pessoa A: GitHub + flutter create + Firebase console
+<span class="dim">          Pessoa B: flutter run no emulador</span>
+<span class="dim">          Pessoa C: flutterfire configure</span>
+<span class="dim">          Pessoa D: organiza board + docs</span>
+<span class="w">  Dia 3 —</span> Pessoa A: pastas + main.dart + routes
+<span class="dim">          Pessoa B: tema + componentes base</span>
+<span class="w">  Dia 4 —</span> Pessoa A: AuthService + AuthProvider
+<span class="dim">          Pessoa B: LoginScreen + RegisterScreen</span>
+<span class="dim">          Pessoa C: FirestoreService</span>
+<span class="w">  Dia 5 —</span> Pessoa C: regras segurança Firestore
+<span class="dim">          Pessoa D: testes + checklist</span>
+<span class="dim">          Todos: PR #1 + review + merge</span>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
