@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="GraduaHUB — Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP na banca.">
 <title>GraduaHUB — Guia Completo</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
@@ -44,7 +44,8 @@
   --r:12px;
   --r-sm:8px;
   --r-lg:16px;
-  --f:'Inter',system-ui,sans-serif;
+  --f:'Plus Jakarta Sans',system-ui,sans-serif;
+  --f-alt:'Space Grotesk',system-ui,sans-serif;
   --m:'JetBrains Mono',monospace;
   --safe-b:env(safe-area-inset-bottom,0px);
   --safe-t:env(safe-area-inset-top,0px);
@@ -203,6 +204,29 @@ body.no-scroll{overflow:hidden;position:fixed;width:100%}
 .badge-dot.pur{background:var(--pur);box-shadow:0 0 6px var(--pur-glow)}
 .badge-dot.blu{background:var(--blu);box-shadow:0 0 6px var(--blu-glow)}
 .badge-dot.yel{background:var(--yel);box-shadow:0 0 6px rgba(234,179,8,.3)}
+
+/* ═══ NOISE TEXTURE OVERLAY ═══ */
+.noise-overlay{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:256px 256px;mix-blend-mode:overlay;
+}
+[data-theme="light"] .noise-overlay{opacity:.12}
+
+/* ═══ DECORATIVE GEOMETRIC RINGS ═══ */
+.geo-ring{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  opacity:.08;will-change:transform;
+}
+.geo-ring-1{width:500px;height:500px;border:1px solid var(--pur);top:-120px;right:-80px;animation:orbit1 30s linear infinite}
+.geo-ring-2{width:350px;height:350px;border:1px solid var(--blu);bottom:10%;left:-100px;animation:orbit1 40s linear infinite reverse}
+.geo-ring-3{width:200px;height:200px;border:1px solid var(--teal);top:40%;right:5%;animation:orbit1 25s linear infinite}
+.geo-ring-4{width:150px;height:150px;border:1px dashed var(--pur);bottom:30%;right:20%;animation:orbit1 20s linear infinite reverse}
+.geo-dot-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background-image:radial-gradient(circle,var(--tx4) .5px,transparent .5px);
+  background-size:48px 48px;opacity:.15;
+}
 
 /* ═══ GLASS CARD VARIANT ═══ */
 .glass-card{
@@ -387,8 +411,8 @@ body.no-scroll{overflow:hidden;position:fixed;width:100%}
 /* ═══ SECTIONS ═══ */
 .section{margin-bottom:48px}
 .sec-tag{
-  font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase;
-  letter-spacing:1.5px;margin-bottom:5px;font-family:var(--m)
+  font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;
+  letter-spacing:1.8px;margin-bottom:5px;font-family:var(--f-alt)
 }
 .sec-title{
   font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:14px;
@@ -574,7 +598,7 @@ details[open]{animation:fadeUp .3s ease}
   opacity:0;transition:opacity .4s;pointer-events:none;
 }
 .st-card:hover::after{opacity:1}
-.st-l{font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;font-family:var(--m)}
+.st-l{font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;font-family:var(--f-alt)}
 .st-n{font-size:24px;font-weight:800;font-family:var(--m);letter-spacing:-1px;line-height:1}
 .st-n.grn{color:var(--grn)}
 .st-n.blu{color:var(--blu)}
@@ -917,10 +941,14 @@ details[open]{animation:fadeUp .3s ease}
 /* ═══ CONFETTI CANVAS ═══ */
 #confettiCanvas{position:fixed;inset:0;z-index:9999;pointer-events:none}
 
-/* ═══ 3D TILT ═══ */
-.tilt-wrap{perspective:1000px;transform-style:preserve-3d}
-.tilt-inner{transition:transform .1s ease;transform-style:preserve-3d;will-change:transform}
-.tilt-inner .card,.tilt-inner .sc,.tilt-inner .st-card,.tilt-inner .pc,.tilt-inner .tc{transition:transform .1s ease,box-shadow .1s ease}
+/* ═══ 3D TILT (enhanced) ═══ */
+.tilt-wrap{perspective:1200px;transform-style:preserve-3d}
+.tilt-inner{transition:transform .15s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d;will-change:transform}
+.tilt-inner .card,.tilt-inner .sc,.tilt-inner .st-card,.tilt-inner .pc,.tilt-inner .tc,.tilt-inner .tl-step-badge,.tilt-inner .split-card{transition:transform .15s ease,box-shadow .15s ease}
+
+/* ═══ SECTION TITLE DECORATION ═══ */
+.sec-title-wrap{position:relative;display:inline-block;margin-bottom:14px}
+.sec-title-bar{width:0;height:3px;border-radius:2px;margin-top:6px;background:linear-gradient(90deg,var(--sec-accent,var(--pur)),transparent);transition:width 1s cubic-bezier(.22,1,.36,1)}
 
 /* ═══ ROADMAP POPUP ═══ */
 .road-popup{position:fixed;bottom:20px;left:16px;right:16px;max-width:400px;margin:0 auto;background:rgba(14,14,17,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--brd2);border-radius:14px;padding:18px;z-index:300;transform:translateY(120px);opacity:0;transition:all .5s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 40px rgba(0,0,0,.6);pointer-events:none}
@@ -950,6 +978,12 @@ details[open]{animation:fadeUp .3s ease}
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
+<div class="geo-ring geo-ring-1"></div>
+<div class="geo-ring geo-ring-2"></div>
+<div class="geo-ring geo-ring-3"></div>
+<div class="geo-ring geo-ring-4"></div>
+<div class="geo-dot-grid"></div>
+<div class="noise-overlay"></div>
 
 <a href="#main-content" class="skip-link" tabindex="1">Pular para conteúdo</a>
 
@@ -2369,9 +2403,19 @@ observeInContainer('.section', entries => {
     rev.observe(el);
   });
 
-  // Apply card-grow + card-shine to interactive cards
-  document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co').forEach(el => {
+  // Apply card-grow + card-shine + 3D tilt to interactive cards
+  document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co, .split-card').forEach(el => {
     el.classList.add('card-grow', 'card-shine');
+    // Wrap in tilt container for 3D perspective effect
+    if (!el.closest('.tilt-inner') && !el.closest('.tl-detail')) {
+      const wrap = document.createElement('div');
+      wrap.className = 'tilt-wrap';
+      const inner = document.createElement('div');
+      inner.className = 'tilt-inner';
+      el.parentNode.insertBefore(wrap, el);
+      wrap.appendChild(inner);
+      inner.appendChild(el);
+    }
   });
 
   function scrambleText(el){
@@ -2852,6 +2896,70 @@ document.querySelectorAll('details').forEach(d => {
 
     // Observe the shimmer element (which acts as the trigger point)
     obs.observe(shimmer);
+  });
+})();
+
+// ─── SECTION TITLE BAR REVEAL ───
+(function(){
+  const titles = document.querySelectorAll('.sec-title');
+  titles.forEach(title => {
+    const wrap = document.createElement('div');
+    wrap.className = 'sec-title-wrap';
+    title.parentNode.insertBefore(wrap, title);
+    wrap.appendChild(title);
+    const bar = document.createElement('div');
+    bar.className = 'sec-title-bar';
+    wrap.appendChild(bar);
+  });
+  const bars = document.querySelectorAll('.sec-title-bar');
+  if (!bars.length) return;
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        entry.target.style.width = '60px';
+      }
+    });
+  }, { threshold: .3, rootMargin: '0px 0px -40px 0px', root });
+  bars.forEach(b => {
+    b.style.width = '0';
+    obs.observe(b);
+  });
+})();
+
+// ─── ENHANCED 3D TILT ON CARDS ───
+(function(){
+  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (prefersReduced || !matchMedia('(hover:hover)').matches) return;
+  const wrappers = document.querySelectorAll('.tilt-wrap');
+  if (!wrappers.length) return;
+  let raf = null;
+  wrappers.forEach(wrap => {
+    wrap.addEventListener('mousemove', function(e){
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const dx = (x - cx) / cx;
+      const dy = (y - cy) / cy;
+      const inner = this.querySelector('.tilt-inner');
+      if (!inner) return;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const rx = dy * -6;
+        const ry = dx * 6;
+        inner.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
+      });
+    });
+    wrap.addEventListener('mouseleave', function(){
+      const inner = this.querySelector('.tilt-inner');
+      if (!inner) return;
+      if (raf) cancelAnimationFrame(raf);
+      inner.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+    });
   });
 })();
 
