@@ -1784,9 +1784,14 @@ observeInContainer('.section', entries => {
     });
   }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
 
-  // Apply stagger-enter to children of grids and direct cards in sections
-  document.querySelectorAll('.sg > *, .pg > *, .cg > *, .tg > *, .sw > *, .cl > *, .section > .card, .section > .co').forEach(el => {
+  // Apply stagger-enter to children of observed containers and section-level cards
+  document.querySelectorAll('.sg > *, .pg > *, .cg > *, .tg > *, .cl > *, .section > .card, .section > .co').forEach(el => {
     el.classList.add('stagger-enter');
+  });
+  // Add .sd to the reveal observer so study-week cards animate in
+  document.querySelectorAll('.sd').forEach(el => {
+    el.classList.add('stagger-enter');
+    rev.observe(el);
   });
 
   // Apply card-grow + card-shine to interactive cards
