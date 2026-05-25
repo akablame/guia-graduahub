@@ -1,0 +1,3192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#08080a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="GraduaHUB — Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP na banca. Planos, roadmaps, testes e deploy para equipes TDS.">
+<meta name="keywords" content="SENAI, Flutter, Firebase, Projeto Integrador, TDS, GraduaHUB, mobile, dart">
+<meta name="author" content="Equipe GraduaHUB SENAI">
+<meta name="robots" content="index, follow">
+<meta name="revisit-after" content="7 days">
+
+<!-- Open Graph -->
+<meta property="og:title" content="GraduaHUB — Guia Completo do Projeto Integrador">
+<meta property="og:description" content="Do zero ao MVP na banca: guideline técnico, planos de estudo/execução, testes, git, deploy e roadmaps visuais.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akablame.github.io/guia-graduahub/">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GraduaHUB — Guia Completo">
+<meta name="twitter:description" content="Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP.">
+
+<!-- Favicon (SVG inline) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23141418'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23a855f7' font-family='system-ui' font-weight='bold'>G</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23141418'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23a855f7' font-family='system-ui' font-weight='bold'>G</text></svg>">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "GraduaHUB — Guia Completo",
+  "description": "Guia completo do Projeto Integrador SENAI: Flutter + Firebase, do zero ao MVP na banca.",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Student"
+  },
+  "about": {
+    "@type": "Course",
+    "name": "Projeto Integrador SENAI TDS",
+    "description": "Desenvolvimento de aplicativo acadêmico com Flutter e Firebase"
+  },
+  "inLanguage": "pt-BR",
+  "dateModified": "2026-05-16"
+}
+</script>
+
+<title>GraduaHUB — Guia Completo</title>
+
+<!-- Google Fonts (preconnect + deferred) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --bg:#08080a;
+  --bg2:#0e0e11;
+  --bg3:#151518;
+  --bg4:#1c1c21;
+  --bg5:#25252b;
+  --bg6:#2e2e36;
+  --tx:#e8e8ed;
+  --tx2:#9f9fab;
+  --tx3:#6b6b78;
+  --tx4:#4a4a54;
+  --grn:#22c55e;
+  --grn-bg:rgba(34,197,94,.08);
+  --grn-glow:rgba(34,197,94,.15);
+  --blu:#3b82f6;
+  --blu-bg:rgba(59,130,246,.08);
+  --blu-glow:rgba(59,130,246,.15);
+  --pur:#a855f7;
+  --pur-bg:rgba(168,85,247,.08);
+  --pur-glow:rgba(168,85,247,.15);
+  --yel:#eab308;
+  --yel-bg:rgba(234,179,8,.08);
+  --red:#ef4444;
+  --red-bg:rgba(239,68,68,.08);
+  --teal:#14b8a6;
+  --teal-bg:rgba(20,184,166,.08);
+  --brd:#1c1c21;
+  --brd2:#26262c;
+  --brd3:#33333d;
+  --r:12px;
+  --r-sm:8px;
+  --r-lg:16px;
+  --f:'Plus Jakarta Sans',system-ui,sans-serif;
+  --f-alt:'Space Grotesk',system-ui,sans-serif;
+  --m:'JetBrains Mono',monospace;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-t:env(safe-area-inset-top,0px);
+  --glass-bg:rgba(21,21,24,.75);
+  --glass-brd:rgba(255,255,255,.06);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+  --transition-fast:.2s ease;
+  --transition-med:.35s cubic-bezier(.22,1,.36,1);
+  --transition-slow:.6s cubic-bezier(.22,1,.36,1);
+}
+
+::selection{background:rgba(168,85,247,.35);color:#fff}
+::-moz-selection{background:rgba(168,85,247,.35);color:#fff}
+
+:focus-visible{outline:2px solid var(--pur);outline-offset:2px;border-radius:4px}
+
+html{scroll-behavior:smooth;font-size:16px;scrollbar-width:thin;scrollbar-color:var(--bg5) transparent}
+body{font-family:var(--f);background:var(--bg);color:var(--tx);line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;padding-top:52px;min-height:100vh}
+body.no-scroll{overflow:hidden;position:fixed;width:100%;overscroll-behavior:none}
+
+@media(min-width:1024px){
+  body{padding-top:0;display:flex;overflow:hidden}
+}
+
+/* ═══ CUSTOM SCROLLBAR ═══ */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--bg6)}
+
+/* ═══ CURSOR FOLLOWER ═══ */
+.cursor-follower{
+  position:fixed;pointer-events:none;z-index:99999;width:20px;height:20px;
+  border-radius:50%;background:radial-gradient(circle,var(--pur) 0%,transparent 70%);
+  opacity:0;transform:translate(-50%,-50%) scale(0);
+  transition:opacity .6s ease,transform .3s ease;
+  will-change:transform,left,top;
+}
+.cursor-follower.show{opacity:.35;transform:translate(-50%,-50%) scale(1)}
+@media(hover:none)and(pointer:coarse){.cursor-follower{display:none}}
+
+/* ═══ THEME TOGGLE ═══ */
+.theme-toggle{
+  position:fixed;bottom:80px;right:16px;z-index:100;
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--brd2);
+  background:var(--bg3);color:var(--tx2);cursor:pointer;display:flex;
+  align-items:center;justify-content:center;
+  transition:all var(--transition-med);box-shadow:0 4px 16px rgba(0,0,0,.4);
+  opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;
+}
+.theme-toggle.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.theme-toggle:hover{background:var(--bg4);border-color:var(--brd3);color:var(--tx);transform:scale(1.1)}
+.theme-toggle:active{transform:scale(.92)}
+.theme-toggle svg{width:18px;height:18px;display:block}
+
+/* ═══ LIGHT THEME ═══ */
+[data-theme="light"]{
+  --bg:#f5f5f7;
+  --bg2:#eeeeef;
+  --bg3:#e8e8ed;
+  --bg4:#dddde3;
+  --bg5:#c8c8d0;
+  --bg6:#b8b8c2;
+  --tx:#1a1a24;
+  --tx2:#4a4a54;
+  --tx3:#6b6b78;
+  --tx4:#8a8a94;
+  --brd:#d0d0d8;
+  --brd2:#c0c0ca;
+  --brd3:#aaaab4;
+  --glass-bg:rgba(245,245,247,.8);
+  --glass-brd:rgba(0,0,0,.06);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.1);
+  --grn-bg:rgba(34,197,94,.12);
+  --blu-bg:rgba(59,130,246,.12);
+  --pur-bg:rgba(168,85,247,.12);
+  --yel-bg:rgba(234,179,8,.12);
+  --red-bg:rgba(239,68,68,.12);
+  --teal-bg:rgba(20,184,166,.12);
+}
+[data-theme="light"] .card{background:rgba(255,255,255,.7);border-color:var(--brd)}
+[data-theme="light"] .card:hover{border-color:var(--brd2)}
+[data-theme="light"] .card-b code{background:var(--bg3)}
+[data-theme="light"] .card-b pre{background:var(--bg2)}
+[data-theme="light"] .sc,.st-card,.pc,.co{background:rgba(255,255,255,.7)}
+[data-theme="light"] .drawer{background:rgba(238,238,239,.97)}
+[data-theme="light"] .topbar{background:rgba(238,238,239,.85)}
+[data-theme="light"] .road-dot.dim{background:var(--bg4);border-color:var(--bg4)}
+[data-theme="light"] .sd{background:var(--bg2)}
+[data-theme="light"] .tc{background:var(--bg2)}
+[data-theme="light"] .cl-progress{background:rgba(255,255,255,.5)}
+[data-theme="light"] .ce{background:rgba(255,255,255,.5)}
+[data-theme="light"] .co::after{background:linear-gradient(135deg,transparent 60%,rgba(0,0,0,.02))}
+[data-theme="light"] .cl-i:hover{background:var(--bg3)}
+[data-theme="light"] .milestone-highlight{border-color:var(--brd2)}
+[data-theme="light"] .shimmer-line{background:linear-gradient(90deg,var(--bg3) 25%,var(--bg4) 50%,var(--bg3) 75%)}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--f);background:var(--bg);color:var(--tx);
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-top:52px;min-height:100vh;
+}
+body.no-scroll{overflow:hidden;position:fixed;width:100%;overscroll-behavior:none}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(168,85,247,.15),0 0 20px rgba(168,85,247,.05)}50%{box-shadow:0 0 16px rgba(168,85,247,.3),0 0 40px rgba(168,85,247,.1)}}
+@keyframes borderGlow{0%,100%{border-color:var(--brd2)}50%{border-color:rgba(168,85,247,.3)}}
+@keyframes gradientText{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes float-delayed{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes orbit1{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+@keyframes breathe{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes rotate-glow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes shine-slide{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+@keyframes morph{0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}}
+
+/* ═══ REDUCED MOTION ═══ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ═══ SHIMMER LINES (skeleton) ═══ */
+.shimmer-line{
+  height:12px;border-radius:6px;background:linear-gradient(90deg,var(--bg4) 25%,var(--bg5) 50%,var(--bg4) 75%);
+  background-size:200% 100%;animation:shimmer 1.5s ease infinite;margin-bottom:8px;
+}
+.shimmer-line:last-child{width:60%}
+.shimmer-line.wide{width:100%}
+.shimmer-line.med{width:75%}
+.shimmer-line.narrow{width:45%}
+
+/* ═══ SECTION GLASS DIVIDER ═══ */
+.section-divider{
+  height:1px;margin:0 -16px 32px;position:relative;
+  background:linear-gradient(90deg,transparent,var(--brd2),transparent);
+}
+.section-divider::after{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:40px;height:12px;border-radius:50%;background:var(--pur-glow);filter:blur(8px);
+  animation:breathe 3s ease-in-out infinite;
+}
+@media(min-width:640px){.section-divider{margin-left:-24px;margin-right:-24px}}
+
+/* ═══ STATUS BADGE PULSE ═══ */
+.badge-pulse{display:inline-flex;align-items:center;gap:5px}
+.badge-dot{width:6px;height:6px;border-radius:50%;display:inline-block;animation:pulse 2s ease-in-out infinite}
+.badge-dot.grn{background:var(--grn);box-shadow:0 0 6px var(--grn-glow)}
+.badge-dot.pur{background:var(--pur);box-shadow:0 0 6px var(--pur-glow)}
+.badge-dot.blu{background:var(--blu);box-shadow:0 0 6px var(--blu-glow)}
+.badge-dot.yel{background:var(--yel);box-shadow:0 0 6px rgba(234,179,8,.3)}
+
+/* ═══ NOISE TEXTURE OVERLAY ═══ */
+.noise-overlay{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:256px 256px;mix-blend-mode:overlay;
+}
+[data-theme="light"] .noise-overlay{opacity:.12}
+
+/* ═══ DECORATIVE GEOMETRIC RINGS ═══ */
+.geo-ring{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  opacity:.08;will-change:transform;
+}
+.geo-ring-1{width:500px;height:500px;border:1px solid var(--pur);top:-120px;right:-80px;animation:orbit1 30s linear infinite}
+.geo-ring-2{width:350px;height:350px;border:1px solid var(--blu);bottom:10%;left:-100px;animation:orbit1 40s linear infinite reverse}
+.geo-ring-3{width:200px;height:200px;border:1px solid var(--teal);top:40%;right:5%;animation:orbit1 25s linear infinite}
+.geo-ring-4{width:150px;height:150px;border:1px dashed var(--pur);bottom:30%;right:20%;animation:orbit1 20s linear infinite reverse}
+.geo-dot-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background-image:radial-gradient(circle,var(--tx4) .5px,transparent .5px);
+  background-size:48px 48px;opacity:.15;
+}
+
+/* ═══ GLASS CARD VARIANT ═══ */
+.glass-card{
+  background:var(--glass-bg);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);border:1px solid var(--glass-brd);
+  box-shadow:var(--glass-shadow);
+}
+
+/* ═══ CARD SHINE ═══ */
+/* ═══ CARD GROW ON HOVER (scale instead of tilt) ═══ */
+.card-grow{transition:transform var(--transition-med),box-shadow var(--transition-med),border-color var(--transition-med),z-index 0s;will-change:transform;z-index:1}
+.card-grow:hover{transform:scale(1.04);z-index:3;box-shadow:0 8px 40px rgba(0,0,0,.35);border-color:var(--brd3)}
+.card-grow:active{transform:scale(.98)}
+[data-theme="light"] .card-grow:hover{box-shadow:0 8px 40px rgba(0,0,0,.12)}
+
+/* ═══ STAGGER ENTER ANIMATION ═══ */
+.stagger-enter{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.stagger-enter.revealed{opacity:1;transform:translateY(0)}
+.stagger-enter:nth-child(1){transition-delay:0s}
+.stagger-enter:nth-child(2){transition-delay:.06s}
+.stagger-enter:nth-child(3){transition-delay:.12s}
+.stagger-enter:nth-child(4){transition-delay:.18s}
+.stagger-enter:nth-child(5){transition-delay:.24s}
+.stagger-enter:nth-child(6){transition-delay:.3s}
+.stagger-enter:nth-child(7){transition-delay:.36s}
+.stagger-enter:nth-child(8){transition-delay:.42s}
+
+.card-shine{position:relative;overflow:hidden}
+.card-shine::before{
+  content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.04) 45%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 55%,transparent 60%);
+  transform:translateX(-100%);transition:transform .6s ease;pointer-events:none;z-index:2;
+}
+.card-shine:hover::before{transform:translateX(100%)}
+[data-theme="light"] .card-shine::before{background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.3) 45%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.3) 55%,transparent 60%)}
+
+/* ═══ PARALLAX DECORATIVE ORB ═══ */
+.orb{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  filter:blur(60px);opacity:.12;will-change:transform;
+}
+.orb-1{width:400px;height:400px;background:var(--pur);top:-100px;right:-100px;animation:float-delayed 8s ease-in-out infinite}
+.orb-2{width:300px;height:300px;background:var(--blu);bottom:-50px;left:-80px;animation:float-delayed 10s ease-in-out infinite reverse}
+.orb-3{width:250px;height:250px;background:var(--teal);top:50%;left:60%;animation:float-delayed 12s ease-in-out infinite 2s}
+
+/* ═══ ACCESSIBILITY SKIP LINK ═══ */
+.skip-link{
+  position:fixed;top:-100%;left:16px;z-index:100000;padding:8px 16px;
+  background:var(--pur);color:#fff;border-radius:8px;font-size:13px;font-weight:600;
+  transition:top .3s ease;
+}
+.skip-link:focus{top:16px}
+
+/* ═══ PARTICLES BG ═══ */
+#particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.main,.drawer,.topbar,.backdrop{position:relative;z-index:1}
+
+/* ═══ MOBILE TOPBAR ═══ */
+.topbar{
+  display:flex;position:fixed;top:0;left:0;right:0;height:52px;
+  background:rgba(14,14,17,.85);-webkit-backdrop-filter:blur(16px) saturate(1.5);
+  backdrop-filter:blur(16px) saturate(1.5);
+  border-bottom:1px solid var(--brd);z-index:100;align-items:center;
+  padding:0 12px;gap:10px;padding-top:var(--safe-t);
+  animation:slideDown .4s ease;
+}
+.topbar::after{
+  content:'';position:absolute;bottom:-1px;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(168,85,247,.3),transparent);
+  opacity:0;transition:opacity .4s;
+}
+.topbar:hover::after,.topbar:focus-within::after{opacity:1}
+.topbar .logo{font-size:15px;font-weight:700;flex:1;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+.topbar .logo .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--grn);
+  display:inline-block;flex-shrink:0;animation:pulse 2s ease-in-out infinite;
+  box-shadow:0 0 6px rgba(34,197,94,.5);
+}
+.topbar .logo .sub{font-size:9px;font-weight:400;color:var(--tx3);letter-spacing:0}
+.menu-btn{
+  width:40px;height:40px;border:none;background:var(--bg3);color:var(--tx2);
+  border-radius:10px;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;border:1px solid var(--brd);
+  -webkit-user-select:none;user-select:none;position:relative;overflow:hidden;
+}
+.menu-btn:hover{background:var(--bg4);border-color:var(--brd2)}
+.menu-btn:active{background:var(--bg4);transform:scale(.92)}
+.menu-btn svg{width:18px;height:18px;display:block;position:relative;z-index:1}
+
+/* ═══ SIDEBAR DRAWER ═══ */
+.backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;
+  opacity:0;pointer-events:none;transition:opacity .4s ease,backdrop-filter .4s;
+  -webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);
+}
+.backdrop.open{opacity:1;pointer-events:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+
+.drawer{
+  position:fixed;top:0;left:0;bottom:0;width:280px;max-width:82vw;
+  background:rgba(14,14,17,.97);-webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);
+  z-index:200;transform:translateX(-100%);display:flex;flex-direction:column;
+  padding-top:var(--safe-t,0px);
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+  border-right:1px solid var(--brd);
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:18px 16px 14px;border-bottom:1px solid var(--brd2);flex-shrink:0}
+.drawer-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(59,130,246,.1));
+  border:1px solid rgba(168,85,247,.2);padding:2px 9px;border-radius:20px;
+  font-size:8px;font-weight:700;color:var(--pur);letter-spacing:.8px;
+  text-transform:uppercase;margin-bottom:7px;
+  animation:borderGlow 3s ease-in-out infinite;
+}
+.drawer-title{font-size:15px;font-weight:700;letter-spacing:-.3px}
+.drawer-sub{font-size:10px;color:var(--tx3);margin-top:2px}
+
+.drawer-nav{flex:1;overflow-y:auto;padding:4px 0 12px;-webkit-overflow-scrolling:touch}
+.drawer-nav::-webkit-scrollbar{width:3px}
+.drawer-nav::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:3px}
+.dnav-grp{padding:14px 16px 3px;font-size:8px;font-weight:600;color:var(--tx4);text-transform:uppercase;letter-spacing:1.5px;font-family:var(--m)}
+.dnav-item{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:13px;
+  font-weight:500;color:var(--tx2);cursor:pointer;border-left:2px solid transparent;
+  line-height:1.3;min-height:44px;-webkit-user-select:none;user-select:none;
+  position:relative;overflow:hidden;
+}
+.dnav-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--pur);opacity:0;transition:opacity .3s,transform .3s;
+  transform:translateX(-2px);
+}
+.dnav-item:hover{background:var(--bg3);color:var(--tx)}
+.dnav-item:active{background:var(--bg3);color:var(--tx)}
+.dnav-item.active{color:var(--pur);background:var(--pur-bg)}
+.dnav-item.active::before{opacity:1;transform:translateX(0)}
+.dnav-item .nb{font-family:var(--m);font-size:9px;color:var(--tx4);min-width:18px;font-weight:500;transition:color .3s}
+.dnav-item.active .nb{color:var(--pur)}
+
+.drawer-foot{padding:12px 16px;border-top:1px solid var(--brd2);font-size:10px;color:var(--tx4);line-height:1.5;flex-shrink:0}
+
+/* ═══ SWIPE HINT ═══ */
+.swipe-hint{
+  position:fixed;left:0;top:50%;transform:translateY(-50%);width:4px;height:40px;
+  background:linear-gradient(to bottom,var(--pur),var(--blu));border-radius:0 4px 4px 0;
+  z-index:40;opacity:0;transition:opacity .5s ease;pointer-events:none;
+  box-shadow:0 0 8px rgba(168,85,247,.3);
+}
+.swipe-hint.show{opacity:1}
+
+/* ═══ MAIN CONTENT ═══ */
+.main{min-height:calc(100vh - 52px);padding-bottom:calc(60px + var(--safe-b))}
+.ct{padding:20px 16px 0;max-width:960px;margin:0 auto}
+
+/* ═══ PAGE HEADER ═══ */
+.hero{
+  margin-bottom:28px;opacity:0;transform:translateY(20px);
+  animation:fadeUp .8s ease .15s forwards;
+}
+.hero-tag{
+  display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;
+  color:var(--pur);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;
+}
+.hero-tag::before{content:'';width:18px;height:2px;background:var(--pur);border-radius:1px;flex-shrink:0}
+.hero-title{
+  font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:8px;line-height:1.15;
+  opacity:0;animation:fadeUp .6s ease .25s forwards;
+}
+.hero-title span{
+  background:linear-gradient(135deg,var(--pur),var(--blu),var(--teal),var(--pur));
+  background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:gradientText 6s ease infinite;
+}
+.hero-desc{font-size:14px;color:var(--tx2);line-height:1.7;opacity:0;animation:fadeUp .6s ease .35s forwards}
+.hero-desc .highlight{color:var(--pur);font-weight:500}
+
+/* ═══ TYPEWRITER ═══ */
+#typewriter{font-size:13px;color:var(--tx3);margin-top:12px;min-height:28px;font-family:var(--m)}
+#typewriter .cursor{display:inline-block;width:2px;height:16px;background:var(--pur);margin-left:2px;animation:pulse 1s step-end infinite;vertical-align:middle}
+
+/* ═══ SECTIONS ═══ */
+.section{margin-bottom:48px}
+.sec-tag{
+  font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;
+  letter-spacing:1.8px;margin-bottom:5px;font-family:var(--f-alt)
+}
+.sec-title{
+  font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap
+}
+.sec-title .num{font-size:10px;font-weight:500;font-family:var(--m);color:var(--tx4);background:var(--bg4);padding:2px 8px;border-radius:5px;letter-spacing:.5px}
+.sec-title .hl{background:linear-gradient(135deg,var(--pur),var(--blu));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ═══ CARDS ═══ */
+.card{
+  background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);
+  padding:18px;margin-bottom:14px;
+  transition:transform .25s ease,border-color .3s,box-shadow .3s;
+}
+.card:hover{border-color:var(--brd2);box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.card:active{transform:scale(.99)}
+.card-t{
+  font-size:15px;font-weight:600;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap
+}
+.card-t .b{font-size:9px;font-weight:600;font-family:var(--m);padding:2px 8px;border-radius:5px;letter-spacing:.3px}
+.card-t .b.grn{background:var(--grn-bg);color:var(--grn)}
+.card-t .b.blu{background:var(--blu-bg);color:var(--blu)}
+.card-t .b.pur{background:var(--pur-bg);color:var(--pur)}
+.card-t .b.yel{background:var(--yel-bg);color:var(--yel)}
+.card-b{font-size:14px;color:var(--tx2);line-height:1.7}
+.card-b p{margin-bottom:10px;color:var(--tx2)}
+.card-b p:last-child{margin-bottom:0}
+.card-b ul{margin:6px 0 10px 20px}
+.card-b li{margin:5px 0;font-size:14px;line-height:1.6}
+.card-b li strong{color:var(--tx)}
+.card-b code{font-family:var(--m);font-size:12px;background:var(--bg4);padding:1px 6px;border-radius:4px;color:var(--pur)}
+.card-b pre{
+  background:var(--bg);border:1px solid var(--brd);border-radius:8px;
+  padding:14px;margin:12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  font-family:var(--m);font-size:12px;line-height:1.6;color:var(--tx2)
+}
+.card-b pre .cm{color:var(--tx4)}
+.card-b pre .kw{color:var(--pur)}
+.card-b pre .fn{color:var(--blu)}
+.card-b pre .str{color:var(--grn)}
+.card-b pre .tp{color:var(--yel)}
+.card-b pre .op{color:var(--red)}
+
+.card-b .tbl-wrap{width:100%;overflow-x:auto;margin:10px 0}
+.card-b .tbl-wrap table{width:100%;border-collapse:collapse;font-size:13px}
+.card-b th{background:var(--bg4);padding:9px 12px;text-align:left;font-weight:600;color:var(--tx2);border-bottom:1px solid var(--brd);font-size:10px;letter-spacing:.5px;text-transform:uppercase}
+.card-b td{padding:9px 12px;border-bottom:1px solid var(--brd);color:var(--tx2)}
+.card-b tbody tr:active{background:var(--bg4)}
+
+details{margin-top:8px}
+details summary{
+  list-style:none;display:flex;align-items:center;gap:6px;cursor:pointer;
+  font-weight:600;font-size:14px;color:var(--pur);padding:10px 0;
+  min-height:44px;-webkit-user-select:none;user-select:none
+}
+details summary::-webkit-details-marker{display:none}
+details summary::before{
+  content:'\25B6';font-size:10px;transition:transform .3s ease;display:inline-block
+}
+details[open] summary::before{transform:rotate(90deg)}
+details[open]{animation:fadeUp .3s ease}
+
+/* ═══ CALLOUTS ═══ */
+.co{background:var(--bg3);border:1px solid var(--brd);border-radius:10px;padding:14px 16px;margin:12px 0;border-left:3px solid;position:relative;overflow:hidden}
+.co::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,transparent 60%,rgba(255,255,255,.02));pointer-events:none}
+.co.grn{border-left-color:var(--grn);background:var(--grn-bg);box-shadow:0 0 20px rgba(34,197,94,.04)}
+.co.blu{border-left-color:var(--blu);background:var(--blu-bg);box-shadow:0 0 20px rgba(59,130,246,.04)}
+.co.pur{border-left-color:var(--pur);background:var(--pur-bg);box-shadow:0 0 20px rgba(168,85,247,.04)}
+.co.yel{border-left-color:var(--yel);background:var(--yel-bg);box-shadow:0 0 20px rgba(234,179,8,.04)}
+.co.red{border-left-color:var(--red);background:var(--red-bg);box-shadow:0 0 20px rgba(239,68,68,.04)}
+.co-t{font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.co-b{font-size:13px;color:var(--tx2);line-height:1.6}
+
+/* ═══ FLOW ═══ */
+.flow{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;margin:12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:4px 0;scrollbar-width:none}
+.flow::-webkit-scrollbar{display:none}
+.flow-s{
+  flex-shrink:0;background:var(--bg);border:1px solid var(--brd2);border-radius:8px;
+  padding:7px 13px;font-size:12px;font-weight:600;color:var(--tx2);
+  white-space:nowrap;transition:.2s ease;cursor:default
+}
+.flow-s:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.flow-s:active{transform:scale(.95)}
+.flow-s.act{background:var(--pur-bg);border-color:rgba(168,85,247,.25);color:var(--pur)}
+.flow-s.grn{background:var(--grn-bg);border-color:rgba(34,197,94,.2);color:var(--grn)}
+.flow-s.blu{background:var(--blu-bg);border-color:rgba(59,130,246,.2);color:var(--blu)}
+.flow-s.yel{background:var(--yel-bg);border-color:rgba(234,179,8,.2);color:var(--yel)}
+.flow-s.red{background:var(--red-bg);border-color:rgba(239,68,68,.2);color:var(--red)}
+.flow-a{flex-shrink:0;color:var(--tx4);font-size:14px;font-weight:300}
+
+/* ═══ TIMELINE ROAD ═══ */
+.road{margin:16px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;border-radius:var(--r)}
+.road-track{display:flex;gap:2px;position:relative;padding:28px 0 14px;min-width:580px;margin:0 4px}
+@media(max-width:640px){.road-track{min-width:100%;gap:1px;padding:24px 0 10px}}
+.road-track::before{content:'';position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,var(--bg5),var(--pur),var(--blu),var(--bg5));opacity:.6}
+.road-s{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
+.road-dot{
+  width:16px;height:16px;border-radius:50%;border:2.5px solid;z-index:1;
+  background:var(--bg);flex-shrink:0;transition:transform .3s ease,box-shadow .3s;
+  cursor:pointer;
+}
+.road-dot:hover{transform:scale(1.3);box-shadow:0 0 12px currentColor}
+.road-dot.grn{border-color:var(--grn);background:var(--grn);color:var(--grn);box-shadow:0 0 6px rgba(34,197,94,.3)}
+.road-dot.blu{border-color:var(--blu);background:var(--blu);color:var(--blu);box-shadow:0 0 6px rgba(59,130,246,.3)}
+.road-dot.pur{border-color:var(--pur);background:var(--pur);color:var(--pur);box-shadow:0 0 6px rgba(168,85,247,.3)}
+.road-dot.yel{border-color:var(--yel);background:var(--yel);color:var(--yel);box-shadow:0 0 6px rgba(234,179,8,.3)}
+.road-dot.red{border-color:var(--red);background:var(--red);color:var(--red);box-shadow:0 0 6px rgba(239,68,68,.3)}
+.road-dot.teal{border-color:var(--teal);background:var(--teal);color:var(--teal);box-shadow:0 0 6px rgba(20,184,166,.3)}
+.road-dot.dim{border-color:var(--bg5);background:var(--bg5);box-shadow:none}
+.road-l{font-size:10px;font-weight:600;color:var(--tx2);font-family:var(--m)}
+.road-s2{font-size:9px;color:var(--tx3);line-height:1.2}
+
+/* ═══ SPRINT GRID ═══ */
+.sg{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+.sc{
+  background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);
+  padding:16px;position:relative;overflow:hidden;
+  transition:transform .25s ease,border-color .3s,box-shadow .3s;
+}
+.sc:hover{transform:translateY(-2px);border-color:var(--brd2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.sc:active{transform:translateY(0)}
+.sc-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.sc-bar.grn{background:linear-gradient(90deg,var(--grn),rgba(34,197,94,.4))}
+.sc-bar.blu{background:linear-gradient(90deg,var(--blu),rgba(59,130,246,.4))}
+.sc-bar.pur{background:linear-gradient(90deg,var(--pur),rgba(168,85,247,.4))}
+.sc-bar.yel{background:linear-gradient(90deg,var(--yel),rgba(234,179,8,.4))}
+.sc-bar.teal{background:linear-gradient(90deg,var(--teal),rgba(20,184,166,.4))}
+.sc-bar.red{background:linear-gradient(90deg,var(--red),rgba(239,68,68,.4))}
+.sc-bar.rbow{background:linear-gradient(90deg,var(--pur),var(--blu),var(--grn),var(--yel),var(--red))}
+.sc-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.sc-n{font-size:14px;font-weight:600}
+.sc-d{font-size:9px;font-family:var(--m);color:var(--tx3);background:var(--bg4);padding:2px 8px;border-radius:5px;font-weight:500;white-space:nowrap}
+.sc-b{font-size:13px;color:var(--tx2);line-height:1.55;margin-bottom:10px}
+.sc-t{display:flex;flex-wrap:wrap;gap:4px}
+.sc-t .t{font-size:9px;font-weight:600;padding:3px 8px;border-radius:4px;font-family:var(--m);letter-spacing:.3px}
+.t-grn{background:var(--grn-bg);color:var(--grn);border:1px solid rgba(34,197,94,.2)}
+.t-blu{background:var(--blu-bg);color:var(--blu);border:1px solid rgba(59,130,246,.2)}
+.t-pur{background:var(--pur-bg);color:var(--pur);border:1px solid rgba(168,85,247,.2)}
+.t-yel{background:var(--yel-bg);color:var(--yel);border:1px solid rgba(234,179,8,.2)}
+.t-red{background:var(--red-bg);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+.t-teal{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(20,184,166,.2)}
+
+/* ═══ STUDY WEEK GRID ═══ */
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}
+@media(min-width:480px){.sw{grid-template-columns:1fr 1fr 1fr}}
+.sd{
+  background:var(--bg);border:1px solid var(--brd2);border-radius:8px;
+  padding:10px 8px;text-align:center;transition:.2s ease
+}
+.sd:hover{transform:translateY(-2px);box-shadow:0 2px 12px rgba(0,0,0,.3);border-color:var(--bg5)}
+.sd:active{transform:scale(.97)}
+.sd .dw{font-size:8px;font-weight:600;color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.sd .tp{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.sd .dt{font-size:10px;color:var(--tx3);line-height:1.4}
+.sd.we{opacity:.35}
+
+/* ═══ MILESTONES ═══ */
+.ms{
+  display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--brd2);
+  align-items:flex-start;transition:.2s ease
+}
+.ms:hover{background:var(--bg3);margin:0 -8px;padding:14px 8px;border-radius:8px}
+.ms:last-child{border-bottom:none}
+.ms-n{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:var(--m);flex-shrink:0;transition:.3s}
+.ms:hover .ms-n{transform:scale(1.15)}
+.ms-n.grn{background:var(--grn-bg);color:var(--grn);border:1px solid rgba(34,197,94,.2)}
+.ms-n.blu{background:var(--blu-bg);color:var(--blu);border:1px solid rgba(59,130,246,.2)}
+.ms-n.pur{background:var(--pur-bg);color:var(--pur);border:1px solid rgba(168,85,247,.2)}
+.ms-n.yel{background:var(--yel-bg);color:var(--yel);border:1px solid rgba(234,179,8,.2)}
+.ms-b{flex:1;min-width:0}
+.ms-t{font-size:14px;font-weight:600;margin-bottom:2px}
+.ms-d{font-size:12px;color:var(--tx2);line-height:1.5}
+
+/* ═══ STATS ═══ */
+.st{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.st-card{
+  background:var(--bg3);border:1px solid var(--brd);border-radius:10px;
+  padding:14px;position:relative;overflow:hidden;
+  transition:transform .25s ease,border-color .3s,box-shadow .3s;
+}
+.st-card:hover{transform:translateY(-3px);border-color:var(--brd2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.st-card::after{
+  content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;
+  background:radial-gradient(circle,var(--pur-bg) 0%,transparent 70%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.st-card:hover::after{opacity:1}
+.st-l{font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;font-family:var(--f-alt)}
+.st-n{font-size:24px;font-weight:800;font-family:var(--m);letter-spacing:-1px;line-height:1}
+.st-n.grn{color:var(--grn)}
+.st-n.blu{color:var(--blu)}
+.st-n.pur{color:var(--pur)}
+.st-n.yel{color:var(--yel)}
+.st-d{font-size:10px;color:var(--tx3);margin-top:4px;line-height:1.3}
+
+/* ═══ PROGRESS ═══ */
+.pb-l{display:grid;gap:8px;margin:14px 0}
+.pb-r{display:flex;align-items:center;gap:12px}
+.pb-lb{min-width:120px;font-size:12px;color:var(--tx2);font-weight:500;flex-shrink:0}
+.pb-tr{flex:1;height:8px;background:var(--bg4);border-radius:4px;overflow:hidden;position:relative}
+.pb-tr::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);background-size:200% 100%;animation:shimmer 2s ease infinite;pointer-events:none}
+.pb-f{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.22,1,.36,1);position:relative}
+.pb-p{font-size:11px;font-family:var(--m);color:var(--tx3);min-width:28px;text-align:right;flex-shrink:0}
+
+/* ═══ PEOPLE ═══ */
+.pg{display:grid;grid-template-columns:1fr;gap:8px;margin:14px 0}
+.pc{
+  background:var(--bg);border:1px solid var(--brd2);border-radius:10px;
+  padding:14px;display:flex;align-items:center;gap:12px;
+  transition:transform .25s ease,border-color .3s,box-shadow .3s;
+}
+.pc:hover{transform:translateX(4px);border-color:var(--bg5);box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.pc:active{transform:scale(.99)}
+.pa{
+  width:40px;height:40px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:15px;font-weight:700;font-family:var(--m);
+  flex-shrink:0;transition:.3s
+}
+.pc:hover .pa{transform:scale(1.1)}
+.pa.a{background:var(--blu-bg);color:var(--blu);border:1px solid rgba(59,130,246,.2)}
+.pa.b{background:var(--grn-bg);color:var(--grn);border:1px solid rgba(34,197,94,.2)}
+.pa.c{background:var(--pur-bg);color:var(--pur);border:1px solid rgba(168,85,247,.2)}
+.pa.d{background:var(--yel-bg);color:var(--yel);border:1px solid rgba(234,179,8,.2)}
+.pa.e{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(20,184,166,.2)}
+.pi{flex:1;min-width:0}
+.pn{font-size:14px;font-weight:600;margin-bottom:1px}
+.pr{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.pt{font-size:11px;color:var(--tx2);line-height:1.4}
+
+/* ═══ CONTINGENCY ═══ */
+.cg{display:grid;grid-template-columns:1fr;gap:8px;margin:14px 0}
+.ce{
+  background:var(--bg3);border:1px solid var(--brd);border-radius:10px;
+  padding:16px;transition:.25s ease
+}
+.ce:hover{border-color:var(--brd2);box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.ce-title{font-size:13px;font-weight:600;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:6px}
+.ce-item{font-size:12px;color:var(--tx2);padding:4px 0 4px 16px;position:relative;line-height:1.5}
+.ce-item::before{content:'';position:absolute;left:0;top:50%;width:5px;height:5px;border-radius:50%;transform:translateY(-2px)}
+.ce.p1 .ce-title{color:var(--red)}
+.ce.p1 .ce-item::before{background:var(--red)}
+.ce.p2 .ce-title{color:var(--yel)}
+.ce.p2 .ce-item::before{background:var(--yel)}
+.ce.p3 .ce-title{color:var(--tx3)}
+.ce.p3 .ce-item::before{background:var(--tx3)}
+
+/* ═══ TECH GRID ═══ */
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.tc{
+  background:var(--bg);border:1px solid var(--brd2);border-radius:8px;
+  padding:12px;transition:.2s ease
+}
+.tc:hover{transform:translateY(-2px);box-shadow:0 2px 12px rgba(0,0,0,.3);border-color:var(--bg5)}
+.tc:active{transform:scale(.97)}
+.tc-l{font-size:8px;font-weight:600;color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-family:var(--m)}
+.tc-n{font-size:14px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.tc-d{font-size:10px;color:var(--tx3);line-height:1.4}
+
+/* ═══ CHECKLIST ═══ */
+.cl{display:grid;gap:2px;margin:10px 0}
+.cl-i{
+  display:flex;align-items:flex-start;gap:12px;padding:10px 0;font-size:14px;
+  color:var(--tx2);cursor:pointer;transition:all .25s ease;min-height:44px;
+  -webkit-user-select:none;user-select:none;border-radius:6px;
+  border:1px solid transparent;padding:10px 12px;
+}
+.cl-i:hover{border-color:var(--brd2);background:var(--bg4)}
+.cl-i:active{transform:scale(.98)}
+.cl-c{
+  width:22px;height:22px;border:2px solid var(--bg5);border-radius:5px;
+  flex-shrink:0;margin-top:1px;display:flex;align-items:center;
+  justify-content:center;transition:all .3s ease;position:relative
+}
+.cl-c.do{
+  background:var(--grn);border-color:var(--grn);
+  box-shadow:0 0 8px rgba(34,197,94,.4);
+  animation:scaleIn .2s ease;
+}
+.cl-c.do::after{content:'\2713';font-size:12px;font-weight:700;color:var(--bg)}
+.cl-l{flex:1;line-height:1.5}
+.cl-i.do .cl-l{text-decoration:line-through;color:var(--tx4)}
+
+/* ═══ CHECKLIST PROGRESS RING ═══ */
+.cl-progress{display:flex;align-items:center;gap:14px;margin:14px 0;padding:14px;background:var(--bg3);border-radius:var(--r);border:1px solid var(--brd)}
+.cl-ring{width:52px;height:52px;border-radius:50%;flex-shrink:0;position:relative}
+.cl-ring svg{transform:rotate(-90deg);width:52px;height:52px}
+.cl-ring-bg{fill:none;stroke:var(--bg4);stroke-width:4}
+.cl-ring-fg{fill:none;stroke:var(--pur);stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset 1s cubic-bezier(.22,1,.36,1)}
+.cl-ring-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:var(--m);color:var(--tx)}
+.cl-ring-lbl{font-size:12px;color:var(--tx2);line-height:1.5;flex:1}
+.cl-ring-lbl strong{color:var(--tx)}
+
+/* ═══ ACHIEVEMENT TOAST ═══ */
+.achievement{
+  position:fixed;bottom:20px;right:20px;max-width:320px;
+  background:rgba(14,14,17,.95);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);border:1px solid var(--brd2);border-radius:12px;
+  padding:14px 16px;z-index:300;display:flex;align-items:center;gap:12px;
+  transform:translateX(400px);transition:transform .5s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 4px 30px rgba(0,0,0,.5);
+}
+.achievement.show{transform:translateX(0)}
+.achievement-icon{font-size:20px;flex-shrink:0}
+.achievement-text{font-size:12px;color:var(--tx2);line-height:1.4}
+.achievement-text strong{color:var(--tx);display:block;margin-bottom:2px;font-size:13px}
+
+/* ═══ FOOTER ═══ */
+footer[role="contentinfo"]{margin-top:32px;padding:24px 0;border-top:1px solid var(--brd);font-size:12px;color:var(--tx4);line-height:1.8}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:2px}
+.dnav-foot-link{display:inline-flex;align-items:center;padding:3px 8px;border:1px solid var(--brd);border-radius:4px;font-size:10px;text-decoration:none;color:var(--tx2);background:var(--bg3);transition:all .25s;font-family:var(--m)}
+.dnav-foot-link:hover{border-color:var(--pur);color:var(--tx);background:var(--pur-bg)}
+.footer strong{color:var(--tx3)}
+
+/* ═══ RIPPLE ═══ */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.15);transform:scale(0);animation:rippleAnim .6s ease-out;pointer-events:none}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+/* ═══ STAGGER CHILDREN ═══ */
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.stagger.show>*{opacity:1;transform:translateY(0)}
+.stagger.show>*:nth-child(1){transition-delay:0s}
+.stagger.show>*:nth-child(2){transition-delay:.04s}
+.stagger.show>*:nth-child(3){transition-delay:.08s}
+.stagger.show>*:nth-child(4){transition-delay:.12s}
+.stagger.show>*:nth-child(5){transition-delay:.16s}
+.stagger.show>*:nth-child(6){transition-delay:.2s}
+.stagger.show>*:nth-child(7){transition-delay:.24s}
+.stagger.show>*:nth-child(8){transition-delay:.28s}
+.stagger.show>*:nth-child(9){transition-delay:.32s}
+.stagger.show>*:nth-child(10){transition-delay:.36s}
+
+/* ═══ TABLET+ (≥640px) ═══ */
+@media(min-width:640px){
+  .ct{padding:28px 24px 0}
+  .sg{grid-template-columns:repeat(2,1fr)}
+  .pg{grid-template-columns:repeat(2,1fr)}
+  .cg{grid-template-columns:repeat(3,1fr)}
+  .sw{grid-template-columns:repeat(6,1fr)}
+  .tg{grid-template-columns:repeat(4,1fr)}
+  .st{grid-template-columns:repeat(4,1fr)}
+  .hero-title{font-size:32px}
+  .sec-title{font-size:22px}
+  .card{padding:22px}
+  .road-track{min-width:auto}
+}
+
+/* ═══ DESKTOP (≥1024px) ═══ */
+@media(min-width:1024px){
+  body{padding-top:0;display:flex;overflow:hidden}
+  .topbar{display:none}
+  .backdrop{display:none!important}
+  .swipe-hint{display:none}
+
+  .drawer{
+    position:sticky;top:0;left:auto;bottom:auto;width:240px;min-width:240px;
+    height:100vh;transform:none!important;z-index:1;padding-top:0;
+    border-right:1px solid var(--brd);transition:none;
+    background:var(--bg2);
+  }
+  .drawer.open{transform:none}
+
+  .main{flex:1;max-height:100vh;overflow-y:auto;padding-bottom:0}
+  .main::-webkit-scrollbar{width:4px}
+  .main::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:4px}
+  .ct{max-width:880px;margin:0 auto;padding:44px 40px 100px}
+  body.no-scroll{position:static;width:auto}
+
+  .dnav-item{padding:9px 16px;min-height:auto;font-size:12px}
+  .dnav-item:hover{background:var(--bg3);color:var(--tx)}
+  .dnav-item:active{transform:none}
+
+  .cl-i:active{transform:none;background:transparent}
+  .cl-i:hover{color:var(--tx);border-color:transparent;background:var(--bg3)}
+
+  .sc:active{transform:translateY(-1px)}
+  .flow-s:active{transform:none}
+  .sd:active{transform:none}
+  .pc:active{transform:none}
+  .tc:active{transform:none}
+  .card:active{transform:scale(1)}
+  .menu-btn:active{transform:none}
+  .road-dot:active{transform:scale(1.3)}
+  .ce:active{transform:none}
+}
+
+/* ═══ GRID BG ═══ */
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.grid-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(168,85,247,.06) 1px,transparent 1px);background-size:32px 32px;animation:gridDrift 12s linear infinite}
+@keyframes gridDrift{0%{transform:translate(0,0)}100%{transform:translate(32px,32px)}}
+
+/* ═══ PER-SECTION ACCENT VARIABLES ═══ */
+.section[data-accent="purple"]{--sec-accent:var(--pur);--sec-glow:rgba(168,85,247,.15);--sec-bg:var(--pur-bg)}
+.section[data-accent="blue"]{--sec-accent:var(--blu);--sec-glow:rgba(59,130,246,.15);--sec-bg:var(--blu-bg)}
+.section[data-accent="green"]{--sec-accent:var(--grn);--sec-glow:rgba(34,197,94,.15);--sec-bg:var(--grn-bg)}
+.section[data-accent="yellow"]{--sec-accent:var(--yel);--sec-glow:rgba(234,179,8,.15);--sec-bg:var(--yel-bg)}
+.section[data-accent="red"]{--sec-accent:var(--red);--sec-glow:rgba(239,68,68,.15);--sec-bg:var(--red-bg)}
+.section[data-accent="teal"]{--sec-accent:var(--teal);--sec-glow:rgba(20,184,166,.15);--sec-bg:var(--teal-bg)}
+
+/* ═══ ENHANCED TIMELINE SYSTEM ═══ */
+.tl-wrap{margin:20px 0;position:relative}
+.tl-track{display:flex;gap:0;position:relative;padding:36px 0 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-snap-type:x mandatory}
+.tl-track::-webkit-scrollbar{display:none}
+.tl-step{flex:1;min-width:120px;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 4px;scroll-snap-align:start}
+.tl-step-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:var(--m);position:relative;z-index:2;flex-shrink:0;border:2px solid;transition:all var(--transition-med);cursor:pointer;background:var(--bg)}
+.tl-step-badge::after{content:'';position:absolute;inset:-4px;border-radius:50%;opacity:0;transition:opacity .4s}
+.tl-step:hover .tl-step-badge::after{opacity:1}
+.tl-step-badge.grn{border-color:var(--grn);color:var(--grn);box-shadow:0 0 8px rgba(34,197,94,.2)}
+.tl-step-badge.blu{border-color:var(--blu);color:var(--blu);box-shadow:0 0 8px rgba(59,130,246,.2)}
+.tl-step-badge.pur{border-color:var(--pur);color:var(--pur);box-shadow:0 0 8px rgba(168,85,247,.2)}
+.tl-step-badge.yel{border-color:var(--yel);color:var(--yel);box-shadow:0 0 8px rgba(234,179,8,.2)}
+.tl-step-badge.teal{border-color:var(--teal);color:var(--teal);box-shadow:0 0 8px rgba(20,184,166,.2)}
+.tl-step-badge.red{border-color:var(--red);color:var(--red);box-shadow:0 0 8px rgba(239,68,68,.2)}
+.tl-step-badge.dim{border-color:var(--bg5);color:var(--tx4);background:var(--bg4);box-shadow:none}
+.tl-step:hover .tl-step-badge{transform:scale(1.2);box-shadow:0 0 20px currentColor}
+.tl-step-badge .tl-step-num{position:relative;z-index:1}
+
+/* Connector line */
+.tl-connector{position:absolute;top:50px;left:calc(50% + 32px);right:calc(50% - 32px + 16px);height:2px;z-index:1;transform:translateY(-50%)}
+.tl-connector svg{width:100%;height:6px;display:block}
+.tl-connector-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:2000;stroke-dashoffset:2000;transition:stroke-dashoffset 1.5s cubic-bezier(.22,1,.36,1)}
+.tl-connector-line.drawn{stroke-dashoffset:0}
+
+/* Step content */
+.tl-step-label{font-size:11px;font-weight:600;margin-top:8px;color:var(--tx2);font-family:var(--m);line-height:1.2}
+.tl-step-sub{font-size:9px;color:var(--tx3);margin-top:2px;line-height:1.2}
+
+/* Category label */
+.tl-cat{display:inline-flex;align-items:center;gap:4px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:2px 8px;border-radius:10px;margin-bottom:6px;border:1px solid transparent}
+.tl-cat.setup{background:rgba(107,107,120,.15);color:var(--tx3);border-color:rgba(107,107,120,.2)}
+.tl-cat.dev{background:var(--blu-bg);color:var(--blu);border-color:rgba(59,130,246,.2)}
+.tl-cat.test{background:var(--grn-bg);color:var(--grn);border-color:rgba(34,197,94,.2)}
+.tl-cat.deploy{background:var(--pur-bg);color:var(--pur);border-color:rgba(168,85,247,.2)}
+.tl-cat.prep{background:var(--yel-bg);color:var(--yel);border-color:rgba(234,179,8,.2)}
+
+/* Detail card */
+.tl-detail{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(8px);width:200px;background:var(--bg3);border:1px solid var(--brd2);border-radius:10px;padding:12px;opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1);z-index:10;box-shadow:0 8px 32px rgba(0,0,0,.5);text-align:left}
+.tl-step:hover .tl-detail{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.tl-detail::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:var(--bg3);border-left:1px solid var(--brd2);border-top:1px solid var(--brd2)}
+.tl-detail-title{font-size:12px;font-weight:600;margin-bottom:3px;color:var(--tx)}
+.tl-detail-desc{font-size:10px;color:var(--tx2);line-height:1.5}
+.tl-detail-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.tl-detail-tags span{font-size:7px;font-weight:600;padding:2px 6px;border-radius:4px;background:var(--bg4);color:var(--tx3);font-family:var(--m);letter-spacing:.3px}
+
+/* Shimmer skeleton for timelines */
+.tl-shimmer{display:flex;gap:8px;padding:20px 0;overflow:hidden}
+.tl-shimmer-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.tl-shimmer-circle{width:32px;height:32px;border-radius:50%;background:linear-gradient(90deg,var(--bg4) 25%,var(--bg5) 50%,var(--bg4) 75%);background-size:200% 100%;animation:shimmer 1.5s ease infinite}
+.tl-shimmer-line{width:50px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--bg4) 25%,var(--bg5) 50%,var(--bg4) 75%);background-size:200% 100%;animation:shimmer 1.5s ease infinite}
+.tl-shimmer-line:last-child{width:35px}
+
+/* Section-specific entrance animations */
+@keyframes secSlideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes secSlideLeft{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes secSlideRight{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes secScaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes secReveal{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes secRotateIn{from{opacity:0;transform:rotate(-3deg) scale(.9)}to{opacity:1;transform:rotate(0) scale(1)}}
+@keyframes secFlipUp{from{opacity:0;transform:perspective(600px) rotateX(10deg) translateY(20px)}to{opacity:1;transform:perspective(600px) rotateX(0) translateY(0)}}
+@keyframes secBlurIn{from{opacity:0;filter:blur(8px);transform:translateY(20px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
+
+.sec-enter{opacity:0}
+.sec-enter.revealed{animation:secSlideUp .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="slide-left"].revealed{animation:secSlideLeft .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="slide-right"].revealed{animation:secSlideRight .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="scale-in"].revealed{animation:secScaleIn .6s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="rotate-in"].revealed{animation:secRotateIn .7s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="flip-up"].revealed{animation:secFlipUp .8s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="blur-in"].revealed{animation:secBlurIn .8s cubic-bezier(.22,1,.36,1) forwards}
+.sec-enter[data-style="reveal"].revealed{animation:secReveal .9s cubic-bezier(.22,1,.36,1) forwards}
+
+/* ═══ ENHANCED MICRO-INTERACTIONS ═══ */
+.hover-glow{transition:all var(--transition-med)}
+.hover-glow:hover{box-shadow:0 0 24px var(--sec-glow,var(--pur-glow));border-color:var(--sec-accent,var(--pur));transform:translateY(-2px)}
+.hover-lift{transition:transform var(--transition-med),box-shadow var(--transition-med)}
+.hover-lift:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.hover-bright{transition:filter var(--transition-fast),opacity var(--transition-fast)}
+.hover-bright:hover{filter:brightness(1.3)}
+.hover-underline{position:relative;display:inline-block}
+.hover-underline::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--sec-accent,var(--pur));border-radius:1px;transition:width .4s cubic-bezier(.22,1,.36,1)}
+.hover-underline:hover::after{width:100%}
+
+/* Step pulse on load */
+@keyframes stepPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 currentColor}50%{transform:scale(1.15);box-shadow:0 0 0 8px transparent}}
+.tl-step.pulse .tl-step-badge:not(.dim){animation:stepPulse .6s ease 1}
+
+/* Interactive tag filter style */
+.tag-filter{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.tag-filter-btn{font-size:9px;font-weight:600;padding:5px 12px;border-radius:14px;border:1px solid var(--brd2);background:var(--bg3);color:var(--tx3);cursor:pointer;transition:all var(--transition-fast);font-family:var(--m);letter-spacing:.3px}
+.tag-filter-btn:hover{background:var(--bg4);color:var(--tx);border-color:var(--brd3)}
+.tag-filter-btn.active{background:var(--pur-bg);color:var(--pur);border-color:rgba(168,85,247,.25)}
+
+/* Split layout for guide sections */
+.split-layout{display:grid;grid-template-columns:1fr;gap:16px;margin:14px 0}
+@media(min-width:640px){.split-layout{grid-template-columns:1fr 1fr}}
+.split-card{background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r);padding:16px;transition:all var(--transition-med)}
+.split-card:hover{border-color:var(--brd2);box-shadow:0 4px 20px rgba(0,0,0,.3);transform:translateY(-2px)}
+.split-card-title{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;color:var(--tx)}
+.split-card-body{font-size:13px;color:var(--tx2);line-height:1.6}
+
+/* Progress highlight bar */
+.progress-highlight{height:3px;border-radius:2px;margin:8px 0;background:linear-gradient(90deg,var(--sec-accent,var(--pur)),transparent);animation:progressPulse 2s ease-in-out infinite}
+@keyframes progressPulse{0%,100%{opacity:.6}50%{opacity:1}}
+
+/* Tooltip style for step badges */
+.tl-step-badge[data-tooltip]{position:relative}
+.tl-step-badge[data-tooltip]:hover::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg5);color:var(--tx);font-size:9px;font-weight:500;padding:4px 10px;border-radius:6px;white-space:nowrap;z-index:20;font-family:var(--f);box-shadow:0 4px 12px rgba(0,0,0,.4);pointer-events:none;animation:fadeIn .2s ease}
+.tl-step-badge[data-tooltip]:hover::before{content:'';position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--bg5);z-index:20;pointer-events:none;animation:fadeIn .2s ease}
+
+/* Stat counter highlight */
+.st-card.stat-pop{transition:all var(--transition-med)}
+.st-card.stat-pop:hover .st-n{transform:scale(1.1);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.st-card.stat-pop .st-n{display:inline-block;transition:transform .3s ease}
+
+/* Flow step animation */
+.flow-s.flow-pop{transition:all var(--transition-med)}
+.flow-s.flow-pop:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+
+/* ═══ PROGRESS BAR ═══ */
+#progressBar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--pur),var(--blu),var(--teal));z-index:999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(168,85,247,.4)}
+
+/* ═══ BACK TO TOP ═══ */
+.btt{position:fixed;bottom:24px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:var(--bg3);color:var(--tx2);cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:all .4s cubic-bezier(.22,1,.36,1);border:1px solid var(--brd2);box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.btt.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.btt:active{transform:scale(.92)}
+.btt svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btt-ring{position:absolute;inset:2px;pointer-events:none}
+.btt-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.btt-ring-bg{fill:none;stroke:var(--bg4);stroke-width:2}
+.btt-ring-fg{fill:none;stroke:var(--pur);stroke-width:2;stroke-linecap:round;transition:stroke-dashoffset .3s}
+
+/* ═══ CONFETTI CANVAS ═══ */
+#confettiCanvas{position:fixed;inset:0;z-index:9999;pointer-events:none}
+
+/* ═══ SECTION TITLE DECORATION ═══ */
+.sec-title-wrap{position:relative;display:inline-block;margin-bottom:14px}
+.sec-title-bar{width:0;height:3px;border-radius:2px;margin-top:6px;background:linear-gradient(90deg,var(--sec-accent,var(--pur)),transparent);transition:width 1s cubic-bezier(.22,1,.36,1)}
+
+/* ═══ ROADMAP POPUP ═══ */
+.road-popup{position:fixed;bottom:20px;left:16px;right:16px;max-width:400px;margin:0 auto;background:rgba(14,14,17,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--brd2);border-radius:14px;padding:18px;z-index:300;transform:translateY(120px);opacity:0;transition:all .5s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 40px rgba(0,0,0,.6);pointer-events:none}
+.road-popup.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.road-popup-close{position:absolute;top:10px;right:12px;width:28px;height:28px;border:none;background:var(--bg4);color:var(--tx3);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px}
+.road-popup-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.road-popup-sub{font-size:11px;color:var(--pur);font-family:var(--m);margin-bottom:8px}
+.road-popup-desc{font-size:13px;color:var(--tx2);line-height:1.6}
+
+/* ═══ SCRAMBLE TEXT ═══ */
+.scramble{display:inline-block}
+.scramble-done{color:var(--tx)}
+
+/* ═══ PARALLAX WRAP ═══ */
+.parallax{will-change:transform}
+
+/* ═══ DRAWER DRAG HANDLE ═══ */
+.drawer-handle{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:20px;height:40px;background:var(--bg3);border:1px solid var(--brd);border-left:none;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .3s;z-index:201}
+.drawer.open .drawer-handle{opacity:1}
+.drawer-handle::after{content:'';width:3px;height:14px;background:var(--tx4);border-radius:2px;display:block}
+
+/* ════════════════════════════════════════
+   MOBILE ENHANCEMENTS (≤639px)
+   ════════════════════════════════════════ */
+@media(max-width:639px){
+  /* ── Background elements: scale down or hide ── */
+  .orb{opacity:.06}
+  .orb-1{width:200px;height:200px;top:-60px;right:-60px}
+  .orb-2{width:160px;height:160px;bottom:-40px;left:-60px}
+  .orb-3{width:120px;height:120px;top:40%;left:70%}
+  .geo-ring{opacity:.04}
+  .geo-ring-1{width:260px;height:260px;top:-60px;right:-40px}
+  .geo-ring-2{width:200px;height:200px;bottom:8%;left:-60px}
+  .geo-ring-3{width:120px;height:120px;top:35%;right:2%}
+  .geo-ring-4{display:none}
+  .geo-dot-grid{opacity:.08;background-size:36px 36px}
+  .noise-overlay{opacity:.15}
+  #particles-canvas{opacity:.3}
+
+  /* ── Typography & spacing ── */
+  .hero-title{font-size:22px}
+  .hero-desc{font-size:13px}
+  .sec-title{font-size:17px}
+  .card{padding:14px}
+  .card-t{font-size:14px}
+  .card-b{font-size:13px}
+  .card-b li{font-size:13px}
+  .section{margin-bottom:32px}
+  .sc{padding:13px}
+  .sc-n{font-size:13px}
+  .sc-b{font-size:12px}
+  .split-card{padding:13px}
+  .split-card-title{font-size:12px}
+  .split-card-body{font-size:12px}
+
+  /* ── Better touch targets ── */
+  .tag-filter-btn{padding:7px 14px;font-size:10px;min-height:36px}
+  .road-dot{width:20px;height:20px}
+  .road-l{font-size:11px}
+  .road-s2{font-size:10px}
+
+  /* ── Timeline steps scroll ── */
+  .tl-step{min-width:100px;padding:0 3px}
+  .tl-step-label{font-size:10px}
+  .tl-step-sub{font-size:8px}
+  .tl-cat{font-size:6px;padding:1px 6px}
+  .tl-step-badge{width:28px;height:28px;font-size:10px}
+  .tl-connector{top:45px;left:calc(50% + 24px);right:calc(50% - 24px + 12px)}
+
+  /* ── Timeline detail card: reposition on mobile ── */
+  .tl-detail{position:fixed;top:auto;bottom:70px;left:16px;right:16px;transform:none!important;width:auto;max-width:360px;margin:0 auto;z-index:50;border-radius:12px;padding:14px}
+  .tl-detail::before{display:none}
+  .tl-step:hover .tl-detail,.tl-step:active .tl-detail,.tl-step.tl-tap .tl-detail{transform:none!important;opacity:1;pointer-events:auto}
+
+  /* ── Touch active feedback ── */
+  .touch-active{-webkit-tap-highlight-color:rgba(168,85,247,.25)}
+  .touch-active:active{transform:scale(.97)!important}
+  .dnav-item.touch-active:active{transform:none!important;background:var(--bg4)!important}
+  .menu-btn:active,.btt:active,.theme-toggle:active,.road-popup-close:active,.road-dot:active{transform:scale(.92)!important}
+  .tl-detail-title{font-size:13px}
+  .tl-detail-desc{font-size:11px}
+
+  /* ── Section title bar ── */
+  .sec-title-bar{margin-top:4px;height:2px}
+
+  /* ── Hero typewriter ── */
+  #typewriter{font-size:12px;min-height:24px}
+
+  /* ── Progress highlight ── */
+  .progress-highlight{margin:6px 0}
+
+  /* ── Flow steps horizontal scroll ── */
+  .flow{padding:2px 0;gap:3px}
+  .flow-s{padding:6px 10px;font-size:10px;white-space:nowrap;flex-shrink:0}
+
+  /* ── Roadmap popup ── */
+  .road-popup{left:12px;right:12px;padding:14px;bottom:16px}
+
+  /* ── Back to top button ── */
+  .btt{bottom:18px;right:12px;width:40px;height:40px}
+
+  /* ── Theme toggle ── */
+  .theme-toggle{bottom:70px;right:12px;width:40px;height:40px}
+  .theme-toggle svg{width:16px;height:16px}
+
+  /* ── Drawer improvements ── */
+  .drawer{width:290px;max-width:85vw}
+  .drawer:not(.open)+.drawer-handle{display:none}
+  .dnav-item{padding:12px 16px;min-height:48px;font-size:14px}
+  .dnav-item .nb{min-width:20px;font-size:10px}
+  .dnav-foot-link{padding:4px 10px;font-size:11px}
+
+  /* ── Sprint grid ── */
+  .sg{gap:8px}
+
+  /* ── Study week grid ── */
+  .sw{gap:5px}
+
+  /* ── Tables ── */
+  .tbl-wrap{font-size:12px;margin:10px 0}
+  .tbl-wrap td,.tbl-wrap th{padding:6px 8px}
+
+  /* ── Confetti ── */
+  #confettiCanvas{display:none}
+
+  /* ── Section divider ── */
+  .section-divider{margin:0 -16px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="geo-ring geo-ring-1"></div>
+<div class="geo-ring geo-ring-2"></div>
+<div class="geo-ring geo-ring-3"></div>
+<div class="geo-ring geo-ring-4"></div>
+<div class="geo-dot-grid"></div>
+<div class="noise-overlay"></div>
+
+<a href="#main-content" class="skip-link" tabindex="1">Pular para conteúdo</a>
+
+<canvas id="particles-canvas"></canvas>
+
+<div class="achievement" id="achievementToast">
+  <div class="achievement-icon">🏆</div>
+  <div class="achievement-text"><strong>Conquista!</strong>Continue assim!</div>
+</div>
+
+<div class="grid-bg"></div>
+<div id="progressBar"></div>
+<canvas id="confettiCanvas"></canvas>
+
+<button class="btt" id="backToTop" aria-label="Voltar ao topo">
+  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+  <span class="btt-ring"><svg viewBox="0 0 44 44"><circle class="btt-ring-bg" cx="22" cy="22" r="19"/><circle class="btt-ring-fg" id="bttRingFg" cx="22" cy="22" r="19"/></svg></span>
+</button>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">
+  <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
+
+<div class="road-popup" id="roadPopup">
+  <button class="road-popup-close" onclick="closeRoadPopup()" aria-label="Fechar popup">✕</button>
+  <div class="road-popup-title" id="roadPopupTitle"></div>
+  <div class="road-popup-sub" id="roadPopupSub"></div>
+  <div class="road-popup-desc" id="roadPopupDesc"></div>
+</div>
+
+<div class="swipe-hint" id="swipeHint"></div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <button class="menu-btn" onclick="toggleDrawer()" aria-label="Abrir menu">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+  </button>
+  <div class="logo"><span class="dot"></span>GraduaHUB <span class="sub">guia completo</span></div>
+</header>
+
+<!-- BACKDROP -->
+<div class="backdrop" onclick="toggleDrawer()"></div>
+
+<!-- DRAWER -->
+<aside class="drawer" role="complementary" aria-label="Navegação principal">
+  <div class="drawer-head">
+    <div class="drawer-badge">SENAI — TDS</div>
+    <div class="drawer-title">GraduaHUB</div>
+    <div class="drawer-sub">Guia completo do projeto</div>
+  </div>
+  <nav class="drawer-nav" aria-label="Seções do guia">
+    <div class="dnav-grp">Visão Geral</div>
+    <div class="dnav-item active" data-target="visao"><span class="nb">◆</span> Visão do Projeto</div>
+    <div class="dnav-grp">Guias</div>
+    <div class="dnav-item" data-target="guideline"><span class="nb">01</span> Guideline Técnico</div>
+    <div class="dnav-item" data-target="estudos"><span class="nb">02</span> Plano de Estudos</div>
+    <div class="dnav-item" data-target="execucao"><span class="nb">03</span> Plano de Execução</div>
+    <div class="dnav-item" data-target="testes"><span class="nb">04</span> Testes</div>
+    <div class="dnav-item" data-target="git"><span class="nb">05</span> Git & GitHub</div>
+    <div class="dnav-item" data-target="troubleshooting"><span class="nb">06</span> Troubleshooting</div>
+    <div class="dnav-item" data-target="deploy"><span class="nb">07</span> Deploy</div>
+    <div class="dnav-grp">Roadmaps</div>
+    <div class="dnav-item" data-target="road-guideline"><span class="nb">R1</span> Guideline</div>
+    <div class="dnav-item" data-target="road-estudos"><span class="nb">R2</span> Estudos</div>
+    <div class="dnav-item" data-target="road-execucao"><span class="nb">R3</span> Execução</div>
+    <div class="dnav-item" data-target="road-testes"><span class="nb">R4</span> Testes</div>
+    <div class="dnav-item" data-target="road-deploy"><span class="nb">R5</span> Deploy</div>
+    <div class="dnav-grp">Final</div>
+    <div class="dnav-item" data-target="checklist"><span class="nb">✓</span> Checklist da Banca</div>
+  </nav>
+  <div class="drawer-foot">
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+      <a href="guias/Guideline_GraduaHUB_Completo.md" class="dnav-foot-link" target="_blank" rel="noopener" aria-label="Guia completo em Markdown">📄 Guideline</a>
+      <a href="guias/Plano_de_Estudos_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Estudos</a>
+      <a href="guias/Plano_de_Execucao_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Execução</a>
+      <a href="guias/Guia_Testes_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Testes</a>
+      <a href="guias/Guia_Git_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Git</a>
+      <a href="guias/Guia_Troubleshooting_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Troubleshooting</a>
+      <a href="guias/Guia_Deploy_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Deploy</a>
+      <a href="guias/Guia_Apresentacao_GraduaHUB.md" class="dnav-foot-link" target="_blank" rel="noopener">📄 Apresentação</a>
+    </div>
+    Projeto Integrador · SENAI<br>
+    Curso Técnico em Desenvolvimento de Sistemas
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main-content" tabindex="-1">
+<div class="ct">
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-tag">GraduaHUB</div>
+  <h1 class="hero-title">Guia <span>Completo</span> do Projeto</h1>
+  <p class="hero-desc">Do zero ao MVP na banca — guideline técnico, planos de estudo/execução, testes, git, deploy, troubleshooting e roadmaps visuais para a equipe do SENAI.</p>
+  <div id="typewriter"><span class="cursor"></span></div>
+</div>
+
+<!-- ═══ VISÃO ═══ -->
+<div class="section sec-enter" id="visao" data-accent="purple" data-style="flip-up" role="region" aria-label="Visão do Projeto">
+  <div class="sec-tag">Visão Geral</div>
+  <h2 class="sec-title">O <span class="hl">GraduaHUB</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Stack</div><div class="st-n pur">Flutter</div><div class="st-d">+ Firebase + Provider</div></div>
+    <div class="st-card"><div class="st-l">Duração</div><div class="st-n grn">50 dias</div><div class="st-d">10 semanas</div></div>
+    <div class="st-card"><div class="st-l">Módulos</div><div class="st-n blu">5</div><div class="st-d">Rotina, Cert., Pesq., Radar</div></div>
+    <div class="st-card"><div class="st-l">Equipe</div><div class="st-n yel">4</div><div class="st-d">alunos SENAI</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📌 O que é?</div>
+    <div class="card-b">
+      <p>Hub acadêmico que centraliza a vida universitária do aluno em um só app:</p>
+      <ul>
+        <li><strong>Gestão de Rotina</strong> — disciplinas, notas, faltas, cálculo de média e previsão de nota final</li>
+        <li><strong>Certificados</strong> — upload de PDF/imagem, validação manual de horas complementares, progresso visual</li>
+        <li><strong>Pesquisa TCC</strong> — busca de artigos científicos na API aberta OpenAlex</li>
+        <li><strong>Radar de Eventos</strong> — lista e mapa com eventos acadêmicos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🛠 Stack Tecnológica</div>
+    <div class="tg">
+      <div class="tc"><div class="tc-l">Frontend</div><div class="tc-n">Flutter</div><div class="tc-d">Android, iOS, Web</div></div>
+      <div class="tc"><div class="tc-l">Auth</div><div class="tc-n">Firebase Auth</div><div class="tc-d">Email/senha</div></div>
+      <div class="tc"><div class="tc-l">Banco</div><div class="tc-n">Firestore</div><div class="tc-d">NoSQL tempo real</div></div>
+      <div class="tc"><div class="tc-l">Storage</div><div class="tc-n">Firebase Storage</div><div class="tc-d">Upload certificados</div></div>
+      <div class="tc"><div class="tc-l">Estado</div><div class="tc-n">Provider</div><div class="tc-d">ChangeNotifier</div></div>
+      <div class="tc"><div class="tc-l">Mapa</div><div class="tc-n">flutter_map</div><div class="tc-d">OpenStreetMap</div></div>
+      <div class="tc"><div class="tc-l">OCR</div><div class="tc-n">ML Kit</div><div class="tc-d">Reconhecimento texto</div></div>
+      <div class="tc"><div class="tc-l">API</div><div class="tc-n">OpenAlex</div><div class="tc-d">Catálogo científico</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📂 Estrutura de Pastas</div>
+    <div class="card-b">
+<pre>lib/
+├── main.dart
+├── app.dart
+├── core/ (theme, routes, constants, utils)
+├── data/
+│   ├── models/ (user, discipline, certificate, event)
+│   └── services/ (auth, firestore, storage, openalex)
+├── providers/ (auth, routine, certificate, event)
+└── features/
+    ├── auth/ (login, register)
+    ├── dashboard/
+    ├── routine/ (disciplines, forms, widgets)
+    ├── certificates/ (upload, list, progress)
+    ├── research/ (search, article card)
+    └── events/ (list, map, card)</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GUIDELINE ═══ -->
+<div class="section sec-enter" id="guideline" data-accent="purple" data-style="slide-right" role="region" aria-label="Guideline Técnico">
+  <div class="sec-tag">Guia 01</div>
+  <h2 class="sec-title">Guideline <span class="hl">Técnico</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Sem 1</div><div class="road-s2">Fundação</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Sem 2</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Sem 3</div><div class="road-s2">Dashboard</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Sem 4-5</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Sem 6</div><div class="road-s2">Certificados</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Sem 7</div><div class="road-s2">Pesquisa</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Sem 8</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Sem 9-10</div><div class="road-s2">Banca</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🛠 Fase 1 — Fundação <span class="b blu">Dias 1-5</span></div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s act">Flutter SDK</span><span class="flow-a">→</span>
+        <span class="flow-s act">Android Studio</span><span class="flow-a">→</span>
+        <span class="flow-s act">Firebase</span><span class="flow-a">→</span>
+        <span class="flow-s act">Estrutura</span><span class="flow-a">→</span>
+        <span class="flow-s act">AuthService</span><span class="flow-a">→</span>
+        <span class="flow-s act">PR #1</span>
+      </div>
+      <div class="co grn"><div class="co-b"><code>flutter run</code> sem erro · Firebase conectado · PR #1 mergeado</div></div>
+      <details>
+        <summary>Ver comandos de setup</summary>
+<pre><span class="cm"># Instalar Flutter</span>
+<span class="cm"># https://docs.flutter.dev/get-started/install/windows</span>
+
+flutter create --org com.graduahub --project-name graduahub .
+flutter pub get
+
+<span class="cm"># Configurar Firebase</span>
+dart pub global activate flutterfire_cli
+flutterfire configure --project=graduahub-dev
+
+<span class="cm"># Verificar</span>
+flutter doctor
+flutter run</pre>
+      </details>
+      <details>
+        <summary>Ver main.dart</summary>
+<pre><span class="kw">import</span> <span class="str">'package:flutter/material.dart'</span>;
+<span class="kw">import</span> <span class="str">'package:firebase_core/firebase_core.dart'</span>;
+<span class="kw">import</span> <span class="str">'firebase_options.dart'</span>;
+<span class="kw">import</span> <span class="str">'app.dart'</span>;
+
+<span class="kw">void</span> <span class="fn">main</span>() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  <span class="kw">await</span> Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const GraduaHubApp());
+}</pre>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔐 Fase 2 — Auth + Navegação <span class="b blu">Dias 6-10</span></div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s blu">Login</span><span class="flow-a">→</span>
+        <span class="flow-s blu">Cadastro</span><span class="flow-a">→</span>
+        <span class="flow-s blu">Guarda Rota</span><span class="flow-a">→</span>
+        <span class="flow-s blu">BottomNav</span><span class="flow-a">→</span>
+        <span class="flow-s blu">Dashboard</span><span class="flow-a">→</span>
+        <span class="flow-s blu">PR #2</span>
+      </div>
+      <div class="co grn"><div class="co-b">Criar conta → Dashboard · Fechar app → Logado · Erros PT</div></div>
+      <details>
+        <summary>Ver AuthService + AuthProvider</summary>
+<pre><span class="cm">// AuthService</span>
+<span class="kw">class</span> AuthService {
+  <span class="kw">final</span> FirebaseAuth _auth = FirebaseAuth.instance;
+  User? <span class="kw">get</span> currentUser => _auth.currentUser;
+  Stream&lt;User?&gt; <span class="kw">get</span> authStateChanges => _auth.authStateChanges();
+
+  Future&lt;UserCredential&gt; <span class="fn">signUp</span>(String email, String password)
+    => _auth.createUserWithEmailAndPassword(email: email, password: password);
+  Future&lt;UserCredential&gt; <span class="fn">signIn</span>(String email, String password)
+    => _auth.signInWithEmailAndPassword(email: email, password: password);
+  Future&lt;void&gt; <span class="fn">signOut</span>() => _auth.signOut();
+}
+
+<span class="cm">// AuthProvider (excerpt)</span>
+Future&lt;bool&gt; <span class="fn">login</span>(String email, String password) async {
+  _isLoading = <span class="kw">true</span>; _error = <span class="kw">null</span>; notifyListeners();
+  <span class="kw">try</span> {
+    <span class="kw">await</span> _auth.signIn(email, password);
+    <span class="kw">return true</span>;
+  } <span class="kw">on</span> FirebaseAuthException <span class="kw">catch</span> (e) {
+    _error = _mapError(e.code); <span class="kw">return false</span>;
+  } <span class="kw">finally</span> { _isLoading = <span class="kw">false</span>; notifyListeners(); }
+}</pre>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🧩 Fase 3 — Módulos <span class="b yel">Dias 11-44</span></div>
+    <div class="sg">
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView cards, ModuleCard, resumo horas, progresso visual</div><div class="sc-t"><span class="t t-grn">GridView</span><span class="t t-blu">Provider</span></div></div>
+      <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD disciplinas, notas, média, previsão final, faltas, alertas</div><div class="sc-t"><span class="t t-yel">Forms</span><span class="t t-red">Cálculos</span></div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Certificados</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload PDF/imagem, Storage, validação manual, gráfico progresso</div><div class="sc-t"><span class="t t-pur">Upload</span><span class="t t-teal">Storage</span></div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa TCC</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex API, ArticleCard, paginação, filtro ano</div><div class="sc-t"><span class="t t-teal">HTTP</span><span class="t t-blu">API</span></div></div>
+      <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista eventos, flutter_map markers, popup, filtro data</div><div class="sc-t"><span class="t t-red">Mapa</span><span class="t t-grn">flutter_map</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">✨ Fase 4 — Banca <span class="b pur">Dias 45-50</span></div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s red">Testes</span><span class="flow-a">→</span>
+        <span class="flow-s red">Correções</span><span class="flow-a">→</span>
+        <span class="flow-s red">Dados Demo</span><span class="flow-a">→</span>
+        <span class="flow-s red">Slides</span><span class="flow-a">→</span>
+        <span class="flow-s red">3 Ensaios</span><span class="flow-a">→</span>
+        <span class="flow-s red">Banca 🎯</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🛡 Regras Firestore</div>
+    <div class="card-b">
+<pre>match /users/{userId} {
+  allow read, write: <span class="kw">if</span> request.auth.uid == userId;
+}
+match /certificates/{certId} {
+  allow read, update, delete: <span class="kw">if</span> resource.data.userId == request.auth.uid;
+  allow create: <span class="kw">if</span> request.resource.data.userId == request.auth.uid;
+}
+match /grades/{gradeId} {
+  allow read, update, delete: <span class="kw">if</span> resource.data.userId == request.auth.uid;
+  allow create: <span class="kw">if</span> request.resource.data.userId == request.auth.uid;
+}
+match /events/{eventId} {
+  allow read: <span class="kw">if</span> request.auth != <span class="kw">null</span>;
+}</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ESTUDOS ═══ -->
+<div class="section sec-enter" id="estudos" data-accent="blue" data-style="blur-in" role="region" aria-label="Plano de Estudos">
+  <div class="sec-tag">Guia 02</div>
+  <h2 class="sec-title">Plano de <span class="hl">Estudos</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Duração</div><div class="st-n grn">4 sem</div><div class="st-d">Capacitação</div></div>
+    <div class="st-card"><div class="st-l">Carga</div><div class="st-n blu">2-3h/dia</div><div class="st-d">Mín/ideal</div></div>
+    <div class="st-card"><div class="st-l">Projetos</div><div class="st-n pur">2</div><div class="st-d">Obrigatórios</div></div>
+    <div class="st-card"><div class="st-l">Meta</div><div class="st-n yel">100%</div><div class="st-d">Time pronto</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📘 Semana 1 — Dart + Flutter Base</div>
+    <div class="card-b">
+      <div class="sw">
+        <div class="sd"><div class="dw">Seg</div><div class="tp">Dart I</div><div class="dt">Variáveis, funções</div></div>
+        <div class="sd"><div class="dw">Ter</div><div class="tp">Dart II</div><div class="dt">Classes, listas</div></div>
+        <div class="sd"><div class="dw">Qua</div><div class="tp">Flutter I</div><div class="dt">App, widgets</div></div>
+        <div class="sd"><div class="dw">Qui</div><div class="tp">Flutter II</div><div class="dt">Navegação, forms</div></div>
+        <div class="sd"><div class="dw">Sex</div><div class="tp">Listas</div><div class="dt">ListView, Grid</div></div>
+        <div class="sd we"><div class="dw">Sáb</div><div class="tp">Reforço</div><div class="dt">Revisão</div></div>
+      </div>
+      <div class="co grn"><div class="co-b"><strong>🏁</strong> App com 3 telas navegáveis + formulário validado no emulador</div></div>
+      <details>
+        <summary>Ver exercícios Dart</summary>
+<pre><span class="cm">// Média</span>
+<span class="tp">double</span> <span class="fn">media</span>(<span class="tp">double</span> a, <span class="tp">double</span> b) => (a + b) / <span class="op">2</span>;
+
+<span class="cm">// Nullable</span>
+String <span class="fn">saudar</span>(String? nome) => <span class="str">'Olá, ${nome ?? "visitante"}'</span>;
+
+<span class="cm">// Classe</span>
+<span class="kw">class</span> Aluno {
+  <span class="kw">final</span> String nome;
+  <span class="kw">final</span> List&lt;<span class="tp">double</span>&gt; notas;
+  Aluno({required <span class="kw">this</span>.nome, required <span class="kw">this</span>.notas});
+  <span class="tp">double</span> <span class="kw">get</span> media => notas.isEmpty
+    ? <span class="op">0</span> : notas.reduce((a,b)=>a+b) / notas.length;
+}</pre>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔥 Semana 2 — Firebase + Provider</div>
+    <div class="card-b">
+      <div class="sw">
+        <div class="sd"><div class="dw">Seg</div><div class="tp">Provider</div><div class="dt">ChangeNotifier</div></div>
+        <div class="sd"><div class="dw">Ter</div><div class="tp">Auth</div><div class="dt">Login Firebase</div></div>
+        <div class="sd"><div class="dw">Qua</div><div class="tp">Firestore</div><div class="dt">CRUD, streams</div></div>
+        <div class="sd"><div class="dw">Qui</div><div class="tp">Storage</div><div class="dt">Upload, Picker</div></div>
+        <div class="sd"><div class="dw">Sex</div><div class="tp">HTTP</div><div class="dt">OpenAlex API</div></div>
+        <div class="sd we"><div class="dw">Sáb</div><div class="tp">Reforço</div><div class="dt">Revisão</div></div>
+      </div>
+      <div class="co grn"><div class="co-b"><strong>🏁</strong> 2 apps: ToDo com Provider + Login CRUD Firestore. Individual.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🚀 Semana 3 — Mini Projetos</div>
+    <div class="sg" style="grid-template-columns:1fr">
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Projeto 1 — ToDo List</div><div class="sc-d">2 dias</div></div><div class="sc-b">Login Auth · CRUD Firestore · Concluir · Filtrar · Provider + Loading/Erro</div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Projeto 2 — CRUD + Upload</div><div class="sc-d">2 dias</div></div><div class="sc-b">Formulário · Upload Storage · Lista StreamBuilder · Editar/Excluir</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">⚡ Semana 4 — Avançado</div>
+    <div class="card-b">
+      <div class="sw">
+        <div class="sd"><div class="dw">Seg</div><div class="tp">Nav</div><div class="dt">BottomNav, Stack</div></div>
+        <div class="sd"><div class="dw">Ter</div><div class="tp">Maps</div><div class="dt">flutter_map</div></div>
+        <div class="sd"><div class="dw">Qua</div><div class="tp">OCR</div><div class="dt">ML Kit</div></div>
+        <div class="sd"><div class="dw">Qui</div><div class="tp">Anim.</div><div class="dt">AnimatedContainer</div></div>
+        <div class="sd"><div class="dw">Sex</div><div class="tp">Rev.</div><div class="dt">Juntar tudo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📊 Progresso</div>
+    <div class="pb-l">
+      <div class="pb-r"><div class="pb-lb">Sem 1 — Dart + Flutter</div><div class="pb-tr"><div class="pb-f" style="width:40%;background:var(--blu)"></div></div><div class="pb-p">40%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 2 — Firebase + Provider</div><div class="pb-tr"><div class="pb-f" style="width:60%;background:var(--grn)"></div></div><div class="pb-p">60%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 3 — Mini Projetos</div><div class="pb-tr"><div class="pb-f" style="width:90%;background:var(--pur)"></div></div><div class="pb-p">90%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 4 — Avançado</div><div class="pb-tr"><div class="pb-f" style="width:100%;background:var(--pur)"></div></div><div class="pb-p">100%</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📚 Recursos</div>
+    <div class="card-b">
+       <div class="tbl-wrap"><table>
+        <thead><tr><th>Assunto</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td>Dart Tour</td><td><code>dart.dev/language</code></td></tr>
+          <tr><td>DartPad</td><td><code>dartpad.dev</code></td></tr>
+          <tr><td>Flutter Get Started</td><td><code>docs.flutter.dev/get-started/install</code></td></tr>
+          <tr><td>Widget of the Week</td><td><code>youtube.com/playlist?list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG</code></td></tr>
+          <tr><td>Firebase + Flutter</td><td><code>firebase.flutter.dev/docs/overview</code></td></tr>
+          <tr><td>Flutter com Migs (PT)</td><td><code>youtube.com/@fluttercommigs</code></td></tr>
+          <tr><td>NetNinja Flutter</td><td><code>youtube.com/playlist?list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ</code></td></tr>
+        </tbody>
+      </table></div>
+      <div class="co pur"><div class="co-b"><strong>🎯</strong> Cada membro: cria tela · navega · Firestore · login · PR</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EXECUÇÃO ═══ -->
+<div class="section sec-enter" id="execucao" data-accent="green" data-style="scale-in" role="region" aria-label="Plano de Execução">
+  <div class="sec-tag">Guia 03</div>
+  <h2 class="sec-title">Plano de <span class="hl">Execução</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Sprints</div><div class="st-n blu">8</div><div class="st-d">0 a 7</div></div>
+    <div class="st-card"><div class="st-l">Dias</div><div class="st-n grn">50</div><div class="st-d">Setup → banca</div></div>
+    <div class="st-card"><div class="st-l">PRs</div><div class="st-n pur">7</div><div class="st-d">1 por sprint</div></div>
+    <div class="st-card"><div class="st-l">Equipe</div><div class="st-n yel">4</div><div class="st-d">pessoas</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">👥 Distribuição</div>
+    <div class="pg">
+      <div class="pc"><div class="pa a">A</div><div class="pi"><div class="pn">Pessoa A</div><div class="pr">Líder Técnico</div><div class="pt">Auth, Provider, Firebase, revisão PRs</div></div></div>
+      <div class="pc"><div class="pa b">B</div><div class="pi"><div class="pn">Pessoa B</div><div class="pr">Dev Front</div><div class="pt">Telas, Dashboard, Rotina, layout</div></div></div>
+      <div class="pc"><div class="pa c">C</div><div class="pi"><div class="pn">Pessoa C</div><div class="pr">Dev Dados</div><div class="pt">Modelos, Services, Storage, API</div></div></div>
+      <div class="pc"><div class="pa d">D</div><div class="pi"><div class="pn">Pessoa D</div><div class="pr">QA/Doc</div><div class="pt">Testes, checklist, slides, evidências</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📋 Sprints</div>
+    <div class="sg">
+      <div class="sc"><div class="sc-bar" style="background:var(--tx3)"></div><div class="sc-h"><div class="sc-n">Sprint 0 — Fundação</div><div class="sc-d">Dias 1-5</div></div><div class="sc-b">Flutter SDK, Android Studio, GitHub, Firebase, estrutura, tema, rotas, AuthService</div><div class="sc-t"><span class="t t-grn">flutter run ✅</span><span class="t t-blu">Firebase ✅</span></div></div>
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Sprint 1 — Auth + Nav</div><div class="sc-d">Dias 6-10</div></div><div class="sc-b">Login, cadastro, guarda rota, sessão, BottomNav, Dashboard</div><div class="sc-t"><span class="t t-blu">Auth ✅</span><span class="t t-pur">PR #2</span></div></div>
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Sprint 2 — Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView cards, ModuleCard, resumo horas, progresso</div><div class="sc-t"><span class="t t-grn">Cards ✅</span><span class="t t-pur">PR #3</span></div></div>
+      <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Sprint 3 — Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD disciplinas, notas, média, previsão final, faltas</div><div class="sc-t"><span class="t t-yel">8 dias</span><span class="t t-pur">PR #4</span></div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Sprint 4 — Certificados</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload PDF, Storage, validação, progress ring, Dashboard</div><div class="sc-t"><span class="t t-pur">Upload ✅</span><span class="t t-pur">PR #5</span></div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Sprint 5 — Pesquisa</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex, ArticleCard, paginação, filtro ano</div><div class="sc-t"><span class="t t-teal">API ✅</span><span class="t t-pur">PR #6</span></div></div>
+      <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Sprint 6 — Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista, flutter_map markers, popup, filtro data</div><div class="sc-t"><span class="t t-red">Mapa ✅</span><span class="t t-pur">PR #7</span></div></div>
+      <div class="sc"><div class="sc-bar rbow"></div><div class="sc-h"><div class="sc-n">Sprint 7 — Banca</div><div class="sc-d">Dias 45-50</div></div><div class="sc-b">Testes, correções, dados demo, vídeo, slides, 3 ensaios</div><div class="sc-t"><span class="t t-grn">Demo ✅</span><span class="t t-red">🎯</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🏆 Marcos</div>
+    <div class="ms"><div class="ms-n blu">1</div><div class="ms-b"><div class="ms-t">Sem 1 — Fundação</div><div class="ms-d">flutter run · Firebase · PR #1</div></div></div>
+    <div class="ms"><div class="ms-n blu">2</div><div class="ms-b"><div class="ms-t">Sem 2 — Auth</div><div class="ms-d">Login · Sessão · BottomNav · PR #2</div></div></div>
+    <div class="ms"><div class="ms-n grn">3</div><div class="ms-b"><div class="ms-t">Sem 4 — Rotina</div><div class="ms-d">CRUD · Média · Previsão · Faltas · PR #4</div></div></div>
+    <div class="ms"><div class="ms-n grn">4</div><div class="ms-b"><div class="ms-t">Sem 6 — Certificados</div><div class="ms-d">Upload · Lista · Progresso · PR #5</div></div></div>
+    <div class="ms"><div class="ms-n pur">5</div><div class="ms-b"><div class="ms-t">Sem 8 — Todos módulos</div><div class="ms-d">Pesquisa · Radar · Integrado · PR #7</div></div></div>
+    <div class="ms"><div class="ms-n yel">6</div><div class="ms-b"><div class="ms-t">Dia 50 — Banca!</div><div class="ms-d">App estável · 3 ensaios · Vídeo · Slides</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">⚠️ Contingência</div>
+    <div class="cg">
+      <div class="ce p1"><div class="ce-title">🔴 Não Pular</div><div class="ce-item">Auth + Dashboard</div><div class="ce-item">Rotina completo</div><div class="ce-item">Certificados v1</div></div>
+      <div class="ce p2"><div class="ce-title">🟡 Reduzir</div><div class="ce-item">Pesquisa (sem paginação)</div><div class="ce-item">Radar (só lista)</div></div>
+      <div class="ce p3"><div class="ce-title">⚪ Cortar</div><div class="ce-item">OCR · Scraper · Notificações</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📅 Rotina Semanal</div>
+    <div class="card-b">
+      <div class="co blu"><div class="co-b"><strong>Segunda:</strong> Planejamento + distribuir tarefas</div></div>
+      <div class="co grn"><div class="co-b"><strong>Ter-Qui:</strong> Codar + daily 15 min</div></div>
+      <div class="co yel"><div class="co-b"><strong>Sexta:</strong> Demo interna + correções + retro</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📝 Templates</div>
+    <div class="card-b">
+      <details>
+        <summary>Daily (15 min)</summary>
+<pre>Ontem: [o que fez]
+Hoje: [tarefa específica]  
+Bloqueios: [o que impede]</pre>
+      </details>
+      <details>
+        <summary>Pull Request</summary>
+<pre><span class="cm">## O que foi feito</span>
+[descrição]
+
+<span class="cm">## Evidência</span>
+[print/vídeo]
+
+<span class="cm">## Checklist</span>
+- [ ] Roda no emulador
+- [ ] Sem erro compilação
+- [ ] Testado manualmente
+- [ ] Segue padrões
+
+<span class="cm">## Revisores</span>
+@colega1 @colega2</pre>
+      </details>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ═══ TESTES ═══ -->
+<div class="section-divider"></div>
+<div class="section sec-enter" id="testes" data-accent="green" data-style="reveal" role="region" aria-label="Testes">
+  <div class="sec-tag">Guia 04</div>
+  <h2 class="sec-title">Guia de <span class="hl">Testes</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Unit Tests</div><div class="st-n grn">ms</div><div class="st-d">Modelos e serviços</div></div>
+    <div class="st-card"><div class="st-l">Widget Tests</div><div class="st-n blu">seg</div><div class="st-d">Telas e componentes</div></div>
+    <div class="st-card"><div class="st-l">Cobertura</div><div class="st-n pur">70%+</div><div class="st-d">Meta do projeto</div></div>
+    <div class="st-card"><div class="st-l">CI</div><div class="st-n yel">GitHub Actions</div><div class="st-d">Automático no push</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🧪 Tipos de Teste</div>
+    <div class="flow">
+      <span class="flow-s grn">Unit</span><span class="flow-a">→</span>
+      <span class="flow-s blu">Widget</span><span class="flow-a">→</span>
+      <span class="flow-s pur">Integração</span>
+    </div>
+    <div class="card-b">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Tipo</th><th>O que testa</th><th>Comando</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Unit</strong></td><td>Modelos, serviços, providers</td><td><code>flutter test test/models/</code></td></tr>
+          <tr><td><strong>Widget</strong></td><td>Telas, formulários, componentes</td><td><code>flutter test test/features/</code></td></tr>
+          <tr><td><strong>Integração</strong></td><td>Fluxo completo (login → dashboard)</td><td><code>flutter test integration_test/</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📋 Modelo — Teste de Discipline</div>
+    <div class="card-b">
+<pre><span class="kw">void</span> main() {
+  group(<span class="str">'Discipline Model'</span>, () {
+    test(<span class="str">'weightedAverage retorna 0 sem notas'</span>, () {
+      <span class="kw">final</span> d = Discipline(id: <span class="str">'1'</span>, name: <span class="str">'Mat'</span>, professor: <span class="str">'João'</span>);
+      expect(d.weightedAverage, 0);
+    });
+
+    test(<span class="str">'calcula média ponderada correta'</span>, () {
+      <span class="kw">final</span> d = Discipline(id: <span class="str">'1'</span>, name: <span class="str">'Mat'</span>, professor: <span class="str">'João'</span>,
+        grades: [Grade(weight: 2, score: 8.0), Grade(weight: 3, score: 6.0)]);
+      expect(d.weightedAverage, 6.8);  <span class="cm">// (16+18)/5</span>
+    });
+  });
+}</pre>
+      <div class="co blu"><div class="co-b"><strong>Comandos:</strong> <code>flutter test</code> · <code>flutter test --coverage</code> · <code>genhtml coverage/lcov.info -o coverage/html/</code></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📋 Checklist por Módulo</div>
+    <div class="sg" style="grid-template-columns:1fr">
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Auth</div></div><div class="sc-b">signUp · signIn · signOut · Loading/Erro LoginScreen · Validação RegisterScreen</div></div>
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Rotina</div></div><div class="sc-b">Média ponderada · Faltas restantes · toMap/fromMap · neededForFinal</div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Dashboard</div></div><div class="sc-b">ModuleCards · Nome usuário · Resumo horas · Empty state</div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa</div></div><div class="sc-b">OpenAlex parse · Campo busca · Lista resultados · Empty state</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GIT & GITHUB ═══ -->
+<div class="section-divider"></div>
+<div class="section sec-enter" id="git" data-accent="purple" data-style="slide-left" role="region" aria-label="Git e GitHub">
+  <div class="sec-tag">Guia 05</div>
+  <h2 class="sec-title">Guia de <span class="hl">Git & GitHub</span></h2>
+
+  <div class="card">
+    <div class="card-t">🌳 Estrutura de Branches</div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s red">main</span><span class="flow-a">←</span>
+        <span class="flow-s yel">develop</span><span class="flow-a">←</span>
+        <span class="flow-s grn">feature/*</span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Branch</th><th>Finalidade</th></tr></thead>
+        <tbody>
+          <tr><td><code>main</code></td><td>Código final — só entra depois de testado</td></tr>
+          <tr><td><code>develop</code></td><td>Integração — onde as features são juntadas</td></tr>
+          <tr><td><code>feature/nome</code></td><td>Sua branch de trabalho (uma por funcionalidade)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="co red"><div class="co-b">🚫 <strong>Nunca</strong> commitar direto em <code>main</code> ou <code>develop</code>. Sempre criar <code>feature/nomedatarefa</code>.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔄 Fluxo Diário</div>
+    <div class="card-b">
+<pre><span class="cm"># Início do dia</span>
+git checkout develop
+git pull origin develop
+git checkout -b feature/nome-da-tarefa
+
+<span class="cm"># Durante</span>
+git add .
+git commit -m <span class="str">"feat: adiciona tela de login"</span>
+git push origin feature/nome-da-tarefa
+
+<span class="cm"># Antes do PR</span>
+git checkout develop && git pull
+git checkout feature/nome-da-tarefa && git merge develop
+git push origin feature/nome-da-tarefa</pre>
+      <div class="co grn"><div class="co-b"><strong>Commits:</strong> <code>feat:</code> nova funcionalidade · <code>fix:</code> correção · <code>refactor:</code> reorganização · <code>test:</code> testes · <code>docs:</code> documentação</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">📝 Template de PR</div>
+    <div class="card-b">
+<pre><span class="cm">## O que foi feito</span>
+[descrição das mudanças]
+
+<span class="cm">## Prints / Vídeo</span>
+[evidência do funcionamento]
+
+<span class="cm">## Checklist</span>
+- [ ] Roda no emulador
+- [ ] Sem erro de compilação
+- [ ] Testado manualmente
+- [ ] Código segue padrões
+
+<span class="cm">## Revisores</span>
+@colega1 @colega2</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🆘 Comandos de Emergência</div>
+    <div class="sg" style="grid-template-columns:1fr">
+      <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Status</div></div><div class="sc-b"><code>git status</code> — mostra o que mudou</div></div>
+      <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Diff</div></div><div class="sc-b"><code>git diff</code> — mostra as alterações linha a linha</div></div>
+      <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Desfazer local</div></div><div class="sc-b"><code>git checkout -- arquivo</code> — descarta mudanças</div></div>
+      <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Log</div></div><div class="sc-b"><code>git log --oneline --graph</code> — histórico visual</div></div>
+      <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Reset soft</div></div><div class="sc-b"><code>git reset --soft HEAD~1</code> — desfaz commit mantendo código</div></div>
+      <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Blame</div></div><div class="sc-b"><code>git blame arquivo</code> — quem fez o quê em cada linha</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TROUBLESHOOTING ═══ -->
+<div class="section-divider"></div>
+<div class="section sec-enter" id="troubleshooting" data-accent="red" data-style="flip-up" role="region" aria-label="Troubleshooting">
+  <div class="sec-tag">Guia 06</div>
+  <h2 class="sec-title">Guia de <span class="hl">Troubleshooting</span></h2>
+
+  <div class="card">
+    <div class="card-t">❌ Erros Comuns e Soluções</div>
+    <div class="card-b">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Erro</th><th>Causa</th><th>Solução</th></tr></thead>
+        <tbody>
+          <tr><td><code>No Firebase App '[DEFAULT]'</code></td><td>Firebase não inicializado</td><td>Verificar <code>Firebase.initializeApp()</code> no main.dart</td></tr>
+          <tr><td><code>permission-denied</code></td><td>Regras Firestore bloqueando</td><td>Verificar se usuário só acessa próprios dados</td></tr>
+          <tr><td><code>No connected devices</code></td><td>Nenhum dispositivo conectado</td><td><code>flutter devices</code> · Abrir emulador · USB debugging</td></tr>
+          <tr><td><code>Gradle build failed</code></td><td>Cache corrompido</td><td><code>flutter clean && flutter pub get</code></td></tr>
+          <tr><td><code>setState() after dispose()</code></td><td>Atualizando widget removido</td><td>Verificar <code>if (mounted)</code> antes de setState</td></tr>
+          <tr><td><code>ProviderNotFoundException</code></td><td>Provider não registrado</td><td>Adicionar no <code>MultiProvider</code> em app.dart</td></tr>
+          <tr><td><code>failed to push</code></td><td>Branch remota à frente</td><td><code>git pull origin develop</code></td></tr>
+          <tr><td><code>Undefined name 'X'</code></td><td>Variável não encontrada</td><td>Verificar import e nome da variável</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🔧 Setup Firestore Rules</div>
+    <div class="card-b">
+<pre>rules_version = <span class="str">'2'</span>;
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: <span class="kw">if</span> request.auth.uid == userId;
+    }
+    match /certificates/{certId} {
+      allow read, update, delete: <span class="kw">if</span> resource.data.userId == request.auth.uid;
+      allow create: <span class="kw">if</span> request.resource.data.userId == request.auth.uid;
+    }
+  }
+}</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DEPLOY ═══ -->
+<div class="section-divider"></div>
+<div class="section sec-enter" id="deploy" data-accent="teal" data-style="rotate-in" role="region" aria-label="Deploy">
+  <div class="sec-tag">Guia 07</div>
+  <h2 class="sec-title">Guia de <span class="hl">Deploy</span></h2>
+
+  <div class="card">
+    <div class="card-t">📦 APK de Apresentação (Release)</div>
+    <div class="card-b">
+      <div class="flow">
+        <span class="flow-s blu">keytool</span><span class="flow-a">→</span>
+        <span class="flow-s blu">key.properties</span><span class="flow-a">→</span>
+        <span class="flow-s grn">flutter build</span><span class="flow-a">→</span>
+        <span class="flow-s pur">app-release.apk</span>
+      </div>
+<pre><span class="cm"># Gerar keystore (uma vez)</span>
+keytool -genkey -v -keystore C:\Users\SeuNome\upload-keystore.jks ^
+  -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+
+<span class="cm"># Build release</span>
+flutter build apk --release
+
+<span class="cm"># APK em: build/app/outputs/flutter-apk/app-release.apk</span></pre>
+      <div class="co grn"><div class="co-b"><strong>Dica:</strong> <code>flutter build apk --release --split-per-abi</code> gera APKs menores por arquitetura</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">🌐 Web (Firebase Hosting)</div>
+    <div class="card-b">
+<pre>flutter build web
+firebase init hosting     <span class="cm"># public: build/web, SPA: yes</span>
+firebase deploy --only hosting</pre>
+      <div class="co pur"><div class="co-b">URL: <code>https://graduahub-dev.web.app</code></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-t">✅ Checklist Pré-Deploy</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">flutter analyze sem erros</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">flutter test passando</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Testado em dispositivo físico</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">APK gerado e testado</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">APK salvo em pendrive + nuvem</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Vídeo de backup do fluxo completo</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP GUIDELINE ═══ -->
+<div class="section sec-enter" id="road-guideline" data-accent="purple" data-style="slide-right" role="region" aria-label="Roadmap Guideline">
+  <div class="sec-tag">Roadmap R1</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Guideline</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Dias 1-5</div><div class="road-s2">Fundação</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Dias 6-10</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Dias 11-14</div><div class="road-s2">Dash</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Dias 15-22</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 23-30</div><div class="road-s2">Cert</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Dias 31-37</div><div class="road-s2">Pesq</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Dias 38-44</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Dias 45-50</div><div class="road-s2">Banca</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🛠 Fase 1 — Fundação <span class="b blu">Dias 1-5</span></div><div class="card-b"><div class="flow"><span class="flow-s act">SDK</span><span class="flow-a">→</span><span class="flow-s act">Studio</span><span class="flow-a">→</span><span class="flow-s act">Firebase</span><span class="flow-a">→</span><span class="flow-s act">Pastas</span><span class="flow-a">→</span><span class="flow-s act">AuthService</span><span class="flow-a">→</span><span class="flow-s act">PR #1</span></div><div class="co grn"><div class="co-b">flutter run ✅ · Firebase ✅ · PR #1 ✅</div></div></div></div>
+  <div class="card"><div class="card-t">🔐 Fase 2 — Auth <span class="b blu">Dias 6-10</span></div><div class="card-b"><div class="flow"><span class="flow-s blu">Login</span><span class="flow-a">→</span><span class="flow-s blu">Cadastro</span><span class="flow-a">→</span><span class="flow-s blu">Guarda</span><span class="flow-a">→</span><span class="flow-s blu">Nav</span><span class="flow-a">→</span><span class="flow-s blu">Sessão</span><span class="flow-a">→</span><span class="flow-s blu">PR #2</span></div><div class="co grn"><div class="co-b">Login/Cadastro ✅ · Sessão ✅ · Erros PT ✅</div></div></div></div>
+  <div class="card"><div class="card-t">🧩 Fase 3 — Módulos <span class="b yel">Dias 11-44</span></div><div class="sg">
+    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Dashboard</div><div class="sc-d">PR #3</div></div><div class="sc-b">GridView, ModuleCard, resumo horas</div></div>
+    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Rotina</div><div class="sc-d">PR #4</div></div><div class="sc-b">CRUD, média, previsão, faltas</div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Certificados</div><div class="sc-d">PR #5</div></div><div class="sc-b">Upload, Storage, progresso</div></div>
+    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Pesquisa</div><div class="sc-d">PR #6</div></div><div class="sc-b">OpenAlex, ArticleCard</div></div>
+    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Radar</div><div class="sc-d">PR #7</div></div><div class="sc-b">Lista, mapa, markers</div></div>
+  </div></div>
+  <div class="card"><div class="card-t">✨ Fase 4 — Banca <span class="b pur">Dias 45-50</span></div><div class="card-b"><div class="flow"><span class="flow-s red">Testes</span><span class="flow-a">→</span><span class="flow-s red">Correções</span><span class="flow-a">→</span><span class="flow-s red">Demo</span><span class="flow-a">→</span><span class="flow-s red">Slides</span><span class="flow-a">→</span><span class="flow-s red">Ensaio</span><span class="flow-a">→</span><span class="flow-s red">🎯</span></div></div></div>
+</div>
+
+<!-- ═══ ROADMAP ESTUDOS ═══ -->
+<div class="section sec-enter" id="road-estudos" data-accent="blue" data-style="blur-in" role="region" aria-label="Roadmap Estudos">
+  <div class="sec-tag">Roadmap R2</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Estudos</span></h2>
+
+  <div class="st">
+    <div class="st-card"><div class="st-l">Semanas</div><div class="st-n grn">4</div><div class="st-d">Capacitação</div></div>
+    <div class="st-card"><div class="st-l">Carga</div><div class="st-n blu">2-3h</div><div class="st-d">por dia</div></div>
+    <div class="st-card"><div class="st-l">Projetos</div><div class="st-n pur">2</div><div class="st-d">Obrigatórios</div></div>
+    <div class="st-card"><div class="st-l">Meta</div><div class="st-n yel">100%</div><div class="st-d">Time apto</div></div>
+  </div>
+
+  <div class="card"><div class="card-t">📘 Semana 1 — Dart + Flutter</div><div class="card-b"><div class="flow"><span class="flow-s">Dart I</span><span class="flow-a">→</span><span class="flow-s">Dart II</span><span class="flow-a">→</span><span class="flow-s">Flutter I</span><span class="flow-a">→</span><span class="flow-s">Flutter II</span><span class="flow-a">→</span><span class="flow-s">Listas</span><span class="flow-a">→</span><span class="flow-s grn">App 3 telas</span></div><div class="co grn"><div class="co-b">🏁 App 3 telas + form válido no emulador</div></div></div></div>
+  <div class="card"><div class="card-t">🔥 Semana 2 — Firebase + Provider</div><div class="card-b"><div class="flow"><span class="flow-s">Provider</span><span class="flow-a">→</span><span class="flow-s">Auth</span><span class="flow-a">→</span><span class="flow-s">Firestore</span><span class="flow-a">→</span><span class="flow-s">Storage</span><span class="flow-a">→</span><span class="flow-s">HTTP</span><span class="flow-a">→</span><span class="flow-s grn">2 apps</span></div><div class="co grn"><div class="co-b">🏁 ToDo + Login CRUD. Individual.</div></div></div></div>
+  <div class="card"><div class="card-t">🚀 Semana 3 — Mini Projetos</div><div class="sg" style="grid-template-columns:1fr">
+    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">ToDo</div><div class="sc-d">2 dias</div></div><div class="sc-b">Login · CRUD · Concluir · Filtrar · Provider</div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">CRUD + Upload</div><div class="sc-d">2 dias</div></div><div class="sc-b">Forms · Storage · Stream · Editar</div></div>
+  </div></div>
+  <div class="card"><div class="card-t">⚡ Semana 4 — Avançado</div><div class="card-b"><div class="flow"><span class="flow-s">Nav</span><span class="flow-a">→</span><span class="flow-s">Maps</span><span class="flow-a">→</span><span class="flow-s">OCR</span><span class="flow-a">→</span><span class="flow-s">Anim</span><span class="flow-a">→</span><span class="flow-s grn">Rev</span></div></div></div>
+
+  <div class="card"><div class="card-t">📊 Progresso</div>
+    <div class="pb-l">
+      <div class="pb-r"><div class="pb-lb">Sem 1</div><div class="pb-tr"><div class="pb-f" style="width:40%;background:var(--blu)"></div></div><div class="pb-p">40%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 2</div><div class="pb-tr"><div class="pb-f" style="width:60%;background:var(--grn)"></div></div><div class="pb-p">60%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 3</div><div class="pb-tr"><div class="pb-f" style="width:90%;background:var(--pur)"></div></div><div class="pb-p">90%</div></div>
+      <div class="pb-r"><div class="pb-lb">Sem 4</div><div class="pb-tr"><div class="pb-f" style="width:100%;background:var(--pur)"></div></div><div class="pb-p">100%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP EXECUÇÃO ═══ -->
+<div class="section sec-enter" id="road-execucao" data-accent="green" data-style="scale-in" role="region" aria-label="Roadmap Execução">
+  <div class="sec-tag">Roadmap R3</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Execução</span></h2>
+
+  <div class="road">
+    <div class="road-track">
+      <div class="road-s"><div class="road-dot dim"></div><div class="road-l">Spr.0</div><div class="road-s2">Fund</div></div>
+      <div class="road-s"><div class="road-dot blu"></div><div class="road-l">Spr.1</div><div class="road-s2">Auth</div></div>
+      <div class="road-s"><div class="road-dot grn"></div><div class="road-l">Spr.2</div><div class="road-s2">Dash</div></div>
+      <div class="road-s"><div class="road-dot yel"></div><div class="road-l">Spr.3</div><div class="road-s2">Rotina</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.4</div><div class="road-s2">Cert</div></div>
+      <div class="road-s"><div class="road-dot teal"></div><div class="road-l">Spr.5</div><div class="road-s2">Pesq</div></div>
+      <div class="road-s"><div class="road-dot red"></div><div class="road-l">Spr.6</div><div class="road-s2">Radar</div></div>
+      <div class="road-s"><div class="road-dot pur"></div><div class="road-l">Spr.7</div><div class="road-s2">🎯</div></div>
+    </div>
+  </div>
+
+  <div class="sg">
+    <div class="sc"><div class="sc-bar" style="background:var(--tx3)"></div><div class="sc-h"><div class="sc-n">Sprint 0 — Fundação</div><div class="sc-d">Dias 1-5</div></div><div class="sc-b">Flutter, Studio, GitHub, Firebase, pastas, tema, AuthService</div><div class="sc-t"><span class="t t-grn">PR #1</span></div></div>
+    <div class="sc"><div class="sc-bar blu"></div><div class="sc-h"><div class="sc-n">Sprint 1 — Auth+Nav</div><div class="sc-d">Dias 6-10</div></div><div class="sc-b">Login, cadastro, guarda, BottomNav, Dashboard</div><div class="sc-t"><span class="t t-blu">PR #2</span></div></div>
+    <div class="sc"><div class="sc-bar grn"></div><div class="sc-h"><div class="sc-n">Sprint 2 — Dashboard</div><div class="sc-d">Dias 11-14</div></div><div class="sc-b">GridView, ModuleCard, resumo, progresso</div><div class="sc-t"><span class="t t-grn">PR #3</span></div></div>
+    <div class="sc"><div class="sc-bar yel"></div><div class="sc-h"><div class="sc-n">Sprint 3 — Rotina</div><div class="sc-d">Dias 15-22</div></div><div class="sc-b">CRUD, notas, média, previsão, faltas</div><div class="sc-t"><span class="t t-yel">PR #4</span></div></div>
+    <div class="sc"><div class="sc-bar pur"></div><div class="sc-h"><div class="sc-n">Sprint 4 — Cert.</div><div class="sc-d">Dias 23-30</div></div><div class="sc-b">Upload Storage, validação, ring, Dashboard</div><div class="sc-t"><span class="t t-pur">PR #5</span></div></div>
+    <div class="sc"><div class="sc-bar teal"></div><div class="sc-h"><div class="sc-n">Sprint 5 — Pesquisa</div><div class="sc-d">Dias 31-37</div></div><div class="sc-b">OpenAlex, ArticleCard, paginação</div><div class="sc-t"><span class="t t-teal">PR #6</span></div></div>
+    <div class="sc"><div class="sc-bar red"></div><div class="sc-h"><div class="sc-n">Sprint 6 — Radar</div><div class="sc-d">Dias 38-44</div></div><div class="sc-b">Lista, flutter_map, markers, popup</div><div class="sc-t"><span class="t t-red">PR #7</span></div></div>
+    <div class="sc"><div class="sc-bar rbow"></div><div class="sc-h"><div class="sc-n">Sprint 7 — Banca</div><div class="sc-d">Dias 45-50</div></div><div class="sc-b">Testes, demo, vídeo, slides, 3 ensaios</div><div class="sc-t"><span class="t t-grn">🎯</span></div></div>
+  </div>
+
+  <div class="card"><div class="card-t">⚠️ Contingência</div>
+    <div class="cg">
+      <div class="ce p1"><div class="ce-title">🔴 Não Pular</div><div class="ce-item">Auth + Dashboard</div><div class="ce-item">Rotina</div><div class="ce-item">Certificados</div></div>
+      <div class="ce p2"><div class="ce-title">🟡 Reduzir</div><div class="ce-item">Pesquisa (sem paginação)</div><div class="ce-item">Radar (só lista)</div></div>
+      <div class="ce p3"><div class="ce-title">⚪ Cortar</div><div class="ce-item">OCR · Scraper · Notificações</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP TESTES ═══ -->
+<div class="section-divider"></div>
+<div class="section sec-enter" id="road-testes" data-accent="green" data-style="reveal" role="region" aria-label="Roadmap Testes">
+  <div class="sec-tag">Roadmap R4</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Testes</span></h2>
+
+  <div class="st">
+    <div class="st-card stat-pop"><div class="st-l">Fases</div><div class="st-n grn">7</div><div class="st-d">Setup → Cobertura</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Foco</div><div class="st-n blu">Models</div><div class="st-d">Primeiro a testar</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Meta</div><div class="st-n pur">70%+</div><div class="st-d">Cobertura geral</div></div>
+    <div class="st-card stat-pop"><div class="st-l">CI</div><div class="st-n yel">Auto</div><div class="st-d">GitHub Actions</div></div>
+  </div>
+
+  <div class="tl-wrap">
+    <div class="tl-shimmer" id="testesShimmer">
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+    </div>
+    <div class="tl-track" id="testesTrack" style="display:none">
+      <div class="tl-connector" id="testesConnector"><svg viewBox="0 0 100 6" preserveAspectRatio="none"><path class="tl-connector-line" d="M1,3 L99,3" stroke="var(--grn)"/></svg></div>
+      <div class="tl-step">
+        <div class="tl-cat setup">Setup</div>
+        <div class="tl-step-badge dim" data-tooltip="Ferramentas prontas"><span class="tl-step-num">1</span></div>
+        <div class="tl-step-label">flutter_test</div>
+        <div class="tl-step-sub">SDK nativo</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Setup de Testes</div>
+          <div class="tl-detail-desc">Flutter já vem com flutter_test. Rode flutter test para verificar. Adicione mocktail ou mockito para mocks.</div>
+          <div class="tl-detail-tags"><span>mocktail</span><span>flutter_test</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Core</div>
+        <div class="tl-step-badge blu" data-tooltip="Modelos de dados"><span class="tl-step-num">2</span></div>
+        <div class="tl-step-label">Models</div>
+        <div class="tl-step-sub">Discipline, Cert</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Modelos</div>
+          <div class="tl-detail-desc">Testar cálculo de média, faltas, toMap/fromMap. Cobertura alvo: 100% dos models.</div>
+          <div class="tl-detail-tags"><span>unit</span><span>100%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Core</div>
+        <div class="tl-step-badge grn" data-tooltip="Serviços Firebase"><span class="tl-step-num">3</span></div>
+        <div class="tl-step-label">Services</div>
+        <div class="tl-step-sub">Auth, Firestore</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Serviços</div>
+          <div class="tl-detail-desc">Mockar Firebase com mocktail. Testar signUp, signIn, upload, CRUD. Cobertura: 80%.</div>
+          <div class="tl-detail-tags"><span>mock</span><span>80%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Lógica</div>
+        <div class="tl-step-badge yel" data-tooltip="Providers com mock"><span class="tl-step-num">4</span></div>
+        <div class="tl-step-label">Providers</div>
+        <div class="tl-step-sub">Mock + test</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Providers</div>
+          <div class="tl-detail-desc">Injetar serviços mockados. Testar loading/erro/sucesso. Cobertura: 70%.</div>
+          <div class="tl-detail-tags"><span>ChangeNotifier</span><span>70%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat test">UI</div>
+        <div class="tl-step-badge pur" data-tooltip="Telas e componentes"><span class="tl-step-num">5</span></div>
+        <div class="tl-step-label">Widgets</div>
+        <div class="tl-step-sub">Telas críticas</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testes de Widget</div>
+          <div class="tl-detail-desc">Testar LoginScreen, Dashboard, formulários. Verificar loading, erro, empty state. Cobertura: 60%.</div>
+          <div class="tl-detail-tags"><span>widget</span><span>60%</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat deploy">CI</div>
+        <div class="tl-step-badge teal" data-tooltip="Automação"><span class="tl-step-num">6</span></div>
+        <div class="tl-step-label">GitHub Actions</div>
+        <div class="tl-step-sub">Automático</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">CI com GitHub Actions</div>
+          <div class="tl-detail-desc">Configurar .github/workflows/test.yml. Roda flutter test a cada push. Bloqueia PR se falhar.</div>
+          <div class="tl-detail-tags"><span>CI/CD</span><span>automation</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat prep">Meta</div>
+        <div class="tl-step-badge red" data-tooltip="Objetivo final"><span class="tl-step-num">7</span></div>
+        <div class="tl-step-label">Cobertura</div>
+        <div class="tl-step-sub">70%+</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Cobertura 70%+</div>
+          <div class="tl-detail-desc">Gerar relatório com flutter test --coverage. Visualizar com genhtml. Meta mínima: 70% geral.</div>
+          <div class="tl-detail-tags"><span>coverage</span><span>genhtml</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROADMAP DEPLOY ═══ -->
+<div class="section-divider"></div>
+<div class="section sec-enter" id="road-deploy" data-accent="teal" data-style="rotate-in" role="region" aria-label="Roadmap Deploy">
+  <div class="sec-tag">Roadmap R5</div>
+  <h2 class="sec-title">Roadmap — <span class="hl">Deploy</span></h2>
+
+  <div class="st">
+    <div class="st-card stat-pop"><div class="st-l">Etapas</div><div class="st-n teal">6</div><div class="st-d">Keystore → Backup</div></div>
+    <div class="st-card stat-pop"><div class="st-l">APK</div><div class="st-n grn">1</div><div class="st-d">app-release.apk</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Web</div><div class="st-n blu">Firebase</div><div class="st-d">Hosting</div></div>
+    <div class="st-card stat-pop"><div class="st-l">Backup</div><div class="st-n yel">3</div><div class="st-d">Pendrive + nuvem + vídeo</div></div>
+  </div>
+
+  <div class="tl-wrap">
+    <div class="tl-shimmer" id="deployShimmer">
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+      <div class="tl-shimmer-step"><div class="tl-shimmer-circle"></div><div class="tl-shimmer-line"></div><div class="tl-shimmer-line"></div></div>
+    </div>
+    <div class="tl-track" id="deployTrack" style="display:none">
+      <div class="tl-connector" id="deployConnector"><svg viewBox="0 0 100 6" preserveAspectRatio="none"><path class="tl-connector-line" d="M1,3 L99,3" stroke="var(--teal)"/></svg></div>
+      <div class="tl-step">
+        <div class="tl-cat setup">Setup</div>
+        <div class="tl-step-badge dim" data-tooltip="Chave de assinatura"><span class="tl-step-num">1</span></div>
+        <div class="tl-step-label">Keystore</div>
+        <div class="tl-step-sub">Gerar chave</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Gerar Keystore</div>
+          <div class="tl-detail-desc">keytool -genkey -v -keystore upload-keystore.jks. Anote a senha! Só precisa fazer uma vez.</div>
+          <div class="tl-detail-tags"><span>keytool</span><span>JKS</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat setup">Setup</div>
+        <div class="tl-step-badge blu" data-tooltip="Assinatura configurada"><span class="tl-step-num">2</span></div>
+        <div class="tl-step-label">Config</div>
+        <div class="tl-step-sub">key.properties</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Configurar key.properties</div>
+          <div class="tl-detail-desc">Criar android/key.properties com storePassword, keyPassword, keyAlias, storeFile.</div>
+          <div class="tl-detail-tags"><span>config</span><span>signing</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat dev">Build</div>
+        <div class="tl-step-badge grn" data-tooltip="Build release"><span class="tl-step-num">3</span></div>
+        <div class="tl-step-label">APK</div>
+        <div class="tl-step-sub">flutter build</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Build do APK</div>
+          <div class="tl-detail-desc">flutter build apk --release. APK em build/app/outputs/flutter-apk/app-release.apk.</div>
+          <div class="tl-detail-tags"><span>release</span><span>APK</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat deploy">Web</div>
+        <div class="tl-step-badge yel" data-tooltip="Deploy web"><span class="tl-step-num">4</span></div>
+        <div class="tl-step-label">Firebase Hosting</div>
+        <div class="tl-step-sub">Web</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Deploy Web</div>
+          <div class="tl-detail-desc">flutter build web && firebase deploy --only hosting. URL: https://graduahub-dev.web.app</div>
+          <div class="tl-detail-tags"><span>hosting</span><span>web</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat test">QA</div>
+        <div class="tl-step-badge pur" data-tooltip="Teste em dispositivo"><span class="tl-step-num">5</span></div>
+        <div class="tl-step-label">Testar</div>
+        <div class="tl-step-sub">Celular limpo</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Testar APK</div>
+          <div class="tl-detail-desc">Instalar APK em um celular que nunca viu o projeto. Testar fluxo completo.</div>
+          <div class="tl-detail-tags"><span>QA</span><span>device</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-cat prep">Backup</div>
+        <div class="tl-step-badge red" data-tooltip="Plano B"><span class="tl-step-num">6</span></div>
+        <div class="tl-step-label">Backup</div>
+        <div class="tl-step-sub">Pendrive + vídeo</div>
+        <div class="tl-detail">
+          <div class="tl-detail-title">Backup</div>
+          <div class="tl-detail-desc">Salvar APK, slides PDF e vídeo do app em pendrive e na nuvem. Plano B para banca.</div>
+          <div class="tl-detail-tags"><span>backup</span><span>plan-b</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CHECKLIST ═══ -->
+<div class="section sec-enter" id="checklist" data-accent="purple" data-style="slide-up" role="region" aria-label="Checklist da Banca">
+  <div class="sec-tag">Checklist Final</div>
+  <h2 class="sec-title">Checklist da <span class="hl">Banca</span></h2>
+
+  <div class="cl-progress">
+    <div class="cl-ring">
+      <svg viewBox="0 0 52 52">
+        <circle class="cl-ring-bg" cx="26" cy="26" r="22"/>
+        <circle class="cl-ring-fg" id="clRingFg" cx="26" cy="26" r="22"/>
+      </svg>
+      <div class="cl-ring-txt" id="clRingTxt">0%</div>
+    </div>
+    <div class="cl-ring-lbl">
+      <strong>Progresso da Checklist</strong>
+      Toque nos itens abaixo para marcar. Tudo salvo no celular.
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">📱 Funcionalidades</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cadastro: criar conta com email + senha + nome</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Login: entrar com email + senha</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Logout: sair e voltar para tela de login</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Persistência: fechar e abrir app continua logado</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Dashboard: cards dos módulos com resumo</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: disciplina, nota, média calculada</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Rotina: faltas restantes com alertas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: upload de PDF/imagem</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Certificado: progresso de horas no dashboard</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Pesquisa: buscar artigos no OpenAlex</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: lista de eventos do Firestore</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Radar: mapa com pins dos eventos</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🎨 Qualidade</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Sem crash ao navegar entre telas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Loading visível em operações lentas</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Mensagem de erro amigável</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Estado vazio quando não há dados</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Design consistente (cores, fontes)</div></div>
+    </div>
+  </div>
+
+  <div class="card"><div class="card-t">🎤 Apresentação</div>
+    <div class="cl">
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Contas de teste com dados reais</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Roteiro de demo de 5-8 minutos</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Vídeo de backup do fluxo completo</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">Cada membro explica uma parte técnica</div></div>
+      <div class="cl-i"><div class="cl-c"></div><div class="cl-l">3 ensaios realizados antes do dia</div></div>
+    </div>
+  </div>
+
+  <div class="co grn">
+    <div class="co-t">🎯 Regra de Ouro</div>
+    <div class="co-b">Funcionalidade simples funcionando &gt; complexa quebrada. Entreguem o básico <strong>PERFEITO</strong>.</div>
+  </div>
+</div>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <span>GraduaHUB — Projeto Integrador SENAI</span>
+    <strong>Curso Técnico em Desenvolvimento de Sistemas</strong>
+  </div>
+</footer>
+
+</div><!-- /ct -->
+</main>
+
+<script>
+;(function(){
+'use strict';
+
+/* ═══ SCROLL CONTAINER HELPERS (desktop: .main, mobile: window) ═══ */
+const isDesktopLayout = () => {
+  const main = document.querySelector('.main');
+  return main && getComputedStyle(document.body).overflow === 'hidden';
+};
+const $main = () => document.querySelector('.main');
+const getScrollY = () => {
+  if (isDesktopLayout()) return $main().scrollTop;
+  return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+};
+const getScrollHeight = () => {
+  if (isDesktopLayout()) return $main().scrollHeight;
+  return document.documentElement.scrollHeight;
+};
+const getClientHeight = () => {
+  if (isDesktopLayout()) return $main().clientHeight;
+  return document.documentElement.clientHeight;
+};
+const addScrollListener = (fn) => {
+  window.addEventListener('scroll', fn, {passive:true});
+  if (isDesktopLayout()) $main().addEventListener('scroll', fn, {passive:true});
+};
+const smoothScrollTo = (top) => {
+  if (isDesktopLayout()) $main().scrollTo({top, behavior:'smooth'});
+  else window.scrollTo({top, behavior:'smooth'});
+};
+const observeInContainer = (selector, callback, options = {}) => {
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver(callback, {...options, root});
+  document.querySelectorAll(selector).forEach(el => obs.observe(el));
+  return obs;
+};
+
+// ─── ENHANCED PARTICLES WITH MOUSE INTERACTION ───
+(function(){
+  const c = document.getElementById('particles-canvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let w, h, particles = [];
+  let mouse = {x: -9999, y: -9999};
+  const isMobile = innerWidth < 640 || matchMedia('(hover:none)').matches;
+  const COUNT = isMobile ? 25 : 70;
+  const CONNECT_DIST = isMobile ? 80 : 140;
+  const MOUSE_RADIUS = isMobile ? 0 : 150;
+
+  function resize(){ w = c.width = innerWidth; h = c.height = innerHeight; }
+  addEventListener('resize', resize); resize();
+  addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  for (let i = 0; i < COUNT; i++) particles.push({
+    x: Math.random() * w, y: Math.random() * h,
+    vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+    r: Math.random() * 2.5 + .5, a: Math.random() * .4 + .15
+  });
+
+  function draw(){
+    ctx.clearRect(0, 0, w, h);
+
+    for (const p of particles) {
+      const dx = mouse.x - p.x;
+      const dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > 0 && dist < MOUSE_RADIUS) {
+        const force = (1 - dist / MOUSE_RADIUS) * .5;
+        p.vx -= dx / dist * force;
+        p.vy -= dy / dist * force;
+      }
+      p.vx += (Math.random() - .5) * .02;
+      p.vy += (Math.random() - .5) * .02;
+      p.vx *= .98; p.vy *= .98;
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(168, 85, 247, ${p.a})`;
+      ctx.fill();
+    }
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECT_DIST) {
+          const alpha = .1 * (1 - dist / CONNECT_DIST);
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(168, 85, 247, ${alpha})`;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── CURSOR FOLLOWER ───
+(function(){
+  const cf = document.getElementById('cursorFollower');
+  if (!cf) return;
+  let x = -100, y = -100, tx = -100, ty = -100;
+  let raf = null;
+  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (prefersReduced) return;
+
+  function onMove(e){
+    tx = e.clientX; ty = e.clientY;
+    if (!raf) { raf = requestAnimationFrame(tick); }
+  }
+
+  function tick(){
+    raf = null;
+    x += (tx - x) * .15;
+    y += (ty - y) * .15;
+    cf.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-50%)';
+    if (Math.abs(x - tx) > .5 || Math.abs(y - ty) > .5) {
+      raf = requestAnimationFrame(tick);
+    }
+  }
+
+  addEventListener('mousemove', onMove, {passive:true});
+  addEventListener('mouseenter', () => cf.classList.add('show'));
+  addEventListener('mouseleave', () => { cf.classList.remove('show'); x = -100; y = -100; tx = -100; ty = -100; });
+})();
+
+// ─── PARALLAX ORBS ───
+(function(){
+  const orbs = document.querySelectorAll('.orb');
+  if (!orbs.length) return;
+  const prefersReduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (prefersReduced) return;
+  let raf = null;
+  addScrollListener(() => {
+    if (!raf) raf = requestAnimationFrame(() => {
+      raf = null;
+      const s = getScrollY();
+      orbs[0].style.transform = `translate(${s * .02}px, ${s * -.015}px)`;
+      if (orbs[1]) orbs[1].style.transform = `translate(${s * -.015}px, ${s * .02}px)`;
+      if (orbs[2]) orbs[2].style.transform = `translate(${s * .01}px, ${s * -.01}px)`;
+    });
+  });
+})();
+
+// ─── THEME TOGGLE ───
+(function(){
+  const btn = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+  if (!btn) return;
+
+  const saved = localStorage.getItem('gh_theme');
+  if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+
+  updateIcon();
+
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isLight = html.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      html.removeAttribute('data-theme');
+      localStorage.setItem('gh_theme', 'dark');
+    } else {
+      html.setAttribute('data-theme', 'light');
+      localStorage.setItem('gh_theme', 'light');
+    }
+    updateIcon();
+    btn.style.transform = 'scale(.85)';
+    setTimeout(() => { btn.style.transform = ''; }, 200);
+  });
+
+  function updateIcon(){
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    icon.innerHTML = isLight
+      ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'
+      : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  }
+})();
+
+// ─── READING PROGRESS BAR ───
+(function(){
+  const bar = document.getElementById('progressBar');
+  if (!bar) return;
+  const update = () => {
+    const s = getScrollY();
+    const total = getScrollHeight() - getClientHeight();
+    const pct = total > 0 ? (s / total) * 100 : 0;
+    bar.style.width = Math.min(pct, 100) + '%';
+  };
+  addScrollListener(update);
+  setTimeout(update, 100);
+})();
+
+// ─── BACK TO TOP ───
+(function(){
+  const btt = document.getElementById('backToTop');
+  const ring = document.getElementById('bttRingFg');
+  if (!btt) return;
+  const circ = 2 * Math.PI * 19;
+  ring.style.strokeDasharray = circ;
+  const update = () => {
+    const s = getScrollY();
+    const total = getScrollHeight() - getClientHeight();
+    const pct = total > 0 ? s / total : 0;
+    ring.style.strokeDashoffset = circ - circ * Math.min(pct, 1);
+    btt.classList.toggle('show', s > 300);
+  };
+  addScrollListener(update); update();
+
+  btt.addEventListener('click', () => smoothScrollTo(0));
+})();
+
+// ─── TOGGLE DRAWER ───
+window.toggleDrawer = function() {
+  const d = document.querySelector('.drawer');
+  const b = document.querySelector('.backdrop');
+  const isOpen = d.classList.toggle('open');
+  b.classList.toggle('open', isOpen);
+  document.body.classList.toggle('no-scroll', isOpen);
+};
+
+// ─── NAV ITEMS ───
+document.querySelectorAll('.dnav-item').forEach(item => {
+  item.setAttribute('tabindex', '0');
+  item.setAttribute('role', 'button');
+  function navHandler() {
+    const target = this.dataset.target;
+    if (!target) return;
+    document.querySelectorAll('.dnav-item').forEach(i => { i.classList.remove('active'); i.removeAttribute('aria-current'); });
+    this.classList.add('active');
+    this.setAttribute('aria-current', 'page');
+    const el = document.getElementById(target);
+    if (el) {
+      toggleDrawer();
+      const topbar = document.querySelector('.topbar');
+      const topbarH = topbar && !isDesktopLayout() ? topbar.offsetHeight + 8 : 0;
+      const container = isDesktopLayout() ? $main() : window;
+      const rect = el.getBoundingClientRect();
+      const elTop = rect.top + (isDesktopLayout() ? container.scrollTop : window.scrollY);
+      requestAnimationFrame(() => {
+        smoothScrollTo(elTop - topbarH);
+      });
+    } else {
+      toggleDrawer();
+    }
+  }
+  item.addEventListener('click', navHandler);
+  item.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navHandler.call(this, e); }
+  });
+});
+
+// ─── INTERSECTION OBSERVER (nav active) ───
+observeInContainer('.section', entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.dnav-item').forEach(i => { i.classList.remove('active'); i.removeAttribute('aria-current'); });
+      const link = document.querySelector(`.dnav-item[data-target="${entry.target.id}"]`);
+      if (link) { link.classList.add('active'); link.setAttribute('aria-current', 'page'); }
+    }
+  });
+}, { threshold: .2, rootMargin: '0px 0px -40% 0px' });
+
+// ─── SCROLL REVEAL + SCRAMBLE + STAGGER ───
+(function(){
+  const revealItems = '.card, .sc, .pc, .ce, .tc, .ms, .co, .st, .sg, .pg, .cg, .tg, .cl, .cl-progress, .road, .flow';
+  const rev = observeInContainer(revealItems, entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.classList.add('revealed');
+        el.style.opacity = '';
+        el.style.transform = '';
+        rev.unobserve(el);
+
+        const staggerEls = el.querySelectorAll(':scope > .stagger-enter');
+        if (staggerEls.length) {
+          staggerEls.forEach((child, i) => {
+            setTimeout(() => child.classList.add('revealed'), i * 80);
+          });
+        }
+
+        if (el.classList.contains('section')) {
+          const title = el.querySelector('.sec-title');
+          if (title && !title.dataset.scrambled) {
+            title.dataset.scrambled = '1';
+            scrambleText(title);
+          }
+        }
+      }
+    });
+  }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+
+  // Apply stagger-enter to children of observed containers and section-level cards
+  document.querySelectorAll('.sg > *, .pg > *, .cg > *, .tg > *, .cl > *, .section > .card, .section > .co').forEach(el => {
+    el.classList.add('stagger-enter');
+  });
+  // Add .sd to the reveal observer so study-week cards animate in
+  document.querySelectorAll('.sd').forEach(el => {
+    el.classList.add('stagger-enter');
+    rev.observe(el);
+  });
+
+  // Apply card-grow + card-shine to interactive cards
+  document.querySelectorAll('.card, .sc, .st-card, .pc, .tc, .co, .split-card').forEach(el => {
+    el.classList.add('card-grow', 'card-shine');
+  });
+
+  function scrambleText(el){
+    const orig = el.textContent || '';
+    const chars = '!@#$%&?+*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let frame = 0;
+    const total = 20;
+    const iv = setInterval(() => {
+      frame++;
+      let txt = '';
+      for (let i = 0; i < orig.length; i++) {
+        if (orig[i] === ' ') { txt += ' '; continue; }
+        const progress = frame / total;
+        if (progress > i / orig.length) {
+          txt += orig[i];
+        } else {
+          txt += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      el.textContent = txt;
+      if (frame >= total) { clearInterval(iv); el.textContent = orig; }
+    }, 40);
+  }
+})();
+
+// ─── TYPEWRITER ───
+(function(){
+  const el = document.getElementById('typewriter');
+  if (!el) return;
+  const phrases = [
+    'Flutter + Firebase • 50 dias • 4 pessoas',
+    'Provider • OpenAlex • flutter_map',
+    'Do zero ao MVP na banca!'
+  ];
+  let pi = 0, ci = 0, isDel = false;
+  function tick(){
+    const full = phrases[pi];
+    if (!isDel) {
+      el.innerHTML = full.substring(0, ci + 1) + '<span class="cursor"></span>';
+      ci++;
+      if (ci === full.length) { setTimeout(() => { isDel = true; setTimeout(tick, 50); }, 2000); return; }
+      setTimeout(tick, 40 + Math.random() * 60);
+    } else {
+      if (ci === 0) { isDel = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 200); return; }
+      el.innerHTML = full.substring(0, ci - 1) + '<span class="cursor"></span>';
+      ci--;
+      setTimeout(tick, 20 + Math.random() * 30);
+    }
+  }
+  setTimeout(tick, 1500);
+})();
+
+// ─── ANIMATED COUNTERS ───
+(function(){
+  const counters = document.querySelectorAll('.st-n');
+  if (!counters.length) return;
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        observer.unobserve(el);
+        const txt = el.textContent.trim();
+        const num = parseInt(txt);
+        if (!isNaN(num) && num > 0) {
+          const isPct = txt.includes('%');
+          let current = 0;
+          const step = Math.max(1, Math.floor(num / 30));
+          el.textContent = '0' + (isPct ? '%' : '');
+          const iv = setInterval(() => {
+            current += step;
+            if (current >= num) { current = num; clearInterval(iv); }
+            el.textContent = current + (isPct ? '%' : '');
+          }, 30);
+        }
+      }
+    });
+  }, { threshold: .5, root });
+  counters.forEach(c => obs.observe(c));
+})();
+
+// (3D tilt replaced by CSS scale-up hover — see .card-grow in stylesheet)
+
+// ─── PROGRESS BARS FILL ON SCROLL ───
+(function(){
+  const bars = document.querySelectorAll('.pb-f');
+  if (!bars.length) return;
+  bars.forEach(bar => {
+    const w = bar.style.width || '0%';
+    bar.dataset.targetWidth = w;
+    bar.style.width = '0%';
+    bar.style.transition = 'width 1.5s cubic-bezier(.22,1,.36,1)';
+  });
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        observer.unobserve(bar);
+        bar.style.width = bar.dataset.targetWidth || '0%';
+      }
+    });
+  }, { threshold: .2, root });
+  bars.forEach(b => obs.observe(b));
+})();
+
+// ─── ROADMAP SEQUENTIAL GLOW ON SCROLL ───
+(function(){
+  const tracks = document.querySelectorAll('.road-track');
+  if (!tracks.length) return;
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const track = entry.target;
+        observer.unobserve(track);
+        const dots = track.querySelectorAll('.road-dot:not(.dim)');
+        dots.forEach((dot, i) => {
+          setTimeout(() => {
+            dot.style.transform = 'scale(1.4)';
+            dot.style.boxShadow = '0 0 20px currentColor';
+            setTimeout(() => {
+              dot.style.transform = '';
+              dot.style.boxShadow = '';
+            }, 600);
+          }, i * 200);
+        });
+      }
+    });
+  }, { threshold: .3, root });
+  tracks.forEach(t => obs.observe(t));
+})();
+
+// ─── AUTO-SAVE READING POSITION ───
+(function(){
+  const key = 'gh_read_pos';
+  const saved = sessionStorage.getItem(key);
+  if (saved) {
+    const pos = parseInt(saved);
+    setTimeout(() => smoothScrollTo(pos), 200);
+  }
+  let saveTimer = null;
+  addScrollListener(() => {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      sessionStorage.setItem(key, getScrollY().toString());
+    }, 500);
+  });
+})();
+
+// ─── ROADMAP CLICK POPUP ───
+(function(){
+  const dots = document.querySelectorAll('.road-dot');
+  const popup = document.getElementById('roadPopup');
+  const pTitle = document.getElementById('roadPopupTitle');
+  const pSub = document.getElementById('roadPopupSub');
+  const pDesc = document.getElementById('roadPopupDesc');
+  if (!popup) return;
+  const roadData = {
+    'Dias 1-5': { title:'Fundação', sub:'Setup do ambiente', desc:'Instalar Flutter SDK, Android Studio, configurar Firebase, criar projeto, estrutura de pastas, AuthService. Primeiro PR mergeado.' },
+    'Dias 6-10': { title:'Auth + Navegação', sub:'Sistema de login', desc:'Tela de login, cadastro, guarda de rota com auth state listener, BottomNavigationBar, Dashboard. Sessão persistente.' },
+    'Dias 11-14': { title:'Dashboard', sub:'Visão geral', desc:'GridView com ModuleCards, resumo de horas complementares, indicador de progresso visual.' },
+    'Dias 15-22': { title:'Módulo Rotina', sub:'CRUD de disciplinas', desc:'Adicionar disciplinas, lançar notas, calcular média automática, previsão de nota final, faltas restantes, alertas visuais.' },
+    'Dias 23-30': { title:'Certificados', sub:'Upload + validação', desc:'Upload de PDF/imagem para Firebase Storage, lista com StreamBuilder, validação manual, gráfico de progresso de horas.' },
+    'Dias 31-37': { title:'Pesquisa TCC', sub:'OpenAlex API', desc:'Buscar artigos na API OpenAlex, ArticleCard com título/ano/resumo, paginação, filtro por ano.' },
+    'Dias 38-44': { title:'Radar de Eventos', sub:'Lista + Mapa', desc:'Lista de eventos acadêmicos, flutter_map com markers OpenStreetMap, popup de detalhes, filtro por data.' },
+    'Dias 45-50': { title:'Banca Final 🎯', sub:'Preparação para apresentação', desc:'Testes finais, correção de bugs, dados demo populados, roteiro de apresentação, 3 ensaios completos. Sucesso!' },
+    'Sem 1': { title:'Semana 1 — Fundação', sub:'Dias 1-5', desc:'Flutter SDK, Android Studio, GitHub, Firebase, estrutura, tema, rotas, AuthService.' },
+    'Sem 2': { title:'Semana 2 — Auth', sub:'Dias 6-10', desc:'Login, sessão, BottomNav, Dashboard, PR #2.' },
+    'Sem 3': { title:'Semana 3 — Dashboard', sub:'Dias 11-14', desc:'GridView, ModuleCard, resumo, progresso, PR #3.' },
+    'Sem 4-5': { title:'Semanas 4-5 — Rotina', sub:'Dias 15-22', desc:'CRUD disciplinas, média, previsão, faltas, PR #4.' },
+    'Sem 6': { title:'Semana 6 — Certificados', sub:'Dias 23-30', desc:'Upload Storage, validação, progresso, PR #5.' },
+    'Sem 7': { title:'Semana 7 — Pesquisa TCC', sub:'Dias 31-37', desc:'OpenAlex API, ArticleCard, paginação, PR #6.' },
+    'Sem 8': { title:'Semana 8 — Radar', sub:'Dias 38-44', desc:'Lista eventos, flutter_map, markers, PR #7.' },
+    'Sem 9-10': { title:'Semanas 9-10 — Banca', sub:'Dias 45-50', desc:'Testes, correções, demo, slides, 3 ensaios, banca!' },
+    'Spr.0': { title:'Sprint 0 — Fundação', sub:'Dias 1-5', desc:'Setup completo. Flutter + Firebase rodando. PR #1.' },
+    'Spr.1': { title:'Sprint 1 — Auth+Nav', sub:'Dias 6-10', desc:'Login, guarda rota, BottomNav. PR #2.' },
+    'Spr.2': { title:'Sprint 2 — Dashboard', sub:'Dias 11-14', desc:'GridView cards, resumo. PR #3.' },
+    'Spr.3': { title:'Sprint 3 — Rotina', sub:'Dias 15-22', desc:'CRUD + cálculos. PR #4.' },
+    'Spr.4': { title:'Sprint 4 — Certificados', sub:'Dias 23-30', desc:'Upload + progresso. PR #5.' },
+    'Spr.5': { title:'Sprint 5 — Pesquisa', sub:'Dias 31-37', desc:'API + filtros. PR #6.' },
+    'Spr.6': { title:'Sprint 6 — Radar', sub:'Dias 38-44', desc:'Mapa + lista. PR #7.' },
+    'Spr.7': { title:'Sprint 7 — Banca 🎯', sub:'Dias 45-50', desc:'Preparação final e apresentação!' },
+    'Setup': { title:'Setup de Testes', sub:'flutter_test nativo', desc:'Flutter já vem com flutter_test. Rode flutter test para verificar. Adicione mocktail ou mockito para mocks.' },
+    'Models': { title:'Testes de Modelos', sub:'Discipline, Certificate', desc:'Testar cálculo de média, faltas, toMap/fromMap. Cobertura alvo: 100% dos models.' },
+    'Services': { title:'Testes de Serviços', sub:'Auth, Firestore, Storage', desc:'Mockar Firebase com mocktail. Testar signUp, signIn, upload, CRUD. Cobertura: 80%.' },
+    'Providers': { title:'Testes de Providers', sub:'Mock + ChangeNotifier', desc:'Injetar serviços mockados. Testar loading/erro/sucesso. Cobertura: 70%.' },
+    'Widgets': { title:'Testes de Widget', sub:'Telas críticas', desc:'Testar LoginScreen, Dashboard, formulários. Verificar loading, erro, empty state. Cobertura: 60%.' },
+    'CI': { title:'CI com GitHub Actions', sub:'Automático no push', desc:'Configurar .github/workflows/test.yml. Roda flutter test a cada push. Bloqueia PR se falhar.' },
+    'Cobertura': { title:'Cobertura 70%+', sub:'Meta do projeto', desc:'Gerar relatório com flutter test --coverage. Visualizar com genhtml. Meta mínima: 70% geral.' },
+    'D-7': { title:'7 Dias Antes', sub:'Slides', desc:'Finalizar slides da apresentação. Estrutura: problema, solução, demo, arquitetura, desafios.' },
+    'D-5': { title:'5 Dias Antes', sub:'Roteiro', desc:'Distribuir falas entre os 4 membros. Cada um prepara sua parte. Roteiro de 7 min.' },
+    'D-3': { title:'3 Dias Antes', sub:'1º Ensaio', desc:'Primeiro ensaio completo cronometrado. Corrigir falhas, ajustar tempo.' },
+    'D-1': { title:'1 Dia Antes', sub:'2º Ensaio', desc:'Segundo ensaio. Gravar vídeo de backup. Exportar slides em PDF. Salvar APK em pendrive.' },
+    'Keystore': { title:'Gerar Keystore', sub:'Chave de assinatura', desc:'keytool -genkey -v -keystore upload-keystore.jks. Anote a senha! Só precisa fazer uma vez.' },
+    'Config': { title:'Configurar key.properties', sub:'Assinatura do APK', desc:'Criar android/key.properties com storePassword, keyPassword, keyAlias, storeFile.' },
+    'APK': { title:'Build do APK', sub:'flutter build --release', desc:'flutter build apk --release. APK em build/app/outputs/flutter-apk/app-release.apk.' },
+    'Web': { title:'Deploy Web', sub:'Firebase Hosting', desc:'flutter build web && firebase deploy --only hosting. URL: https://graduahub-dev.web.app' },
+    'Testar': { title:'Testar APK', sub:'Dispositivo físico', desc:'Instalar APK em um celular que nunca viu o projeto. Testar fluxo completo.' },
+    'Backup': { title:'Backup', sub:'Pendrive + nuvem + vídeo', desc:'Salvar APK, slides PDF e vídeo do app em pendrive e na nuvem. Plano B para banca.' }
+  };
+  dots.forEach(dot => {
+    dot.addEventListener('click', function(){
+      const parent = this.closest('.road-s');
+      if (!parent) return;
+      const label = parent.querySelector('.road-l')?.textContent?.trim();
+      const sub = parent.querySelector('.road-s2')?.textContent?.trim();
+      const data = roadData[label] || roadData[sub];
+      if (data) {
+        pTitle.textContent = data.title;
+        pSub.textContent = data.sub;
+        pDesc.textContent = data.desc;
+        popup.classList.add('show');
+      }
+    });
+  });
+})();
+
+window.closeRoadPopup = function(){
+  document.getElementById('roadPopup')?.classList.remove('show');
+};
+
+// ─── ACHIEVEMENT TOAST ───
+(function(){
+  const toast = document.getElementById('achievementToast');
+  if (!toast) return;
+  let queue = [], shown = false;
+  window.showAchievement = function(emoji, title, desc){
+    queue.push({emoji, title, desc});
+    if (!shown) showNext();
+  };
+  function showNext(){
+    if (!queue.length) { shown = false; return; }
+    shown = true;
+    const a = queue.shift();
+    toast.querySelector('.achievement-icon').textContent = a.emoji;
+    toast.querySelector('.achievement-text').innerHTML = `<strong>${a.title}</strong>${a.desc}`;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(showNext, 400);
+    }, 3000);
+  }
+})();
+
+// ─── CONFETTI ───
+(function(){
+  const c = document.getElementById('confettiCanvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let particles = [], animId = null;
+  function resize(){ c.width = innerWidth; c.height = innerHeight; }
+  addEventListener('resize', resize); resize();
+  window.fireConfetti = function(count){
+    count = count || 100;
+    const colors = ['#a855f7','#3b82f6','#22c55e','#eab308','#ef4444','#14b8a6'];
+    for (let i = 0; i < count; i++) {
+      const size = Math.random() * 8 + 4;
+      particles.push({
+        x: innerWidth / 2 + (Math.random() - .5) * innerWidth * .6,
+        y: -10,
+        w: size, h: size * .6,
+        vx: (Math.random() - .5) * 6,
+        vy: Math.random() * 3 + 2,
+        rot: Math.random() * 360,
+        vr: (Math.random() - .5) * 8,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 1
+      });
+    }
+    if (!animId) drawConfetti();
+  };
+  function drawConfetti(){
+    if (!particles.length) { animId = null; ctx.clearRect(0,0,c.width,c.height); return; }
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy; p.vy += .05;
+      p.rot += p.vr;
+      p.life -= .003;
+      if (p.life <= 0 || p.y > c.height + 20) { particles.splice(i,1); continue; }
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+    }
+    animId = requestAnimationFrame(drawConfetti);
+  }
+})();
+
+// ─── CHECKLIST ───
+(function(){
+  const items = document.querySelectorAll('.cl-i');
+  items.forEach(item => {
+    const text = item.querySelector('.cl-l')?.textContent?.trim().substring(0, 50) || '';
+    const key = 'ghc_' + text.replace(/\s+/g,'_');
+    const saved = localStorage.getItem(key);
+    if (saved === '1') {
+      item.classList.add('do');
+      item.querySelector('.cl-c')?.classList.add('do');
+    }
+    item.addEventListener('click', function(e) {
+      const cb = this.querySelector('.cl-c');
+      cb?.classList.toggle('do');
+      this.classList.toggle('do');
+      const nowChecked = this.classList.contains('do');
+      localStorage.setItem(key, nowChecked ? '1' : '0');
+      updateChecklistProgress();
+      if (nowChecked) {
+        const total = items.length;
+        const done = document.querySelectorAll('.cl-i.do').length;
+        const pct = Math.round(done / total * 100);
+        if (pct === 25) showAchievement('🎯', '25% da Checklist!', 'Continue assim, vai dar certo!');
+        if (pct === 50) { showAchievement('⭐', 'Metade da Checklist!', 'Você está no caminho certo!'); fireConfetti(40); }
+        if (pct === 75) showAchievement('🔥', '75% da Checklist!', 'Quase lá, não pare agora!');
+        if (done === total) { showAchievement('🏆', 'Checklist COMPLETA!', 'Parabéns! Tudo pronto para a banca!'); fireConfetti(150); }
+      }
+    });
+  });
+
+  function updateChecklistProgress(){
+    const ring = document.getElementById('clRingFg');
+    const txt = document.getElementById('clRingTxt');
+    if (!ring || !txt) return;
+    const total = items.length;
+    const done = document.querySelectorAll('.cl-i.do').length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    const circ = 2 * Math.PI * 22;
+    ring.style.strokeDasharray = circ;
+    ring.style.strokeDashoffset = circ - (circ * pct / 100);
+    txt.textContent = pct + '%';
+  }
+  updateChecklistProgress();
+})();
+
+// ─── RIPPLE EFFECT ───
+(function(){
+  document.addEventListener('click', function(e){
+    const target = e.target.closest('.menu-btn, .dnav-item, .cl-i, .flow-s, details summary, .btt, .road-dot, .theme-toggle');
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
+    const r = document.createElement('span');
+    r.className = 'ripple';
+    const size = Math.max(rect.width, rect.height);
+    r.style.width = r.style.height = size + 'px';
+    r.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    r.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    if (getComputedStyle(target).position !== 'relative') target.style.position = 'relative';
+    if (getComputedStyle(target).overflow !== 'hidden') target.style.overflow = 'hidden';
+    target.appendChild(r);
+    setTimeout(() => r.remove(), 600);
+  });
+})();
+
+// ─── SWIPE HINT ───
+(function(){
+  const hint = document.getElementById('swipeHint');
+  if (!hint) return;
+  let shown = localStorage.getItem('swipe_hint_shown');
+  if (!shown) {
+    setTimeout(() => { hint.classList.add('show'); }, 2000);
+    setTimeout(() => { hint.classList.remove('show'); }, 6000);
+    localStorage.setItem('swipe_hint_shown', '1');
+  }
+})();
+
+// ─── DETAILS SMOOTH OPEN ───
+document.querySelectorAll('details').forEach(d => {
+  d.addEventListener('toggle', function() {
+    if (this.open) {
+      this.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+  });
+});
+
+// ─── DRAWER SWIPE GESTURE ───
+(function(){
+  let sX = 0, dragging = false;
+  const drawer = document.querySelector('.drawer');
+  if (!drawer) return;
+  document.addEventListener('touchstart', e => {
+    sX = e.changedTouches[0].screenX;
+    dragging = drawer.classList.contains('open');
+  }, {passive:true});
+  document.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const dx = e.changedTouches[0].screenX - sX;
+    if (dx < 0) {
+      drawer.style.transform = `translateX(${Math.max(-280, dx)}px)`;
+      drawer.style.transition = 'none';
+    }
+  }, {passive:true});
+  document.addEventListener('touchend', e => {
+    if (!dragging) return;
+    dragging = false;
+    drawer.style.transition = '';
+    const dx = e.changedTouches[0].screenX - sX;
+    drawer.style.transform = '';
+    if (dx < -60) toggleDrawer();
+  }, {passive:true});
+})();
+
+// ─── TIMELINE TAP ON MOBILE ───
+(function(){
+  if (!matchMedia('(hover:none)').matches) return;
+  document.querySelectorAll('.tl-step').forEach(step => {
+    step.addEventListener('click', function(e) {
+      const wasTap = this.classList.contains('tl-tap');
+      document.querySelectorAll('.tl-step.tl-tap').forEach(s => s.classList.remove('tl-tap'));
+      if (!wasTap) this.classList.add('tl-tap');
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.tl-step')) {
+      document.querySelectorAll('.tl-step.tl-tap').forEach(s => s.classList.remove('tl-tap'));
+    }
+  });
+})();
+
+// ─── THEME TOGGLE SHOW ON SCROLL ───
+(function(){
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  const update = () => {
+    btn.classList.toggle('show', getScrollY() > 500);
+  };
+  addScrollListener(update); update();
+})();
+
+// ─── ENHANCED SECTION ENTRANCE OBSERVER ───
+(function(){
+  const sections = document.querySelectorAll('.sec-enter');
+  if (!sections.length) return;
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .1, rootMargin: '0px 0px -40px 0px', root });
+  sections.forEach(s => obs.observe(s));
+})();
+
+// ─── TIMELINE ANIMATIONS (road-testes, road-deploy) ───
+(function(){
+  const timelines = [
+    { trackId: 'testesTrack', connectorId: 'testesConnector', shimmerId: 'testesShimmer' },
+    { trackId: 'deployTrack', connectorId: 'deployConnector', shimmerId: 'deployShimmer' }
+  ];
+
+  timelines.forEach(tl => {
+    const track = document.getElementById(tl.trackId);
+    const connector = document.getElementById(tl.connectorId);
+    const shimmer = document.getElementById(tl.shimmerId);
+    if (!track || !shimmer) return;
+
+    const root = isDesktopLayout() ? $main() : null;
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+
+          // Hide shimmer, show track
+          shimmer.style.display = 'none';
+          track.style.display = 'flex';
+
+          // Animate steps in sequence
+          const steps = track.querySelectorAll('.tl-step');
+          steps.forEach((step, i) => {
+            setTimeout(() => {
+              step.style.opacity = '0';
+              step.style.transform = 'translateY(20px)';
+              step.style.transition = 'opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)';
+              requestAnimationFrame(() => {
+                step.style.opacity = '1';
+                step.style.transform = 'translateY(0)';
+              });
+              // Pulse badge
+              const badge = step.querySelector('.tl-step-badge:not(.dim)');
+              if (badge) {
+                setTimeout(() => {
+                  badge.style.transform = 'scale(1.3)';
+                  badge.style.boxShadow = '0 0 24px currentColor';
+                  setTimeout(() => {
+                    badge.style.transform = '';
+                    badge.style.boxShadow = '';
+                  }, 500);
+                }, 300);
+              }
+            }, i * 150);
+          });
+
+          // Draw connector line
+          if (connector) {
+            const line = connector.querySelector('.tl-connector-line');
+            if (line) {
+              setTimeout(() => {
+                line.classList.add('drawn');
+              }, 200);
+            }
+          }
+        }
+      });
+    }, { threshold: .15, rootMargin: '0px 0px -60px 0px', root });
+
+    // Observe the shimmer element (which acts as the trigger point)
+    obs.observe(shimmer);
+  });
+})();
+
+// ─── SECTION TITLE BAR REVEAL ───
+(function(){
+  const titles = document.querySelectorAll('.sec-title');
+  titles.forEach(title => {
+    const wrap = document.createElement('div');
+    wrap.className = 'sec-title-wrap';
+    title.parentNode.insertBefore(wrap, title);
+    wrap.appendChild(title);
+    const bar = document.createElement('div');
+    bar.className = 'sec-title-bar';
+    wrap.appendChild(bar);
+  });
+  const bars = document.querySelectorAll('.sec-title-bar');
+  if (!bars.length) return;
+  const root = isDesktopLayout() ? $main() : null;
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        entry.target.style.width = '60px';
+      }
+    });
+  }, { threshold: .3, rootMargin: '0px 0px -40px 0px', root });
+  bars.forEach(b => {
+    b.style.width = '0';
+    obs.observe(b);
+  });
+})();
+
+// ─── ENHANCED COUNTER POP ON SCROLL ───
+(function(){
+  document.querySelectorAll('.stat-pop .st-n').forEach(el => {
+    const root = isDesktopLayout() ? $main() : null;
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+          entry.target.style.transition = 'transform .5s cubic-bezier(.22,1,.36,1)';
+          entry.target.style.transform = 'scale(1.2)';
+          setTimeout(() => { entry.target.style.transform = ''; }, 500);
+        }
+      });
+    }, { threshold: .5, root });
+    obs.observe(el);
+  });
+})();
+
+// ─── HOVER GLOW ON GUIDE CARDS ───
+(function(){
+  document.querySelectorAll('.card, .sc, .st-card').forEach(el => {
+    el.classList.add('hover-glow');
+  });
+})();
+
+// ─── TAG FILTER TOGGLE ───
+(function(){
+  document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      this.classList.toggle('active');
+    });
+  });
+})();
+
+// ─── TOUCH ACTIVE FEEDBACK ───
+(function(){
+  if (!matchMedia('(hover:none)').matches) return;
+  const sel = '.card,.sc,.sd,.pc,.ce,.tc,.ms,.co,.st,.sg,.pg,.cg,.tg,.cl,.split-card,.tl-step,.menu-btn,.btt,.theme-toggle,.tag-filter-btn,.flow-s';
+  document.querySelectorAll(sel).forEach(el => {
+    el.classList.add('touch-active');
+  });
+})();
+
+// ─── KEYBOARD SHORTCUTS ───
+(function(){
+  addEventListener('keydown', e => {
+    if (e.key === 't' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      document.getElementById('themeToggle')?.click();
+    }
+    if (e.key === 'Escape') {
+      const popup = document.getElementById('roadPopup');
+      if (popup?.classList.contains('show')) closeRoadPopup();
+      const drawer = document.querySelector('.drawer');
+      if (drawer?.classList.contains('open')) toggleDrawer();
+    }
+    if (e.key === 'm' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      toggleDrawer();
+    }
+  });
+})();
+
+})();
+</script>
+</body>
+</html>
